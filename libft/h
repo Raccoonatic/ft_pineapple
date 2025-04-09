@@ -1,5 +1,0 @@
-int main (int a, char *w[])
-{                                                            (void)a;
-        int h = atoi(w[1]);
-        printf("%d\n", ft_isalnum(h));
-}
