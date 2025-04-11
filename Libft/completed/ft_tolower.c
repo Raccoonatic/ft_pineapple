@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-san- <lde-san-@student.42porto.com     +#+  +:+       +#+        */
+/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 21:05:47 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/11 17:55:07 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/11 20:42:49 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/11 20:42:52 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(const char *str)
+int	ft_tolower(int c)
 {
-	unsigned int	counter;
-
-	counter = 0;
-	while (str[counter])
-		counter++;
-	return (counter);
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
 }

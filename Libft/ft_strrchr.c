@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 21:21:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/10 21:34:11 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/11 21:19:17 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/11 21:32:00 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*strrchr(const char *s, int c)
 {
-	size_t	 srclen;
+	int	slen;
+	char	*found;
 
-	srclen = 0;
-	if (size == 0)
-		return(
+	slen = 0;
+	while (s[slen])
+		slen++;
+	while (slen > 0 && *s != c)
+	{
+		*found = s[slen];
+		slen--;
+	}
+	if (*s == c)
+		return (found);
+	return (NULL);
 }
