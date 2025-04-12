@@ -13,17 +13,13 @@
 char	*strrchr(const char *s, int c)
 {
 	int	slen;
-	char	*found;
 
 	slen = 0;
 	while (s[slen])
 		slen++;
-	while (slen > 0 && *s != c)
-	{
-		*found = s[slen];
+	while (slen >= 0 && s[slen] != c)
 		slen--;
-	}
-	if (*s == c)
-		return (found);
+	if (s[slen] == c)
+		return ((char *)&s[slen]);
 	return (NULL);
 }
