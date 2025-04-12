@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 17:55:41 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/11 20:21:24 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/10 20:13:47 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/10 21:19:43 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-size_t	strlcat(char *dst, const char *src, size_t size)
+#include "libft.h"
+
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t	srclen;
-	size_t	dstlen;
 	size_t	guide;
 
-	srclen = 0;
-	dstlen = 0;
-	guide = 0;
-	while (src[srclen])
-		srclen++;
-	while (dst[dstlen] && dstlen < size)
-		dstlen++;
-	if (dstlen >= size)
-		return (size + srclen);
+	if ((uintptr_t)src == (uintptr_t)dest)
+		return (dest);
+	else if ((uintptr_t)src < (uintptr_t)dest)
+	{
+		guide = n;
+		while (guide > 0)
+		{
+			guide--;
+			((unsigned char *)dest)[guide] = ((unsigned char *)src)[guide];
+		}
+	}
 	else
 	{
-		while (src[guide] && ((dstlen + guide) < size - 1))
+		guide = 0;
+		while (guide < n)
 		{
-			dst[dstlen + guide] = src[guide];
+			((unsigned char *)dest)[guide] = ((unsigned char *)src)[guide];
 			guide++;
 		}
-		dst[dstlen + guide] = '\0';
 	}
-	return (dstlen + srclen);
+	return (dest);
 }

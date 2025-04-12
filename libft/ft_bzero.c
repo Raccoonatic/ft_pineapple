@@ -6,9 +6,11 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 19:30:34 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/10 19:50:38 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/04/12 22:29:28 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
