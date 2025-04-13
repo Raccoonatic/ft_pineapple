@@ -14,7 +14,6 @@ NAME = libft.a
 
 COMPILE = cc -Wall -Werror -Wextra -I.
 OBJ = $(FILE:%.c=%.o)
-SRC = ./
 
 FILE = ft_isalpha.c
 FILE += ft_isdigit.c
@@ -43,7 +42,7 @@ FILE += ft_atoi.c
 $(NAME): $(OBJ)
 	ar -rcs $@ $^
 
-%.o: %.c
+%.o: %.c libft.h
 	$(COMPILE) -c $< -o $@
 
 all: $(NAME)
