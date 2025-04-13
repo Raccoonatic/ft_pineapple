@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 21:11:45 by lde-san-          #+#    #+#              #
-#    Updated: 2025/04/12 23:40:17 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/04/13 12:36:15 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ FILE += ft_tolower.c
 FILE += ft_strchr.c
 FILE += ft_strrchr.c
 FILE += ft_strncmp.c
-# FILE += ft_memchr.c
+FILE += ft_memchr.c
 # FILE += ft_memcmp.c
 # FILE += ft_strnstr.c
 FILE += ft_atoi.c

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 21:19:17 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/13 13:13:18 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/13 12:02:28 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/13 12:34:06 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	slen;
+	size_t	guide;
 
-	slen = 0;
-	while (s[slen])
-		slen++;
-	while (slen >= 0 && s[slen] != (unsigned char)c)
-		slen--;
-	if (s[slen] == (unsigned char)c)
-		return ((char *)&s[slen]);
+	guide = 0;
+	while (guide < n)
+	{
+		if (((unsigned char *)s)[guide] == (unsigned char)c)
+			return ((void *)&(((unsigned char *)s)[guide]));
+		guide++;
+	}
 	return (NULL);
 }
