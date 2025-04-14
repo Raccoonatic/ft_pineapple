@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 21:21:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/14 20:05:26 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/14 20:07:00 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/14 21:12:42 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	srclen;
 	size_t	guide;
+	char	*substr;
+	size_t	slen;
 
-	srclen = 0;
 	guide = 0;
-	while (src[srclen])
-		srclen++;
-	if (size != 0)
+	slen = ft_strlen(s);
+	if ((size_t)start >= slen)
+		return (ft_strdup(""));
+	if ((slen - (size_t)start) < len)
+		len = slen - (size_t)start;
+	substr = malloc((len + 1) * sizeof (char));
+	if (!substr)
+		return (NULL);
+	while (s[guide] && guide < len)
 	{
-		while (src[guide] && guide < size - 1)
-		{
-			dst[guide] = src[guide];
-			guide++;
-		}
-		dst[guide] = '\0';
+		substr[guide] = s[(size_t)start + guide];
+		guide++;
 	}
-	return (srclen);
+	substr[guide] = '\0';
+	return (substr);
 }

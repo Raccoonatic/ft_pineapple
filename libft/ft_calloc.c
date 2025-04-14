@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 21:21:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/14 20:05:26 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/14 18:29:10 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/14 19:30:10 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	srclen;
-	size_t	guide;
+	void	*allocated;
+	size_t	mem_total_size;
 
-	srclen = 0;
-	guide = 0;
-	while (src[srclen])
-		srclen++;
-	if (size != 0)
-	{
-		while (src[guide] && guide < size - 1)
-		{
-			dst[guide] = src[guide];
-			guide++;
-		}
-		dst[guide] = '\0';
-	}
-	return (srclen);
+	mem_total_size = nmemb * size;
+	allocated = malloc(mem_total_size);
+	if (!allocated)
+		return (NULL);
+	ft_bzero(allocated, mem_total_size);
+	return (allocated);
 }

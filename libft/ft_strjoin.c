@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 21:21:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/14 20:05:26 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/14 21:17:01 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/14 21:28:39 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	srclen;
-	size_t	guide;
+	size_t	total_len;
+	char	*nu_str;
+	size_t	guidea;
+	size_t	guideb;
 
-	srclen = 0;
-	guide = 0;
-	while (src[srclen])
-		srclen++;
-	if (size != 0)
+	total_len = (ft_strlen(s1) + ft_strlen(s2));
+	nu_str = malloc(total_len * sizeof (char));
+	guidea = 0;
+	while (s1[guidea])
 	{
-		while (src[guide] && guide < size - 1)
-		{
-			dst[guide] = src[guide];
-			guide++;
-		}
-		dst[guide] = '\0';
+		nu_str[guidea] = ((char *)s1)[guidea];
+		guidea++;
 	}
-	return (srclen);
-}
+	guideb = 0;
+	while (s2[guideb]

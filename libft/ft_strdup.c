@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 21:21:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/14 20:05:26 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/14 19:31:28 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/14 20:02:13 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strdup(const char *s)
 {
-	size_t	srclen;
+	size_t	len;
+	char	*clone;
 	size_t	guide;
 
-	srclen = 0;
+	len = ft_strlen(s);
+	clone = malloc((len + 1) * sizeof (char));
+	if (!clone)
+		return (NULL);
 	guide = 0;
-	while (src[srclen])
-		srclen++;
-	if (size != 0)
+	while (s[guide])
 	{
-		while (src[guide] && guide < size - 1)
-		{
-			dst[guide] = src[guide];
-			guide++;
-		}
-		dst[guide] = '\0';
+		clone[guide] = s[guide];
+		guide++;
 	}
-	return (srclen);
+	clone[guide] = '\0';
+	return (clone);
 }

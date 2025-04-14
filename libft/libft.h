@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 22:29:41 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/14 18:07:32 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/04/14 20:31:59 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ int		ft_isdigit(int c);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_strdup(const char *s);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
