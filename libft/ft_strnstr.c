@@ -1,26 +1,39 @@
-#include "ftlib.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 17:32:21 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/14 18:20:41 by lde-san-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char 	*strnstr(const char *big, const char *little, size_t len)
+#include "libft.h"
+
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	guidea;
 	size_t	guideb;
 	char	*start_little;
-	size_t	little_len
 
-	guide = 0;
-	little_len = 0;
-
-	while(little[little_len])
-		little_len++;
+	guidea = 0;
+	if (!little[guidea])
+		return ((char *)big);
 	while (big[guidea] && guidea < len)
 	{
 		guideb = 0;
 		if (big[guidea] == little[guideb])
 		{
-			start_little = &big[guide];
-			while (big[guidea + guideb] == little[guideb])
-			guideb++;
+			start_little = &((char *)big)[guidea];
+			while (little[guideb] && (guidea + guideb) < len
+				&& big[guidea + guideb] == little[guideb])
+				guideb++;
+			if (!little[guideb])
+				return (start_little);
+		}
+		guidea++;
 	}
-
-
+	return (NULL);
 }
