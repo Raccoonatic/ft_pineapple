@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 22:29:41 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/13 12:35:19 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:26:12 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int		ft_isascii(int c);
 int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 void	*ft_memchr(const void *s, int c, size_t n);
+int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 #endif
