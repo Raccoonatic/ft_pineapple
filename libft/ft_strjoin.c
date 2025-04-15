@@ -19,8 +19,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	guidea;
 	size_t	guideb;
 
-	total_len = (ft_strlen(s1) + ft_strlen(s2));
+	total_len = (ft_strlen(s1) + ft_strlen(s2) + 1);
 	nu_str = malloc(total_len * sizeof (char));
+	if (!nu_str)
+		return (NULL);
 	guidea = 0;
 	while (s1[guidea])
 	{
@@ -28,4 +30,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		guidea++;
 	}
 	guideb = 0;
-	while (s2[guideb]
+	while (s2[guideb])
+	{
+		nu_str[guidea + guideb] = ((char *)s2)[guideb];
+		guideb++;
+	}
+	nu_str[guidea + guideb] = '\0';
+	return (nu_str);
+}
+
