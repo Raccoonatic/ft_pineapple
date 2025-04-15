@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 21:17:01 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/14 21:28:39 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:44:02 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	nu_str[guidea + guideb] = '\0';
 	return (nu_str);
 }
-

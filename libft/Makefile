@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 21:11:45 by lde-san-          #+#    #+#              #
-#    Updated: 2025/04/14 20:31:22 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/04/15 15:51:12 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,8 @@ FILE += ft_atoi.c
 FILE += ft_calloc.c
 FILE += ft_strdup.c
 FILE += ft_substr.c
-# FILE += ft_strjoin.c
-# FILE += ft_strtrim.c
+FILE += ft_strjoin.c
+FILE += ft_strtrim.c
 # FILE += ft_split.c
 # FILE += ft_itoa.c
 # FILE += ft_strmapi.c

@@ -1,39 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 16:29:39 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/15 19:54:03 by lde-san-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
+
+static char	*starter(char const *s1, char const *set);
+static char	*ender(char const *s1, char const *set);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
+	char	*start;
+	char	*end;
+	char	*baby;
 	size_t	guide;
-	char	ptr[1];
-	char	*trimmed;
-	size_t	count_rm;
+
+	start = starter(s1, set);
+	end = ender(s1, set);
+	if (end <= start)
+	{
+		baby = ft_calloc(1, sizeof (char));
+		return (baby);
+	}
+	baby = ft_calloc((((uintptr_t)end
+					- (uintptr_t)start) + 1) + 1, sizeof (char));
+	if (!baby)
+		return (NULL);
+	guide = 0;
+	while (guide < ((uintptr_t)end - (uintptr_t)start) + 1)
+	{
+		baby[guide] = start[guide];
+		guide++;
+	}
+	return (baby);
+}
+
+static char	*starter(char const *s1, char const *set)
+{
+	size_t		guide;
+	char const	*start;
 
 	guide = 0;
-	count_rm = 0;
+	if (!*set)
+		return (&((char *)s1)[guide]);
+	start = &s1[guide];
 	while (s1[guide])
 	{
-		ptr[0] = s1[guide];
-		if (!(ft_strchr(set, (int)ptr[0])))
+		if (ft_strchr(set, ((int)(s1[guide]))))
 		{
 			guide++;
-			continue;
+			continue ;
 		}
-		count_rm++;
-		guide++;
+		start = &s1[guide];
+		break ;
 	}
-	trimmed = malloc(((ft_strlen(s1) - count_rm) + 1) * sizeof (char));
-	guide = 0;
-	while (*s1)
+	return ((char *)start);
+}
+
+static char	*ender(char const *s1, char const *set)
+{
+	size_t		guide;
+	char const	*end;
+
+	guide = ft_strlen(s1);
+	if (!*set)
+		return (&((char *)s1)[guide]);
+	while (guide >= 0)
 	{
-		ptr[0] = *s1;
-		if (!(ft_strchr(set, (int)ptr[0])))
+		if (guide == 0)
+			return ((char *)s1);
+		if (ft_strchr(set, ((int)(s1[guide]))))
 		{
-			s1++;
-			continue;
+			end = &s1[guide];
+			guide--;
+			continue ;
 		}
-		trimmed[guide] = *s1;
-		guide++;
-		s1++;
+		end = &s1[guide];
+		break ;
 	}
-	trimmed[guide] = '\0';
-	return (trimmed);
+	return ((char *)end);
 }
