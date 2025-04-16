@@ -28,12 +28,12 @@ static size_t	string_counter(char const *s, char c)
 	size_t guide;
 	size_t instances;
 	
-	if (!*s)
-		return (0);
 	guide = 0;
 	instances = 1;
 	while (s[guide] == c)
 		guide++;
+	if (!s[guide])
+		return (0);
 	while (s[guide])
 	{			
 		if (s[guide] == c && s[guide + 1] != c && s[guide + 1] != '\0')
@@ -57,12 +57,14 @@ static size_t	str_len(char const *s, char c, size_t guide)
 		index++;
 	while(marker < guide)
 	{
-		while (s[index])
+		if(s[index] == c && s[index + 1] != c)
+			marker++;
+		if (s[index + 1])
 		{
-			if(s[index] == c && s[index + 1] != c && s[index + 1] != '\0')
-				marker++;
-			index++
+			marker++;
+			break ;
 		}
+		index++
 	}
 	len = 0;
 	while(s[index] != c && s[index])
