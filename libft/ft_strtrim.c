@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:29:39 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/15 19:54:03 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/04/16 22:12:18 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 		baby = ft_calloc(1, sizeof (char));
 		return (baby);
 	}
-	baby = ft_calloc((((uintptr_t)end
-					- (uintptr_t)start) + 1) + 1, sizeof (char));
+	baby = ft_calloc((end - start) + 1, sizeof(char));
+/*	baby = ft_calloc((((uintptr_t)end
+					- (uintptr_t)start) + 1) + 1, sizeof (char));*/
 	if (!baby)
 		return (NULL);
 	guide = 0;
@@ -66,24 +67,40 @@ static char	*starter(char const *s1, char const *set)
 
 static char	*ender(char const *s1, char const *set)
 {
-	size_t		guide;
-	char const	*end;
+	ssize_t guide = ft_strlen(s1) - 1;
+
+	if (!*set)
+		return ((char *)s1 + ft_strlen(s1));
+
+	while (guide >= 0)
+	{
+		if (!ft_strchr(set, s1[guide]))
+			break;
+		guide--;
+	}
+	return ((char *)s1 + guide + 1);
+}
+
+/*static char	*ender(char const *s1, char const *set)
+{
+	ssize_t		guide;
+	char		*end;
 
 	guide = ft_strlen(s1);
 	if (!*set)
-		return (&((char *)s1)[guide]);
+		return ((char *)&s1[guide]);
 	while (guide >= 0)
 	{
 		if (guide == 0)
 			return ((char *)s1);
 		if (ft_strchr(set, ((int)(s1[guide]))))
 		{
-			end = &s1[guide];
+			end = (char *)&s1[guide];
 			guide--;
 			continue ;
 		}
-		end = &s1[guide];
+		end = (char *)&s1[guide];
 		break ;
 	}
-	return ((char *)end);
-}
+	return (end);
+}*/

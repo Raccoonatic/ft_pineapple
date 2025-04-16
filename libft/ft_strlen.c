@@ -6,13 +6,15 @@
 /*   By: lde-san- <lde-san-@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 21:05:47 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/11 17:55:07 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/04/16 21:43:27 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(const char *str)
+#include "libft.h"
+
+size_t	ft_strlen(const char *str)
 {
-	unsigned int	counter;
+	size_t	counter;
 
 	counter = 0;
 	while (str[counter])

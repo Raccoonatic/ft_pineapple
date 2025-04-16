@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 22:29:41 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/16 16:46:18 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/04/16 21:56:58 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@
 
 int		ft_isalpha(int c);
 int		ft_atoi(const char *str);
-int		strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strchr(const char *s, int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-size_t	strlcat(char *dst, const char *src, size_t size);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
-int		ft_strlen(const char *str);
+size_t	ft_strlen(const char *str);
 int		ft_isprint(int c);
 int		ft_isascii(int c);
 int		ft_isalnum(int c);
