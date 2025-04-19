@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 21:11:45 by lde-san-          #+#    #+#              #
-#    Updated: 2025/04/16 16:46:43 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/04/19 18:38:04 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = libft.a
 
 COMPILE = cc -Wall -Werror -Wextra -I.
 OBJ = $(FILE:%.c=%.o)
+OBJ_BONUS = $(FILE_BONUS:%.c=%.o)
 
 FILE = ft_isalpha.c
 FILE += ft_isdigit.c
@@ -42,13 +43,23 @@ FILE += ft_substr.c
 FILE += ft_strjoin.c
 FILE += ft_strtrim.c
 FILE += ft_split.c
-# FILE += ft_itoa.c
-# FILE += ft_strmapi.c
-# FILE += ft_striteri.c
-# FILE += ft_putchar_fd.c
-# FILE += ft_putstr_fd.c
-# FILE += ft_putendl_fd.c
-# FILE += ft_putnbr_fd.c
+FILE += ft_itoa.c
+FILE += ft_strmapi.c
+FILE += ft_striteri.c
+FILE += ft_putchar_fd.c
+FILE += ft_putstr_fd.c
+FILE += ft_putendl_fd.c
+FILE += ft_putnbr_fd.c
+
+FILE_BONUS = ft_lstnew.c
+# FILE_BONUS += ft_lstadd_front.c
+# FILE_BONUS += ft_lstsize.c
+# FILE_BONUS += ft_lstlast.c
+# FILE_BONUS += ft_lstadd_back.c
+# FILE_BONUS += ft_lstdelone.c
+# FILE_BONUS += ft_lstclear.c
+# FILE_BONUS += ft_lstiter.c
+# FILE_BONUS += ft_lstmap.c
 
 $(NAME): $(OBJ)
 	ar -rcs $@ $^
@@ -58,6 +69,9 @@ $(NAME): $(OBJ)
 
 all: $(NAME)
 
+bonus: $(OBJ) $(OBJ_BONUS)
+	ar -rcs $(NAME) $(OBJ) $(OBJ_BONUS)
+
 open: $(FILE)
 	for file in $(FILE); do open $$file; done
 
@@ -65,7 +79,7 @@ print:
 	@echo $(OBJ)
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
 	rm -f $(NAME)

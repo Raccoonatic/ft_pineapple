@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 17:51:28 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/17 18:51:08 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/17 19:22:41 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/19 16:03:15 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*end;
-	unsigned int	start;
+	unsigned int	guide;
+	char			*clone;
 
-	if (!s1 || !set)
+	if (!s || !f)
 		return (NULL);
-	start = 0;
-	while (ft_strchr(set, s1[start]) && s1[start])
-		start++;
-	if (!s1[start])
+	guide = 0;
+	clone = ft_strdup(s);
+	if (!clone)
+		return (NULL);
+	while (clone[guide])
 	{
-		end = ft_calloc(1, sizeof (char));
-		if (!end)
-			return (NULL);
-		return (end);
+		clone[guide] = (*f)(guide, s[guide]);
+		guide++;
 	}
-	end = (char *)(s1 + ft_strlen(s1));
-	while (ft_strchr(set, *end))
-		end--;
-	return (ft_substr(s1, start, ((size_t)end - (size_t) & s1[start]) + 1));
+	return (clone);
 }

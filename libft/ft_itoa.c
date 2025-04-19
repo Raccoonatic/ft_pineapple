@@ -6,11 +6,14 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:41:55 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/16 20:35:58 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/04/17 19:21:16 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static int	int_len(int n);
+static void	copy_digits(int n, int size, char *str, char symbol);
 
 char	*ft_itoa(int n)
 {
@@ -18,8 +21,8 @@ char	*ft_itoa(int n)
 	char	*result;
 	int		nlen;
 
-	if (nb == -2147483648)
-		return (edge_neg);
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	nlen = int_len(n);
 	symbol = '+';
 	if (n < 0)
@@ -29,11 +32,12 @@ char	*ft_itoa(int n)
 	}
 	result = ft_calloc((nlen + 1), sizeof (char));
 	if (!result)
-		return (Ncopy_digits(n, nlen, result, symbol));
+		return (NULL);
 	copy_digits(n, nlen, result, symbol);
 	return (result);
 }
-static int	int_len(int n);
+
+static int	int_len(int n)
 {
 	if (n < 0)
 		return (1 + int_len(-n));
@@ -42,19 +46,7 @@ static int	int_len(int n);
 	return (1 + int_len(n / 10));
 }
 
-char	*edge_neg(void)
-{
-	char	*min;
-
-	min = ft_calloc(12, sizeof (char));
-	if (!min)
-		return (NULL);
-	min[11] = '8';
-	copy_digits(214748364, 11, min, '-');
-	return (min);
-}
-
-char	*copy_digits(int n, int size, char *str, char symbol)
+static void	copy_digits(int n, int size, char *str, char symbol)
 {
 	int	guide;
 
@@ -69,14 +61,7 @@ char	*copy_digits(int n, int size, char *str, char symbol)
 	}
 	else
 	{
-		copy_digits(n/10);
-		copy_digits(n%10);
+		copy_digits(n / 10, size, str, symbol);
+		copy_digits(n % 10, size, str, symbol);
 	}
-
 }
-
-
-
-
-
-
