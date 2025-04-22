@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 21:11:45 by lde-san-          #+#    #+#              #
-#    Updated: 2025/04/19 18:38:04 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/04/22 17:57:33 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,14 +52,14 @@ FILE += ft_putendl_fd.c
 FILE += ft_putnbr_fd.c
 
 FILE_BONUS = ft_lstnew.c
-# FILE_BONUS += ft_lstadd_front.c
-# FILE_BONUS += ft_lstsize.c
-# FILE_BONUS += ft_lstlast.c
-# FILE_BONUS += ft_lstadd_back.c
-# FILE_BONUS += ft_lstdelone.c
-# FILE_BONUS += ft_lstclear.c
-# FILE_BONUS += ft_lstiter.c
-# FILE_BONUS += ft_lstmap.c
+FILE_BONUS += ft_lstadd_front.c
+FILE_BONUS += ft_lstsize.c
+FILE_BONUS += ft_lstlast.c
+FILE_BONUS += ft_lstadd_back.c
+FILE_BONUS += ft_lstdelone.c
+FILE_BONUS += ft_lstclear.c
+FILE_BONUS += ft_lstiter.c
+FILE_BONUS += ft_lstmap.c
 
 $(NAME): $(OBJ)
 	ar -rcs $@ $^
