@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 22:29:41 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/22 19:09:22 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/04/25 00:00:36 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <strings.h>
 # include <ctype.h>
 # include <unistd.h>
 # include <stddef.h>

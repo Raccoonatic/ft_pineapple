@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 21:11:45 by lde-san-          #+#    #+#              #
-#    Updated: 2025/04/22 17:57:33 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/04/23 13:54:36 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,15 +62,15 @@ FILE_BONUS += ft_lstiter.c
 FILE_BONUS += ft_lstmap.c
 
 $(NAME): $(OBJ)
-	ar -rcs $@ $^
+	@ar -rcs $@ $^
 
 %.o: %.c libft.h
-	$(COMPILE) -c $< -o $@
+	@$(COMPILE) -c $< -o $@
 
 all: $(NAME)
 
 bonus: $(OBJ) $(OBJ_BONUS)
-	ar -rcs $(NAME) $(OBJ) $(OBJ_BONUS)
+	@ar -rcs $(NAME) $(OBJ) $(OBJ_BONUS)
 
 open: $(FILE)
 	for file in $(FILE); do open $$file; done
@@ -78,10 +78,23 @@ open: $(FILE)
 print:
 	@echo $(OBJ)
 
+leak: tests
+	valgrind --leak-check=full ./tests
+	@echo -e "\033[1;35;40m\t\t16 Errors are expected. No sweat homie!\033[0m"
+
+leak_trace:
+	valgrind --leak-check=full --track-origins=yes -s ./tests
+
+tests: $(NAME)
+	cc -Wall -Werror -Wextra -g -I. tests.c -L. -lft -o tests
+
+tester: re tests
+	@./tests
+
 clean:
-	rm -f $(OBJ) $(OBJ_BONUS)
+	@rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME) tests
 
 re: fclean all
