@@ -22,6 +22,10 @@ int test_memset(void *s, size_t c, size_t n, int *local);
 int test_bzero(void *s1, void *s2, size_t n, int *local);
 int test_bzero_chad(void *input, size_t n, int *local);
 int test_memcpy(const void *src, size_t n, int *local);
+int test_memmove(void *dst1, void *dst2, const void *src1, const void *src2, size_t n, int *local);
+int test_strlcpy(const char *src, size_t n, int *local);
+size_t	mr_strlcpy(char *dst, const char *src, size_t size);
+int test_strlcat(char *dst, const char *src, size_t size, int *local);
 
 int	main(void)
 {
@@ -404,6 +408,82 @@ memset(char_empty3, 'z', 41);
 	char *src5 = NULL;
 	sucs += test_memcpy(src5, 0, &local);
 	
+// ft_memmove
+	printf("\033[1mTesting ft_memmove:\033[0m\n");
+	local = 1;
+
+	char *src = calloc(42, sizeof(char));
+	char *dst_std = calloc(42, sizeof(char));
+	char *dst_ft = calloc(42, sizeof(char));
+
+	if (!src || !dst_std || !dst_ft)
+	{
+		printf("\033[31m\tOops... Allocation problem\033[0m\n");
+		return (0);
+	}
+
+	strcpy(src, "This is a totally normal thing that a human would say.");
+	sucs += test_memmove(dst_std, dst_ft, src, src, 10, &local); // 	1
+
+	strcpy(src, "Overlap test where src < dst.");
+	sucs += test_memmove(src, src, src + 5, src + 5, 20, &local); //	2
+
+	strcpy(src, "Overlap test where dst < src.");
+	sucs += test_memmove(src + 5, src + 5, src, src, 20, &local); // 	3
+
+	strcpy(src, "0 move.");
+	sucs += test_memmove(dst_std, dst_ft, src, src, 0, &local); // 		4
+
+	strcpy(src, "Ah MEeessed UP! STR with%^@&$ WieRDS CHar==2s");
+	sucs += test_memmove(dst_std, dst_ft, src, src, 25, &local); // 	5
+
+	strcpy(src, "Tiny");
+	sucs += test_memmove(dst_std, dst_ft, src, src, 2, &local); // partial copy
+
+	free(src);
+	free(dst_std);
+	free(dst_ft);
+	
+// ft_strlcpy
+	printf("\033[1mTesting ft_strlcpy:\033[0m\n");
+	local = 1;
+	
+	sucs += test_strlcpy("Qlq con qlq en mi rd", 20, &local);	// 1 exact size
+	sucs += test_strlcpy("bby boi", 10, &local);			// 2 small src
+	sucs += test_strlcpy("", 5, &local);				// 3 empty src
+	sucs += test_strlcpy("This is a very long boi that should defo be truncated.", 20, &local); // 4 truncate
+	sucs += test_strlcpy("Tiny", 0, &local);			// 5 n = 0
+	sucs += test_strlcpy("Overflow?", 1, &local);			// 6 n = 1
+	sucs += test_strlcpy("Negative Mindset", -1, &local);		// 7 n = -1 
+	
+// ft_strlcat
+    printf("\033[1mTesting ft_strlcat:\033[0m\n");
+    local = 1;
+
+    // Test case 1: Normal concatenation
+    char dest1a[50] = "Hello, ";
+    char src1a[] = "world!";
+    sucs += test_strlcat(dest1a, src1a, sizeof(dest1a), &local); // 1
+
+    // Test case 2: Truncated concatenation (buffer too small)
+    char dest2a[10] = "Hello, ";
+    char src2a[] = "world!";
+    sucs += test_strlcat(dest2a, src2a, sizeof(dest2a), &local); // 2
+
+    // Test case 3: Empty source string
+    char dest3a[50] = "Hello, ";
+    char src3a[] = "";
+    sucs += test_strlcat(dest3a, src3a, sizeof(dest3a), &local); // 3
+
+    // Test case 4: Null termination check
+    char dest4a[50] = "Hello, ";
+    char src4a[] = "world!";
+    sucs += test_strlcat(dest4a, src4a, sizeof(dest4a), &local); // 4
+
+    // Test case 5: Overflow (buffer too small to fit the source and current content)
+    char dest5a[10] = "Hello";
+    char srca5a[] = "world!";
+    sucs += test_strlcat(dest5a, src5a, sizeof(dest5a), &local); // 5
 
 // After all tests	
 	printf("\033[36mAll tests done!\nSuccessful tests: %d\033[0m\n", sucs);
@@ -413,20 +493,112 @@ memset(char_empty3, 'z', 41);
 //////////////////////////////    TESTS HERE    //////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 
+int test_strlcat(char *dst, const char *src, size_t size, int *local)
+{
+    size_t boi = strlcat(dst, src, size);
+    size_t ft_boi = ft_strlcat(dst, src, size);
+
+    if (boi == ft_boi && strcmp(strlcat(dst, src, size), ft_strlcat(dst, src, size)) == 0)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        *local += 1;
+        printf("\t\tExpected: %zu, \"%s\"\n", ret, dst);
+        printf("\t\tReceived: %zu, \"%s\"\n", ft_ret, dst);
+    }
+    return (0);
+}
+
+size_t	mr_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	src_size;
+
+	i = 0;
+	src_size = ft_strlen(src);
+	if (!dst || !src)
+		return (0);
+	if (size == 0)
+		return (src_size);
+	while (src[i] && (i < size - 1))
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (src_size);
+}
+
+int test_strlcpy(const char *src, size_t n, int *local)
+{
+	char vessel1[100];
+	char vessel2[100];
+
+	memset(vessel1, 'o', 100);
+	memset(vessel2, 'o', 100);
+
+	size_t vessel1_len = mr_strlcpy(vessel1, src, n);
+	size_t vessel2_len = ft_strlcpy(vessel2, src, n);
+
+	if (memcmp(vessel1, vessel2, 100) == 0 && vessel1_len == vessel2_len)
+	{
+		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		return (1);
+	}
+	else
+	{
+		printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+		printf("\t\tExpected length: %zu\n", vessel1_len);
+		printf("\t\tReceived length: %zu\n", vessel2_len);
+		printf("\t\tExpected string: %s\n", vessel1);
+		printf("\t\tReceived string: %s\n", vessel2);
+		*local += 1;
+		return (0);
+	}
+}
+
+int test_memmove(void *dst1, void *dst2, const void *src1, const void *src2, size_t n, int *local)
+{
+	if (memcmp(memmove(dst1, src1, n), ft_memmove(dst2, src2, n), n) == 0)
+	{
+		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		(*local)++;
+		return (1);
+	}
+	else
+	{
+		printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+		(*local)++;
+		printf("\t\tExpected: 0\n");
+		printf("\t\tReceived: %d\n", memcmp(memmove(dst1, src1, n), ft_memmove(dst2, src2, n), n));
+	}
+	printf("%s\n", (char *)memmove(dst1, src1, n));
+	printf("%s\n", (char *)ft_memmove(dst2, src2, n));
+	return (0);
+}
+
 int test_memcpy(const void *src, size_t n, int *local)
 {
 	void *clone1 = malloc(n);
 	void *clone2 = malloc(n);
 	if (!clone1 || !clone2)
-		return 0;
-
+	{
+		printf("\033[31m\tOops... Allocation problem\033[0m\n");
+		return (0);
+	}
 	memcpy(clone1, src, n);
 	ft_memcpy(clone2, src, n);
 
 	if (memcmp(clone1, clone2, n) == 0)
 	{
 		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
-		(*local)++;
+		*local += 1;
 		free(clone1);
 		free(clone2);
 		return 1;
@@ -434,7 +606,7 @@ int test_memcpy(const void *src, size_t n, int *local)
 	else
 	{
 		printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
-		(*local)++;
+		*local += 1;
 		printf("\t\tExpected: 0\n");
 		printf("\t\tReceived: %d\n", memcmp(clone1, clone2, n));
 		free(clone1);
@@ -459,7 +631,7 @@ int test_bzero_chad(void *input, size_t n, int *local)
 	if (memcmp(s1, s2, n) == 0)
 	{
 		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
-		(*local)++;
+		*local += 1;
 		free(s1);
 		free(s2);
 		return 1;
@@ -467,7 +639,7 @@ int test_bzero_chad(void *input, size_t n, int *local)
 	else
 	{
 		printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
-		(*local)++;
+		*local += 1;
 		printf("\t\tExpected: 0\n");
 		printf("\t\tReceived: %d\n", memcmp(s1, s2, n));
 		free(s1);
