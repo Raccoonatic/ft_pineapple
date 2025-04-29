@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
 int test_isalpha(int a, int *local);
 int test_isdigit(int a, int *local);
@@ -26,6 +27,18 @@ int test_memmove(void *dst1, void *dst2, const void *src1, const void *src2, siz
 int test_strlcpy(const char *src, size_t n, int *local);
 size_t	mr_strlcpy(char *dst, const char *src, size_t size);
 int test_strlcat(char *dst, const char *src, size_t size, int *local);
+size_t	mr_strlcat(char *dst, const char *src, size_t size);
+int test_toupper(int input, int *local);
+int test_tolower(int input, int *local);
+int test_strchr(const char *s, int c, int *local);
+int test_strrchr(const char *s, int c, int *local);
+int test_strncmp(const char *s1, const char *s2, size_t n, int *local);
+int test_memchr(const void *s, int c, size_t n, int *local);
+int test_memcmp(const void *s1, const void *s2, size_t n, int *local);
+int test_strnstr(const char *haystack, const char *needle, size_t len, int *local);
+char	*mr_strnstr(const char *big, const char *little, size_t len);
+int test_atoi(const char *str, int *local);
+int test_calloc(size_t count, size_t size, int *local);
 
 int	main(void)
 {
@@ -412,7 +425,7 @@ memset(char_empty3, 'z', 41);
 	printf("\033[1mTesting ft_memmove:\033[0m\n");
 	local = 1;
 
-	char *src = calloc(42, sizeof(char));
+	char *src = calloc(52, sizeof(char));
 	char *dst_std = calloc(42, sizeof(char));
 	char *dst_ft = calloc(42, sizeof(char));
 
@@ -461,7 +474,7 @@ memset(char_empty3, 'z', 41);
     local = 1;
 
     // Test case 1: Normal concatenation
-    char dest1a[50] = "Hello, ";
+    char dest1a[14] = "Hello, ";
     char src1a[] = "world!";
     sucs += test_strlcat(dest1a, src1a, sizeof(dest1a), &local); // 1
 
@@ -471,21 +484,165 @@ memset(char_empty3, 'z', 41);
     sucs += test_strlcat(dest2a, src2a, sizeof(dest2a), &local); // 2
 
     // Test case 3: Empty source string
-    char dest3a[50] = "Hello, ";
+    char dest3a[8] = "Hello, ";
     char src3a[] = "";
     sucs += test_strlcat(dest3a, src3a, sizeof(dest3a), &local); // 3
 
     // Test case 4: Null termination check
-    char dest4a[50] = "Hello, ";
+    char dest4a[14] = "Hello, ";
     char src4a[] = "world!";
     sucs += test_strlcat(dest4a, src4a, sizeof(dest4a), &local); // 4
 
     // Test case 5: Overflow (buffer too small to fit the source and current content)
-    char dest5a[10] = "Hello";
-    char srca5a[] = "world!";
+    char dest5a[6] = "Hello";
+    char src5a[] = "world!";
     sucs += test_strlcat(dest5a, src5a, sizeof(dest5a), &local); // 5
 
-// After all tests	
+// ft_toupper
+	printf("\033[1mTesting ft_toupper:\033[0m\n");
+	local = 1;
+	sucs += test_toupper('a', &local);        // 1: basic lowercase
+	sucs += test_toupper('z', &local);        // 2: end of lowercase
+	sucs += test_toupper('A', &local);        // 3: already uppercase
+	sucs += test_toupper('0', &local);        // 4: non-alpha
+	sucs += test_toupper(2147483647, &local); // 5: int max
+	sucs += test_toupper(-1, &local);  	  // 6: negative value
+	sucs += test_toupper(128, &local);        // 7: beyond ASCII
+	sucs += test_toupper(0, &local);          // 8: null char
+	sucs += test_toupper(1, &local);          // 9: control char
+	sucs += test_toupper('[', &local);        // 10: bracket
+
+// ft_tolower
+	printf("\033[1mTesting ft_tolower:\033[0m\n");
+	local = 1;
+	sucs += test_tolower('A', &local);   // 1: uppercase letter
+	sucs += test_tolower('Z', &local);   // 2: uppercase edge
+	sucs += test_tolower('M', &local);   // 3: middle uppercase
+	sucs += test_tolower('a', &local);   // 4: already lowercase
+	sucs += test_tolower('z', &local);   // 5: already lowercase edge
+	sucs += test_tolower('0', &local);   // 6: digit
+	sucs += test_tolower('!', &local);   // 7: punctuation
+	sucs += test_tolower(' ', &local);   // 8: space
+	sucs += test_tolower(-1, &local);    // 9: EOF
+	sucs += test_tolower(-42, &local);   // 10: negative invalid input
+	sucs += test_tolower(128, &local);   // 11: extended ASCII
+	sucs += test_tolower(255, &local);   // 12: upper unsigned char limit
+	sucs += test_tolower(0, &local);     // 13: null char
+
+// ft_strchr
+	printf("\033[1mTesting ft_strchr:\033[0m\n");
+	local = 1;
+	sucs += test_strchr("hello world", 'w', &local);      // 1: normal match
+	sucs += test_strchr("hello world", 'l', &local);      // 2: multiple matches
+	sucs += test_strchr("hello world", 'z', &local);      // 3: no match
+	sucs += test_strchr("", 'a', &local);                 // 4: empty string
+	sucs += test_strchr("42 Perritos sentaos", '4', &local);        // 5: match at start
+	sucs += test_strchr("end\0hidden", '\0', &local);     // 6: null terminator
+	sucs += test_strchr("abc", 0, &local);                // 7: explicit null
+	sucs += test_strchr("ñandú", 163, &local);            // 8: non-ASCII char
+	sucs += test_strchr("abc", -42, &local);              // 9: negative input
+	sucs += test_strchr("abc", 256, &local);              // 10: out-of-range input
+
+// ft_strrchr
+	printf("\033[1mTesting ft_strrchr:\033[0m\n");
+	local = 1;
+	sucs += test_strrchr("hello world", 'w', &local);      // 1: normal match
+	sucs += test_strrchr("hello world", 'l', &local);      // 2: multiple matches
+	sucs += test_strrchr("hello world", 'z', &local);      // 3: no match
+	sucs += test_strrchr("", 'a', &local);                 // 4: empty string
+	sucs += test_strrchr("42 Perritos sentaos", '4', &local);        // 5: match at start
+	sucs += test_strrchr("end\0hidden", '\0', &local);     // 6: null terminator
+	sucs += test_strrchr("abc", 0, &local);                // 7: explicit null
+	sucs += test_strrchr("ñandú", 163, &local);            // 8: non-ASCII char
+	sucs += test_strrchr("abc", -42, &local);              // 9: negative input
+	sucs += test_strrchr("abc", 256, &local);              // 10: out-of-range input
+
+// ft_strncmp
+    printf("\033[1mTesting ft_strncmp:\033[0m\n");
+    local = 1;
+    sucs += test_strncmp("hello", "hello", 5, &local); // 1
+    sucs += test_strncmp("hello", "hellp", 5, &local); // 2
+    sucs += test_strncmp("hell", "hello", 4, &local);   // 3
+    sucs += test_strncmp("abc", "abcdef", 3, &local);   // 4
+    sucs += test_strncmp("abc", "abc", -4, &local);      // 5
+    sucs += test_strncmp("abc", "abz", 3, &local);      // 6
+    sucs += test_strncmp("abcd", "abc", 4, &local);     // 7
+    sucs += test_strncmp("abcd", "abcd", 4, &local);    // 8
+    sucs += test_strncmp("hello", "hello", 0, &local);  // 9
+    sucs += test_strncmp("test", "TEST", 4, &local);  // 10
+
+// ft_memchr
+    printf("\033[1mTesting ft_memchr:\033[0m\n");
+    local = 1;
+    sucs += test_memchr("hello", 'e', 5, &local); 	// 1
+    sucs += test_memchr("hello", 'l', 5, &local);   	// 2
+    sucs += test_memchr("hello", 'o', 5, &local);     	// 3
+    sucs += test_memchr("abcdef", 'a', 6, &local); 	// 4
+    sucs += test_memchr("abcdef", 'd', 6, &local);   	// 5
+    sucs += test_memchr("abcdef", 'z', 6, &local);    	// 6 (not found case)
+    sucs += test_memchr("hello", 'l', 2, &local);     	// 7
+    sucs += test_memchr("12345", '3', 5, &local);    	// 8
+    sucs += test_memchr("hello", 'e', 1, &local);    	// 9
+    sucs += test_memchr("hello", 'o', 5, &local);     	// 10
+
+// ft_memcmp
+    printf("\033[1mTesting ft_memcmp:\033[0m\n");
+    local = 1;
+    sucs += test_memcmp("hello", "hello", 5, &local);   // 1
+    sucs += test_memcmp("hello", "hella", 5, &local);    // 2
+    sucs += test_memcmp("abcdef", "abcdef", 6, &local);  // 3
+    sucs += test_memcmp("abcd", "abce", 4, &local);    // 4
+    sucs += test_memcmp("abc", "abcd", 3, &local);     // 5
+    sucs += test_memcmp("abcd", "abdc", 4, &local);     // 6
+    sucs += test_memcmp("12345", "12346", 5, &local);  // 7
+    sucs += test_memcmp("123", "124", 3, &local);     // 8
+    sucs += test_memcmp("abcd", "abcc", 4, &local);     // 9
+    sucs += test_memcmp("hello", "hell", 4, &local);    // 10
+
+// ft_strnstr
+    printf("\033[1mTesting ft_strnstr:\033[0m\n");
+    local = 1;
+    sucs += test_strnstr("Hello, world!", "world", 13, &local);   // 1
+    sucs += test_strnstr("Hello, world!", "abc", 13, &local);       // 2
+    sucs += test_strnstr("abcdef", "cd", 6, &local);                // 3
+    sucs += test_strnstr("abcdef", "bc", 3, &local);                // 4
+    sucs += test_strnstr("abcdef", "def", 3, &local);               // 5
+    sucs += test_strnstr("abcdef", "f", 3, &local);                 // 6
+    sucs += test_strnstr("abcdef", "f", 6, &local);                  // 7
+    sucs += test_strnstr("abcdef", "abc", 3, &local);              // 8
+    sucs += test_strnstr("abcdef", "abcdef", 6, &local);        // 9
+    sucs += test_strnstr("abcdef", "z", 6, &local);                 // 10
+
+// ft_atoi
+	printf("\033[1mTesting ft_atoi:\033[0m\n");
+	local = 1;
+	sucs += test_atoi("42", &local);                 	// 1
+	sucs += test_atoi("   -42", &local);             	// 2
+	sucs += test_atoi("4193 with words", &local);    	// 3
+	sucs += test_atoi("words and 987", &local);      	// 4
+	sucs += test_atoi("-91283472332", &local);       	// 5
+	sucs += test_atoi("+2147483647", &local);        	// 6
+	sucs += test_atoi("-2147483648", &local);        	// 7
+	sucs += test_atoi("00000000123", &local);        	// 8
+	sucs += test_atoi("  +000", &local);             	// 9
+	sucs += test_atoi("  -0000042abc", &local);      	//10
+	sucs += test_atoi("", &local);                   	//11
+	sucs += test_atoi("   \t\n\r\v\f123", &local);    	//12
+
+// ft_calloc
+	printf("\033[1mTesting ft_calloc:\033[0m\n");
+	local = 1;
+	sucs += test_calloc(10, sizeof(int), &local);     // 1
+	sucs += test_calloc(0, 1, &local);                // 2
+	sucs += test_calloc(1, 0, &local);                // 3
+	sucs += test_calloc(0, 0, &local);                // 4
+	sucs += test_calloc(100, 100, &local);            // 5
+	sucs += test_calloc(1, 1, &local);                // 6
+	sucs += test_calloc(50, sizeof(char), &local);    // 7
+	sucs += test_calloc(5, sizeof(long), &local);     // 8
+
+
+// After all tests
 	printf("\033[36mAll tests done!\nSuccessful tests: %d\033[0m\n", sucs);
 	return(0);
 }
@@ -493,12 +650,147 @@ memset(char_empty3, 'z', 41);
 //////////////////////////////    TESTS HERE    //////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 
-int test_strlcat(char *dst, const char *src, size_t size, int *local)
+int test_calloc(size_t count, size_t size, int *local)
 {
-    size_t boi = strlcat(dst, src, size);
-    size_t ft_boi = ft_strlcat(dst, src, size);
+	void *expected = calloc(count, size);
+	void *result = ft_calloc(count, size);
+	int match = 1;
 
-    if (boi == ft_boi && strcmp(strlcat(dst, src, size), ft_strlcat(dst, src, size)) == 0)
+	if (!expected || !result)
+		match = (expected == result);
+	else
+		match = !memcmp(expected, result, count);
+
+	if (match)
+	{
+		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+	}
+	else
+	{
+		printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+		printf("\t\tCount: %zu, Size: %zu\n", count, size);
+	}
+	free(expected);
+	free(result);
+	*local += 1;
+	return (match);
+}
+
+
+int test_atoi(const char *str, int *local)
+{
+	int expected = atoi(str);
+	int result = ft_atoi(str);
+	if (expected == result)
+	{
+		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		return (1);
+	}
+	else
+	{
+		printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+		printf("\t\tInput: \"%s\"\n", str);
+		printf("\t\tExpected: %d\n", expected);
+		printf("\t\tReceived: %d\n", result);
+		*local += 1;
+		return (0);
+	}
+}
+
+char	*mr_strnstr(const char *big, const char *little, size_t len)
+{
+	size_t	i;
+	size_t	j;
+
+	if (!big && !len)
+		return (0);
+	if (little[0] == '\0')
+		return ((char *)big);
+	i = 0;
+	while (i < len && big[i])
+	{
+		j = 0;
+		while (i + j < len && big[i + j] != '\0' && big[i + j] == little[j])
+		{
+			if (little[j + 1] == '\0')
+				return ((char *)&big[i]);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int test_strnstr(const char *haystack, const char *needle, size_t len, int *local)
+{
+    char *result = mr_strnstr(haystack, needle, len);
+    char *ft_result = ft_strnstr(haystack, needle, len);
+
+    if ((result == NULL && ft_result == NULL) || (strcmp(result, ft_result) == 0))
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        return 1;
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        *local += 1;
+        printf("\t\tExpected: %s\n", result ? result : "NULL");
+        printf("\t\tReceived: %s\n", ft_result ? ft_result : "NULL");
+    }
+    return 0;
+}
+
+int test_memcmp(const void *s1, const void *s2, size_t n, int *local)
+{
+    int expected = memcmp(s1, s2, n);
+    int result = ft_memcmp(s1, s2, n);
+    
+    if (result == expected)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        return 1;
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        *local += 1;
+        printf("\t\tExpected: %d\n", expected);
+        printf("\t\tReceived: %d\n", result);
+    }
+    return 0;
+}
+
+int test_memchr(const void *s, int c, size_t n, int *local)
+{
+    void *result = memchr(s, c, n);
+    void *expected = ft_memchr(s, c, n);
+    
+    if (result == expected)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        return 1;
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        *local += 1;
+        printf("\t\tExpected: %p\n", expected);
+        printf("\t\tReceived: %p\n", result);
+    }
+    return 0;
+}
+
+int test_strncmp(const char *s1, const char *s2, size_t n, int *local)
+{
+    int expected = strncmp(s1, s2, n);
+    int result = strncmp(s1, s2, n);
+    
+    if (result == expected)
     {
         printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
         *local += 1;
@@ -508,9 +800,141 @@ int test_strlcat(char *dst, const char *src, size_t size, int *local)
     {
         printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
         *local += 1;
-        printf("\t\tExpected: %zu, \"%s\"\n", ret, dst);
-        printf("\t\tReceived: %zu, \"%s\"\n", ft_ret, dst);
+        printf("\t\tExpected: %d\n", expected);
+        printf("\t\tReceived: %d\n", result);
     }
+    return (0);
+}
+
+int test_strrchr(const char *s, int c, int *local)
+{
+	char *std = strrchr(s, c);
+	char *mine = ft_strrchr(s, c);
+
+	if (std == mine || (std && mine && strcmp(std, mine) == 0))
+	{
+		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		return (1);
+	}
+	else
+	{
+		printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+		printf("\t\tInput: \"%s\", char: '%c' (%d)\n", s, (c >= 32 && c <= 126) ? c : '.', c);
+		printf("\t\tExpected: \"%s\"\n", std ? std : "NULL");
+		printf("\t\tReceived: \"%s\"\n", mine ? mine : "NULL");
+		*local += 1;
+		return (0);
+	}
+}
+
+
+int test_strchr(const char *s, int c, int *local)
+{
+	char *std = strchr(s, c);
+	char *mine = ft_strchr(s, c);
+
+	if (std == mine || (std && mine && strcmp(std, mine) == 0))
+	{
+		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		return (1);
+	}
+	else
+	{
+		printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+		printf("\t\tInput: \"%s\", char: '%c' (%d)\n", s, (c >= 32 && c <= 126) ? c : '.', c);
+		printf("\t\tExpected: \"%s\"\n", std ? std : "NULL");
+		printf("\t\tReceived: \"%s\"\n", mine ? mine : "NULL");
+		*local += 1;
+		return (0);
+	}
+}
+
+int test_tolower(int input, int *local)
+{
+	int std = tolower((unsigned char)input);
+	int mine = ft_tolower((unsigned char)input);
+
+	if (mine == std)
+	{
+		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		return (1);
+	}
+	else
+	{
+		printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+		printf("\t\tInput: %d ('%c')\n", input, (input >= 32 && input <= 126) ? input : '.');
+		printf("\t\tExpected: %d\n", std);
+		printf("\t\tReceived: %d\n", mine);
+		*local += 1;
+		return (0);
+	}
+}
+
+int test_toupper(int input, int *local)
+{
+	if (ft_toupper(input) == toupper(input))
+	{
+		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		return (1);
+	}
+	else
+	{
+		printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+		printf("\t\tInput: %d ('%c')\n", input, (input >= 32 && input <= 126) ? input : '.');
+		printf("\t\tExpected: %d\n", toupper(input));
+		printf("\t\tReceived: %d\n", ft_toupper(input));
+		*local += 1;
+		return (0);
+	}
+}
+
+size_t	mr_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	dst_size;
+	size_t	src_size;
+	size_t	space_left;
+
+	i = 0;
+	dst_size = ft_strlen(dst);
+	src_size = ft_strlen(src);
+	if (size <= dst_size)
+		return (size + src_size);
+	space_left = size - dst_size - 1;
+	while (i < (space_left) && src[i])
+	{
+		dst[dst_size + i] = src[i];
+		i++;
+	}
+	dst[dst_size + i] = '\0';
+	return (dst_size + src_size);
+}
+
+int test_strlcat(char *dst, const char *src, size_t size, int *local)
+{
+    char *dst_clone = strdup((const char *)dst);
+    size_t res = mr_strlcat(dst, src, size);
+    size_t ft_res = ft_strlcat(dst_clone, src, size);
+
+    if (res == ft_res && strcmp(dst, dst_clone) == 0)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        free(dst_clone);
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        *local += 1;
+        printf("\t\tExpected: %zu, \"%s\"\n", res, dst);
+        printf("\t\tReceived: %zu, \"%s\"\n", ft_res, dst_clone);
+    }
+    free(dst_clone);
     return (0);
 }
 

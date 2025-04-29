@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 21:11:45 by lde-san-          #+#    #+#              #
-#    Updated: 2025/04/23 13:54:36 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/04/29 18:46:50 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ print:
 
 leak: tests
 	valgrind --leak-check=full ./tests
-	@echo -e "\033[1;35;40m\t\t16 Errors are expected. No sweat homie!\033[0m"
+	@echo -e "\033[1;35;40m\t16 Errors are expected. No Leaks? No sweat homie!\033[0m"
 
 leak_trace:
 	valgrind --leak-check=full --track-origins=yes -s ./tests

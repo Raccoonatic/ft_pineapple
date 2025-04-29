@@ -6,14 +6,13 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 22:29:41 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/25 00:00:36 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:56:34 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <string.h>
 # include <strings.h>
 # include <ctype.h>
 # include <unistd.h>
@@ -21,6 +20,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdint.h>
+# include <string.h>
 
 int		ft_isalpha(int c);
 int		ft_atoi(const char *str);
