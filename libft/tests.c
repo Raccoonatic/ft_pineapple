@@ -39,6 +39,23 @@ int test_strnstr(const char *haystack, const char *needle, size_t len, int *loca
 char	*mr_strnstr(const char *big, const char *little, size_t len);
 int test_atoi(const char *str, int *local);
 int test_calloc(size_t count, size_t size, int *local);
+int test_strdup(char *str, int *local);
+int test_substr(char *str, unsigned int start, size_t len, char *expected, int *local);
+int test_strjoin(char *s1, char *s2, char *expected, int *local);
+int test_strtrim(char *s1, char *set, char *expected, int *local);
+int test_split(char *str, char sep, char **expected, int *local);
+int test_itoa(int n, char *expected, int *local);
+char index_plus_char(unsigned int i, char c);
+int test_strmapi(char const *s, char (*f)(unsigned int, char), char *expected, int *local);
+char to_upper(unsigned int i, char c);
+void to_upper_iter(unsigned int i, char *c);
+void shift_by_index(unsigned int i, char *c);
+int test_striteri(char *input, void (*f)(unsigned int, char *), char *expected, int *local);
+int test_putchar_fd(char c, char expected, int *local);
+int test_putstr_fd(char *input, char *expected, int *local);
+int test_putendl_fd(char *input, char *expected, int *local);
+int test_putnbr_fd(int n, char *expected, int *local);
+int test_lstnew_str(void *content, int *local);
 
 int	main(void)
 {
@@ -640,30 +657,698 @@ memset(char_empty3, 'z', 41);
 	sucs += test_calloc(1, 1, &local);                // 6
 	sucs += test_calloc(50, sizeof(char), &local);    // 7
 	sucs += test_calloc(5, sizeof(long), &local);     // 8
+	sucs += test_calloc(10000000, 10000, &local);     // 9
+
+// ft_strdup
+	printf("\033[1mTesting ft_strdup:\033[0m\n");
+	local = 1;
+	char *str1x = "Hello, world!";
+	char *str2x = "🦝ñandú";
+	char *str3x = "1234567890";
+	char *str4x = "";
+	char *str5x = "\0";
+
+	sucs += test_strdup(str1x, &local); //1
+	sucs += test_strdup(str2x, &local); //2
+	sucs += test_strdup(str3x, &local); //3
+	sucs += test_strdup(str4x, &local); //4
+	sucs += test_strdup(str5x, &local); //5
+
+// ft_substr
+printf("\033[1mTesting ft_substr:\033[0m\n");
+local = 1;
+
+sucs += test_substr("Hello, world!", 7, 5, "world", &local);  		// Substring in the middle
+sucs += test_substr("Hello!", 0, 5, "Hello", &local);  			// Substring from the start
+sucs += test_substr("Hello, world!", 0, 20, "Hello, world!", &local); 	// longer than the original
+sucs += test_substr("ABCDE", 5, 10, "", &local); 			// Substring out of bounds
+sucs += test_substr("", 0, 5, "", &local);    				// Empty string input
+sucs += test_substr("ABCDE", 2, 0, "", &local);  			// Empty substring
+
+// ft_strjoin
+printf("\033[1mTesting ft_strjoin:\033[0m\n");
+local = 1;
+
+sucs += test_strjoin("Hello", "World", "HelloWorld", &local);	//1
+sucs += test_strjoin("", "World", "World", &local);		//2
+sucs += test_strjoin("Hello", "", "Hello", &local);		//3
+sucs += test_strjoin("", "", "", &local);			//4
+sucs += test_strjoin("123", "456", "123456", &local);		//5
+sucs += test_strjoin("🦝ñ", "andú", "🦝ñandú", &local);		//6
+
+// ft_strtrim
+
+printf("\033[1mTesting ft_strtrim:\033[0m\n");
+local = 1;
+
+sucs += test_strtrim("  hello  ", " ", "hello", &local);           //1 Basic trim
+sucs += test_strtrim("$$$money$$$", "$", "money", &local);         //2 Dollar signs
+sucs += test_strtrim("abcXYZabc", "abc", "XYZ", &local);           //3 Trim set chars front & back
+sucs += test_strtrim("clean", "xyz", "clean", &local);             //4 No matching trim
+sucs += test_strtrim("", " ", "", &local);                         //5 Empty input
+sucs += test_strtrim("     ", " ", "", &local);                    //6 All spaces
+
+// ft_split
+
+char *exp1[] = {"hello", "world", NULL};
+char *exp2[] = {"42", "LEiria", NULL};
+char *exp3[] = {"one", "two", "three", NULL};
+char *exp4[] = {NULL};
+char *exp5[] = {"abc", NULL};
+char *exp6[] = {"hell0", NULL};
+
+printf("\033[1mTesting ft_split:\033[0m\n");
+local = 1;
+
+sucs += test_split("hello world", ' ', exp1, &local);	// control
+sucs += test_split("42 LEiria", ' ', exp2, &local);	// num char string
+sucs += test_split("one[two[three[", '[', exp3, &local);// special delimiter + Delimiter at end
+sucs += test_split("", ',', exp4, &local);              // empty string
+sucs += test_split("abc", 'x', exp5, &local);           // delimiter not found
+sucs += test_split("        ", ' ', exp4, &local);	// Only delimiters
+sucs += test_split("        hell0", ' ', exp6, &local);	// Bunch of delimiters leading
+sucs += test_split("    hell0   ", ' ', exp6, &local);	// Delimiters lead+end
+
+// ft_itoa
+
+printf("\033[1mTesting ft_itoa:\033[0m\n");
+local = 1;
+
+sucs += test_itoa(0, "0", &local);				//1
+sucs += test_itoa(123, "123", &local);				//2
+sucs += test_itoa(-123, "-123", &local);			//3
+sucs += test_itoa(2147483647, "2147483647", &local);		//4
+sucs += test_itoa(-2147483648, "-2147483648", &local);		//5
+
+// ft_strmapi
+
+printf("\033[1mTesting ft_strmapi:\033[0m\n");
+local = 1;
+
+sucs += test_strmapi("hello", to_upper, "HELLO", &local);             // 1
+sucs += test_strmapi("abcd", index_plus_char, "aceg", &local);        // 2
+sucs += test_strmapi("", to_upper, "", &local);                       // 3
+sucs += test_strmapi("1234", index_plus_char, "1357", &local);        // 4
+sucs += test_strmapi("XYZ", to_upper, "XYZ", &local);                 // 5
+
+// ft_striteri
+
+printf("\033[1mTesting ft_striteri:\033[0m\n");
+local = 1;
+
+sucs += test_striteri("hello", to_upper_iter, "HELLO", &local);          // 1
+sucs += test_striteri("abcd", shift_by_index, "aceg", &local);           // 2
+sucs += test_striteri("", to_upper_iter, "", &local);                    // 3
+sucs += test_striteri("1234", shift_by_index, "1357", &local);           // 4
+sucs += test_striteri("XYZ", to_upper_iter, "XYZ", &local);              // 5
+
+// ft_putchar_fd
+
+printf("\033[1mTesting ft_putchar_fd:\033[0m\n");
+local = 1;
+
+sucs += test_putchar_fd('a', 'a', &local);          // 1
+sucs += test_putchar_fd('Z', 'Z', &local);          // 2
+sucs += test_putchar_fd('\n', '\n', &local);        // 3
+sucs += test_putchar_fd('0', '0', &local);          // 4
+sucs += test_putchar_fd(127, 127, &local);          // 5 (DEL char)
+
+// ft_putstr_fd
+
+printf("\033[1mTesting ft_putstr_fd:\033[0m\n");
+local = 1;
+
+sucs += test_putstr_fd("hello", "hello", &local);       	// 1
+sucs += test_putstr_fd("world", "world", &local);       	// 2
+sucs += test_putstr_fd("", "", &local);                 	// 3 (Empty string)
+sucs += test_putstr_fd("test123", "test123", &local);   	// 4
+sucs += test_putstr_fd("new\nline", "new\nline", &local); 	// 5 (With newline)
+
+// ft_putendl_fd
+
+printf("\033[1mTesting ft_putendl_fd:\033[0m\n");
+local = 1;
+
+sucs += test_putendl_fd("hello", "hello\n", &local);       	// 1
+sucs += test_putendl_fd("world", "world\n", &local);       	// 2
+sucs += test_putendl_fd("", "\n", &local);                 	// 3 (Empty string)
+sucs += test_putendl_fd("test123", "test123\n", &local);   	// 4
+sucs += test_putendl_fd("new\nline", "new\nline\n", &local); 	// 5 (String with newline already)
+
+// ft_putnbr_fd
+
+printf("\033[1mTesting ft_putnbr_fd:\033[0m\n");
+local = 1;
+
+sucs += test_putnbr_fd(42, "42", &local);               // 1
+sucs += test_putnbr_fd(-42, "-42", &local);             // 2
+sucs += test_putnbr_fd(0, "0", &local);                 // 3 (Zero)
+sucs += test_putnbr_fd(2147483647, "2147483647", &local); // 4 (Max int)
+sucs += test_putnbr_fd(-2147483648, "-2147483648", &local); // 5 (Min int)
+
+// ft_lstnew
+
+	printf("\033[1mTesting ft_lstnew:\033[0m\n");
+	local = 1;
+	
+	sucs += test_lstnew_str("Rojo", &local);
+	sucs += test_lstnew_str("!%^@*", &local);
+	sucs += test_lstnew_str("", &local);
+//	sucs += test_lstnew_int(baby, 5, &local);
+//	sucs += test_lstnew_int(baby, 0, &local);
 
 
 // After all tests
 	printf("\033[36mAll tests done!\nSuccessful tests: %d\033[0m\n", sucs);
 	return(0);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////    TESTS HERE    //////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
+
+void del( void *bye)
+{
+	free(bye);
+}
+
+int test_lstnew_str(void *content, int *local)
+{
+	int count = 0;
+	t_list *list = ft_lstnew(content);
+	
+	if (!list)
+	{
+		printf("\033[31m\ttest %d: Cagaste, list creation failed\033[0m\n", *local);
+		*local += 1;
+		return(count);
+	}
+	else
+	{
+		printf("\033[32m\ttest %d: Todo fino, List created!\033[0m\n", *local);
+        	local += 1;
+        	count++;
+	}
+	
+	if (strcmp(list -> content,content) == 0)
+	{
+		printf("\033[32m\ttest %d: Todo fino, Content written\033[0m\n", *local);
+        	local += 1;
+        	count++;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        	printf("\t\tExpected: '%s'\n", "Rojo");
+        	printf("\t\tReceived: '%s'\n", (char *)list -> content);
+        	local += 1;
+        	return(count);
+	}
+	if (!list -> next)
+	{
+		printf("\033[32m\ttest %d: Todo fino, NULL next\033[0m\n", *local);
+        	local += 1;
+        	count++;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste, next != NULL\033[0m\n", *local);
+        	local += 1;
+        	return(count);
+	}
+	ft_lstdelone(list, del);
+        return(count);
+}
+
+int test_putnbr_fd(int n, char *expected, int *local)
+{
+    int fd[2];
+    char buf[100] = {0};  // Buffer to hold the data read from the pipe
+
+    if (pipe(fd) == -1)
+    {
+        printf("\033[31m\ttest %d: pipe() failed\033[0m\n", *local);
+        *local += 1;
+        return (0);
+    }
+
+    ft_putnbr_fd(n, fd[1]);  // Write the integer as a string to the pipe
+    close(fd[1]);            // Close the write-end
+
+    read(fd[0], buf, sizeof(buf) - 1);  // Read the result from the pipe
+    close(fd[0]);            // Close the read-end
+
+    if (strcmp(buf, expected) == 0)  // Compare the result
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        printf("\t\tExpected: '%s'\n", expected);
+        printf("\t\tReceived: '%s'\n", buf);
+        *local += 1;
+        return (0);
+    }
+}
+
+
+int test_putendl_fd(char *input, char *expected, int *local)
+{
+    int fd[2];
+    char buf[100] = {0};  // Buffer to hold the data read from the pipe
+
+    if (pipe(fd) == -1)
+    {
+        printf("\033[31m\ttest %d: pipe() failed\033[0m\n", *local);
+        *local += 1;
+        return (0);
+    }
+
+    ft_putendl_fd(input, fd[1]);  // Write the string to the pipe with a newline at the end
+    close(fd[1]);                 // Close the write-end
+
+    read(fd[0], buf, sizeof(buf) - 1);  // Read the result from the pipe
+    close(fd[0]);                 // Close the read-end
+
+    if (strcmp(buf, expected) == 0)  // Compare the result
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        printf("\t\tExpected: '%s'\n", expected);
+        printf("\t\tReceived: '%s'\n", buf);
+        *local += 1;
+        return (0);
+    }
+}
+
+
+int test_putstr_fd(char *input, char *expected, int *local)
+{
+    int fd[2];
+    char buf[100] = {0};  // Buffer to hold the data read from the pipe
+
+    if (pipe(fd) == -1)
+    {
+        printf("\033[31m\ttest %d: pipe() failed\033[0m\n", *local);
+        *local += 1;
+        return (0);
+    }
+
+    ft_putstr_fd(input, fd[1]);  // Write the string to the write-end of the pipe
+    close(fd[1]);                // Close the write-end
+
+    read(fd[0], buf, sizeof(buf) - 1);  // Read back from the read-end of the pipe
+    close(fd[0]);                // Close the read-end
+
+    if (strcmp(buf, expected) == 0)  // Compare the result
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        printf("\t\tExpected: '%s'\n", expected);
+        printf("\t\tReceived: '%s'\n", buf);
+        *local += 1;
+        return (0);
+    }
+}
+
+
+int test_putchar_fd(char c, char expected, int *local)
+{
+    int fd[2];
+    char buf[2] = {0};
+
+    if (pipe(fd) == -1)
+    {
+        printf("\033[31m\ttest %d: pipe() failed\033[0m\n", *local);
+        *local += 1;
+        return (0);
+    }
+
+    ft_putchar_fd(c, fd[1]);
+    close(fd[1]);
+
+    read(fd[0], buf, 1);
+    close(fd[0]);
+
+    if (buf[0] == expected)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        printf("\t\tExpected: '%c' (0x%x)\n", expected, expected);
+        printf("\t\tReceived: '%c' (0x%x)\n", buf[0], buf[0]);
+        *local += 1;
+        return (0);
+    }
+}
+
+
+void to_upper_iter(unsigned int i, char *c)
+{
+    (void)i;
+    if (*c >= 'a' && *c <= 'z')
+        *c -= 32;
+}
+
+void shift_by_index(unsigned int i, char *c)
+{
+    *c += i;
+}
+
+int test_striteri(char *input, void (*f)(unsigned int, char *), char *expected, int *local)
+{
+    char buffer[100];
+    strncpy(buffer, input, sizeof(buffer));
+    buffer[sizeof(buffer) - 1] = '\0';
+
+    ft_striteri(buffer, f);
+
+    if (strcmp(buffer, expected) == 0)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        printf("\t\tExpected: %s\n", expected);
+        printf("\t\tReceived: %s\n", buffer);
+        *local += 1;
+        return (0);
+    }
+}
+
+
+char to_upper(unsigned int i, char c)
+{
+    (void)i;
+    if (c >= 'a' && c <= 'z')
+        return (c - 32);
+    return (c);
+}
+
+char index_plus_char(unsigned int i, char c)
+{
+    return (c + i);
+}
+
+int test_strmapi(char const *s, char (*f)(unsigned int, char), char *expected, int *local)
+{
+    char *result = ft_strmapi(s, f);
+
+    if (!result || !expected)
+    {
+        printf("\033[31m\ttest %d: Cagaste (NULL somewhere)\033[0m\n", *local);
+        *local += 1;
+        return (0);
+    }
+
+    if (strcmp(result, expected) == 0)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        free(result);
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        printf("\t\tExpected: %s\n", expected);
+        printf("\t\tReceived: %s\n", result);
+        *local += 1;
+        free(result);
+        return (0);
+    }
+}
+
+
+int test_itoa(int n, char *expected, int *local)
+{
+    char *result = ft_itoa(n);
+
+    if (!result || !expected)
+    {
+        printf("\033[31m\ttest %d: Cagaste (NULL somewhere)\033[0m\n", *local);
+        *local += 1;
+        return (0);
+    }
+
+    if (strcmp(result, expected) == 0)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        free(result);
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        *local += 1;
+        printf("\t\tExpected: %s\n", expected);
+        printf("\t\tReceived: %s\n", result);
+        free(result);
+        return (0);
+    }
+}
+
+
+int test_split(char *str, char sep, char **expected, int *local)
+{
+    char **result = ft_split(str, sep);
+    int i = 0;
+
+    if (!result || !expected)
+    {
+        printf("\033[31m\ttest %d: Cagaste (NULL somewhere)\033[0m\n", *local);
+        *local += 1;
+        return (0);
+    }
+
+    while (expected[i] && result[i])
+    {
+        if (strcmp(expected[i], result[i]) != 0)
+            break;
+        i++;
+    }
+
+    if (expected[i] == NULL && result[i] == NULL)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        i = 0;
+        while (result[i])
+            free(result[i++]);
+        free(result);
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        *local += 1;
+        i = 0;
+        while (expected[i])
+        {
+            printf("\t\tExpected[%d]: %s\n", i, expected[i]);
+            i++;
+        }
+        i = 0;
+        while (result[i])
+        {
+            printf("\t\tResult[%d]: %s\n", i, result[i]);
+            i++;
+        }
+    }
+
+    i = 0;
+    while (result[i])
+        free(result[i++]);
+    free(result);
+    return (0);
+}
+
+
+int test_strtrim(char *s1, char *set, char *expected, int *local)
+{
+    char *result = ft_strtrim(s1, set);  // your implementation
+
+    if (result == NULL || expected == NULL)
+    {
+        printf("\033[31m\ttest %d: Cagaste (NULL somewhere)\033[0m\n", *local);
+        *local += 1;
+        free(result);
+        return (0);
+    }
+
+    if (strcmp(expected, result) == 0)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        free(result);
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        printf("\t\tExpected: %s\n", expected);
+        printf("\t\tReceived: %s\n", result);
+        *local += 1;
+    }
+
+    free(result);
+    return (0);
+}
+
+int test_strjoin(char *s1, char *s2, char *expected, int *local)
+{
+    char *result = ft_strjoin(s1, s2);  // your implementation
+
+    if (result == NULL || expected == NULL)
+    {
+        printf("\033[31m\ttest %d: Cagaste (NULL somewhere)\033[0m\n", *local);
+        *local += 1;
+        free(result);
+        return (0);
+    }
+
+    if (strcmp(expected, result) == 0)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        free(result);
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        printf("\t\tExpected: ");
+        int guidetemp = 4;
+        while(guidetemp >= 0)
+        {
+        	write(1, &expected[guidetemp], 1);
+        	guidetemp--;
+        }
+        printf("\n");
+        printf("\t\tReceived: ");
+        guidetemp = 4;
+        while(guidetemp >= 0)
+        {
+        	write(1, &result[guidetemp], 1);
+        	guidetemp--;
+        }
+        printf("\n");
+        *local += 1;
+    }
+
+    free(result);
+    return (0);
+}
+
+
+int test_substr(char *str, unsigned int start, size_t len, char *expected, int *local)
+{
+    char *result = ft_substr(str, start, len);  // your custom implementation
+
+    if (expected == NULL || result == NULL)
+    {
+        printf("\033[31m\ttest %d: Cagaste (Weird NULL somewhere)\033[0m\n", *local);
+        *local += 1;
+        return (0);
+    }
+
+    if (strcmp(expected, result) == 0)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        free(result);
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        *local += 1;
+        printf("\t\tExpected: %s\n", expected);
+        printf("\t\tReceived: %s\n", result);
+    }
+    free(result);
+    return (0);
+}
+
+
+int test_strdup(char *str, int *local)
+{
+    char *expected = strdup(str);
+    char *result = ft_strdup(str);
+
+    if (expected == NULL && result == NULL)
+    {
+        printf("\033[32m\ttest %d: Todo fino (NULL case)\033[0m\n", *local);
+        *local += 1;
+        return (1);
+    }
+    else if (expected == NULL || result == NULL)
+    {
+        printf("\033[31m\ttest %d: Cagaste (NULL mismatch)\033[0m\n", *local);
+        *local += 1;
+        return (0);
+    }
+    
+    if (strcmp(expected, result) == 0)
+    {
+        printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+        *local += 1;
+        free(expected);
+        free(result);
+        return (1);
+    }
+    else
+    {
+        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        *local += 1;
+        printf("\t\tExpected: %s\n", expected);
+        printf("\t\tReceived: %s\n", result);
+    }
+    free(expected);
+    free(result);
+    return (0);
+}
+
 
 int test_calloc(size_t count, size_t size, int *local)
 {
 	void *expected = calloc(count, size);
 	void *result = ft_calloc(count, size);
-	int match = 1;
+	int match;
 
 	if (!expected || !result)
 		match = (expected == result);
 	else
-		match = !memcmp(expected, result, count);
+		match = !memcmp(expected, result, count * size);
 
 	if (match)
 	{
 		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		free(expected);
+		free(result);
+		return (1);
 	}
 	else
 	{
@@ -673,7 +1358,7 @@ int test_calloc(size_t count, size_t size, int *local)
 	free(expected);
 	free(result);
 	*local += 1;
-	return (match);
+	return (0);
 }
 
 
