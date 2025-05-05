@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 21:11:45 by lde-san-          #+#    #+#              #
-#    Updated: 2025/05/05 22:27:08 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/05/05 22:34:41 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ bonus: $(OBJ) $(OBJ_BONUS)
 
 open: $(FILE)
 	@for file in $(FILE); do open $$file; done
+	@for file in $(FILE_BONUS); do open $$file; done
 
 print:
 	@echo $(OBJ)
@@ -98,3 +99,5 @@ fclean: clean
 	@rm -f $(NAME) tests
 
 re: fclean all
+
+.PHONY: all bonus re clean fclean

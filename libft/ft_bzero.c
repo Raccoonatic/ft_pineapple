@@ -23,3 +23,5 @@ void	ft_bzero(void *s, size_t n)
 		guide++;
 	}
 }
+/*Fills up the first n bytes of the memory pointed
+by s, with null characters \0. It may write or overwrite the memory/*

@@ -16,3 +16,5 @@ int	ft_isprint(int c)
 		return (1);
 	return (0);
 }
+/*Checks if c is a character within the standard ASCII Table that 
+can be printed by traditional means/*

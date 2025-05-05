@@ -24,3 +24,5 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
+/*Initializes the first n bytes of the memory area
+pointed by s, by filling it with the character c/*
