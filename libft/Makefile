@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/12 21:11:45 by lde-san-          #+#    #+#              #
-#    Updated: 2025/05/02 15:22:28 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/05/05 22:27:08 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,15 +51,15 @@ FILE += ft_putstr_fd.c
 FILE += ft_putendl_fd.c
 FILE += ft_putnbr_fd.c
 
-FILE_BONUS = ft_lstnew.c
-FILE_BONUS += ft_lstadd_front.c
-FILE_BONUS += ft_lstsize.c
-FILE_BONUS += ft_lstlast.c
-FILE_BONUS += ft_lstadd_back.c
-FILE_BONUS += ft_lstdelone.c
-FILE_BONUS += ft_lstclear.c
-FILE_BONUS += ft_lstiter.c
-FILE_BONUS += ft_lstmap.c
+FILE_BONUS = ft_lstnew_bonus.c
+FILE_BONUS += ft_lstadd_front_bonus.c
+FILE_BONUS += ft_lstsize_bonus.c
+FILE_BONUS += ft_lstlast_bonus.c
+FILE_BONUS += ft_lstadd_back_bonus.c
+FILE_BONUS += ft_lstdelone_bonus.c
+FILE_BONUS += ft_lstclear_bonus.c
+FILE_BONUS += ft_lstiter_bonus.c
+FILE_BONUS += ft_lstmap_bonus.c
 
 $(NAME): $(OBJ)
 	@ar -rcs $@ $^
@@ -73,14 +73,14 @@ bonus: $(OBJ) $(OBJ_BONUS)
 	@ar -rcs $(NAME) $(OBJ) $(OBJ_BONUS)
 
 open: $(FILE)
-	for file in $(FILE); do open $$file; done
+	@for file in $(FILE); do open $$file; done
 
 print:
 	@echo $(OBJ)
 
 leak: tests
 	valgrind --leak-check=full ./tests
-	@echo -e "\033[1;35;40m\t\t16 Errors are expected. No Leaks? No sweat homie!\033[0m"
+	@echo -e "\033[1;35;40m\t\t47 Errors are expected. No Leaks? No sweat homie!\033[0m"
 
 leak_trace:
 	valgrind --leak-check=full --track-origins=yes -s ./tests

@@ -56,6 +56,22 @@ int test_putstr_fd(char *input, char *expected, int *local);
 int test_putendl_fd(char *input, char *expected, int *local);
 int test_putnbr_fd(int n, char *expected, int *local);
 int test_lstnew_str(void *content, int *local);
+int test_lstnew_int(void *content, int *local);
+int test_lstadd_front(t_list **head, t_list *new, char *expected, int *local);
+int test_lstadd_back(t_list **head, t_list *new, char *expected, int *local);
+int test_lstlast(t_list *lst, char *expected, int *local);
+int test_lstsize(t_list *lst, int expected, int *local);
+void del(void *erase);
+int test_lstiter1(t_list *list, int *local);
+int test_lstiter2(t_list *list, int *local);
+int test_lstiter3(t_list *list, int *local);
+void up(void *a);
+void rotone(void *a);
+void *upper(void *a);
+void *none(void *a);
+void *rotones(void *a);
+
+int lstcmp(t_list *l1, t_list *l2, int *local);
 
 int	main(void)
 {
@@ -649,6 +665,7 @@ memset(char_empty3, 'z', 41);
 // ft_calloc
 	printf("\033[1mTesting ft_calloc:\033[0m\n");
 	local = 1;
+	
 	sucs += test_calloc(10, sizeof(int), &local);     // 1
 	sucs += test_calloc(0, 1, &local);                // 2
 	sucs += test_calloc(1, 0, &local);                // 3
@@ -657,7 +674,7 @@ memset(char_empty3, 'z', 41);
 	sucs += test_calloc(1, 1, &local);                // 6
 	sucs += test_calloc(50, sizeof(char), &local);    // 7
 	sucs += test_calloc(5, sizeof(long), &local);     // 8
-	sucs += test_calloc(10000000, 10000, &local);     // 9
+	sucs += test_calloc(9223372036854775809UL, 100, &local);     // 9
 
 // ft_strdup
 	printf("\033[1mTesting ft_strdup:\033[0m\n");
@@ -811,28 +828,596 @@ sucs += test_putnbr_fd(-2147483648, "-2147483648", &local); // 5 (Min int)
 	printf("\033[1mTesting ft_lstnew:\033[0m\n");
 	local = 1;
 	
-	sucs += test_lstnew_str("Rojo", &local);
-	sucs += test_lstnew_str("!%^@*", &local);
-	sucs += test_lstnew_str("", &local);
-//	sucs += test_lstnew_int(baby, 5, &local);
-//	sucs += test_lstnew_int(baby, 0, &local);
+	int a = 1661944169;
+	int be = 0;
+	void *null = NULL;
+	
+	sucs += test_lstnew_str("Rojo", &local);		//123
+	sucs += test_lstnew_str("!%^@*", &local);		//456
+	sucs += test_lstnew_str("", &local);			//789
+	sucs += test_lstnew_str(null, &local);
+	sucs += test_lstnew_int(&a, &local);
+	sucs += test_lstnew_int(&be, &local);
+	printf("\n");
+	
+// ft_lstadd_front
 
+	printf("\033[1mTesting ft_lstadd_front:\033[0m\n");
+	local = 1;
+	
+	t_list cutie;
+	printf("\033[35mCreated 'cutie' on the stack\n");
+	cutie.content = "The boy she told you not to worry about";
+	printf("\e[38;5;208mcutie.content = '%s'\e[0m\n", (char *)cutie.content);
+	cutie.next = NULL;
+	t_list *cutie_ptr = &cutie;
+	t_list **head = &cutie_ptr;
+	
+	sucs += test_lstadd_front(head, ft_lstnew("Rojo"), "Rojo", &local);	//12
+	sucs += test_lstadd_front(head, ft_lstnew("Azul"), "Azul", &local);	//34
+	sucs += test_lstadd_front(head, ft_lstnew(""), "", &local);		//56
+	sucs += test_lstadd_front(head, ft_lstnew(null), (char *)null, &local);	//78
+	printf("\n");
+		
+// ft_lstadd_back
 
+	printf("\033[1mTesting ft_lstadd_back:\033[0m\n");
+	local = 1;
+	
+	sucs += test_lstadd_back(head, ft_lstnew("Rojo"), "Rojo", &local);	//12
+	sucs += test_lstadd_back(head, ft_lstnew("Azul"), "Azul", &local);	//34
+	sucs += test_lstadd_back(head, ft_lstnew(""), "", &local);		//56
+	sucs += test_lstadd_back(head, ft_lstnew(null), (char *)null, &local);	//78
+	printf("\n");
+
+// ft_lstlast
+	
+	printf("\033[1mTesting ft_lstlast:\033[0m\n");
+	local = 1;
+	
+	ft_lstadd_front(head,ft_lstnew(strdup("Birth")));
+	if (*head)
+		printf("\033[35mCreated 'Birth' above cutie\n");
+	ft_lstadd_back(head,ft_lstnew(strdup("Death")));
+	if((*head) -> next -> next)
+		printf("\033[35mCreated 'Death' below cutie\n");
+	t_list *Tiny = ft_lstnew(strdup("singe"));
+	if(Tiny)
+		printf("\033[35mCreated 'Tiny'\n");
+	t_list *nono = NULL;
+	
+	sucs += test_lstlast(*head, "Death", &local);	//12
+	sucs += test_lstlast(Tiny, "singe", &local);	//34
+	sucs += test_lstlast(nono, "", &local);		//5
+	printf("\n");
+	
+// ft_lstsize
+	
+	printf("\033[1mTesting ft_lstsize:\033[0m\n");
+	local = 1;
+	
+	int maximus = 9999;
+	int content_guide = 0;
+	
+	t_list *death = ft_lstnew(strdup("una vaina bien trambolica"));
+	t_list **death_star = &death;
+	
+	while((maximus - content_guide) > 0)
+	{
+		ft_lstadd_back(death_star, ft_lstnew(strdup("una vaina bien trambolica")));
+		content_guide++;
+	}
+	if(*death_star)
+		printf("\033[35mCreated the 'Death Star' list with %d nodes\n", maximus + 1);
+	
+	sucs += test_lstsize(*head, 3, &local); 		//1
+	sucs += test_lstsize(Tiny, 1, &local);			//2
+	sucs += test_lstsize(nono, 0, &local);			//3
+	sucs += test_lstsize(*death_star, 10000, &local);	//4
+	printf("\n");
+
+// ft_lstiter
+
+	printf("\033[1mTesting ft_lstiter:\033[0m\n");
+	local = 1;
+	
+	t_list *colors = ft_lstnew(strdup("verde"));
+	t_list **color_ptr = &colors;
+	ft_lstadd_back(color_ptr, ft_lstnew(strdup("morao")));
+	ft_lstadd_back(color_ptr, ft_lstnew(strdup("ambar")));
+	
+	if(ft_lstsize(colors) == 3)
+		printf("\033[35mCreated the 'Colors' list with 3 nodes\033[0m\n");
+	sucs += test_lstiter1(colors, &local);
+	sucs += test_lstiter2(colors, &local);
+	sucs += test_lstiter3(Tiny, &local);
+	printf("\n");
+	
+// ft_lstdelone
+
+	printf("\033[1mTesting ft_lstdelone:\033[0m\n");
+	
+	printf("\033[35mDeleting 'Tiny'   -> \tCheck Valgrind \e[3;36m'make leak'\n\e[0m");
+	ft_lstdelone(Tiny, del);
+	t_list *temp = (*head) -> next;
+	printf("\033[35mDeleting 'Birth'  -> \tCheck Valgrind \e[3;36m'make leak'\n\e[0m");
+	ft_lstdelone(*head, del);
+	head = &temp;
+	printf("\033[35mDeleting 'Death'  -> \tCheck Valgrind \e[3;36m'make leak'\n\e[0m");
+	ft_lstdelone(ft_lstlast(*head), del);
+	printf("\033[35mAttempting to Delete NULL pointer.\n\n\033[0m");
+	ft_lstdelone(nono, del);
+	if(strcmp((char*)(*head) -> content, "The boy she told you not to worry about") == 0)
+	{
+		printf("\e[38;5;208mHead Content: '%s'\e[0m\n", (char*)(*head) -> content);
+		printf("\033[32m\ttests 1,2,3,4: No Crash! Todo fino \e[3;36m'En teoria'\n\e[0m");
+		sucs += 4;
+	}
+	printf("\n");
+	
+// ft_lstclear
+	printf("\033[1mTesting ft_lstclear:\033[0m\n");
+	
+	char *notin = strdup("");
+	t_list *Tinier = ft_lstnew(notin);
+	if(Tinier)
+		printf("\033[35mCreated 'Tinier'\n\n");
+	printf("\033[35mDeleting the 'Death Star'   -> \tCheck Valgrind \e[3;36m'make leak'\n\e[0m");
+	ft_lstclear(death_star, del);
+	printf("\033[35mDeleting 'Tinier'           -> \tCheck Valgrind \e[3;36m'make leak'\n\e[0m");
+	ft_lstclear(&Tinier, del);
+	printf("\033[35mDeleting 'Colors'           -> \tCheck Valgrind \e[3;36m'make leak'\n\e[0m");
+	ft_lstclear(color_ptr, del);
+	printf("\033[35mAttempting to Delete NULL pointer.\n\n\033[0m");
+	ft_lstclear(&nono, del);
+	printf("\033[32m\ttests 1,2,3: No Crash! Todo fino \e[3;36m'En teoria'\n\e[0m");
+	sucs += 3;
+	printf("\n");
+	
+// ft_lstmap
+
+	printf("\033[1mTesting ft_lstmap:\033[0m\n");
+	local = 1;
+	
+	t_list *colours = ft_lstnew(strdup("verde"));
+	t_list **colour_ptr = &colours;
+	ft_lstadd_back(colour_ptr, ft_lstnew(strdup("morao")));
+	ft_lstadd_back(colour_ptr, ft_lstnew(strdup("ambar")));
+	
+	if(ft_lstsize(colors) == 3)
+		printf("\033[35mCreated the new 'Colours' list with 3 nodes\033[0m\n");
+	
+	t_list *same_colours = ft_lstmap(colours, none, del);
+	sucs += lstcmp(colours, same_colours, &local);	
+	
+	t_list *new_colours = ft_lstmap(colours, upper, del);
+	ft_lstiter(colours, up);
+	sucs += lstcmp(colours, new_colours, &local);
+	
+	t_list *diff_colours = ft_lstmap(colours, rotones, del);
+	ft_lstiter(colours, rotone);
+	sucs += lstcmp(colours, diff_colours, &local);
+
+	ft_lstclear(colour_ptr, del);
+	ft_lstclear(&diff_colours, del);
+	ft_lstclear(&same_colours, del);	
+	ft_lstclear(&new_colours, del);	
 // After all tests
-	printf("\033[36mAll tests done!\nSuccessful tests: %d\033[0m\n", sucs);
+	
+	
+	printf("\033[36mAll tests done!\n\033[0m");
+	printf("\033[36mSuccessful tests: %d\033[0m\n", sucs);
+	if(sucs < 435)
+		printf("\033[31mFailed tests: %d\033[0m\n", 435 - sucs);
 	return(0);
 }
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////    F-HELP HERE    /////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 
+void del(void *erase)
+{
+	free(erase);
+	return;
+}
+
+void *none(void *a)
+{	
+	char *b = strdup((char *)a);
+	return(b);
+}
+
+void *rotones(void *a)
+{
+	int guide = 0;
+	char *b = strdup((char *)a);
+	
+	while(guide <= 4)
+	{
+		b[guide] = b[guide] + 1;
+		guide++;
+	}
+	return(b);
+}
+
+void *upper(void *a)
+{
+	int guide = 0;
+	char *b = strdup((char *)a);
+	
+	while(guide <= 4)
+	{
+		b[guide] = b[guide] - 32;
+		guide++;
+	}
+	return(b);
+}
+
+void up(void *a)
+{
+	int guide = 0;
+	char *b = (char *)a;
+	
+	while(guide <= 4)
+	{
+		b[guide] = b[guide] - 32;
+		guide++;
+	}
+}
+
+void rotone(void *a)
+{
+	int guide = 0;
+	char *b = (char *)a;
+	
+	while(guide <= 4)
+	{
+		b[guide] = b[guide] + 1;
+		guide++;
+	}
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////    TESTS HERE    //////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void del( void *bye)
-{
-	free(bye);
+int lstcmp(t_list *l1, t_list *l2, int *local)
+{	
+	int count = 0;
+
+	if (ft_lstsize(l1) == ft_lstsize(l2))
+	{
+		printf("\033[32m\ttest %d: Todo fino, Size Confirmed\033[0m\n", *local);
+        	count++;
+        	*local += 1;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste incorrect size\033[0m\n", *local);
+        	printf("\t\tExpected: '%d'\n", ft_lstsize(l1));
+        	printf("\t\tReceived: '%d'\n", ft_lstsize(l2));
+        	*local += 1;
+        	return(count);
+	}
+	int res = 0;
+	res += strcmp((char *)l1 -> content, (char *)l2 -> content);
+	res += strcmp((char *)l1 -> next -> content, (char *)l2 -> next -> content);
+	res += strcmp((char *)l1 -> next -> next -> content, (char *)l2 -> next -> next -> content);
+	if (res == 0)
+   	{
+     	   printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		count++;
+	}
+	else
+	{
+	printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+	printf("\t\tExpected: %s, %s, %s\n",(char *)l1 -> content, (char *)l1 -> next -> content, (char *)l1 -> next -> next -> content);
+	printf("\t\tReceived: %s, %s, %s\n",(char *)l2 -> content, (char *)l2 -> next -> content, (char *)l2 -> next -> next -> content);
+	*local += 1;
+	return (count);
+	}
+	return (count);
 }
 
-int test_lstnew_str(void *content, int *local)
+int test_lstiter3(t_list *list, int *local)
+{	
+	ft_lstiter(list, up);
+	if (strcmp((char *)list -> content, "SINGE") == 0)
+   	{
+     	   printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		return (1);
+	}
+	else
+	{
+	printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+	printf("\t\tExpected: SINGE\n");
+	printf("\t\tReceived: %s\n",(char *)list -> content);
+	*local += 1;
+	return (0);
+	}
+}
+
+int test_lstiter2(t_list *list, int *local)
+{
+	int res = 0;
+	
+	ft_lstiter(list, rotone);
+	res += strcmp((char *)list -> content, "WFSEF");
+	res += strcmp((char *)list -> next -> content, "NPSBP");
+	res += strcmp((char *)list -> next -> next -> content, "BNCBS");
+	if (res == 0)
+   	{
+     	   printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		return (1);
+	}
+	else
+	{
+	printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+	printf("\t\tExpected: VERDE, MORAO, AMBAR\n");
+	printf("\t\tReceived: %s, %s, %s\n",(char *)list -> content, (char *)list -> next -> content, (char *)list -> next -> next -> content);
+	*local += 1;
+	return (0);
+	}
+}
+
+int test_lstiter1(t_list *list, int *local)
+{
+	int res = 0;
+	
+	ft_lstiter(list, up);
+	res += strcmp((char *)list -> content, "VERDE");
+	res += strcmp((char *)list -> next -> content, "MORAO");
+	res += strcmp((char *)list -> next -> next -> content, "AMBAR");
+	if (res == 0)
+   	{
+     	   printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
+		*local += 1;
+		return (1);
+	}
+	else
+	{
+	printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+	printf("\t\tExpected: VERDE, MORAO, AMBAR\n");
+	printf("\t\tReceived: %s, %s, %s\n",(char *)list -> content, (char *)list -> next -> content, (char *)list -> next -> next -> content);
+	*local += 1;
+	return (0);
+	}
+}	
+
+int test_lstsize(t_list *lst, int expected, int *local)
+{
+	if(!lst && ft_lstsize(lst) == 0 && expected == 0)
+	{
+		printf("\033[32m\ttest %d: Todo fino, NULL Pointer\033[0m\n", *local);
+		*local += 1;
+		return(1);
+	}
+	else if(!lst)
+	{
+		printf("\033[31m\ttest %d: Cagaste, NULL Pointer\033[0m\n", *local);
+		*local += 1;
+		return(0);
+	}
+	if(ft_lstsize(lst) == expected)
+	{
+		printf("\033[32m\ttest %d: Todo fino, Size Confirmed\033[0m\n", *local);
+        	*local += 1;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste incorrect size\033[0m\n", *local);
+        	printf("\t\tExpected: '%d'\n", expected);
+        	printf("\t\tReceived: '%d'\n", ft_lstsize(lst));
+        	*local += 1;
+        	return(0);
+	}
+	return(1);
+}
+
+int test_lstlast(t_list *lst, char *expected, int *local)
+{
+	int count = 0;
+	
+	if(!lst && strcmp(expected, "") == 0)
+	{
+		if(ft_lstlast(lst) == NULL)
+		{
+			printf("\033[32m\ttest %d: Todo fino, NULL Pointer\033[0m\n", *local);
+			*local += 1;
+			count++;
+			return(count);
+		}
+		else
+		{
+			printf("\033[31m\ttest %d: Cagaste, NULL Pointer\033[0m\n", *local);
+			*local += 1;
+			return(count);
+		}
+	}
+	if(strcmp(ft_lstlast(lst) -> content, expected) == 0)
+	{
+		printf("\033[32m\ttest %d: Todo fino, Content Confirmed\033[0m\n", *local);
+        	*local += 1;
+        	count++;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste Content Write\033[0m\n", *local);
+        	printf("\t\tExpected: '%s'\n", expected);
+        	printf("\t\tReceived: '%s'\n", (char *)lst -> content);
+        	*local += 1;
+        	return(count);
+	}
+	if (!(ft_lstlast(lst) -> next))
+	{
+		printf("\033[32m\ttest %d: Todo fino, NULL next\033[0m\n", *local);
+        	*local += 1;
+        	count++;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste, next != NULL\033[0m\n", *local);
+        	*local += 1;
+        	return(count);
+	}
+        return(count);
+}
+
+int test_lstadd_back(t_list **head, t_list *new, char *expected, int *local)
+{
+	int count = 0;
+	ft_lstadd_back(head, new);
+	
+	if (!*head)
+	{
+		printf("\033[31m\ttest %d: Cagaste, NULL head\033[0m\n", *local);
+		*local += 1;
+        	free(new);
+        	(*head) -> next = NULL;
+		return(count);
+	}
+	if (expected == NULL && (*head) -> next -> content == NULL)
+	{
+		printf("\033[32m\ttest %d: Todo fino, NULL CONTENT!\033[0m\n", *local);
+		*local += 1;
+        	count++;
+        	if (strcmp((*head) -> content, "The boy she told you not to worry about") == 0)
+		{
+			printf("\033[32m\ttest %d: Todo fino, NC Correct Placement\033[0m\n", *local);
+        		*local += 1;
+        		count++;
+		}
+		else
+		{
+	        	printf("\033[31m\ttest %d: Cagaste el Orden\033[0m\n", *local);
+        		printf("\t\tExpected: '%s'\n", "The boy she told you not to worry about");
+        		printf("\t\tReceived: '%s'\n", (char *)(*head) -> content);
+        		*local += 1;
+        		free(new);
+        		(*head) -> next = NULL;
+        		return(count);
+		}
+        	free(new);
+        	(*head) -> next = NULL;
+        	return(count);
+	}
+	if (strcmp((*head) -> next -> content, expected) == 0)
+	{
+		printf("\033[32m\ttest %d: Todo fino, Content Confirmed\033[0m\n", *local);
+        	*local += 1;
+        	count++;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste Content Write\033[0m\n", *local);
+        	printf("\t\tExpected: '%s'\n", expected);
+        	printf("\t\tReceived: '%s'\n", (char *)(*head) -> content);
+        	*local += 1;
+        	free(new);
+        	(*head) -> next = NULL;
+        	return(count);
+	}
+	if (strcmp((*head) -> content, "The boy she told you not to worry about") == 0)
+	{
+		printf("\033[32m\ttest %d: Todo fino, Correct Placement\033[0m\n", *local);
+        	*local += 1;
+        	count++;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste el Orden\033[0m\n", *local);
+        	printf("\t\tExpected: '%s'\n", "The boy she told you not to worry about");
+        	printf("\t\tReceived: '%s'\n", (char *)(*head) -> next -> content);
+        	*local += 1;
+        	free(new);
+        	(*head) -> next = NULL;
+        	return(count);
+	}
+        free(new);
+        (*head) -> next = NULL;
+	return(count);
+}
+
+
+int test_lstadd_front(t_list **head, t_list *new, char *expected, int *local)
+{
+	int count = 0;
+	t_list *temp = *head;
+	ft_lstadd_front(head, new);
+	
+	if (!*head)
+	{
+		printf("\033[31m\ttest %d: Cagaste, NULL head\033[0m\n", *local);
+		*local += 1;
+        	*head = temp;
+        	free(new);
+		return(count);
+	}
+	if (expected == NULL && (*head) -> content == NULL)
+	{
+		printf("\033[32m\ttest %d: Todo fino, NULL CONTENT!\033[0m\n", *local);
+		*local += 1;
+        	count++;
+        	if (strcmp((*head) -> next -> content, "The boy she told you not to worry about") == 0)
+		{
+			printf("\033[32m\ttest %d: Todo fino, NC Correct Placement\033[0m\n", *local);
+        		*local += 1;
+        		count++;
+		}
+		else
+		{
+	        	printf("\033[31m\ttest %d: Cagaste el Orden\033[0m\n", *local);
+        		printf("\t\tExpected: '%s'\n", "The boy she told you not to worry about");
+        		printf("\t\tReceived: '%s'\n", (char *)(*head) -> next -> content);
+        		*local += 1;
+        		*head = temp;
+        		free(new);
+        		return(count);
+		}
+		*head = temp;
+        	free(new);
+        	return(count);
+	}
+	if (strcmp((*head) -> content, expected) == 0)
+	{
+		printf("\033[32m\ttest %d: Todo fino, Content Confirmed\033[0m\n", *local);
+        	*local += 1;
+        	count++;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste Content Write\033[0m\n", *local);
+        	printf("\t\tExpected: '%s'\n", expected);
+        	printf("\t\tReceived: '%s'\n", (char *)(*head) -> content);
+        	*local += 1;
+        	*head = temp;
+        	free(new);
+        	return(count);
+	}
+	if (strcmp((*head) -> next -> content, "The boy she told you not to worry about") == 0)
+	{
+		printf("\033[32m\ttest %d: Todo fino, Correct Placement\033[0m\n", *local);
+        	*local += 1;
+        	count++;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste el Orden\033[0m\n", *local);
+        	printf("\t\tExpected: '%s'\n", "The boy she told you not to worry about");
+        	printf("\t\tReceived: '%s'\n", (char *)(*head) -> next -> content);
+        	*local += 1;
+        	*head = temp;
+        	free(new);
+        	return(count);
+	}
+        *head = temp;
+        free(new);
+	return(count);
+}
+
+int test_lstnew_int(void *content, int *local)
 {
 	int count = 0;
 	t_list *list = ft_lstnew(content);
@@ -846,37 +1431,106 @@ int test_lstnew_str(void *content, int *local)
 	else
 	{
 		printf("\033[32m\ttest %d: Todo fino, List created!\033[0m\n", *local);
-        	local += 1;
+        	*local += 1;
         	count++;
 	}
 	
-	if (strcmp(list -> content,content) == 0)
+	if (list -> content == content)
 	{
 		printf("\033[32m\ttest %d: Todo fino, Content written\033[0m\n", *local);
-        	local += 1;
+        	*local += 1;
         	count++;
 	}
 	else
 	{
 	        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
-        	printf("\t\tExpected: '%s'\n", "Rojo");
-        	printf("\t\tReceived: '%s'\n", (char *)list -> content);
-        	local += 1;
+        	*local += 1;
         	return(count);
 	}
 	if (!list -> next)
 	{
 		printf("\033[32m\ttest %d: Todo fino, NULL next\033[0m\n", *local);
-        	local += 1;
+        	*local += 1;
         	count++;
 	}
 	else
 	{
 	        printf("\033[31m\ttest %d: Cagaste, next != NULL\033[0m\n", *local);
-        	local += 1;
+        	*local += 1;
         	return(count);
 	}
-	ft_lstdelone(list, del);
+	free(list);
+        return(count);
+}
+
+int test_lstnew_str(void *content, int *local)
+{
+	int count = 0;
+	t_list *list = ft_lstnew(content);
+	
+	if (!list)
+	{
+		printf("\033[31m\ttest %d: Cagaste, list creation failed\033[0m\n", *local);
+		*local += 1;
+		free(list);
+		return(count);
+	}
+	else
+	{
+		printf("\033[32m\ttest %d: Todo fino, List created!\033[0m\n", *local);
+        	*local += 1;
+        	count++;
+	}
+	if (content == NULL && list -> content == NULL)
+	{
+		printf("\033[32m\ttest %d: Todo fino, NULL CONTENT!\033[0m\n", *local);
+		*local += 1;
+        	count++;
+        	if (!list -> next)
+		{
+			printf("\033[32m\ttest %d: Todo fino, NC - NULL next\033[0m\n", *local);
+        		*local += 1;
+        		count++;
+		}
+		else
+		{
+		        printf("\033[31m\ttest %d: Cagaste, NC - next != NULL\033[0m\n", *local);
+        		*local += 1;
+        		free(list);
+        		return(count);
+		}
+		free(list);
+        	return(count);
+	}
+	if (strcmp(list -> content,content) == 0)
+	{
+		printf("\033[32m\ttest %d: Todo fino, Content written\033[0m\n", *local);
+        	*local += 1;
+        	count++;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste\033[0m\n", *local);
+        	printf("\t\tExpected: '%s'\n", (char*)content);
+        	printf("\t\tReceived: '%s'\n", (char *)list -> content);
+        	*local += 1;
+        	free(list);
+        	return(count);
+	}
+	if (!list -> next)
+	{
+		printf("\033[32m\ttest %d: Todo fino, NULL next\033[0m\n", *local);
+        	*local += 1;
+        	count++;
+	}
+	else
+	{
+	        printf("\033[31m\ttest %d: Cagaste, next != NULL\033[0m\n", *local);
+        	*local += 1;
+        	free(list);
+        	return(count);
+	}
+	free(list);
         return(count);
 }
 
@@ -1342,7 +1996,7 @@ int test_calloc(size_t count, size_t size, int *local)
 	else
 		match = !memcmp(expected, result, count * size);
 
-	if (match)
+	if (match)		
 	{
 		printf("\033[32m\ttest %d: Todo fino\033[0m\n", *local);
 		*local += 1;
