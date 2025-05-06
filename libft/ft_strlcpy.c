@@ -32,3 +32,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	}
 	return (srclen);
 }
+/*copies the characters from src to dest up to (size - 1). This ensures
+that the string can then be null terminated. The function returns the
+lenght of the string that it tried to create, which is the lenght of src
+in this case.*/

@@ -17,4 +17,4 @@ int	ft_isalpha(int c)
 	else
 		return (0);
 }
-/*Checks if c is an alphabetical Character/*
+/*Checks if c is an alphabetical Character*/

@@ -26,5 +26,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-/*Copies the first n bytes of the memory area pointed by src into dest. The memory areas 
-must not overlap. If successful, the function returns dest with the memory copied/*
+/*Copies the first n bytes of the memory area pointed by src into dest. 
+The memory areas must not overlap. If successful, the function returns 
+dest with the memory copied*/

@@ -17,4 +17,4 @@ int	ft_isalnum(int c)
 		return (1);
 	return (0);
 }
-/*Checks if c is a Digit. A Numerical Character between 0 - 9/*
+/*Checks if c is a Digit. A Numerical Character between 0 - 9*/

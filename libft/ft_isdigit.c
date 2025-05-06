@@ -17,4 +17,4 @@ int	ft_isdigit(int c)
 	else
 		return (0);
 }
-/*Checks if c is a Numerical Character/*
+/*Checks if c is a Numerical Character*/

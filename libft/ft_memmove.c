@@ -38,7 +38,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-/*Copies the first n bytes of the memory area pointed by src into dest. The memory areas 
-may overlap. If successful, the function returns dest with the memory copied. The use of the
-uintptr_t ensures that the comparison is done between unsigned ints, securing that the function
-properly determines whether src is ahead, or behind dest./*
+/*Copies the first n bytes of the memory area pointed by src into dest. 
+The memory areas may overlap. If successful, the function returns dest 
+with the memory copied. The use of the uintptr_t ensures that the 
+comparison is done between unsigned ints, securing that the function 
+properly determines whether src is ahead, or behind dest.*/

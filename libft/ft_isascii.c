@@ -16,4 +16,4 @@ int	ft_isascii(int c)
 		return (1);
 	return (0);
 }
-/*Checks if c is character within the standard ASCII Table/*
+/*Checks if c is character within the standard ASCII Table*/

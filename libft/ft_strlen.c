@@ -21,4 +21,4 @@ size_t	ft_strlen(const char *str)
 		counter++;
 	return (counter);
 }
-/*Calculates the lenght of a "Valid" C string. Excluding the \0 at the end/*
+/*Calculates the lenght of a "Valid" C string. Excluding the \0 at the end*/
