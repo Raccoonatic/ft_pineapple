@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/21 21:10:36 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/22 16:22:37 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/10 18:37:24 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/10 18:49:24 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+int	ft_isalnum(int c)
 {
-	t_list	*temp;
-
-	if (!lst || !del)
-		return ;
-	while (*lst)
-	{
-		temp = (*lst)-> next;
-		ft_lstdelone(*lst, del);
-		*lst = temp;
-	}
-	*lst = NULL;
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+		|| (c >= '0' && c <= '9'))
+		return (1);
+	return (0);
 }
-/*Frees every node coming after the node that lst is
-pointing to. Using the del function to free the contents
-of each node in the process*/
+/*Checks if c is a Digit. A Numerical Character between 0 - 9*/

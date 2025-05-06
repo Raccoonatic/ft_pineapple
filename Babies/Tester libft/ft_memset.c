@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/21 21:10:36 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/22 16:22:37 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/10 18:53:29 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/10 19:51:14 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	*ft_memset(void *s, int c, size_t n)
 {
-	t_list	*temp;
+	size_t	guide;
 
-	if (!lst || !del)
-		return ;
-	while (*lst)
+	guide = 0;
+	while (guide < n)
 	{
-		temp = (*lst)-> next;
-		ft_lstdelone(*lst, del);
-		*lst = temp;
+		((unsigned char *)s)[guide] = (unsigned char)c;
+		guide++;
 	}
-	*lst = NULL;
+	return (s);
 }
-/*Frees every node coming after the node that lst is
-pointing to. Using the del function to free the contents
-of each node in the process*/
+/*Initializes the first n bytes of the memory area
+pointed by s, by filling it with the character c*/

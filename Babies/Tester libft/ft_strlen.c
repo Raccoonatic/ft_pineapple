@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
+/*   By: lde-san- <lde-san-@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 16:50:31 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/04/19 16:57:25 by lde-san-         ###   ########.fr       */
+/*   Created: 2024/09/17 21:05:47 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/16 21:43:27 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+size_t	ft_strlen(const char *str)
 {
-	if (!s)
-		return ;
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	size_t	counter;
+
+	counter = 0;
+	while (str[counter])
+		counter++;
+	return (counter);
 }
-/*Outputs the string ’s’ to the specified file
-descriptor followed by a newline.*/
+/*Calculates the lenght of a "Valid" C string. Excluding the \0 at the end*/
