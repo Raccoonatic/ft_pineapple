@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <string.h>
+# include <stdint.h>
 
 int		ft_isalpha(int c);
 int		ft_atoi(const char *str);
