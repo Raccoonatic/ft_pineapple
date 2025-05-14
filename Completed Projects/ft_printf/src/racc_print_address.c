@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   racc_print_address.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 19:10:38 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/13 17:02:04 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/05/09 20:11:58 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/05/10 20:38:16 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+void	racc_putadrs(uintptr_t n, int *counter, char *base)
 {
-	va_list	arg;
-	int		counter;
+	uintptr_t	encrypter;
 
-	va_start(arg, format);
-	counter = 0;
-	while (*format)
+	encrypter = 0;
+	while (base[encrypter])
 	{
-		if (*format == '%')
-			racc_format_check(arg, *(++format), &counter);
-		else
-			racc_putchar(*format, &counter);
-		format++;
+		encrypter++;
 	}
-	va_end(arg);
-	return (counter);
+	if (n >= encrypter)
+	{
+		racc_putadrs(n / encrypter, counter, base);
+		racc_putadrs(n % encrypter, counter, base);
+	}
+	else
+		racc_putchar(base[n], counter);
 }

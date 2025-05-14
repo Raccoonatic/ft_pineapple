@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   racc_print_num_base.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 19:10:38 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/13 17:02:04 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/05/09 18:55:31 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/05/10 20:50:25 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+void	racc_putnbs(unsigned int n, int *counter, char *base)
 {
-	va_list	arg;
-	int		counter;
+	unsigned int	encrypter;
 
-	va_start(arg, format);
-	counter = 0;
-	while (*format)
+	encrypter = 0;
+	while (base[encrypter])
 	{
-		if (*format == '%')
-			racc_format_check(arg, *(++format), &counter);
-		else
-			racc_putchar(*format, &counter);
-		format++;
+		encrypter++;
 	}
-	va_end(arg);
-	return (counter);
+	if (n >= encrypter)
+	{
+		racc_putnbs(n / encrypter, counter, base);
+		racc_putnbs(n % encrypter, counter, base);
+	}
+	else
+		racc_putchar(base[n], counter);
 }
