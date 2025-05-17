@@ -12,9 +12,6 @@
 
 NAME = libftprintf.a
 
-SRC_DIR = src/
-OBJ_DIR = obj/
-
 COMPILE = cc -Wall -Werror -Wextra -Iinc
 
 FILE = ft_printf.c
@@ -24,13 +21,12 @@ FILE += racc_print_address.c
 FILE += racc_print_num_base.c
 FILE += racc_format_checker.c
 
-SRC = $(addprefix $(SRC_DIR),$(FILE))
-OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+OBJ = $(FILE:%.c=%.o)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+%.o: %.c ft_printf.h
 	$(COMPILE) -c $< -o $@
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(OBJ)
 	ar -rcs $(NAME) $(OBJ)
 
 $(OBJ_DIR):
@@ -41,11 +37,9 @@ all: $(NAME)
 clean:
 	rm -rf $(OBJ)
 	rm -rf $(OBJ_DIR)
-	clear
 
 fclean: clean
 	rm -f $(NAME)
-	clear
 
 re: fclean all
 

@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   racc_print_address.c                               :+:      :+:    :+:   */
+/*   racc_print_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/09 20:11:58 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/10 20:38:16 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/05/08 20:56:04 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/05/10 20:45:26 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "ft_printf.h"
 
-void	racc_putadrs(uintptr_t n, int *counter, char *base)
+void	racc_putstr(char *s, int *counter)
 {
-	uintptr_t	encrypter;
+	int	guide;
 
-	encrypter = 0;
-	while (base[encrypter])
+	guide = 0;
+	if (!s)
 	{
-		encrypter++;
+		racc_putstr("(null)", counter);
+		return ;
 	}
-	if (n >= encrypter)
+	while (s[guide])
 	{
-		racc_putadrs(n / encrypter, counter, base);
-		racc_putadrs(n % encrypter, counter, base);
+		racc_putchar(s[guide], counter);
+		guide++;
 	}
-	else
-		racc_putchar(base[n], counter);
 }

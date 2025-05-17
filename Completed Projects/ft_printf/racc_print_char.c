@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   racc_print_num_base.c                              :+:      :+:    :+:   */
+/*   racc_print_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/09 18:55:31 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/10 20:50:25 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/05/08 20:51:47 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/05/10 20:44:40 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "ft_printf.h"
 
-void	racc_putnbs(unsigned int n, int *counter, char *base)
+void	racc_putchar(char c, int *counter)
 {
-	unsigned int	encrypter;
-
-	encrypter = 0;
-	while (base[encrypter])
-	{
-		encrypter++;
-	}
-	if (n >= encrypter)
-	{
-		racc_putnbs(n / encrypter, counter, base);
-		racc_putnbs(n % encrypter, counter, base);
-	}
-	else
-		racc_putchar(base[n], counter);
+	write(1, &c, 1);
+	(*counter)++;
 }

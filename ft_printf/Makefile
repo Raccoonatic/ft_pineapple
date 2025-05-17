@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/05/12 18:25:58 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/05/16 20:43:55 by jtorcate         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,11 +41,9 @@ all: $(NAME)
 clean:
 	rm -rf $(OBJ)
 	rm -rf $(OBJ_DIR)
-	clear
 
 fclean: clean
 	rm -f $(NAME)
-	clear
 
 re: fclean all
 

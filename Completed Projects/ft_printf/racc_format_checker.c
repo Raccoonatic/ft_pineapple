@@ -6,14 +6,14 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 20:35:33 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/10 20:52:00 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/05/17 11:52:34 by jtorcate         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "ft_printf.h"
 
-static unsigned int	vibecheck(int n, int *counter);
-static void			ptr(va_list arg, int *counter);
+static void	vibecheck(int n, int *counter);
+static void	ptr(va_list arg, int *counter);
 
 void	racc_format_check(va_list arg, char c, int *cnt)
 {
@@ -28,7 +28,7 @@ void	racc_format_check(va_list arg, char c, int *cnt)
 	if (c == 'p')
 		ptr(arg, cnt);
 	if (c == 'i' || c == 'd')
-		racc_putnbs(vibecheck(va_arg(arg, int), cnt), cnt, "0123456789");
+		vibecheck(va_arg(arg, int), cnt);
 	if (c == 'u')
 		racc_putnbs(va_arg(arg, unsigned int), cnt, "0123456789");
 	if (c == 'x')
@@ -38,17 +38,16 @@ void	racc_format_check(va_list arg, char c, int *cnt)
 	return ;
 }
 
-static unsigned int	vibecheck(int n, int *counter)
+static void	vibecheck(int n, int *counter)
 {
-	unsigned int	result;
-
 	if (n < 0)
 	{
 		racc_putchar('-', counter);
-		result = (unsigned int)(-n);
-		return (result);
+		racc_putnbs((unsigned long long)(-n), counter, "0123456789");
+		return ;
 	}
-	return ((unsigned int)n);
+	racc_putnbs((unsigned long long)(n), counter, "0123456789") ;
+	return ;
 }
 
 static void	ptr(va_list arg, int *counter)
