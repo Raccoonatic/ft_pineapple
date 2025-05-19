@@ -29,6 +29,7 @@ all:
 	@sleep 3
 	@clear
 	@printf "$(MINT_B)🦝 Checking for updates! 🦝$(RESET)\n"
+	@sudo apt install curl
 	@sudo apt update
 	@printf "$(MINT_B)🦝 Applying updates! 🦝$(RESET)\n"
 	@sudo apt upgrade
