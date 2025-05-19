@@ -133,6 +133,8 @@ fruta:
 	@rm -rf *.pub
 	git clone git@github.com:Raccoonatic/ft_pineapple.git La_Fruta
 
+
+
 uninstall:
 	@bash -c '\
 		printf "$(MINT_B)🦝 THIS WILL DELETE EVERYTHING IN YOUR MAPACHE FOLDER 🦝$(RESET)\n"; \
@@ -202,7 +204,19 @@ uninstall:
 	@printf "$(MINT_B) 🦝$(RESET)"
 	@sleep 1
 	@clear
+	@printf "$(MINT_B)🦝 Bye for now <3 🦝$(RESET)\n    "
+	rm -rf ~/Mapache
+	@sleep 3
+	@clear
+	
+omg:
+	rm -rf ~/.ssh
+	rm -rf ~/.zshrc ~/.oh-my-zsh ~/.zsh_history ~/.zprofile ~/.zlogin ~/.zlogout
+	rm -f ~/.bashrc ~/.bash_profile ~/.profile ~/.zshrc ~/.zshenv ~/.zlogin ~/.zlogout ~/.zcompdump* ~/.oh-my-zsh ~/.bash_logout
+	rm -rf ~/.shell.pre-oh-my-zsh
+	rm -rf .zcompdump
+	rm -rf .zcompdump*
 
-.PHONY: all fruta uninstall
+.PHONY: all fruta uninstall omg
 EOF
 
