@@ -79,6 +79,28 @@ all:
 	@printf "$(MINT_I) 🦝 And now the good stuf ...: $(RESET)\n"
 	git clone https://github.com/Kuninoto/installette
 	cd installette ; bash installette.sh -v -h
+	@rm -f ~/.vimrc
+	@echo 'set noexpandtab' >> ~/.vimrc; \
+	@echo 'syntax on' >> ~/.vimrc; \
+	@echo 'set tabstop=4' >> ~/.vimrc; \
+	@echo 'set shiftwidth=4' >> ~/.vimrc; \
+	@echo 'set softtabstop=4' >> ~/.vimrc; \
+	@echo 'set autoindent' >> ~/.vimrc; \
+	@echo 'set smartindent' >> ~/.vimrc; \
+	@echo 'set number' >> ~/.vimrc; \
+	@echo 'set background=dark' >> ~/.vimrc; \
+	@echo 'set colorcolumn=81' >> ~/.vimrc; \
+	@echo 'set mouse=n' >> ~/.vimrc; \
+	@echo 'nnoremap <Leader>cc :set colorcolumn=81<cr>' >> ~/.vimrc; \
+	@echo 'nnoremap <Leader>ncc :set colorcolumn-=81<cr>' >> ~/.vimrc; \
+	@echo 'highlight ColorColumn ctermbg=darkgrey guibg=#212121' >> ~/.vimrc; \
+	@echo 'highlight Comment guifg=#00fff7 ctermfg=51' >> ~/.vimrc; \
+	@echo 'highlight Type guifg=#00fc76 ctermfg=49' >> ~/.vimrc; \
+	@echo 'highlight PreProc guifg=#ffff00 ctermfg=135' >> ~/.vimrc; \
+	@echo 'highlight Function guifg=#ff7700 ctermfg=190' >> ~/.vimrc; \
+	@echo 'highlight Keyword guifg=#ff9900 ctermfg=190' >> ~/.vimrc; \
+	@echo 'highlight String guifg=#df35fc ctermfg=118' >> ~/.vimrc; \
+	@echo 'highlight Constant guifg=#ff00d0 ctermfg=13' >> ~/.vimrc
 	sudo apt install pipx
 	pipx install norminette
 	@printf "$(MINT)Now you should be able to simulate a 42-like envirorment$(RESET)\n"
