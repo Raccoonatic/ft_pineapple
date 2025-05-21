@@ -66,7 +66,6 @@ all:
 	@printf "$(MINT_B)ZSH! 🦝$(RESET)\n"
 	@sleep 0.5
 	@RUNZSH=no CHSH=yes USER=$(shell whoami) sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	@RUNZSH=no CHSH=yes USER=$(shell whoami) sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	@printf "$(MINT)🦝 See that? Pretty ain't it? 🦝$(RESET)\n"
 	@sleep 3
 	@clear
