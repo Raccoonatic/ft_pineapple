@@ -28,22 +28,22 @@ void CatCall(void)
 	fgets(name, sizeof(name), stdin);
 	name[strcspn(name, "\n")] = '\0';
 
-	printf("Si verdad? %s Es tremendo pana\n\n", name);
+	printf("\nSi verdad? %s Es tremendo padre\n\n", name);
 
         fgets(reply, sizeof(reply), stdin);
         reply[strcspn(reply, "\n")] = '\0';
 
-	printf("En serio? Bestial! \nMandale mis felicitaciones%c\n\n", st);
+	printf("\nEn serio? Bestial! \nMandale mis felicitaciones%c\n\n", st);
         
 	fgets(reply2, sizeof(reply2), stdin);
         reply2[strcspn(reply2, "\n")] = '\0';
 
-	printf("Preguntale que va a comer de postre, \nme imagino que torta no%c\n\n", st);
+	printf("\nRecuerdale que se merece todo el amor\nque le dan y todo lo bueno que le pase%c\n Ha trabajado muy duro, y su esfuerzo no\npasa desapercibido <3%c\n\n", st, st);
 	
 	fgets(reply2, sizeof(reply3), stdin);
         reply3[strcspn(reply3, "\n")] = '\0';
 	
-	printf("No me mandes a callar carajito'el coño%c\n\n", st);
+	printf("No me mandes a callar muchacho ma$!#?%c\n\n", st);
 	return;
 	}
 int main(void)
