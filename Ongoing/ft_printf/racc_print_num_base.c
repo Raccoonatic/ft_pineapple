@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-void	racc_putnbs(unsigned long long n, int *counter, char *base)
+void	racc_putnbs(unsigned int n, int *counter, char *base)
 {
-	unsigned long long	encrypter;
+	unsigned int	encrypter;
 
 	encrypter = 0;
 	while (base[encrypter])

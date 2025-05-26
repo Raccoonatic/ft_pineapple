@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 19:10:38 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/13 17:00:43 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/05/26 15:50:43 by mapache          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,9 +220,11 @@ int main(void)
 	a++;
 	
 	printf("\033[36mft_printf: \033[0m\n");	
-	ft = ft_printf("Ay carajito. Tu como que tienes %d%x%i%X pelos de tonto\n", 3.14);
+	ft_printf("Ay carajito. Tu como que");
+	ft = ft_printf(" tienes %d%x%i%X pelos de tonto\n", 3.14);
 	printf("\033[36mprintf: \033[0m\n");
-	pc = printf("Ay carajito. Tu como que tienes %d%x%i%X pelos de tonto\n", 3.14);
+	printf("Ay carajito. Tu como que");
+	pc = printf(" tienes %d%x%i%X pelos de tonto\n", 3.14);
 	
 	printf("\e[38;5;208m 🦝 printed: %d || 💻 printed: %d\e[0m", ft, pc);
 	if (ft == pc)
@@ -340,6 +342,8 @@ int main(void)
 
 //////// AFTER ALL TESTS /////////
 	printf("\n\n\033[1;35;40m\t\tLUIS WINS!\033[0m\n");
-	printf("\e[3;36m Of course he wins, he always does. Even if\nthere are errors, you are wining experience.\n            Keep it up buddy <3\n\e[0m");
+	printf("\e[3;36m Of course he wins, he always does. Even if\n");
+	printf("there are errors, you are wining experience.\n");
+	printf("            Keep it up buddy <3\n\e[0m");
 	return(0);
 }
