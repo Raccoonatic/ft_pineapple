@@ -69,8 +69,8 @@ all:
 	@printf "$(MINT)🦝 See that? Pretty ain't it? 🦝$(RESET)\n"
 	@sleep 3
 	@clear
-	@printf "$(MINT_B)🦝 Miss VIM? Norminette? The 42 Header? 🦝$(RESET)\n"
-	@printf "$(MINT)    PARA DE SOFRER RAPAZ! I got you 🤙$(RESET)\n"
+	@printf "$(MINT_B) 🦝 Miss VIM? The 42 Header? 🦝$(RESET)\n"
+	@printf "$(MINT)PARA DE SOFRER RAPAZ! I got you 🤙$(RESET)\n"
 	@sleep 1
 	@printf "\n$(MINT_I) 🦝  A little bit'o python for spice ...: $(RESET)\n"
 	@sudo apt install python3-full python3-venv python3-dev
@@ -118,10 +118,12 @@ all:
 	echo 'highlight LineNr guifg=#6e6e6e' >> ~/.vimrc
 	echo 'highlight Keyword guifg=#ffc400' >> ~/.vimrc
 	echo 'highlight Normal guifg=#ffffff' >> ~/.vimrc
-	sudo apt install pipx
-	pipx install norminette
+	sed -i 's/let l:user = .*/let l:user = "lde-san-"/' ~/.vim/plugin/stdheader.vim
+	sed -i 's/let l:mail = .*/let l:mail = "lde-san-@student.42porto.com"/' ~/.vim/plugin/stdheader.vim
 	@printf "$(MINT)Now you should be able to simulate a 42-like envirorment$(RESET)\n"
-	@sleep 3
+	@printf "$(MINT_I)Remember you can install Norminette and Francinette with:$(RESET)\n"
+	@printf "$(MINT_B)               'make norm' & 'make paco'$(RESET)\n"
+	@sleep 5
 	@clear
 	@printf "$(MINT_B)🦝 THERE YOU GO! ALL SET AND READY TO RUMBLE 🦝$(RESET)\n"
 	@sleep 1
@@ -173,7 +175,11 @@ fruta:
 	@rm -rf *.pub
 	git clone git@github.com:Raccoonatic/ft_pineapple.git La_Fruta
 
-
+norm:
+	sudo apt install python3-setuptools
+	sudo apt install pipx
+	pipx install norminette
+	pipx ensurepath
 
 uninstall:
 	@bash -c '\
@@ -200,6 +206,8 @@ uninstall:
 	sudo apt remove vim
 	rm -rf ~/installette/.git
 	rm -rf ~/installette
+	rm -rf ~/francinette/.git
+	rm -rf ~/francinette
 	sudo apt remove -y git
 	@sleep 2
 	@clear
@@ -244,11 +252,16 @@ uninstall:
 	@printf "$(MINT_B) 🦝$(RESET)"
 	@sleep 1
 	@clear
-	@printf "$(MINT_B)🦝 Bye for now <3 🦝$(RESET)\n    "
+	@printf "$(MINT_B)🦝 Bye for now <3 🦝$(RESET)\n       "
 	rm -rf ~/Mapache
 	@sleep 3
 	@clear
-	
+
+paco:
+	@printf "$(MINT_B)🦝 Sorry mate, couldnt make it work 🦝$(RESET)\n"
+	@printf "$(MINT_I)\nJust run this from your home folder.\n     Is for the best. Love you!$(RESET)\n\n"
+	@printf 'bash -c "$$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)"\n'
+
 omg:
 	rm -rf ~/.ssh
 	rm -rf ~/.zshrc ~/.oh-my-zsh ~/.zsh_history ~/.zprofile ~/.zlogin ~/.zlogout
@@ -257,4 +270,4 @@ omg:
 	rm -rf .zcompdump
 	rm -rf .zcompdump*
 
-.PHONY: all fruta uninstall omg
+.PHONY: all fruta uninstall omg paco
