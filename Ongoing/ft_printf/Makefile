@@ -15,11 +15,11 @@ NAME = libftprintf.a
 COMPILE = cc -Wall -Werror -Wextra -Iinc
 
 FILE = ft_printf.c
-FILE += racc_print_str.c
-FILE += racc_print_char.c
-FILE += racc_print_address.c
-FILE += racc_print_num_base.c
-FILE += racc_format_checker.c
+FILE += racc_putstr.c
+FILE += racc_putchar.c
+FILE += racc_putadrs.c
+FILE += racc_putnbs.c
+FILE += racc_format_check.c
 
 OBJ = $(FILE:%.c=%.o)
 
