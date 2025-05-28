@@ -119,8 +119,12 @@ all:
 	echo 'highlight LineNr guifg=#6e6e6e' >> ~/.vimrc
 	echo 'highlight Keyword guifg=#ffc400' >> ~/.vimrc
 	echo 'highlight Normal guifg=#ffffff' >> ~/.vimrc
+	sudo apt install python3-setuptools
 	sudo apt install pipx
 	pipx install norminette
+	pipx ensurepath
+	bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)"
+	python3 -m pip install --upgrade norminette
 	@printf "$(MINT)Now you should be able to simulate a 42-like envirorment$(RESET)\n"
 	@sleep 3
 	@clear
