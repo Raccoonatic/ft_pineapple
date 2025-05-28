@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   racc_format_checker.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 20:35:33 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/10 20:52:00 by lde-san-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "ft_printf.h"
 
 static unsigned int	vibecheck(int n, int *counter);
 static void			ptr(va_list arg, int *counter);

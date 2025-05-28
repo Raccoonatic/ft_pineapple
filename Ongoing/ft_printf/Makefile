@@ -29,14 +29,10 @@ OBJ = $(FILE:%.c=%.o)
 $(NAME): $(OBJ)
 	ar -rcs $(NAME) $(OBJ)
 
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
 all: $(NAME)
 
 clean:
 	rm -rf $(OBJ)
-	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)

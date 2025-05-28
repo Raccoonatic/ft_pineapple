@@ -14,6 +14,11 @@
 
 void	racc_putchar(char c, int *counter)
 {
-	write(1, &c, 1);
-	(*counter)++;
+	int	ret;
+
+	ret = write(1, &c, 1);
+	if (ret == 1)
+		(*counter)++;
+	if (ret == -1)
+		*counter = -1;
 }

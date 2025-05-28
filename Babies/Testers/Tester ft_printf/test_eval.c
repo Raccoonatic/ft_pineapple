@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   tests.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
+/*   By: mapache <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/09 22:12:25 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/12 17:44:31 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/05/28 20:09:09 by mapache           #+#    #+#             */
+/*   Updated: 2025/05/28 20:09:47 by mapache          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include <stdio.h>
 #include <fcntl.h>
-#include "inc/ft_printf.h"
+#include "ft_printf.h"
 
 int main(void)
 {
