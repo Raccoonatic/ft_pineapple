@@ -196,9 +196,23 @@ int main(void)
 	else
 		printf("\t❌\n");
 		
-///////////// TEST 13 /////////////////	
-	printf("\n\033[1mTest %d\033[0m\n", a);
+///////////// TEST 13 A/////////////////	
+	printf("\n\033[1mTest %dA\033[0m\n", a);
 	a++;
+	
+	printf("\033[36mft_printf: \033[0m\n");	
+	ft = ft_printf("Ay carajito. Tu como que tienes %d%x%i%X pelos de tonto\n", 3.14);
+	printf("\033[36mprintf: \033[0m\n");
+	pc = printf("Ay carajito. Tu como que tienes %d%x%i%X pelos de tonto\n", 3.14);
+	
+	printf("\e[38;5;208m 🦝 printed: %d || 💻 printed: %d\e[0m", ft, pc);
+	if (ft == pc)
+		printf("\t✅\n");
+	else
+		printf("\t❌\n");
+		
+///////////// TEST 13 B/////////////////	
+	printf("\n\033[1mTest 13B\033[0m\n");
 	
 	printf("\033[36mft_printf: \033[0m\n");	
 	ft_printf("Ay carajito. Tu como que");
@@ -349,6 +363,21 @@ int main(void)
 	ft = ft_printf("This: %x and This: %X should be negative numbers in hex\n", -2393569, -2393569);
 	printf("\033[36mprintf: \033[0m\n");
 	pc = printf("This: %x and This: %X should be negative numbers in hex\n", -2393569, -2393569);
+	
+	printf("\e[38;5;208m 🦝 printed: %d || 💻 printed: %d\e[0m", ft, pc);
+	if (ft == pc)
+		printf("\t\t✅\n");
+	else
+		printf("\t\t❌\n");
+
+///////////// TEST 23 /////////////////	
+	printf("\n\033[1mTest %d\033[0m\n", a);
+	a++;
+	
+	printf("\033[36mft_printf: \033[0m\n");	
+	ft = ft_printf("Asking for unsigned but giving signed? this happens: %u\n", -2147483699);
+	printf("\033[36mprintf: \033[0m\n");
+	pc = printf("Asking for unsigned but giving signed? this happens: %u\n", -2147483699);
 	
 	printf("\e[38;5;208m 🦝 printed: %d || 💻 printed: %d\e[0m", ft, pc);
 	if (ft == pc)
