@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:39:01 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/29 13:11:24 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/05/30 12:49:40 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 #include <stddef.h>
 
 char	*get_next_line(int fd);
+t_list	*racc_lstnew(char *c);
+t_list	*ft_lstlast(t_list *lst);
+size_t	racc_linesize(t_list *lst);
+void	racc_lstclear(t_list **lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
 
 typedef struct s_list
 {
