@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:38:01 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/31 11:51:24 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/05/31 14:18:40 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ char	*get_line(t_list **head)
 	line_len = racc_linesize(*head);
 	line = malloc((line_len + 1) * sizeof (char));
 	if (!line)
+	{
 		racc_delnode(head, 1);
 		return (NULL);
-	traveller = *head;
+	}
+	traveler = *head;
 	while (guide < line_len)
 	{
-		line[guide] = traveler -> letter[0];
+		line[guide] = traveler -> letter;
 		traveler = traveler -> next;
 		racc_delnode(head, 0);
 		guide++;
@@ -36,6 +38,7 @@ char	*get_line(t_list **head)
 	line[guide] = '\0';
 	return (line);
 }
+
 char	*get_next_line(int fd)
 {
 	static t_list	*head;
@@ -52,10 +55,15 @@ char	*get_next_line(int fd)
 	{
 		if (read(fd, &letter, 1) <= 0)
 			break ;
-		if (racc_lstadd_back(&head , racc_lstnew(&letter)) == -1)
-			racc_delnode(head, 1);
+		if (racc_lstadd_back(&head, racc_lstnew(letter)) == -1)
+		{
+			racc_delnode(&head, 1);
 			return (NULL);
+		}
 		counter++;
 	}
-	return (get_next_line(fd));
+	line = get_next_line(fd);
+	if (!line)
+		racc_delnode(&head, 1);
+	return (line);
 }

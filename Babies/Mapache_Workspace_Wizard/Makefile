@@ -179,6 +179,7 @@ norm:
 	sudo apt install python3-setuptools
 	sudo apt install pipx
 	pipx install norminette
+	pipx install norminette --force
 	pipx ensurepath
 
 uninstall:

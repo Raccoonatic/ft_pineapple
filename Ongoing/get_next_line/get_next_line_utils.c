@@ -6,24 +6,20 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:38:33 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/31 11:51:20 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/05/31 14:47:20 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	*racc_lstnew(char *c)
+t_list	*racc_lstnew(char c)
 {
 	t_list	*result;
-	char	*character;
 
 	result = malloc(sizeof (t_list));
 	if (!result)
 		return (NULL);
-	character = malloc(sizeof (char) + 1);
-	character[0] = *c;
-	character[1] = '\0';
-	result -> letter = character;
+	result -> letter = c;
 	result -> next = NULL;
 	return (result);
 }
@@ -36,14 +32,14 @@ size_t	racc_linesize(t_list *lst)
 	while (lst)
 	{
 		count++;
-		if (lst -> letter[0] == '\n')
-			break;
+		if (lst -> letter == '\n')
+			break ;
 		lst = lst -> next;
 	}
 	return (count);
 }
 
-int racc_findend(t_list **lst)
+int	racc_findend(t_list **lst)
 {
 	t_list	*traveler;
 
@@ -59,24 +55,24 @@ int racc_findend(t_list **lst)
 	return (-1);
 }
 
-void racc_delnode(t_list **lst, int clear_all)
+void	racc_delnode(t_list **lst, int clear_all)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	temp = NULL;
 	while (*lst)
 	{
 		temp = (*lst)-> next;
-		free((*lst) -> letter);
 		free(*lst);
 		if (clear_all != 1)
-			break ;
+			return ;
 		*lst = temp;
 	}
+	*lst = NULL;
 	return ;
 }
 
-int racc_lstadd_back(t_list **lst, t_list *new)
+int	racc_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 
