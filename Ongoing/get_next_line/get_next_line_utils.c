@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:38:33 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/30 15:38:12 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/05/31 11:51:20 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,6 @@ t_list	*racc_lstnew(char *c)
 	return (result);
 }
 
-t_list	*ft_lstlast(t_list *lst)
-{
-	while (lst)
-	{
-		if (!(lst -> next))
-			return (lst);
-		lst = lst -> next;
-	}
-	return (NULL);
-}
-
 size_t	racc_linesize(t_list *lst)
 {
 	size_t	count;
@@ -54,17 +43,40 @@ size_t	racc_linesize(t_list *lst)
 	return (count);
 }
 
-t_list	*racc_delnode(t_list **lst)
+int racc_findend(t_list **lst)
+{
+	t_list	*traveler;
+
+	if (!*lst)
+		return (-1);
+	traveler = *lst;
+	while (traveler)
+	{
+		if (traveler -> letter == '\n' || traveler -> letter == '\0')
+			return (0);
+		traveler = traveler -> next;
+	}
+	return (-1);
+}
+
+void racc_delnode(t_list **lst, int clear_all)
 {
 	t_list *temp;
 
-	temp = (*lst) -> next;
-	free((*lst) -> letter);
-	free((*lst));
-	return(temp);
+	temp = NULL;
+	while (*lst)
+	{
+		temp = (*lst)-> next;
+		free((*lst) -> letter);
+		free(*lst);
+		if (clear_all != 1)
+			break ;
+		*lst = temp;
+	}
+	return ;
 }
 
-int ft_lstadd_back(t_list **lst, t_list *new)
+int racc_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 
@@ -75,7 +87,13 @@ int ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 		return (0);
 	}
-	last = ft_lstlast(*lst);
+	last = *lst;
+	while (last)
+	{
+		if (!(last -> next))
+			break ;
+		last = last -> next;
+	}
 	last -> next = new;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:38:01 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/30 15:38:00 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/05/31 11:51:24 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_line(t_list **head)
 {
-	t_list	*traveller;
+	t_list	*traveler;
 	size_t	guide;
 	char	*line;
 	size_t	line_len;
@@ -23,13 +23,14 @@ char	*get_line(t_list **head)
 	line_len = racc_linesize(*head);
 	line = malloc((line_len + 1) * sizeof (char));
 	if (!line)
+		racc_delnode(head, 1);
 		return (NULL);
 	traveller = *head;
 	while (guide < line_len)
 	{
-		line[guide] = traveller -> letter[0];
-		traveller = traveller -> next;
-		*head = racc_delnode(head)
+		line[guide] = traveler -> letter[0];
+		traveler = traveler -> next;
+		racc_delnode(head, 0);
 		guide++;
 	}
 	line[guide] = '\0';
@@ -45,12 +46,16 @@ char	*get_next_line(int fd)
 	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
 	counter = 0;
+	if (head && racc_findend(&head) == 0)
+		return (get_line(&head));
 	while (counter < BUFFER_SIZE)
 	{
 		if (read(fd, &letter, 1) <= 0)
-			break;
-		if (ft_lstadd_back(&head , racc_lstnew(&letter)) == -1)
+			break ;
+		if (racc_lstadd_back(&head , racc_lstnew(&letter)) == -1)
+			racc_delnode(head, 1);
 			return (NULL);
 		counter++;
 	}
+	return (get_next_line(fd));
 }
