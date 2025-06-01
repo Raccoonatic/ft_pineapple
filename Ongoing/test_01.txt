@@ -1,9 +1,12 @@
 uoggwdg
 qwduiowdio
 gqduowdhqwdhhod
-qdhwhlwhhhkldhlwdlwdhkl
+qdhwhl"whhhkldhl"wdlwdhkl
 \n\0\0\0\0\ip2edhopdp
 iodyyidyip
 			1hicfhiwcfi
 			      qiphdihc;ich/////\\\\\&&&(&^!£&%&£"(
-@bash -e echo tufrutaesbonita :3
+@bash echo -e tufrutaesbonita > 3
+echo -e tufrutaesbonita > 3
+
+k

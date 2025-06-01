@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:39:01 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/31 14:12:40 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:07:36 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
-char	*get_line(t_list **head);
+char	*get_lines(t_list **head);
 t_list	*racc_lstnew(char c);
 size_t	racc_linesize(t_list *lst);
 int		racc_findend(t_list **lst);
 void	racc_delnode(t_list **lst, int clear_all);
-int		racc_lstadd_back(t_list **lst, t_list *new);
+int		racc_lstadd(t_list **lst, t_list *new);
 
 #endif

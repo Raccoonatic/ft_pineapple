@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:38:33 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/31 14:47:20 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:07:11 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	racc_findend(t_list **lst)
 	traveler = *lst;
 	while (traveler)
 	{
-		if (traveler -> letter == '\n' || traveler -> letter == '\0')
+		if (traveler -> letter == '\n')
 			return (0);
 		traveler = traveler -> next;
 	}
@@ -64,15 +64,15 @@ void	racc_delnode(t_list **lst, int clear_all)
 	{
 		temp = (*lst)-> next;
 		free(*lst);
-		if (clear_all != 1)
-			return ;
 		*lst = temp;
+		if (clear_all == 0)
+			return ;
 	}
 	*lst = NULL;
 	return ;
 }
 
-int	racc_lstadd_back(t_list **lst, t_list *new)
+int	racc_lstadd(t_list **lst, t_list *new)
 {
 	t_list	*last;
 

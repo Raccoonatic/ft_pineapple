@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:21:21 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/31 14:38:10 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:13:00 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int main(int arc, char *wordy[])
 		printf("Algo no esta piolando papa");
 		return (1);
 	}
-	while (line = get_next_line(fd))
+	while (line != NULL)
 	{
+		line = get_next_line(fd);
 		printf("%s", line);
 		free(line);
 	}

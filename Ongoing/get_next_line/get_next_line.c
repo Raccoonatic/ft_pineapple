@@ -6,28 +6,25 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:38:01 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/31 14:18:40 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:42:01 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_line(t_list **head)
+char	*get_lines(t_list **head)
 {
 	t_list	*traveler;
 	size_t	guide;
 	char	*line;
 	size_t	line_len;
 
-	guide = 0;
 	line_len = racc_linesize(*head);
 	line = malloc((line_len + 1) * sizeof (char));
 	if (!line)
-	{
-		racc_delnode(head, 1);
-		return (NULL);
-	}
+		return (racc_delnode(head, 1), NULL);
 	traveler = *head;
+	guide = 0;
 	while (guide < line_len)
 	{
 		line[guide] = traveler -> letter;
@@ -39,31 +36,47 @@ char	*get_line(t_list **head)
 	return (line);
 }
 
+int	extract_buffer(t_list **head, int fd)
+{
+	ssize_t	read_out;
+	ssize_t	guide;
+	char	*buffer;
+
+	buffer = malloc(BUFFER_SIZE * sizeof(char));
+	if (!buffer)
+		return (-1);
+	read_out = read(fd, buffer, BUFFER_SIZE);
+	if (read_out < 0)
+		return (free(buffer), -1);
+	if (read_out == 0)
+		return (free(buffer), 0);
+	guide = 0;
+	while (guide < read_out)
+	{
+		if (racc_lstadd(head, racc_lstnew(buffer[guide])) == -1)
+			return (free(buffer), -1);
+		guide++;
+	}
+	free(buffer);
+	return (1);
+}
+
 char	*get_next_line(int fd)
 {
 	static t_list	*head;
-	char			*line;
-	char			letter;
-	size_t			counter;
+	int				read_out;
 
-	if (fd == -1 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	counter = 0;
-	if (head && racc_findend(&head) == 0)
-		return (get_line(&head));
-	while (counter < BUFFER_SIZE)
+	while (racc_findend(&head) == -1)
 	{
-		if (read(fd, &letter, 1) <= 0)
+		read_out = extract_buffer(&head, fd);
+		if (read_out == 0)
 			break ;
-		if (racc_lstadd_back(&head, racc_lstnew(letter)) == -1)
-		{
-			racc_delnode(&head, 1);
-			return (NULL);
-		}
-		counter++;
+		if (read_out < 0)
+			return (racc_delnode(&head, 1), NULL);
 	}
-	line = get_next_line(fd);
-	if (!line)
-		racc_delnode(&head, 1);
-	return (line);
+	if (!head)
+		return (NULL);
+	return (get_lines(&head));
 }
