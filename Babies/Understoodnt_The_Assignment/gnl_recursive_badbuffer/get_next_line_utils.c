@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:38:33 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/06/02 12:41:37 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/05/31 14:47:20 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_list	*racc_lstnew(char c)
 		return (NULL);
 	result -> letter = c;
 	result -> next = NULL;
-	result -> tail = NULL;
 	return (result);
 }
 
@@ -44,7 +43,7 @@ int	racc_findend(t_list **lst)
 {
 	t_list	*traveler;
 
-	if (!*lst)
+	if (!lst || !*lst)
 		return (-1);
 	traveler = *lst;
 	while (traveler)
@@ -66,14 +65,14 @@ void	racc_delnode(t_list **lst, int clear_all)
 		temp = (*lst)-> next;
 		free(*lst);
 		*lst = temp;
-		if (clear_all == 0)
+		if (clear_all != 1)
 			return ;
 	}
 	*lst = NULL;
 	return ;
 }
 
-int	racc_lstadd(t_list **lst, t_list *new)
+int	racc_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 
@@ -82,21 +81,15 @@ int	racc_lstadd(t_list **lst, t_list *new)
 	if (!*lst)
 	{
 		*lst = new;
-		(*lst)-> tail = new;
 		return (0);
 	}
-	if (!(*lst)->tail)
+	last = *lst;
+	while (last)
 	{
-		last = *lst;
-		while (last)
-		{
-			if (!(last -> next))
-				break ;
-			last = last -> next;
-		}
-		(*lst)-> tail = last;
+		if (!(last -> next))
+			break ;
+		last = last -> next;
 	}
-	(*lst)-> tail -> next = new;
-	(*lst)-> tail = new;
+	last -> next = new;
 	return (0);
 }
