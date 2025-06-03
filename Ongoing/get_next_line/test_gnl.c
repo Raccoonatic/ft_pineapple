@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:21:21 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/06/02 23:44:18 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:50:11 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int main(int arc, char *wordy[])
 		while(loops < 20)
 		{
 			frames = 0;
+			if (wordy[1][1] == 'a')
+				frames += 16;
 			fd = open(wordy[1], O_RDONLY);
-			while (((line = get_next_line(fd)) != NULL) && frames < 10)
+			while (((line = get_next_line(fd)) != NULL) && frames < 26)
 			{
 				if (line[0] == '=')
 				{
