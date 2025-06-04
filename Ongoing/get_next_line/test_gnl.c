@@ -24,17 +24,37 @@ int main(int arc, char *wordy[])
 	char *line;
 	int	frames;
 	int	loops;
+	int     guide;
 	int fd;
+	int total_fds;
+	int lines_from_each;
 
 	if (arc == 1)
 	{
 		printf("\n" B_WI "Wordy options:\n\n" RSET);
 		printf("\t" MINT "for stdin_mandatory\t" RSET LIME "--> " RSET NEOR "0\n" RSET);
 		printf("\t" MINT "for chosenfd_mandatory\t" RSET LIME "--> " RSET NEOR "chosenfd\n" RSET);
-		printf("\t" MINT "for stdin_bonus\t\t" RSET LIME "--> " RSET NEOR "b 0\n" RSET);
-		printf("\t" MINT "for chosenfd_bonus\t" RSET LIME "--> " RSET NEOR "b chosenfd\n\n" RSET);
+		printf("\t" MINT "for chosenfd_bonus\t" RSET LIME "--> " RSET NEOR "B chosenfd_1 chosenfd_2 chosenfd_... lines_from_each\n\n" RSET);
 		return (1);
 	}
+	
+	if (wordy[1][0] == 'B')
+	{
+	        if (arc < 4)
+	        {
+	                  printf("\n" B_WI "Wordy options:\n\n" RSET);
+	                  printf("\t" MINT "for chosenfd_bonus\t" RSET LIME "--> " RSET NEOR "B chosenfd_1 chosenfd_2 chosenfd_... lines_from_each\n\n" RSET);
+		          return(printf("\t" MINT "Bonus requires multiple fds, \n\tand last argument must be an \n\tunsigned int. Not" B_WI " '%s'\n" RSET, wordy[arc - 1]), 1);
+	        }
+	        lines_from_each = atoi(wordy[arc - 1]);
+	        total_fds = arc - 3;
+	        printf("total fdeez nuts = %d\n", total_fds);
+	        if (lines_from_each < 1)
+	                  return(printf("\t" MINT "For Bonus, last argument must be an unsigned int. Not" B_WI " '%s'\n" RSET, wordy[arc - 1]), 1);
+	        printf(NEOR "lines_from_each = '%d'\n" RSET, lines_from_each);
+	        return(0);
+	}
+	
 	if (wordy[1][0] == '0')
 	{
 		fd = 0;
@@ -50,7 +70,8 @@ int main(int arc, char *wordy[])
 	}
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		line = get_next_line(fd);
+	        if (fd == 0)
+	              printf("\n");
 		printf("%s", line);
 		free(line);
 	}
@@ -60,9 +81,12 @@ int main(int arc, char *wordy[])
 
 	if (wordy[1][0] == 'p')
 	{
-		loops = 0;
+	        if (wordy[1][1] == 'a')
+		        loops = 0;
+		else
+		        loops = 5;
 		system("clear");
-		while(loops < 20)
+		while(loops < 10)
 		{
 			frames = 0;
 			if (wordy[1][1] == 'a')
@@ -77,7 +101,58 @@ int main(int arc, char *wordy[])
 					system("clear");
 					continue ;
 				}
-				printf(MINT"%s", line);
+				if (wordy[1][1] == 'a')
+				        printf(MINT "%s" RSET, line);
+				else
+				        printf(B_WI "%s" RSET, line);
+				free(line);
+			}
+			close(fd);
+			loops++;
+		}
+	}
+	if (wordy[1][0] == 'p' && wordy[1][1] == '_')
+	{
+		loops = 0;
+		system("clear");
+		while(loops < 3)
+		{
+			frames = 0;
+			fd = open(wordy[1], O_RDONLY);
+			while (((line = get_next_line(fd)) != NULL) && frames < 26)
+			{
+			        guide = 0;
+				if (line[0] == '=')
+				{
+					frames++;
+					usleep(70000);
+					system("clear");
+					continue ;
+				}
+                                while (line[guide])
+                                {
+	                                if (line[guide] == '@')
+		                                write(1, " ", 1);
+	                                else if (line[guide] == '#')
+		                                write(1, ",", 1);
+	                                else if (line[guide] == '+')
+		                                write(1, "'", 1);
+	                                else if (line[guide] == '/')
+		                                write(1, "-", 1);
+	                                else if (line[guide] == ':')
+		                                write(1, ":", 1);
+	                                else if (line[guide] == '-')
+		                                write(1, "/", 1);
+	                                else if (line[guide] == '\'')
+		                                write(1, "+", 1);
+	                                else if (line[guide] == ',')
+		                                write(1, "#", 1);
+	                                else if (line[guide] == ' ')
+		                                write(1, "@", 1);
+	                                else
+		                                write(1, &line[guide], 1); // Keep unchanged chars
+	                                guide++;
+                                }
 				free(line);
 			}
 			close(fd);
