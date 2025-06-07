@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:39:01 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/06/03 12:25:11 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/06/07 09:05:31 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,20 @@
 # include <unistd.h>
 # include <stddef.h>
 
-typedef struct s_list
+typedef struct s_lst
 {
 	char			letter;
-	struct s_list	*tail;
-	struct s_list	*next;
-}	t_list;
+	struct s_lst	*tail;
+	struct s_lst	*next;
+}	t_lst;
 
 char	*get_next_line(int fd);
-char	*get_lines(t_list **head);
-t_list	*racc_lstnew(char c);
-size_t	racc_linesize(t_list *lst);
-int		racc_findend(t_list **lst);
-void	racc_delnode(t_list **lst, int clear_all);
-int		racc_lstadd(t_list **lst, t_list *new);
+int		extract_buffer(t_lst **head, int fd);
+char	*get_lines(t_lst **head);
+t_lst	*racc_lstnew(char c);
+size_t	racc_linesize(t_lst *lst);
+int		racc_findend(t_lst **lst);
+void	racc_delnode(t_lst **lst, int clear_all);
+int		racc_lstadd(t_lst **lst, t_lst *new);
 
 #endif

@@ -12,11 +12,11 @@
 
 #include "get_next_line_bonus.h"
 
-t_list	*racc_lstnew(char c)
+t_lst	*racc_lstnew(char c)
 {
-	t_list	*result;
+	t_lst	*result;
 
-	result = malloc(sizeof (t_list));
+	result = malloc(sizeof (t_lst));
 	if (!result)
 		return (NULL);
 	result -> letter = c;
@@ -25,7 +25,7 @@ t_list	*racc_lstnew(char c)
 	return (result);
 }
 
-size_t	racc_linesize(t_list *lst)
+size_t	racc_linesize(t_lst *lst)
 {
 	size_t	count;
 
@@ -40,9 +40,9 @@ size_t	racc_linesize(t_list *lst)
 	return (count);
 }
 
-int	racc_findend(t_list **lst)
+int	racc_findend(t_lst **lst)
 {
-	t_list	*traveler;
+	t_lst	*traveler;
 
 	if (!*lst)
 		return (-1);
@@ -56,9 +56,9 @@ int	racc_findend(t_list **lst)
 	return (-1);
 }
 
-void	racc_delnode(t_list **lst, int clear_all)
+void	racc_delnode(t_lst **lst, int clear_all)
 {
-	t_list	*temp;
+	t_lst	*temp;
 
 	temp = NULL;
 	while (*lst)
@@ -73,9 +73,9 @@ void	racc_delnode(t_list **lst, int clear_all)
 	return ;
 }
 
-int	racc_lstadd(t_list **lst, t_list *new)
+int	racc_lstadd(t_lst **lst, t_lst *new)
 {
-	t_list	*last;
+	t_lst	*last;
 
 	if (!lst || !new)
 		return (-1);

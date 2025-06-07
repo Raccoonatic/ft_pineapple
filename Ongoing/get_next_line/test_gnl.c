@@ -6,12 +6,12 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:21:21 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/06/03 15:35:07 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/06/07 09:18:52 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 #include <stdio.h>
+#include "get_next_line_bonus.h"
 
 #define RSET	"\033[0m"
 #define B_WI    "\033[1;37m"
@@ -26,8 +26,10 @@ int main(int arc, char *wordy[])
 	int	loops;
 	int     guide;
 	int fd;
+	int *fdeez;
 	int total_fds;
 	int lines_from_each;
+	int nulos;
 
 	if (arc == 1)
 	{
@@ -35,10 +37,11 @@ int main(int arc, char *wordy[])
 		printf("\t" MINT "for stdin_mandatory\t" RSET LIME "--> " RSET NEOR "0\n" RSET);
 		printf("\t" MINT "for chosenfd_mandatory\t" RSET LIME "--> " RSET NEOR "chosenfd\n" RSET);
 		printf("\t" MINT "for chosenfd_bonus\t" RSET LIME "--> " RSET NEOR "B chosenfd_1 chosenfd_2 chosenfd_... lines_from_each\n\n" RSET);
+		printf(NEOR "note: file names can't start with 'B' or '0'\n" RSET);
 		return (1);
 	}
 	
-	if (wordy[1][0] == 'B')
+	if (wordy[1][0] == 'B' && arc != 2)
 	{
 	        if (arc < 4)
 	        {
@@ -48,13 +51,57 @@ int main(int arc, char *wordy[])
 	        }
 	        lines_from_each = atoi(wordy[arc - 1]);
 	        total_fds = arc - 3;
-	        printf("total fdeez nuts = %d\n", total_fds);
 	        if (lines_from_each < 1)
 	                  return(printf("\t" MINT "For Bonus, last argument must be an unsigned int. Not" B_WI " '%s'\n" RSET, wordy[arc - 1]), 1);
-	        printf(NEOR "lines_from_each = '%d'\n" RSET, lines_from_each);
+	        
+////////////////// BONUS ///////////////////			
+			fdeez = malloc(total_fds * sizeof(int));
+			if(!fdeez)
+				return (printf(MINT "Algo no esta piolando papa\n" RSET), 1);
+			guide = 0;
+			while (guide < total_fds)
+			{
+				if (wordy[guide + 2][0] == '0')
+					fd = 0;
+				else
+					fd = open(wordy[guide + 2], O_RDONLY);
+				if(fd < 0)
+					return (printf(MINT "Algo no esta piolando papa\n" RSET), 1);
+				fdeez[guide] = fd;
+				guide++;
+			}
+			nulos = 0;
+			while (nulos < total_fds)
+			{
+				fd = 0;
+				while (fd < total_fds)
+				{
+					while (((line = get_next_line(fdeez[fd])) != NULL) && guide < lines_from_each)
+					{
+						printf("%s", line);
+						free(line);
+						guide++;
+					}
+					if (!line)
+						nulos++;
+					fd++;
+				}
+			}
+			fd = 0;
+			while (fd < total_fds)
+			{
+				if (fdeez[fd] == 0)
+				{
+					fd++;
+					continue;
+				}
+				close(fdeez[fd]);
+				fd++;
+			}
+			free(fdeez);
 	        return(0);
 	}
-	
+///////////////// Mandatory ////////////////
 	if (wordy[1][0] == '0')
 	{
 		fd = 0;
@@ -64,14 +111,12 @@ int main(int arc, char *wordy[])
 	
 	if (fd < 0)
 	{
-		printf("Algo no esta piolando papa");
-		printf("note: file names can't start with a b");
+		printf(MINT "Algo no esta piolando papa\n" RSET);
+		printf(NEOR "note: file names can't start with 'B' or '0'" RSET);
 		return (1);
 	}
 	while ((line = get_next_line(fd)) != NULL)
 	{
-	        if (fd == 0)
-	              printf("\n");
 		printf("%s", line);
 		free(line);
 	}

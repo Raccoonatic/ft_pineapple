@@ -12,9 +12,9 @@
 
 #include "get_next_line_bonus.h"
 
-char	*get_lines(t_list **head)
+char	*get_lines(t_lst **head)
 {
-	t_list	*traveler;
+	t_lst	*traveler;
 	size_t	guide;
 	char	*line;
 	size_t	line_len;
@@ -36,7 +36,7 @@ char	*get_lines(t_list **head)
 	return (line);
 }
 
-int	extract_buffer(t_list **head, int fd)
+int	extract_buffer(t_lst **head, int fd)
 {
 	ssize_t	read_out;
 	ssize_t	guide;
@@ -63,7 +63,7 @@ int	extract_buffer(t_list **head, int fd)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*head_hub[MAX_FD];
+	static t_lst	*head_hub[MAX_FD];
 	int				read_out;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= MAX_FD)
