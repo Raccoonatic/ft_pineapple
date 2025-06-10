@@ -82,8 +82,6 @@ int main(int arc, char *wordy[])
 						printf("%s", line);
 						free(line);
 						guide++;
-						if (!line)
-							nulos++;
 					}
 					guide = 0;
 					fd++;
