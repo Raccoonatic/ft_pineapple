@@ -47,12 +47,12 @@ int main(int arc, char *wordy[])
 	        {
 	                  printf("\n" B_WI "Wordy options:\n\n" RSET);
 	                  printf("\t" MINT "for chosenfd_bonus\t" RSET LIME "--> " RSET NEOR "B chosenfd_1 chosenfd_2 chosenfd_... lines_from_each\n\n" RSET);
-		          return(printf("\t" MINT "Bonus requires multiple fds, \n\tand last argument must be an \n\tunsigned int. Not" B_WI " ''\n" RSET, wordy[arc - 1]), 1);
+		          return(printf("\t" MINT "Bonus requires multiple fds, \n\tand last argument must be an \n\tunsigned int. Not" B_WI " '%s'\n" RSET, wordy[arc - 1]), 1);
 	        }
 	        lines_from_each = atoi(wordy[arc - 1]);
 	        total_fds = arc - 3;
 	        if (lines_from_each < 1)
-	                  return(printf("\t" MINT "For Bonus, last argument must be an unsigned int. Not" B_WI " ''\n" RSET, wordy[arc - 1]), 1);
+	                  return(printf("\t" MINT "For Bonus, last argument must be an unsigned int. Not" B_WI " '%s'\n" RSET, wordy[arc - 1]), 1);
 	        
 ////////////////// BONUS ///////////////////			
 			fdeez = malloc(total_fds * sizeof(int));
@@ -79,7 +79,7 @@ int main(int arc, char *wordy[])
 				{
 					while (guide < lines_from_each && ((line = get_next_line(fdeez[fd])) != NULL))
 					{
-						printf("", line);
+						printf("%s", line);
 						free(line);
 						guide++;
 					}
@@ -119,7 +119,7 @@ int main(int arc, char *wordy[])
 	}
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("", line);
+		printf("%s", line);
 		free(line);
 	}
 	close(fd);
@@ -149,9 +149,9 @@ int main(int arc, char *wordy[])
 					continue ;
 				}
 				if (wordy[1][1] == 'a')
-				        printf(MINT "" RSET, line);
+				        printf(MINT "%s" RSET, line);
 				else
-				        printf(B_WI "" RSET, line);
+				        printf(B_WI "%s" RSET, line);
 				free(line);
 			}
 			close(fd);
