@@ -26,7 +26,7 @@ FILES	+= get_next_line_utils_bonus.c
 INC	= get_next_line_bonus.h
 
 %.c:
-	@$(MAKE) build_make_echoes.c build_get_next_line_bonus.c build_get_next_line_utils_bonus.c
+	@$(MAKE) build_get_next_line_bonus.c build_get_next_line_utils_bonus.c
 	@printf "$(BLACK)"
 %.h:
 	@$(MAKE) build_get_next_line_bonus.h
@@ -142,6 +142,15 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re info build_get_next_line_bonus.h build_get_next_line_utils_bonus.c build_get_next_line_bonus.c build_make_echoes.c
+
+build_p_racc.txt:
+	@printf "$(NEOR) Building p_racc.txt... $(RESET)"
+	@printf "$(MINT)🦝\n\n"
+	@> p_racc.txt
+	@printf "%s""--+##+\\-:-\$$a'''::\"\"---'++ gf   '                                           \nh">> p_racc.txt
+	@open p_racc.txt
+	@printf "$(RESET)🦝"
+
 
 build_get_next_line_bonus.c:
 	@printf "$(NEOR) Building get_next_line_bonus.c... $(RESET)"
