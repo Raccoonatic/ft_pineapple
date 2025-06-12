@@ -35,9 +35,14 @@ all: $(FILES)
   @$(MAKE) build_test_02.txt
   @$(MAKE) build_test_gnl.c
 
-test_mandatory:
-  
+test_mandatory: $(FILES) get_next_line.h
+  rm -rf tester
+  cc -g -o0 test_gnl.c get_next_line.c get_next_line_utils.c -o tester
 
-.PHONY: all ($FILES) build_test_gnl.c
+test_bonus: $(FILES) get_next_line_bonus.h
+  rm -rf tester
+  cc -g -o0 test_gnl.c get_next_line_bonus.c get_next_line_utils_bonus.c -o tester
+
+.PHONY: all ($FILES) build_test_gnl.c test_bonus test_mandatory
 
 
