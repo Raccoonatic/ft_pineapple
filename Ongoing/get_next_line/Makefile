@@ -41,24 +41,30 @@ cor%:
 
 %.c:
 	@$(MAKE) build_test_gnl.c
-	@printf "$(B_WI)🦝 \tOptions:\n\t$(NEOR)-->\t$(BABY)'make $(MINT)test_mandatory'\n\t$(NEOR)-->\t$(BABY)'make $(MINT)test_bonus'"
-	@printf "$(RESET)🦝"
+	@printf "$(B_WI)\t🦝 Options 🦝:\n\t$(NEOR)-->\t$(BABY)'make $(MINT)test_mandatory'\n\t$(NEOR)-->\t$(BABY)'make $(MINT)test_bonus'"
+	@printf "$(RESET)"
 
 
 test_mandatory: $(FILES) get_next_line.h
 	@rm -rf tester
-	@printf "$(MINT)🦝"
-	cc -g -o0 test_gnl.c get_next_line.c get_next_line_utils.c -o tester
-	@printf "$(RESET)🦝"
+	@printf "\n$(MINT)🦝 cc -g -o0 -Wall -Werror -Wextra test_gnl.c get_next_line.c get_next_line_utils.c -o tester 🦝 \n\n$(RESET)"
+	@cc -g -o0 -Wall -Werror -Wextra test_gnl.c get_next_line.c get_next_line_utils.c -o tester
 
 test_bonus: $(FILES) get_next_line_bonus.h
 	@rm -rf tester
-	@printf "$(MINT)🦝"
-	cc -g -o0 test_gnl.c get_next_line_bonus.c get_next_line_utils_bonus.c -o tester
-	@printf "$(RESET)🦝"
+	@printf "\n$(MINT)🦝 cc -g -o0 -Wall -Werror -Wextra test_gnl.c get_next_line_bonus.c get_next_line_utils_bonus.c -o tester 🦝 \n\n$(RESET)"
+	@cc -g -o0 -Wall -Werror -Wextra test_gnl.c get_next_line_bonus.c get_next_line_utils_bonus.c -o tester
+
+clean: 
+	@rm -rf $(FILES)
+
+fclean: clean
+	@rm -rf tester
+	
+re: fclean all
 
 
-.PHONY: all ($FILES) build_test_gnl.c test_bonus test_mandatory
+.PHONY: all ($FILES) build_test_gnl.c test_bonus test_mandatory re fclean clean build_cora build_corb build_corc build_test_02.txt build_test_01.txt build_p_racc.txt build_parrot.txt
 
 
 
@@ -66,217 +72,216 @@ build_test_gnl.c:
 	@printf "$(NEOR) Building test_gnl.c... $(RESET)"
 	@printf "$(MINT)🦝\n\n"
 	@> test_gnl.c
-	printf '/* ************************************************************************** */\n'>> test_gnl.c
-	printf '/*                                                                            */\n'>> test_gnl.c
-	printf '/*                                                        :::      ::::::::   */\n'>> test_gnl.c
-	printf '/*   test_gnl.c                                         :+:      :+:    :+:   */\n'>> test_gnl.c
-	printf '/*                                                    +:+ +:+         +:+     */\n'>> test_gnl.c
-	printf '/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */\n'>> test_gnl.c
-	printf '/*                                                +#+#+#+#+#+   +#+           */\n'>> test_gnl.c
-	printf '/*   Created: 2025/05/31 14:21:21 by lde-san-          #+#    #+#             */\n'>> test_gnl.c
-	printf '/*   Updated: 2025/06/07 09:18:52 by lde-san-         ###   ########.fr       */\n'>> test_gnl.c
-	printf '/*                                                                            */\n'>> test_gnl.c
-	printf '/* ************************************************************************** */\n'>> test_gnl.c
-	@printf '\n'>> test_gnl.c
-	@printf '#include <stdio.h>\n'>> test_gnl.c
-	@printf '#include "get_next_line_bonus.h"\n'>> test_gnl.c
-	@printf '\n'>> test_gnl.c
-	@printf '#define RSET	"'\\\\'033[0m"\n'>> test_gnl.c
-	@printf '#define B_WI    "'\\\\'033[1;37m"\n'>> test_gnl.c
-	@printf '#define MINT	"'\\\\'033[38;2;55;250;133;48;2;0;0;0m"\n'>> test_gnl.c
-	@printf '#define LIME	"'\\\\'033[38;2;0;255;0m"\n'>> test_gnl.c
-	@printf '#define NEOR	"'\\\\'033[3m'\\\\'033[38;2;255;153;51m"\n'>> test_gnl.c
-	@printf '\n'>> test_gnl.c
-	@printf 'int main(int arc, char *wordy[])\n'>> test_gnl.c
-	@printf '{\n'>> test_gnl.c
-	@printf '	char *line;\n'>> test_gnl.c
-	@printf '	int	frames;\n'>> test_gnl.c
-	@printf '	int	loops;\n'>> test_gnl.c
-	@printf '	int     guide;\n'>> test_gnl.c
-	@printf '	int fd;\n'>> test_gnl.c
-	@printf '	int *fdeez;\n'>> test_gnl.c
-	@printf '	int total_fds;\n'>> test_gnl.c
-	@printf '	int lines_from_each;\n'>> test_gnl.c
-	@printf '	int nulos;\n'>> test_gnl.c
-	@printf '\n'>> test_gnl.c
-	@printf '	if (arc == 1)\n'>> test_gnl.c
-	@printf '	{\n'>> test_gnl.c
-	@printf '		printf("'\\\\'n" B_WI "Wordy options:'\\\\'n'\\\\'n" RSET);\n'>> test_gnl.c
-	@printf '		printf("'\\\\'t" MINT "for stdin_mandatory'\\\\'t" RSET LIME "--> " RSET NEOR "0'\\\\'n" RSET);\n'>> test_gnl.c
-	@printf '		printf("'\\\\'t" MINT "for chosenfd_mandatory'\\\\'t" RSET LIME "--> " RSET NEOR "chosenfd'\\\\'n" RSET);\n'>> test_gnl.c
-	@printf '		printf("'\\\\'t" MINT "for chosenfd_bonus'\\\\'t" RSET LIME "--> " RSET NEOR "B chosenfd_1 chosenfd_2 chosenfd_... lines_from_each'\\\\'n'\\\\'n" RSET);\n'>> test_gnl.c
-	@printf '		printf(NEOR "note: file names can'\''t start with '\''B'\'' or '\''0'\'''\\\\'n" RSET);\n'>> test_gnl.c
-	@printf '		return (1);\n'>> test_gnl.c
-	@printf '	}\n'>> test_gnl.c
-	@printf '	\n'>> test_gnl.c
-	@printf '	if (wordy[1][0] == '\''B'\'' && arc != 2)\n'>> test_gnl.c
-	@printf '	{\n'>> test_gnl.c
-	@printf '	        if (arc < 4)\n'>> test_gnl.c
-	@printf '	        {\n'>> test_gnl.c
-	@printf '	                  printf("'\\\\'n" B_WI "Wordy options:'\\\\'n'\\\\'n" RSET);\n'>> test_gnl.c
-	@printf '	                  printf("'\\\\'t" MINT "for chosenfd_bonus'\\\\'t" RSET LIME "--> " RSET NEOR "B chosenfd_1 chosenfd_2 chosenfd_... lines_from_each'\\\\'n'\\\\'n" RSET);\n'>> test_gnl.c
-	@printf '		          return(printf("'\\\\'t" MINT "Bonus requires multiple fds, '\\\\'n'\\\\'tand last argument must be an '\\\\'n'\\\\'tunsigned int. Not" B_WI " '\''%%s'\'''\\\\'n" RSET, wordy[arc - 1]), 1);\n'>> test_gnl.c
-	@printf '	        }\n'>> test_gnl.c
-	@printf '	        lines_from_each = atoi(wordy[arc - 1]);\n'>> test_gnl.c
-	@printf '	        total_fds = arc - 3;\n'>> test_gnl.c
-	@printf '	        if (lines_from_each < 1)\n'>> test_gnl.c
-	@printf '	                  return(printf("'\\\\'t" MINT "For Bonus, last argument must be an unsigned int. Not" B_WI " '\''%%s'\'''\\\\'n" RSET, wordy[arc - 1]), 1);\n'>> test_gnl.c
-	@printf '	        \n'>> test_gnl.c
-	@printf '////////////////// BONUS ///////////////////			\n'>> test_gnl.c
-	@printf '			fdeez = malloc(total_fds * sizeof(int));\n'>> test_gnl.c
-	@printf '			if(!fdeez)\n'>> test_gnl.c
-	@printf '				return (printf(MINT "Algo no esta piolando papa'\\\\'n" RSET), 1);\n'>> test_gnl.c
-	@printf '			guide = 0;\n'>> test_gnl.c
-	@printf '			while (guide < total_fds)\n'>> test_gnl.c
-	@printf '			{\n'>> test_gnl.c
-	@printf '				if (wordy[guide + 2][0] == '\''0'\'')\n'>> test_gnl.c
-	@printf '					fd = 0;\n'>> test_gnl.c
-	@printf '				else\n'>> test_gnl.c
-	@printf '					fd = open(wordy[guide + 2], O_RDONLY);\n'>> test_gnl.c
-	@printf '				if(fd < 0)\n'>> test_gnl.c
-	@printf '					return (printf(MINT "Algo no esta piolando papa'\\\\'n" RSET), 1);\n'>> test_gnl.c
-	@printf '				fdeez[guide] = fd;\n'>> test_gnl.c
-	@printf '				guide++;\n'>> test_gnl.c
-	@printf '			}\n'>> test_gnl.c
-	@printf '			nulos = 0;\n'>> test_gnl.c
-	@printf '			while (nulos < total_fds)\n'>> test_gnl.c
-	@printf '			{\n'>> test_gnl.c
-	@printf '				fd = 0;\n'>> test_gnl.c
-	@printf '				guide = 0;\n'>> test_gnl.c
-	@printf '				while (fd < total_fds)\n'>> test_gnl.c
-	@printf '				{\n'>> test_gnl.c
-	@printf '					while (guide < lines_from_each && ((line = get_next_line(fdeez[fd])) != NULL))\n'>> test_gnl.c
-	@printf '					{\n'>> test_gnl.c
-	@printf '						printf("%%s", line);\n'>> test_gnl.c
-	@printf '						free(line);\n'>> test_gnl.c
-	@printf '						guide++;\n'>> test_gnl.c
-	@printf '					}\n'>> test_gnl.c
-	@printf '					guide = 0;\n'>> test_gnl.c
-	@printf '					fd++;\n'>> test_gnl.c
-	@printf '				}\n'>> test_gnl.c
-	@printf '				if (!line)\n'>> test_gnl.c
-	@printf '					nulos++;\n'>> test_gnl.c
-	@printf '			}\n'>> test_gnl.c
-	@printf '			fd = 0;\n'>> test_gnl.c
-	@printf '			while (fd < total_fds)\n'>> test_gnl.c
-	@printf '			{\n'>> test_gnl.c
-	@printf '				if (fdeez[fd] == 0)\n'>> test_gnl.c
-	@printf '				{\n'>> test_gnl.c
-	@printf '					fd++;\n'>> test_gnl.c
-	@printf '					continue;\n'>> test_gnl.c
-	@printf '				}\n'>> test_gnl.c
-	@printf '				close(fdeez[fd]);\n'>> test_gnl.c
-	@printf '				fd++;\n'>> test_gnl.c
-	@printf '			}\n'>> test_gnl.c
-	@printf '			free(fdeez);\n'>> test_gnl.c
-	@printf '	        return(0);\n'>> test_gnl.c
-	@printf '	}\n'>> test_gnl.c
-	@printf '///////////////// Mandatory ////////////////\n'>> test_gnl.c
-	@printf '	if (wordy[1][0] == '\''0'\'')\n'>> test_gnl.c
-	@printf '	{\n'>> test_gnl.c
-	@printf '		fd = 0;\n'>> test_gnl.c
-	@printf '	}\n'>> test_gnl.c
-	@printf '	else\n'>> test_gnl.c
-	@printf '		fd = open(wordy[1], O_RDONLY);\n'>> test_gnl.c
-	@printf '	\n'>> test_gnl.c
-	@printf '	if (fd < 0)\n'>> test_gnl.c
-	@printf '	{\n'>> test_gnl.c
-	@printf '		printf(MINT "Algo no esta piolando papa'\\\\'n" RSET);\n'>> test_gnl.c
-	@printf '		printf(NEOR "note: file names can'\''t start with '\''B'\'' or '\''0'\''" RSET);\n'>> test_gnl.c
-	@printf '		return (1);\n'>> test_gnl.c
-	@printf '	}\n'>> test_gnl.c
-	@printf '	while ((line = get_next_line(fd)) != NULL)\n'>> test_gnl.c
-	@printf '	{\n'>> test_gnl.c
-	@printf '		printf("%%s", line);\n'>> test_gnl.c
-	@printf '		free(line);\n'>> test_gnl.c
-	@printf '	}\n'>> test_gnl.c
-	@printf '	close(fd);\n'>> test_gnl.c
-	@printf '\n'>> test_gnl.c
-	@printf '///// PARROT TIME BABY! //////\n'>> test_gnl.c
-	@printf '\n'>> test_gnl.c
-	@printf '	if (wordy[1][0] == '\''p'\'')\n'>> test_gnl.c
-	@printf '	{\n'>> test_gnl.c
-	@printf '	        if (wordy[1][1] == '\''a'\'')\n'>> test_gnl.c
-	@printf '		        loops = 0;\n'>> test_gnl.c
-	@printf '		else\n'>> test_gnl.c
-	@printf '		        loops = 5;\n'>> test_gnl.c
-	@printf '		system("clear");\n'>> test_gnl.c
-	@printf '		while(loops < 10)\n'>> test_gnl.c
-	@printf '		{\n'>> test_gnl.c
-	@printf '			frames = 0;\n'>> test_gnl.c
-	@printf '			if (wordy[1][1] == '\''a'\'')\n'>> test_gnl.c
-	@printf '				frames += 16;\n'>> test_gnl.c
-	@printf '			fd = open(wordy[1], O_RDONLY);\n'>> test_gnl.c
-	@printf '			while (((line = get_next_line(fd)) != NULL) && frames < 26)\n'>> test_gnl.c
-	@printf '			{\n'>> test_gnl.c
-	@printf '				if (line[0] == '\''='\'')\n'>> test_gnl.c
-	@printf '				{\n'>> test_gnl.c
-	@printf '					frames++;\n'>> test_gnl.c
-	@printf '					usleep(70000);\n'>> test_gnl.c
-	@printf '					system("clear");\n'>> test_gnl.c
-	@printf '					continue ;\n'>> test_gnl.c
-	@printf '				}\n'>> test_gnl.c
-	@printf '				if (wordy[1][1] == '\''a'\'')\n'>> test_gnl.c
-	@printf '				        printf(MINT "%%s" RSET, line);\n'>> test_gnl.c
-	@printf '				else\n'>> test_gnl.c
-	@printf '				        printf(B_WI "%%s" RSET, line);\n'>> test_gnl.c
-	@printf '				free(line);\n'>> test_gnl.c
-	@printf '			}\n'>> test_gnl.c
-	@printf '			close(fd);\n'>> test_gnl.c
-	@printf '			loops++;\n'>> test_gnl.c
-	@printf '		}\n'>> test_gnl.c
-	@printf '	}\n'>> test_gnl.c
-	@printf '	if (wordy[1][0] == '\''p'\'' && wordy[1][1] == '\''_'\'')\n'>> test_gnl.c
-	@printf '	{\n'>> test_gnl.c
-	@printf '		loops = 0;\n'>> test_gnl.c
-	@printf '		system("clear");\n'>> test_gnl.c
-	@printf '		while(loops < 3)\n'>> test_gnl.c
-	@printf '		{\n'>> test_gnl.c
-	@printf '			frames = 0;\n'>> test_gnl.c
-	@printf '			fd = open(wordy[1], O_RDONLY);\n'>> test_gnl.c
-	@printf '			while (((line = get_next_line(fd)) != NULL) && frames < 26)\n'>> test_gnl.c
-	@printf '			{\n'>> test_gnl.c
-	@printf '			        guide = 0;\n'>> test_gnl.c
-	@printf '				if (line[0] == '\''='\'')\n'>> test_gnl.c
-	@printf '				{\n'>> test_gnl.c
-	@printf '					frames++;\n'>> test_gnl.c
-	@printf '					usleep(70000);\n'>> test_gnl.c
-	@printf '					system("clear");\n'>> test_gnl.c
-	@printf '					continue ;\n'>> test_gnl.c
-	@printf '				}\n'>> test_gnl.c
-	@printf '                                while (line[guide])\n'>> test_gnl.c
-	@printf '                                {\n'>> test_gnl.c
-	@printf '	                                if (line[guide] == '\''@'\'')\n'>> test_gnl.c
-	@printf '		                                write(1, " ", 1);\n'>> test_gnl.c
-	@printf '	                                else if (line[guide] == '\''#'\'')\n'>> test_gnl.c
-	@printf '		                                write(1, ",", 1);\n'>> test_gnl.c
-	@printf '	                                else if (line[guide] == '\''+'\'')\n'>> test_gnl.c
-	@printf '		                                write(1, "'\''", 1);\n'>> test_gnl.c
-	@printf '	                                else if (line[guide] == '\''/'\'')\n'>> test_gnl.c
-	@printf '		                                write(1, "-", 1);\n'>> test_gnl.c
-	@printf '	                                else if (line[guide] == '\'':'\'')\n'>> test_gnl.c
-	@printf '		                                write(1, ":", 1);\n'>> test_gnl.c
-	@printf '	                                else if (line[guide] == '\''-'\'')\n'>> test_gnl.c
-	@printf '		                                write(1, "/", 1);\n'>> test_gnl.c
-	@printf '	                                else if (line[guide] == '\'''\\\\''\'''\'')\n'>> test_gnl.c
-	@printf '		                                write(1, "+", 1);\n'>> test_gnl.c
-	@printf '	                                else if (line[guide] == '\'','\'')\n'>> test_gnl.c
-	@printf '		                                write(1, "#", 1);\n'>> test_gnl.c
-	@printf '	                                else if (line[guide] == '\'' '\'')\n'>> test_gnl.c
-	@printf '		                                write(1, "@", 1);\n'>> test_gnl.c
-	@printf '	                                else\n'>> test_gnl.c
-	@printf '		                                write(1, &line[guide], 1); // Keep unchanged chars\n'>> test_gnl.c
-	@printf '	                                guide++;\n'>> test_gnl.c
-	@printf '                                }\n'>> test_gnl.c
-	@printf '				free(line);\n'>> test_gnl.c
-	@printf '			}\n'>> test_gnl.c
-	@printf '			close(fd);\n'>> test_gnl.c
-	@printf '			loops++;\n'>> test_gnl.c
-	@printf '		}\n'>> test_gnl.c
-	@printf '	}\n'>> test_gnl.c
-	@printf '	return (0);\n'>> test_gnl.c
-	@printf '}\n'>> test_gnl.c
-	@open test_gnl.c
+	printf "%s\n" '/* ************************************************************************** */'>> test_gnl.c
+	printf "%s\n" '/*                                                                            */'>> test_gnl.c
+	printf "%s\n" '/*                                                        :::      ::::::::   */'>> test_gnl.c
+	printf "%s\n" '/*   test_gnl.c                                         :+:      :+:    :+:   */'>> test_gnl.c
+	printf "%s\n" '/*                                                    +:+ +:+         +:+     */'>> test_gnl.c
+	printf "%s\n" '/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */'>> test_gnl.c
+	printf "%s\n" '/*                                                +#+#+#+#+#+   +#+           */'>> test_gnl.c
+	printf "%s\n" '/*   Created: 2025/05/31 14:21:21 by lde-san-          #+#    #+#             */'>> test_gnl.c
+	printf "%s\n" '/*   Updated: 2025/06/07 09:18:52 by lde-san-         ###   ########.fr       */'>> test_gnl.c
+	printf "%s\n" '/*                                                                            */'>> test_gnl.c
+	printf "%s\n" '/* ************************************************************************** */'>> test_gnl.c
+	@printf "%s\n" ''>> test_gnl.c
+	@printf "%s\n" '#include <stdio.h>'>> test_gnl.c
+	@printf "%s\n" '#include '\"'get_next_line_bonus.h'\"''>> test_gnl.c
+	@printf "%s\n" ''>> test_gnl.c
+	@printf "%s\n" '#define RSET	'\"''\\'033[0m'\"''>> test_gnl.c
+	@printf "%s\n" '#define B_WI    '\"''\\'033[1;37m'\"''>> test_gnl.c
+	@printf "%s\n" '#define MINT	'\"''\\'033[38;2;55;250;133;48;2;0;0;0m'\"''>> test_gnl.c
+	@printf "%s\n" '#define LIME	'\"''\\'033[38;2;0;255;0m'\"''>> test_gnl.c
+	@printf "%s\n" '#define NEOR	'\"''\\'033[3m'\\'033[38;2;255;153;51m'\"''>> test_gnl.c
+	@printf "%s\n" ''>> test_gnl.c
+	@printf "%s\n" 'int main(int arc, char *wordy[])'>> test_gnl.c
+	@printf "%s\n" '{'>> test_gnl.c
+	@printf "%s\n" '	char *line;'>> test_gnl.c
+	@printf "%s\n" '	int	frames;'>> test_gnl.c
+	@printf "%s\n" '	int	loops;'>> test_gnl.c
+	@printf "%s\n" '	int     guide;'>> test_gnl.c
+	@printf "%s\n" '	int fd;'>> test_gnl.c
+	@printf "%s\n" '	int *fdeez;'>> test_gnl.c
+	@printf "%s\n" '	int total_fds;'>> test_gnl.c
+	@printf "%s\n" '	int lines_from_each;'>> test_gnl.c
+	@printf "%s\n" '	int nulos;'>> test_gnl.c
+	@printf "%s\n" ''>> test_gnl.c
+	@printf "%s\n" '	if (arc == 1)'>> test_gnl.c
+	@printf "%s\n" '	{'>> test_gnl.c
+	@printf "%s\n" '		printf('\"''\\'n'\"' B_WI '\"'Wordy options:'\\'n'\\'n'\"' RSET);'>> test_gnl.c
+	@printf "%s\n" '		printf('\"''\\'t'\"' MINT '\"'for stdin_mandatory'\\'t'\"' RSET LIME '\"'--> '\"' RSET NEOR '\"'0'\\'n'\"' RSET);'>> test_gnl.c
+	@printf "%s\n" '		printf('\"''\\'t'\"' MINT '\"'for chosenfd_mandatory'\\'t'\"' RSET LIME '\"'--> '\"' RSET NEOR '\"'chosenfd'\\'n'\"' RSET);'>> test_gnl.c
+	@printf "%s\n" '		printf('\"''\\'t'\"' MINT '\"'for chosenfd_bonus'\\'t'\"' RSET LIME '\"'--> '\"' RSET NEOR '\"'B chosenfd_1 chosenfd_2 chosenfd_... lines_from_each'\\'n'\\'n'\"' RSET);'>> test_gnl.c
+	@printf "%s\n" '		printf(NEOR '\"'note: file names can'\''t start with '\''B'\'' or '\''0'\'''\\'n'\"' RSET);'>> test_gnl.c
+	@printf "%s\n" '		return (1);'>> test_gnl.c
+	@printf "%s\n" '	}'>> test_gnl.c
+	@printf "%s\n" '	'>> test_gnl.c
+	@printf "%s\n" '	if (wordy[1][0] == '\''B'\'' && arc != 2)'>> test_gnl.c
+	@printf "%s\n" '	{'>> test_gnl.c
+	@printf "%s\n" '	        if (arc < 4)'>> test_gnl.c
+	@printf "%s\n" '	        {'>> test_gnl.c
+	@printf "%s\n" '	                  printf('\"''\\'n'\"' B_WI '\"'Wordy options:'\\'n'\\'n'\"' RSET);'>> test_gnl.c
+	@printf "%s\n" '	                  printf('\"''\\'t'\"' MINT '\"'for chosenfd_bonus'\\'t'\"' RSET LIME '\"'--> '\"' RSET NEOR '\"'B chosenfd_1 chosenfd_2 chosenfd_... lines_from_each'\\'n'\\'n'\"' RSET);'>> test_gnl.c
+	@printf "%s\n" '		          return(printf('\"''\\'t'\"' MINT '\"'Bonus requires multiple fds, '\\'n'\\'tand last argument must be an '\\'n'\\'tunsigned int. Not'\"' B_WI '\"' '\'''\%'s'\'''\\'n'\"' RSET, wordy[arc - 1]), 1);'>> test_gnl.c
+	@printf "%s\n" '	        }'>> test_gnl.c
+	@printf "%s\n" '	        lines_from_each = atoi(wordy[arc - 1]);'>> test_gnl.c
+	@printf "%s\n" '	        total_fds = arc - 3;'>> test_gnl.c
+	@printf "%s\n" '	        if (lines_from_each < 1)'>> test_gnl.c
+	@printf "%s\n" '	                  return(printf('\"''\\'t'\"' MINT '\"'For Bonus, last argument must be an unsigned int. Not'\"' B_WI '\"' '\'''\%'s'\'''\\'n'\"' RSET, wordy[arc - 1]), 1);'>> test_gnl.c
+	@printf "%s\n" '	        '>> test_gnl.c
+	@printf "%s\n" '////////////////// BONUS ///////////////////			'>> test_gnl.c
+	@printf "%s\n" '			fdeez = malloc(total_fds * sizeof(int));'>> test_gnl.c
+	@printf "%s\n" '			if(!fdeez)'>> test_gnl.c
+	@printf "%s\n" '				return (printf(MINT '\"'Algo no esta piolando papa'\\'n'\"' RSET), 1);'>> test_gnl.c
+	@printf "%s\n" '			guide = 0;'>> test_gnl.c
+	@printf "%s\n" '			while (guide < total_fds)'>> test_gnl.c
+	@printf "%s\n" '			{'>> test_gnl.c
+	@printf "%s\n" '				if (wordy[guide + 2][0] == '\''0'\'')'>> test_gnl.c
+	@printf "%s\n" '					fd = 0;'>> test_gnl.c
+	@printf "%s\n" '				else'>> test_gnl.c
+	@printf "%s\n" '					fd = open(wordy[guide + 2], O_RDONLY);'>> test_gnl.c
+	@printf "%s\n" '				if(fd < 0)'>> test_gnl.c
+	@printf "%s\n" '					return (printf(MINT '\"'Algo no esta piolando papa'\\'n'\"' RSET), 1);'>> test_gnl.c
+	@printf "%s\n" '				fdeez[guide] = fd;'>> test_gnl.c
+	@printf "%s\n" '				guide++;'>> test_gnl.c
+	@printf "%s\n" '			}'>> test_gnl.c
+	@printf "%s\n" '			nulos = 0;'>> test_gnl.c
+	@printf "%s\n" '			while (nulos < total_fds)'>> test_gnl.c
+	@printf "%s\n" '			{'>> test_gnl.c
+	@printf "%s\n" '				fd = 0;'>> test_gnl.c
+	@printf "%s\n" '				guide = 0;'>> test_gnl.c
+	@printf "%s\n" '				while (fd < total_fds)'>> test_gnl.c
+	@printf "%s\n" '				{'>> test_gnl.c
+	@printf "%s\n" '					while (guide < lines_from_each && ((line = get_next_line(fdeez[fd])) != NULL))'>> test_gnl.c
+	@printf "%s\n" '					{'>> test_gnl.c
+	@printf "%s\n" '						printf('\"''\%'s'\"', line);'>> test_gnl.c
+	@printf "%s\n" '						free(line);'>> test_gnl.c
+	@printf "%s\n" '						guide++;'>> test_gnl.c
+	@printf "%s\n" '					}'>> test_gnl.c
+	@printf "%s\n" '					guide = 0;'>> test_gnl.c
+	@printf "%s\n" '					fd++;'>> test_gnl.c
+	@printf "%s\n" '				}'>> test_gnl.c
+	@printf "%s\n" '				if (!line)'>> test_gnl.c
+	@printf "%s\n" '					nulos++;'>> test_gnl.c
+	@printf "%s\n" '			}'>> test_gnl.c
+	@printf "%s\n" '			fd = 0;'>> test_gnl.c
+	@printf "%s\n" '			while (fd < total_fds)'>> test_gnl.c
+	@printf "%s\n" '			{'>> test_gnl.c
+	@printf "%s\n" '				if (fdeez[fd] == 0)'>> test_gnl.c
+	@printf "%s\n" '				{'>> test_gnl.c
+	@printf "%s\n" '					fd++;'>> test_gnl.c
+	@printf "%s\n" '					continue;'>> test_gnl.c
+	@printf "%s\n" '				}'>> test_gnl.c
+	@printf "%s\n" '				close(fdeez[fd]);'>> test_gnl.c
+	@printf "%s\n" '				fd++;'>> test_gnl.c
+	@printf "%s\n" '			}'>> test_gnl.c
+	@printf "%s\n" '			free(fdeez);'>> test_gnl.c
+	@printf "%s\n" '	        return(0);'>> test_gnl.c
+	@printf "%s\n" '	}'>> test_gnl.c
+	@printf "%s\n" '///////////////// Mandatory ////////////////'>> test_gnl.c
+	@printf "%s\n" '	if (wordy[1][0] == '\''0'\'')'>> test_gnl.c
+	@printf "%s\n" '	{'>> test_gnl.c
+	@printf "%s\n" '		fd = 0;'>> test_gnl.c
+	@printf "%s\n" '	}'>> test_gnl.c
+	@printf "%s\n" '	else'>> test_gnl.c
+	@printf "%s\n" '		fd = open(wordy[1], O_RDONLY);'>> test_gnl.c
+	@printf "%s\n" '	'>> test_gnl.c
+	@printf "%s\n" '	if (fd < 0)'>> test_gnl.c
+	@printf "%s\n" '	{'>> test_gnl.c
+	@printf "%s\n" '		printf(MINT '\"'Algo no esta piolando papa'\\'n'\"' RSET);'>> test_gnl.c
+	@printf "%s\n" '		printf(NEOR '\"'note: file names can'\''t start with '\''B'\'' or '\''0'\'''\"' RSET);'>> test_gnl.c
+	@printf "%s\n" '		return (1);'>> test_gnl.c
+	@printf "%s\n" '	}'>> test_gnl.c
+	@printf "%s\n" '	while ((line = get_next_line(fd)) != NULL)'>> test_gnl.c
+	@printf "%s\n" '	{'>> test_gnl.c
+	@printf "%s\n" '		printf('\"''\%'s'\"', line);'>> test_gnl.c
+	@printf "%s\n" '		free(line);'>> test_gnl.c
+	@printf "%s\n" '	}'>> test_gnl.c
+	@printf "%s\n" '	close(fd);'>> test_gnl.c
+	@printf "%s\n" ''>> test_gnl.c
+	@printf "%s\n" '///// PARROT TIME BABY! //////'>> test_gnl.c
+	@printf "%s\n" ''>> test_gnl.c
+	@printf "%s\n" '	if (wordy[1][0] == '\''p'\'')'>> test_gnl.c
+	@printf "%s\n" '	{'>> test_gnl.c
+	@printf "%s\n" '	        if (wordy[1][1] == '\''a'\'')'>> test_gnl.c
+	@printf "%s\n" '		        loops = 0;'>> test_gnl.c
+	@printf "%s\n" '		else'>> test_gnl.c
+	@printf "%s\n" '		        loops = 5;'>> test_gnl.c
+	@printf "%s\n" '		system('\"'clear'\"');'>> test_gnl.c
+	@printf "%s\n" '		while(loops < 10)'>> test_gnl.c
+	@printf "%s\n" '		{'>> test_gnl.c
+	@printf "%s\n" '			frames = 0;'>> test_gnl.c
+	@printf "%s\n" '			if (wordy[1][1] == '\''a'\'')'>> test_gnl.c
+	@printf "%s\n" '				frames += 16;'>> test_gnl.c
+	@printf "%s\n" '			fd = open(wordy[1], O_RDONLY);'>> test_gnl.c
+	@printf "%s\n" '			while (((line = get_next_line(fd)) != NULL) && frames < 26)'>> test_gnl.c
+	@printf "%s\n" '			{'>> test_gnl.c
+	@printf "%s\n" '				if (line[0] == '\''='\'')'>> test_gnl.c
+	@printf "%s\n" '				{'>> test_gnl.c
+	@printf "%s\n" '					frames++;'>> test_gnl.c
+	@printf "%s\n" '					usleep(70000);'>> test_gnl.c
+	@printf "%s\n" '					system('\"'clear'\"');'>> test_gnl.c
+	@printf "%s\n" '					continue ;'>> test_gnl.c
+	@printf "%s\n" '				}'>> test_gnl.c
+	@printf "%s\n" '				if (wordy[1][1] == '\''a'\'')'>> test_gnl.c
+	@printf "%s\n" '				        printf(MINT '\"''\%'s'\"' RSET, line);'>> test_gnl.c
+	@printf "%s\n" '				else'>> test_gnl.c
+	@printf "%s\n" '				        printf(B_WI '\"''\%'s'\"' RSET, line);'>> test_gnl.c
+	@printf "%s\n" '				free(line);'>> test_gnl.c
+	@printf "%s\n" '			}'>> test_gnl.c
+	@printf "%s\n" '			close(fd);'>> test_gnl.c
+	@printf "%s\n" '			loops++;'>> test_gnl.c
+	@printf "%s\n" '		}'>> test_gnl.c
+	@printf "%s\n" '	}'>> test_gnl.c
+	@printf "%s\n" '	if (wordy[1][0] == '\''p'\'' && wordy[1][1] == '\''_'\'')'>> test_gnl.c
+	@printf "%s\n" '	{'>> test_gnl.c
+	@printf "%s\n" '		loops = 0;'>> test_gnl.c
+	@printf "%s\n" '		system('\"'clear'\"');'>> test_gnl.c
+	@printf "%s\n" '		while(loops < 3)'>> test_gnl.c
+	@printf "%s\n" '		{'>> test_gnl.c
+	@printf "%s\n" '			frames = 0;'>> test_gnl.c
+	@printf "%s\n" '			fd = open(wordy[1], O_RDONLY);'>> test_gnl.c
+	@printf "%s\n" '			while (((line = get_next_line(fd)) != NULL) && frames < 26)'>> test_gnl.c
+	@printf "%s\n" '			{'>> test_gnl.c
+	@printf "%s\n" '			        guide = 0;'>> test_gnl.c
+	@printf "%s\n" '				if (line[0] == '\''='\'')'>> test_gnl.c
+	@printf "%s\n" '				{'>> test_gnl.c
+	@printf "%s\n" '					frames++;'>> test_gnl.c
+	@printf "%s\n" '					usleep(70000);'>> test_gnl.c
+	@printf "%s\n" '					system('\"'clear'\"');'>> test_gnl.c
+	@printf "%s\n" '					continue ;'>> test_gnl.c
+	@printf "%s\n" '				}'>> test_gnl.c
+	@printf "%s\n" '                                while (line[guide])'>> test_gnl.c
+	@printf "%s\n" '                                {'>> test_gnl.c
+	@printf "%s\n" '	                                if (line[guide] == '\''@'\'')'>> test_gnl.c
+	@printf "%s\n" '		                                write(1, '\"' '\"', 1);'>> test_gnl.c
+	@printf "%s\n" '	                                else if (line[guide] == '\''#'\'')'>> test_gnl.c
+	@printf "%s\n" '		                                write(1, '\"','\"', 1);'>> test_gnl.c
+	@printf "%s\n" '	                                else if (line[guide] == '\''+'\'')'>> test_gnl.c
+	@printf "%s\n" '		                                write(1, '\"''\'''\"', 1);'>> test_gnl.c
+	@printf "%s\n" '	                                else if (line[guide] == '\''/'\'')'>> test_gnl.c
+	@printf "%s\n" '		                                write(1, '\"'-'\"', 1);'>> test_gnl.c
+	@printf "%s\n" '	                                else if (line[guide] == '\'':'\'')'>> test_gnl.c
+	@printf "%s\n" '		                                write(1, '\"':'\"', 1);'>> test_gnl.c
+	@printf "%s\n" '	                                else if (line[guide] == '\''-'\'')'>> test_gnl.c
+	@printf "%s\n" '		                                write(1, '\"'/'\"', 1);'>> test_gnl.c
+	@printf "%s\n" '	                                else if (line[guide] == '\'''\\''\'''\'')'>> test_gnl.c
+	@printf "%s\n" '		                                write(1, '\"'+'\"', 1);'>> test_gnl.c
+	@printf "%s\n" '	                                else if (line[guide] == '\'','\'')'>> test_gnl.c
+	@printf "%s\n" '		                                write(1, '\"'#'\"', 1);'>> test_gnl.c
+	@printf "%s\n" '	                                else if (line[guide] == '\'' '\'')'>> test_gnl.c
+	@printf "%s\n" '		                                write(1, '\"'@'\"', 1);'>> test_gnl.c
+	@printf "%s\n" '	                                else'>> test_gnl.c
+	@printf "%s\n" '		                                write(1, &line[guide], 1); // Keep unchanged chars'>> test_gnl.c
+	@printf "%s\n" '	                                guide++;'>> test_gnl.c
+	@printf "%s\n" '                                }'>> test_gnl.c
+	@printf "%s\n" '				free(line);'>> test_gnl.c
+	@printf "%s\n" '			}'>> test_gnl.c
+	@printf "%s\n" '			close(fd);'>> test_gnl.c
+	@printf "%s\n" '			loops++;'>> test_gnl.c
+	@printf "%s\n" '		}'>> test_gnl.c
+	@printf "%s\n" '	}'>> test_gnl.c
+	@printf "%s\n" '	return (0);'>> test_gnl.c
+	@printf "%s\n" '}'>> test_gnl.c
 	@printf "$(BLACK)🦝"
 
 
@@ -285,20 +290,19 @@ build_test_01.txt:
 	@printf "$(NEOR) Building test_01.txt... $(RESET)"
 	@printf "$(MINT)🦝\n\n"
 	@> test_01.txt
-	@printf 'uoggwdg\n'>> test_01.txt
-	@printf 'qwduiowdio\n'>> test_01.txt
-	@printf 'gqduowdhqwdhhod\n'>> test_01.txt
-	@printf 'qdhwhl"whhhkldhl"wdlwdhkl\n'>> test_01.txt
-	@printf ''\\\\'n'\\\\'0'\\\\'0'\\\\'0'\\\\'0'\\\\'ip2edhopdp\n'>> test_01.txt
-	@printf 'iodyyidyip\n'>> test_01.txt
-	@printf '			1hicfhiwcfi\n'>> test_01.txt
-	@printf '			      qiphdihc;ich/////'\\\\''\\\\''\\\\''\\\\''\\\\'&&&(&^!£&%%&£"(\n'>> test_01.txt
-	@printf '@bash echo -e tufrutaesbonita > 3\n'>> test_01.txt
-	@printf 'echo -e tufrutaesbonita > 3\n'>> test_01.txt
-	@printf '\n'>> test_01.txt
-	@printf 'k\n'>> test_01.txt
+	@printf "%s\n" 'uoggwdg'>> test_01.txt
+	@printf "%s\n" 'qwduiowdio'>> test_01.txt
+	@printf "%s\n" 'gqduowdhqwdhhod'>> test_01.txt
+	@printf "%s\n" 'qdhwhl'\"'whhhkldhl'\"'wdlwdhkl'>> test_01.txt
+	@printf "%s\n" ''\\'n'\\'0'\\'0'\\'0'\\'0'\\'ip2edhopdp'>> test_01.txt
+	@printf "%s\n" 'iodyyidyip'>> test_01.txt
+	@printf "%s\n" '			1hicfhiwcfi'>> test_01.txt
+	@printf "%s\n" '			      qiphdihc;ich/////'\\''\\''\\''\\''\\'&&&(&^!£&'\%'&£'\"'('>> test_01.txt
+	@printf "%s\n" '@bash echo -e tufrutaesbonita > 3'>> test_01.txt
+	@printf "%s\n" 'echo -e tufrutaesbonita > 3'>> test_01.txt
+	@printf "%s\n" ''>> test_01.txt
+	@printf "%s\n" 'k'>> test_01.txt
 	@chmod 777 test_01.txt
-	@open test_01.txt
 	@printf "$(BLACK)🦝"
 
 
@@ -307,315 +311,314 @@ build_test_02.txt:
 	@printf "$(NEOR) Building test_02.txt... $(RESET)"
 	@printf "$(MINT)🦝\n\n"
 	@> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
-	@printf '\n'>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
+	@printf "%s\n" ''>> test_02.txt
 	@chmod 777 test_02.txt
-	@open test_02.txt
 	@printf "$(BLACK)🦝"
 
 
@@ -624,290 +627,1282 @@ build_parrot.txt:
 	@printf "$(NEOR) Building parrot.txt... $(RESET)"
 	@printf "$(MINT)🦝\n\n"
 	@> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '              .;:;,.,;:,.\n'>> parrot.txt
-	@printf '            .cc;.  ...  .;c.\n'>> parrot.txt
-	@printf '         .,,cc:cc:lxxxl:ccc:;,.\n'>> parrot.txt
-	@printf '        .lo;...lKKklllookl..cO;\n'>> parrot.txt
-	@printf '      .cl;.,;'\''.okl;...'\''.;,..'\'';:.\n'>> parrot.txt
-	@printf '     .:o;;dkx,.ll..,cc::,..,'\''.;:,.\n'>> parrot.txt
-	@printf '     co..lKKKkokl.'\'':lllo;'\'''\''ol..;dl.\n'>> parrot.txt
-	@printf '   .,c;.,xKKKKKKo.'\'':llll;.'\''oOxo,.cl,.\n'>> parrot.txt
-	@printf '   cNo..lKKKKKKKo'\'''\'';llll;;okKKKl..oNc\n'>> parrot.txt
-	@printf '   cNo..lKKKKKKKko;'\'':c:,'\''lKKKKKo'\''.oNc\n'>> parrot.txt
-	@printf '   cNo..lKKKKKKKKKl.....'\''dKKKKKxc,l0:\n'>> parrot.txt
-	@printf '   .c:'\''.lKKKKKKKKKk;....oKKKKKKo'\''.oNc\n'>> parrot.txt
-	@printf '     ,:.,oxOKKKKKKKOxxxxOKKKKKKxc,;ol:.\n'>> parrot.txt
-	@printf '     ;c..'\'''\'':oookKKKKKKKKKKKKKKKKKk:.'\''clc.\n'>> parrot.txt
-	@printf '   ,dl'\''.,oxo;'\'''\'';oxOKKKKKKKKKKKKKKKOxxl::;,,.\n'>> parrot.txt
-	@printf '  .dOc..lKKKkoooookKKKKKKKKKKKKKKKKKKKxl,;ol.\n'>> parrot.txt
-	@printf '  cx,'\'';okKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKl..;lc.\n'>> parrot.txt
-	@printf '  co..:dddddddddddddddddddddddddddddddddl:;'\'''\''::.\n'>> parrot.txt
-	@printf '  co..........................................."\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '=\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '           .ccccccc.\n'>> parrot.txt
-	@printf '      .,,,;cooolccol;;,,.\n'>> parrot.txt
-	@printf '     .dOx;..;lllll;..;xOd.\n'>> parrot.txt
-	@printf '   .cdo,'\'',loOXXXXXkll;'\'';odc.\n'>> parrot.txt
-	@printf '  ,oo:;c,'\'':oko:cccccc,...ckl.\n'>> parrot.txt
-	@printf '  ;c.;kXo..::..;c::'\''.......oc\n'>> parrot.txt
-	@printf ',dc..oXX0kk0o.'\'':lll;..cxxc.,ld,\n'>> parrot.txt
-	@printf 'kNo.'\''oXXXXXXo'\'''\'':lll;..oXXOd;cOd.\n'>> parrot.txt
-	@printf 'KOc;oOXXXXXXo.'\'':lol,..dXXXXl'\'';xc\n'>> parrot.txt
-	@printf 'Ol,:k0XXXXXX0c.,clc'\''.:0XXXXx,.oc\n'>> parrot.txt
-	@printf 'KOc;dOXXXXXXXl..'\'';'\''..lXXXXXd..oc\n'>> parrot.txt
-	@printf 'dNo..oXXXXXXXOx:..'\''lxOXXXXXk,.:; ..\n'>> parrot.txt
-	@printf 'cNo..lXXXXXXXXXOolkXXXXXXXXXkl;..;:.;.\n'>> parrot.txt
-	@printf '.,;'\''.,dkkkkk0XXXXXXXXXXXXXXXXXOxxl;,;,;l:.\n'>> parrot.txt
-	@printf '  ;c.;:'\'''\'''\'''\'''\'':doOXXXXXXXXXXXXXXXXXXOdo;'\'';clc.\n'>> parrot.txt
-	@printf '  ;c.lOdood:'\'''\'''\''oXXXXXXXXXXXXXXXXXXXXXk,..;ol.\n'>> parrot.txt
-	@printf '  '\'';.:xxxxxocccoxxxxxxxxxxxxxxxxxxxxxxl::'\''.'\'';;.\n'>> parrot.txt
-	@printf '  '\'';........................................;l'\''\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '=\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '        .;:;;,.,;;::,.\n'>> parrot.txt
-	@printf '     .;'\'':;........'\''co:.\n'>> parrot.txt
-	@printf '   .clc;'\'''\'':cllllc::,.'\'':c.\n'>> parrot.txt
-	@printf '  .lo;;o:coxdlooollc;'\'',::,,.\n'>> parrot.txt
-	@printf '.c:'\''.,cl,.'\''lc'\'',,;;'\''......cO;\n'>> parrot.txt
-	@printf 'do;'\'';oxoc::l;;llllc'\''.'\'';;'\''.'\'';.\n'>> parrot.txt
-	@printf 'c..ckkkkkkkd,;llllc'\''.:kkd;.'\'':c.\n'>> parrot.txt
-	@printf ''\''.,okkkkkkkkc;llllc,.:kkkdl,cO;\n'>> parrot.txt
-	@printf '..;xkkkkkkkkc,ccll:,;okkkkk:,cl,\n'>> parrot.txt
-	@printf '..,dkkkkkkkkc..,;,'\''ckkkkkkkc;ll.\n'>> parrot.txt
-	@printf '..'\''okkkkkkkko,....'\''okkkkkkkc,:c.\n'>> parrot.txt
-	@printf 'c..ckkkkkkkkkdl;,:okkkkkkkkd,.'\'','\'';.\n'>> parrot.txt
-	@printf 'd..'\'':lxkkkkkkkkxxkkkkkkkkkkkdoc;,;'\''..'\''.,.\n'>> parrot.txt
-	@printf 'o...'\'''\'';llllldkkkkkkkkkkkkkkkkkkdll;..'\''cdo.\n'>> parrot.txt
-	@printf 'o..,l;'\'''\'''\'''\'''\'''\'';dkkkkkkkkkkkkkkkkkkkkdlc,..;lc.\n'>> parrot.txt
-	@printf 'o..;lc;;;;;;,,;clllllllllllllllllllllc'\''..,:c.\n'>> parrot.txt
-	@printf 'o..........................................;'\''\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '=\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '           .,,,,,,,,,.\n'>> parrot.txt
-	@printf '         .ckKxodooxOOdcc.\n'>> parrot.txt
-	@printf '      .cclooc'\''....'\'';;cool.\n'>> parrot.txt
-	@printf '     .loc;;;;clllllc;;;;;:;,.\n'>> parrot.txt
-	@printf '   .c:'\''.,okd;;cdo:::::cl,..oc\n'>> parrot.txt
-	@printf '  .:o;'\'';okkx;'\'';;,'\'';::;'\''....,;,.\n'>> parrot.txt
-	@printf '  co..ckkkkkddk:,cclll;.,c:,:o:.\n'>> parrot.txt
-	@printf '  co..ckkkkkkkk:,cllll;.:kkd,.'\'':c.\n'>> parrot.txt
-	@printf '.,:;.,okkkkkkkk:,cclll;.:kkkdl;;o:.\n'>> parrot.txt
-	@printf 'cNo..ckkkkkkkkko,.;llc,.ckkkkkc..oc\n'>> parrot.txt
-	@printf ',dd;.:kkkkkkkkkx;..;:,.'\''lkkkkko,.:,\n'>> parrot.txt
-	@printf '  ;c.ckkkkkkkkkkc.....;ldkkkkkk:.,'\''\n'>> parrot.txt
-	@printf ',dc..'\''okkkkkkkkkxoc;;cxkkkkkkkkc..,;,.\n'>> parrot.txt
-	@printf 'kNo..'\'':lllllldkkkkkkkkkkkkkkkkkdcc,.;l.\n'>> parrot.txt
-	@printf 'KOc,l;'\'''\'''\'''\'''\'''\'''\'';lldkkkkkkkkkkkkkkkkkc..;lc.\n'>> parrot.txt
-	@printf 'xx:'\'':;;;;,.,,...,;;cllllllllllllllc;'\''.;oo,\n'>> parrot.txt
-	@printf 'cNo.....................................oc\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '=\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '                   .ccccccc.\n'>> parrot.txt
-	@printf '               .ccckNKOOOOkdcc.\n'>> parrot.txt
-	@printf '            .;;cc:ccccccc:,::::,,.\n'>> parrot.txt
-	@printf '         .c;:;.,cccllxOOOxlllc,;ol.\n'>> parrot.txt
-	@printf '        .lkc,coxo:;oOOxooooooo;..:,\n'>> parrot.txt
-	@printf '      .cdc.,dOOOc..cOd,.'\'',,;'\''....'\'':c.\n'>> parrot.txt
-	@printf '      cNx'\''.lOOOOxlldOl..;lll;.....cO;\n'>> parrot.txt
-	@printf '     ,do;,:dOOOOOOOOOl'\'''\'':lll;..:d:.'\''c,\n'>> parrot.txt
-	@printf '     co..lOOOOOOOOOOOl'\'''\'':lll;.'\''lOd,.cd.\n'>> parrot.txt
-	@printf '     co.,dOOOOOOOOOOOo,.;llc,.,dOOc..dc\n'>> parrot.txt
-	@printf '     co..lOOOOOOOOOOOOc.'\'';:,..cOOOl..oc\n'>> parrot.txt
-	@printf '   .,:;.'\''::lxOOOOOOOOOo:'\''...,:oOOOc..dc\n'>> parrot.txt
-	@printf '   ;Oc..cl'\'''\'':llxOOOOOOOOdcclxOOOOx,.cd.\n'>> parrot.txt
-	@printf '  .:;'\'';lxl'\'''\'''\'''\'''\'':lldOOOOOOOOOOOOOOc..oc\n'>> parrot.txt
-	@printf ',dl,.'\''cooc:::,....,::coooooooooooc'\''.c:\n'>> parrot.txt
-	@printf 'cNo.................................oc\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '=\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '                        .cccccccc.\n'>> parrot.txt
-	@printf '                  .,,,;;cc:cccccc:;;,.\n'>> parrot.txt
-	@printf '                .cdxo;..,::cccc::,..;l.\n'>> parrot.txt
-	@printf '               ,oo:,,:c:cdxxdllll:;,'\'';:,.\n'>> parrot.txt
-	@printf '             .cl;.,oxxc'\''.,cc,.'\'',;;'\''...oNc\n'>> parrot.txt
-	@printf '             ;Oc..cxxxc'\''.,c;..;lll;...cO;\n'>> parrot.txt
-	@printf '           .;;'\'',:ldxxxdoldxc..;lll:'\''...'\''c,\n'>> parrot.txt
-	@printf '           ;c..cxxxxkxxkxxxc'\''.;lll:'\'''\'','\''.cdc.\n'>> parrot.txt
-	@printf '         .c;.;odxxxxxxxxxxxd;.,cll;.,l:.'\''dNc\n'>> parrot.txt
-	@printf '        .:,'\'''\''ccoxkxxkxxxxxxx:..,:;'\''.:xc..oNc\n'>> parrot.txt
-	@printf '      .lc,.'\''lc'\'':dxxxkxxxxxxxdl,...'\'',lx:..dNc\n'>> parrot.txt
-	@printf '     .:,'\'',coxoc;;ccccoxxxxxxxxo:::oxxo,.cdc.\n'>> parrot.txt
-	@printf '  .;'\'':;.'\''oxxxxxc'\'''\'''\'''\'''\'';cccoxxxxxxxxxkxc..oc\n'>> parrot.txt
-	@printf ',do:'\''..,:llllll:;;;;;;,..,;:lllllllll;..oc\n'>> parrot.txt
-	@printf 'cNo.....................................oc\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '=\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '                              .ccccc.\n'>> parrot.txt
-	@printf '                         .cc;'\''coooxkl;.\n'>> parrot.txt
-	@printf '                     .:c:::c:,;,,,;c;;,.'\''.\n'>> parrot.txt
-	@printf '                   .clc,'\'',:,..:xxocc;...c;\n'>> parrot.txt
-	@printf '                  .c:,'\'';:ox:..:c,,,,,,...cd,\n'>> parrot.txt
-	@printf '                .c:'\''.,oxxxxl::l:.;loll;..;ol.\n'>> parrot.txt
-	@printf '                ;Oc..:xxxxxxxxx:.,llll,....oc\n'>> parrot.txt
-	@printf '             .,;,'\'',:loxxxxxxxxx:.,llll;.,;.'\''ld,\n'>> parrot.txt
-	@printf '            .lo;..:xxxxxxxxxxxx:.'\''cllc,.:l:'\''cO;\n'>> parrot.txt
-	@printf '           .:;...'\''cxxxxxxxxxxxxol;,::,..cdl;;l'\''\n'>> parrot.txt
-	@printf '         .cl;'\'':;'\'''\'';oxxxxxxxxxxxxx:....,cooc,cO;\n'>> parrot.txt
-	@printf '     .,,,::;,lxoc:,,:lxxxxxxxxxxxo:,,;lxxl;'\''oNc\n'>> parrot.txt
-	@printf '   .cdxo;'\'':lxxxxxxc'\'''\'';cccccoxxxxxxxxxxxxo,.;lc.\n'>> parrot.txt
-	@printf '  .loc'\''.'\''lxxxxxxxxocc;'\'''\'''\'''\'''\'';ccoxxxxxxxxx:..oc\n'>> parrot.txt
-	@printf 'occ'\''..'\'',:cccccccccccc:;;;;;;;;:ccccccccc,.'\''c,\n'>> parrot.txt
-	@printf 'Ol;......................................;l'\''\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '=\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '                              ,ddoodd,\n'>> parrot.txt
-	@printf '                         .cc'\'' ,ooccoo,'\''cc.\n'>> parrot.txt
-	@printf '                      .ccldo;....,,...;oxdc.\n'>> parrot.txt
-	@printf '                   .,,:cc;.'\'''\''..;lol;;,'\''..lkl.\n'>> parrot.txt
-	@printf '                  .dkc'\'';:ccl;..;dl,.'\'''\''.....oc\n'>> parrot.txt
-	@printf '                .,lc'\'',cdddddlccld;.,;c::'\''..,cc:.\n'>> parrot.txt
-	@printf '                cNo..:ddddddddddd;'\'':clll;,c,'\'';xc\n'>> parrot.txt
-	@printf '               .lo;,clddddddddddd;'\'':clll;:kc..;'\''\n'>> parrot.txt
-	@printf '             .,:;..:ddddddddddddd:'\'';clll;;ll,..\n'>> parrot.txt
-	@printf '             ;Oc..'\'';:ldddddddddddl,.,c:;'\'';dd;..\n'>> parrot.txt
-	@printf '           .'\'''\'''\'',:lc,'\''cdddddddddddo:,'\''...'\''cdd;..\n'>> parrot.txt
-	@printf '         .cdc'\'';lddd:'\'';lddddddddddddd;.'\'';lddl,..\n'>> parrot.txt
-	@printf '      .,;::;,cdddddol;;lllllodddddddlcodddd:.'\''l,\n'>> parrot.txt
-	@printf '     .dOc..,lddddddddlccc;'\'''\'';cclddddddddddd;,ll.\n'>> parrot.txt
-	@printf '   .coc,;::ldddddddddddddl:ccc:ldddddddddlc,ck;\n'>> parrot.txt
-	@printf ',dl::,..,cccccccccccccccccccccccccccccccc:;'\'':xx,\n'>> parrot.txt
-	@printf 'cNd.........................................;lOc\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '=\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '                        .cccc;;cc;'\'';c.\n'>> parrot.txt
-	@printf '                      .,:dkdc:;;:c:,:d:.\n'>> parrot.txt
-	@printf '                     .loc'\''.,cc::::::,..,:.\n'>> parrot.txt
-	@printf '                   .cl;....;dkdccc::,...c;\n'>> parrot.txt
-	@printf '                  .c:,'\'';:'\''..ckc'\'',;::;....;c.\n'>> parrot.txt
-	@printf '                .c:'\''.,dkkoc:ok:;llllc,,c,'\'';:.\n'>> parrot.txt
-	@printf '               .;c,'\'';okkkkkkkk:,lllll,:kd;.;:,.\n'>> parrot.txt
-	@printf '               co..:kkkkkkkkkk:;llllc'\'':kkc..oNc\n'>> parrot.txt
-	@printf '             .cl;.,okkkkkkkkkkc,:cll;,okkc'\''.cO;\n'>> parrot.txt
-	@printf '             ;k:..ckkkkkkkkkkkl..,;,.;xkko:'\'',l'\''\n'>> parrot.txt
-	@printf '            .,...'\'';dkkkkkkkkkkd;.....ckkkl'\''.cO;\n'>> parrot.txt
-	@printf '         .,,:,.;oo:ckkkkkkkkkkkdoc;;cdkkkc..cd,\n'>> parrot.txt
-	@printf '      .cclo;,ccdkkl;llccdkkkkkkkkkkkkkkkd,.c;\n'>> parrot.txt
-	@printf '     .lol:;;okkkkkxooc::loodkkkkkkkkkkkko'\''.oc\n'>> parrot.txt
-	@printf '   .c:'\''..lkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkd,.oc\n'>> parrot.txt
-	@printf '  .lo;,ccdkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkd,.c;\n'>> parrot.txt
-	@printf ',dx:..;lllllllllllllllllllllllllllllllloc'\''...\n'>> parrot.txt
-	@printf 'cNO;........................................\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '=\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '                   .ccc;;cc;'\'';c.\n'>> parrot.txt
-	@printf '                .ckx;'\''::;;;;:c'\'':c.\n'>> parrot.txt
-	@printf '             .,:c:c:::oxxocoo::::,'\'',.\n'>> parrot.txt
-	@printf '            .odc'\''..:lkkoolllllo;..;d,\n'>> parrot.txt
-	@printf '            ;c..:o:..;:..'\'',;'\''.......;.\n'>> parrot.txt
-	@printf '           ,c..:0Xx::o:.,cllc:,'\''::,.,c.\n'>> parrot.txt
-	@printf '           ;c;lkXXXXXXl.;lllll;lXXOo;'\'':c.\n'>> parrot.txt
-	@printf '         ,dc.oXXXXXXXXl.,lllll;lXXXXx,c0:\n'>> parrot.txt
-	@printf '         ;Oc.oXXXXXXXXo.'\'':ll:;'\''oXXXXO;,l'\''\n'>> parrot.txt
-	@printf '         '\''l;;OXXXXXXXXd'\''.'\''::'\''..dXXXXO;,l'\''\n'>> parrot.txt
-	@printf '         '\''l;:0XXXXXXXX0x:...,:o0XXXXk,:x,\n'>> parrot.txt
-	@printf '         '\''l;;kXXXXXXKXXXkol;oXXXXXXXO;oNc\n'>> parrot.txt
-	@printf '        ,c'\''..ckk0XXXXXXXXXX00XXXXXXX0:;o:.\n'>> parrot.txt
-	@printf '      .'\'':;..:dd::ooooOXXXXXXXXXXXXXXXo..c;\n'>> parrot.txt
-	@printf '    .'\'','\'',:co0XX0kkkxx0XXXXXXXXXXXXXXX0c..;l.\n'>> parrot.txt
-	@printf '  .:;'\''..oXXXXXXXXXXXXXXXXXXXXXXXXXXXXXko;'\'';:.\n'>> parrot.txt
-	@printf '.cdc..:oOXXXXXXXXKXXXXXXXXXXXXXXXXXXXXXXo..oc\n'>> parrot.txt
-	@printf ':0o...:dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxo,.:,\n'>> parrot.txt
-	@printf 'cNo........................................;'\''\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '\n'>> parrot.txt
-	@printf '=\n'>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '              .;:;,.,;:,.'>> parrot.txt
+	@printf "%s\n" '            .cc;.  ...  .;c.'>> parrot.txt
+	@printf "%s\n" '         .,,cc:cc:lxxxl:ccc:;,.'>> parrot.txt
+	@printf "%s\n" '        .lo;...lKKklllookl..cO;'>> parrot.txt
+	@printf "%s\n" '      .cl;.,;'\''.okl;...'\''.;,..'\'';:.'>> parrot.txt
+	@printf "%s\n" '     .:o;;dkx,.ll..,cc::,..,'\''.;:,.'>> parrot.txt
+	@printf "%s\n" '     co..lKKKkokl.'\'':lllo;'\'''\''ol..;dl.'>> parrot.txt
+	@printf "%s\n" '   .,c;.,xKKKKKKo.'\'':llll;.'\''oOxo,.cl,.'>> parrot.txt
+	@printf "%s\n" '   cNo..lKKKKKKKo'\'''\'';llll;;okKKKl..oNc'>> parrot.txt
+	@printf "%s\n" '   cNo..lKKKKKKKko;'\'':c:,'\''lKKKKKo'\''.oNc'>> parrot.txt
+	@printf "%s\n" '   cNo..lKKKKKKKKKl.....'\''dKKKKKxc,l0:'>> parrot.txt
+	@printf "%s\n" '   .c:'\''.lKKKKKKKKKk;....oKKKKKKo'\''.oNc'>> parrot.txt
+	@printf "%s\n" '     ,:.,oxOKKKKKKKOxxxxOKKKKKKxc,;ol:.'>> parrot.txt
+	@printf "%s\n" '     ;c..'\'''\'':oookKKKKKKKKKKKKKKKKKk:.'\''clc.'>> parrot.txt
+	@printf "%s\n" '   ,dl'\''.,oxo;'\'''\'';oxOKKKKKKKKKKKKKKKOxxl::;,,.'>> parrot.txt
+	@printf "%s\n" '  .dOc..lKKKkoooookKKKKKKKKKKKKKKKKKKKxl,;ol.'>> parrot.txt
+	@printf "%s\n" '  cx,'\'';okKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKl..;lc.'>> parrot.txt
+	@printf "%s\n" '  co..:dddddddddddddddddddddddddddddddddl:;'\'''\''::.'>> parrot.txt
+	@printf "%s\n" '  co...........................................'\"''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '='>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '           .ccccccc.'>> parrot.txt
+	@printf "%s\n" '      .,,,;cooolccol;;,,.'>> parrot.txt
+	@printf "%s\n" '     .dOx;..;lllll;..;xOd.'>> parrot.txt
+	@printf "%s\n" '   .cdo,'\'',loOXXXXXkll;'\'';odc.'>> parrot.txt
+	@printf "%s\n" '  ,oo:;c,'\'':oko:cccccc,...ckl.'>> parrot.txt
+	@printf "%s\n" '  ;c.;kXo..::..;c::'\''.......oc'>> parrot.txt
+	@printf "%s\n" ',dc..oXX0kk0o.'\'':lll;..cxxc.,ld,'>> parrot.txt
+	@printf "%s\n" 'kNo.'\''oXXXXXXo'\'''\'':lll;..oXXOd;cOd.'>> parrot.txt
+	@printf "%s\n" 'KOc;oOXXXXXXo.'\'':lol,..dXXXXl'\'';xc'>> parrot.txt
+	@printf "%s\n" 'Ol,:k0XXXXXX0c.,clc'\''.:0XXXXx,.oc'>> parrot.txt
+	@printf "%s\n" 'KOc;dOXXXXXXXl..'\'';'\''..lXXXXXd..oc'>> parrot.txt
+	@printf "%s\n" 'dNo..oXXXXXXXOx:..'\''lxOXXXXXk,.:; ..'>> parrot.txt
+	@printf "%s\n" 'cNo..lXXXXXXXXXOolkXXXXXXXXXkl;..;:.;.'>> parrot.txt
+	@printf "%s\n" '.,;'\''.,dkkkkk0XXXXXXXXXXXXXXXXXOxxl;,;,;l:.'>> parrot.txt
+	@printf "%s\n" '  ;c.;:'\'''\'''\'''\'''\'':doOXXXXXXXXXXXXXXXXXXOdo;'\'';clc.'>> parrot.txt
+	@printf "%s\n" '  ;c.lOdood:'\'''\'''\''oXXXXXXXXXXXXXXXXXXXXXk,..;ol.'>> parrot.txt
+	@printf "%s\n" '  '\'';.:xxxxxocccoxxxxxxxxxxxxxxxxxxxxxxl::'\''.'\'';;.'>> parrot.txt
+	@printf "%s\n" '  '\'';........................................;l'\'''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '='>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '        .;:;;,.,;;::,.'>> parrot.txt
+	@printf "%s\n" '     .;'\'':;........'\''co:.'>> parrot.txt
+	@printf "%s\n" '   .clc;'\'''\'':cllllc::,.'\'':c.'>> parrot.txt
+	@printf "%s\n" '  .lo;;o:coxdlooollc;'\'',::,,.'>> parrot.txt
+	@printf "%s\n" '.c:'\''.,cl,.'\''lc'\'',,;;'\''......cO;'>> parrot.txt
+	@printf "%s\n" 'do;'\'';oxoc::l;;llllc'\''.'\'';;'\''.'\'';.'>> parrot.txt
+	@printf "%s\n" 'c..ckkkkkkkd,;llllc'\''.:kkd;.'\'':c.'>> parrot.txt
+	@printf "%s\n" ''\''.,okkkkkkkkc;llllc,.:kkkdl,cO;'>> parrot.txt
+	@printf "%s\n" '..;xkkkkkkkkc,ccll:,;okkkkk:,cl,'>> parrot.txt
+	@printf "%s\n" '..,dkkkkkkkkc..,;,'\''ckkkkkkkc;ll.'>> parrot.txt
+	@printf "%s\n" '..'\''okkkkkkkko,....'\''okkkkkkkc,:c.'>> parrot.txt
+	@printf "%s\n" 'c..ckkkkkkkkkdl;,:okkkkkkkkd,.'\'','\'';.'>> parrot.txt
+	@printf "%s\n" 'd..'\'':lxkkkkkkkkxxkkkkkkkkkkkdoc;,;'\''..'\''.,.'>> parrot.txt
+	@printf "%s\n" 'o...'\'''\'';llllldkkkkkkkkkkkkkkkkkkdll;..'\''cdo.'>> parrot.txt
+	@printf "%s\n" 'o..,l;'\'''\'''\'''\'''\'''\'';dkkkkkkkkkkkkkkkkkkkkdlc,..;lc.'>> parrot.txt
+	@printf "%s\n" 'o..;lc;;;;;;,,;clllllllllllllllllllllc'\''..,:c.'>> parrot.txt
+	@printf "%s\n" 'o..........................................;'\'''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '='>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '           .,,,,,,,,,.'>> parrot.txt
+	@printf "%s\n" '         .ckKxodooxOOdcc.'>> parrot.txt
+	@printf "%s\n" '      .cclooc'\''....'\'';;cool.'>> parrot.txt
+	@printf "%s\n" '     .loc;;;;clllllc;;;;;:;,.'>> parrot.txt
+	@printf "%s\n" '   .c:'\''.,okd;;cdo:::::cl,..oc'>> parrot.txt
+	@printf "%s\n" '  .:o;'\'';okkx;'\'';;,'\'';::;'\''....,;,.'>> parrot.txt
+	@printf "%s\n" '  co..ckkkkkddk:,cclll;.,c:,:o:.'>> parrot.txt
+	@printf "%s\n" '  co..ckkkkkkkk:,cllll;.:kkd,.'\'':c.'>> parrot.txt
+	@printf "%s\n" '.,:;.,okkkkkkkk:,cclll;.:kkkdl;;o:.'>> parrot.txt
+	@printf "%s\n" 'cNo..ckkkkkkkkko,.;llc,.ckkkkkc..oc'>> parrot.txt
+	@printf "%s\n" ',dd;.:kkkkkkkkkx;..;:,.'\''lkkkkko,.:,'>> parrot.txt
+	@printf "%s\n" '  ;c.ckkkkkkkkkkc.....;ldkkkkkk:.,'\'''>> parrot.txt
+	@printf "%s\n" ',dc..'\''okkkkkkkkkxoc;;cxkkkkkkkkc..,;,.'>> parrot.txt
+	@printf "%s\n" 'kNo..'\'':lllllldkkkkkkkkkkkkkkkkkdcc,.;l.'>> parrot.txt
+	@printf "%s\n" 'KOc,l;'\'''\'''\'''\'''\'''\'''\'';lldkkkkkkkkkkkkkkkkkc..;lc.'>> parrot.txt
+	@printf "%s\n" 'xx:'\'':;;;;,.,,...,;;cllllllllllllllc;'\''.;oo,'>> parrot.txt
+	@printf "%s\n" 'cNo.....................................oc'>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '='>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '                   .ccccccc.'>> parrot.txt
+	@printf "%s\n" '               .ccckNKOOOOkdcc.'>> parrot.txt
+	@printf "%s\n" '            .;;cc:ccccccc:,::::,,.'>> parrot.txt
+	@printf "%s\n" '         .c;:;.,cccllxOOOxlllc,;ol.'>> parrot.txt
+	@printf "%s\n" '        .lkc,coxo:;oOOxooooooo;..:,'>> parrot.txt
+	@printf "%s\n" '      .cdc.,dOOOc..cOd,.'\'',,;'\''....'\'':c.'>> parrot.txt
+	@printf "%s\n" '      cNx'\''.lOOOOxlldOl..;lll;.....cO;'>> parrot.txt
+	@printf "%s\n" '     ,do;,:dOOOOOOOOOl'\'''\'':lll;..:d:.'\''c,'>> parrot.txt
+	@printf "%s\n" '     co..lOOOOOOOOOOOl'\'''\'':lll;.'\''lOd,.cd.'>> parrot.txt
+	@printf "%s\n" '     co.,dOOOOOOOOOOOo,.;llc,.,dOOc..dc'>> parrot.txt
+	@printf "%s\n" '     co..lOOOOOOOOOOOOc.'\'';:,..cOOOl..oc'>> parrot.txt
+	@printf "%s\n" '   .,:;.'\''::lxOOOOOOOOOo:'\''...,:oOOOc..dc'>> parrot.txt
+	@printf "%s\n" '   ;Oc..cl'\'''\'':llxOOOOOOOOdcclxOOOOx,.cd.'>> parrot.txt
+	@printf "%s\n" '  .:;'\'';lxl'\'''\'''\'''\'''\'':lldOOOOOOOOOOOOOOc..oc'>> parrot.txt
+	@printf "%s\n" ',dl,.'\''cooc:::,....,::coooooooooooc'\''.c:'>> parrot.txt
+	@printf "%s\n" 'cNo.................................oc'>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '='>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '                        .cccccccc.'>> parrot.txt
+	@printf "%s\n" '                  .,,,;;cc:cccccc:;;,.'>> parrot.txt
+	@printf "%s\n" '                .cdxo;..,::cccc::,..;l.'>> parrot.txt
+	@printf "%s\n" '               ,oo:,,:c:cdxxdllll:;,'\'';:,.'>> parrot.txt
+	@printf "%s\n" '             .cl;.,oxxc'\''.,cc,.'\'',;;'\''...oNc'>> parrot.txt
+	@printf "%s\n" '             ;Oc..cxxxc'\''.,c;..;lll;...cO;'>> parrot.txt
+	@printf "%s\n" '           .;;'\'',:ldxxxdoldxc..;lll:'\''...'\''c,'>> parrot.txt
+	@printf "%s\n" '           ;c..cxxxxkxxkxxxc'\''.;lll:'\'''\'','\''.cdc.'>> parrot.txt
+	@printf "%s\n" '         .c;.;odxxxxxxxxxxxd;.,cll;.,l:.'\''dNc'>> parrot.txt
+	@printf "%s\n" '        .:,'\'''\''ccoxkxxkxxxxxxx:..,:;'\''.:xc..oNc'>> parrot.txt
+	@printf "%s\n" '      .lc,.'\''lc'\'':dxxxkxxxxxxxdl,...'\'',lx:..dNc'>> parrot.txt
+	@printf "%s\n" '     .:,'\'',coxoc;;ccccoxxxxxxxxo:::oxxo,.cdc.'>> parrot.txt
+	@printf "%s\n" '  .;'\'':;.'\''oxxxxxc'\'''\'''\'''\'''\'';cccoxxxxxxxxxkxc..oc'>> parrot.txt
+	@printf "%s\n" ',do:'\''..,:llllll:;;;;;;,..,;:lllllllll;..oc'>> parrot.txt
+	@printf "%s\n" 'cNo.....................................oc'>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '='>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '                              .ccccc.'>> parrot.txt
+	@printf "%s\n" '                         .cc;'\''coooxkl;.'>> parrot.txt
+	@printf "%s\n" '                     .:c:::c:,;,,,;c;;,.'\''.'>> parrot.txt
+	@printf "%s\n" '                   .clc,'\'',:,..:xxocc;...c;'>> parrot.txt
+	@printf "%s\n" '                  .c:,'\'';:ox:..:c,,,,,,...cd,'>> parrot.txt
+	@printf "%s\n" '                .c:'\''.,oxxxxl::l:.;loll;..;ol.'>> parrot.txt
+	@printf "%s\n" '                ;Oc..:xxxxxxxxx:.,llll,....oc'>> parrot.txt
+	@printf "%s\n" '             .,;,'\'',:loxxxxxxxxx:.,llll;.,;.'\''ld,'>> parrot.txt
+	@printf "%s\n" '            .lo;..:xxxxxxxxxxxx:.'\''cllc,.:l:'\''cO;'>> parrot.txt
+	@printf "%s\n" '           .:;...'\''cxxxxxxxxxxxxol;,::,..cdl;;l'\'''>> parrot.txt
+	@printf "%s\n" '         .cl;'\'':;'\'''\'';oxxxxxxxxxxxxx:....,cooc,cO;'>> parrot.txt
+	@printf "%s\n" '     .,,,::;,lxoc:,,:lxxxxxxxxxxxo:,,;lxxl;'\''oNc'>> parrot.txt
+	@printf "%s\n" '   .cdxo;'\'':lxxxxxxc'\'''\'';cccccoxxxxxxxxxxxxo,.;lc.'>> parrot.txt
+	@printf "%s\n" '  .loc'\''.'\''lxxxxxxxxocc;'\'''\'''\'''\'''\'';ccoxxxxxxxxx:..oc'>> parrot.txt
+	@printf "%s\n" 'occ'\''..'\'',:cccccccccccc:;;;;;;;;:ccccccccc,.'\''c,'>> parrot.txt
+	@printf "%s\n" 'Ol;......................................;l'\'''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '='>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '                              ,ddoodd,'>> parrot.txt
+	@printf "%s\n" '                         .cc'\'' ,ooccoo,'\''cc.'>> parrot.txt
+	@printf "%s\n" '                      .ccldo;....,,...;oxdc.'>> parrot.txt
+	@printf "%s\n" '                   .,,:cc;.'\'''\''..;lol;;,'\''..lkl.'>> parrot.txt
+	@printf "%s\n" '                  .dkc'\'';:ccl;..;dl,.'\'''\''.....oc'>> parrot.txt
+	@printf "%s\n" '                .,lc'\'',cdddddlccld;.,;c::'\''..,cc:.'>> parrot.txt
+	@printf "%s\n" '                cNo..:ddddddddddd;'\'':clll;,c,'\'';xc'>> parrot.txt
+	@printf "%s\n" '               .lo;,clddddddddddd;'\'':clll;:kc..;'\'''>> parrot.txt
+	@printf "%s\n" '             .,:;..:ddddddddddddd:'\'';clll;;ll,..'>> parrot.txt
+	@printf "%s\n" '             ;Oc..'\'';:ldddddddddddl,.,c:;'\'';dd;..'>> parrot.txt
+	@printf "%s\n" '           .'\'''\'''\'',:lc,'\''cdddddddddddo:,'\''...'\''cdd;..'>> parrot.txt
+	@printf "%s\n" '         .cdc'\'';lddd:'\'';lddddddddddddd;.'\'';lddl,..'>> parrot.txt
+	@printf "%s\n" '      .,;::;,cdddddol;;lllllodddddddlcodddd:.'\''l,'>> parrot.txt
+	@printf "%s\n" '     .dOc..,lddddddddlccc;'\'''\'';cclddddddddddd;,ll.'>> parrot.txt
+	@printf "%s\n" '   .coc,;::ldddddddddddddl:ccc:ldddddddddlc,ck;'>> parrot.txt
+	@printf "%s\n" ',dl::,..,cccccccccccccccccccccccccccccccc:;'\'':xx,'>> parrot.txt
+	@printf "%s\n" 'cNd.........................................;lOc'>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '='>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '                        .cccc;;cc;'\'';c.'>> parrot.txt
+	@printf "%s\n" '                      .,:dkdc:;;:c:,:d:.'>> parrot.txt
+	@printf "%s\n" '                     .loc'\''.,cc::::::,..,:.'>> parrot.txt
+	@printf "%s\n" '                   .cl;....;dkdccc::,...c;'>> parrot.txt
+	@printf "%s\n" '                  .c:,'\'';:'\''..ckc'\'',;::;....;c.'>> parrot.txt
+	@printf "%s\n" '                .c:'\''.,dkkoc:ok:;llllc,,c,'\'';:.'>> parrot.txt
+	@printf "%s\n" '               .;c,'\'';okkkkkkkk:,lllll,:kd;.;:,.'>> parrot.txt
+	@printf "%s\n" '               co..:kkkkkkkkkk:;llllc'\'':kkc..oNc'>> parrot.txt
+	@printf "%s\n" '             .cl;.,okkkkkkkkkkc,:cll;,okkc'\''.cO;'>> parrot.txt
+	@printf "%s\n" '             ;k:..ckkkkkkkkkkkl..,;,.;xkko:'\'',l'\'''>> parrot.txt
+	@printf "%s\n" '            .,...'\'';dkkkkkkkkkkd;.....ckkkl'\''.cO;'>> parrot.txt
+	@printf "%s\n" '         .,,:,.;oo:ckkkkkkkkkkkdoc;;cdkkkc..cd,'>> parrot.txt
+	@printf "%s\n" '      .cclo;,ccdkkl;llccdkkkkkkkkkkkkkkkd,.c;'>> parrot.txt
+	@printf "%s\n" '     .lol:;;okkkkkxooc::loodkkkkkkkkkkkko'\''.oc'>> parrot.txt
+	@printf "%s\n" '   .c:'\''..lkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkd,.oc'>> parrot.txt
+	@printf "%s\n" '  .lo;,ccdkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkd,.c;'>> parrot.txt
+	@printf "%s\n" ',dx:..;lllllllllllllllllllllllllllllllloc'\''...'>> parrot.txt
+	@printf "%s\n" 'cNO;........................................'>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '='>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '                   .ccc;;cc;'\'';c.'>> parrot.txt
+	@printf "%s\n" '                .ckx;'\''::;;;;:c'\'':c.'>> parrot.txt
+	@printf "%s\n" '             .,:c:c:::oxxocoo::::,'\'',.'>> parrot.txt
+	@printf "%s\n" '            .odc'\''..:lkkoolllllo;..;d,'>> parrot.txt
+	@printf "%s\n" '            ;c..:o:..;:..'\'',;'\''.......;.'>> parrot.txt
+	@printf "%s\n" '           ,c..:0Xx::o:.,cllc:,'\''::,.,c.'>> parrot.txt
+	@printf "%s\n" '           ;c;lkXXXXXXl.;lllll;lXXOo;'\'':c.'>> parrot.txt
+	@printf "%s\n" '         ,dc.oXXXXXXXXl.,lllll;lXXXXx,c0:'>> parrot.txt
+	@printf "%s\n" '         ;Oc.oXXXXXXXXo.'\'':ll:;'\''oXXXXO;,l'\'''>> parrot.txt
+	@printf "%s\n" '         '\''l;;OXXXXXXXXd'\''.'\''::'\''..dXXXXO;,l'\'''>> parrot.txt
+	@printf "%s\n" '         '\''l;:0XXXXXXXX0x:...,:o0XXXXk,:x,'>> parrot.txt
+	@printf "%s\n" '         '\''l;;kXXXXXXKXXXkol;oXXXXXXXO;oNc'>> parrot.txt
+	@printf "%s\n" '        ,c'\''..ckk0XXXXXXXXXX00XXXXXXX0:;o:.'>> parrot.txt
+	@printf "%s\n" '      .'\'':;..:dd::ooooOXXXXXXXXXXXXXXXo..c;'>> parrot.txt
+	@printf "%s\n" '    .'\'','\'',:co0XX0kkkxx0XXXXXXXXXXXXXXX0c..;l.'>> parrot.txt
+	@printf "%s\n" '  .:;'\''..oXXXXXXXXXXXXXXXXXXXXXXXXXXXXXko;'\'';:.'>> parrot.txt
+	@printf "%s\n" '.cdc..:oOXXXXXXXXKXXXXXXXXXXXXXXXXXXXXXXo..oc'>> parrot.txt
+	@printf "%s\n" ':0o...:dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxo,.:,'>> parrot.txt
+	@printf "%s\n" 'cNo........................................;'\'''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" ''>> parrot.txt
+	@printf "%s\n" '='>> parrot.txt
 	@chmod 777 parrot.txt
-	@open parrot.txt
-	@printf "$(RESET)🦝"
+	@printf "$(BLACK)🦝"
 
 
 
 build_p_racc.txt:
+	@printf "$(NEOR) Building p_racc.txt... $(RESET)"
+	@printf "$(MINT)🦝\n\n"
+	@> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '    :::                                                          '>> p_racc.txt
+	@printf "%s\n" ' -+@@@##-                                                        '>> p_racc.txt
+	@printf "%s\n" '+#///--/+-'\''                                                      '>> p_racc.txt
+	@printf "%s\n" '#++/-:/+###+/:                                                   '>> p_racc.txt
+	@printf "%s\n" '/+/-/@@#/:--+#-                                                  '>> p_racc.txt
+	@printf "%s\n" '--+##+-:-----++                                                  '>> p_racc.txt
+	@printf "%s\n" ''\''+#+/ :-++++/#/                                                  '>> p_racc.txt
+	@printf "%s\n" '/@@/ +##++##+#:                                                  '>> p_racc.txt
+	@printf "%s\n" '@##:+####++/@@:                                                  '>> p_racc.txt
+	@printf "%s\n" '##+-++##++##//#                                                  '>> p_racc.txt
+	@printf "%s\n" '#@# @####@++@/@'\''                                                 '>> p_racc.txt
+	@printf "%s\n" '#+-'\'' #++##  #-@                                                  '>> p_racc.txt
+	@printf "%s\n" ''\''  :#+++#:  -//                                                  '>> p_racc.txt
+	@printf "%s\n" '/+##+#+#/    :                                                   '>> p_racc.txt
+	@printf "%s\n" '@++@@++:                                                         '>> p_racc.txt
+	@printf "%s\n" '+/++#-                                                           '>> p_racc.txt
+	@printf "%s\n" '@///#'\''                                                           '>> p_racc.txt
+	@printf "%s\n" ':-//:                                                            '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                        :/++-'\''   '>> p_racc.txt
+	@printf "%s\n" '                                                       -++-+##/  '>> p_racc.txt
+	@printf "%s\n" '                '\''-/-                                  /#+::  :+#:'>> p_racc.txt
+	@printf "%s\n" '               /#-#+-                     :'\''       :/##///:'\''  '\''/-'>> p_racc.txt
+	@printf "%s\n" '              +/  -/@+:    :--'\''        -+++-     /###+--+@#/  :#-'>> p_racc.txt
+	@printf "%s\n" '             :+:'\''##-/+#+//-/++++-'\''  :+####++++#@##/--/+@##/-: :#:'>> p_racc.txt
+	@printf "%s\n" '             /+ //@#--+#+#@######@#@@#######++/+#++//##::#++- :#-'>> p_racc.txt
+	@printf "%s\n" '             +-:+@:+#++#++++###++##+++####++++++#++#@+   -@+-::#:'>> p_racc.txt
+	@printf "%s\n" '             /#+@-'\''/@#++++++++#+/////###++++++++++#@+:    ##++@- '>> p_racc.txt
+	@printf "%s\n" '              +@#+#+@++++++++####/++###+++++++++++@#+#-:  :#@#:  '>> p_racc.txt
+	@printf "%s\n" '              ++#///@++++####+--####-:+####+++++++@/-@###+##+/   '>> p_racc.txt
+	@printf "%s\n" '             /#/+++####+//+#+-  '\''::'\''  -+##++++#++++#+::-@#//#-   '>> p_racc.txt
+	@printf "%s\n" '            /--++++++++++++++/:'\''     :++++++++####++++++++//#+'\''  '>> p_racc.txt
+	@printf "%s\n" '           :#--++########++@####: /#++##++++++++++++++++++/--/+: '>> p_racc.txt
+	@printf "%s\n" '          '\''#-//+#@#/@@+'\'':##+###++/#++#+################+++---/// '>> p_racc.txt
+	@printf "%s\n" '          -/--/::'\''       '\'' @#++@#++++####/   -@######+#+++-::/#- '>> p_racc.txt
+	@printf "%s\n" '          +/:'\''              @   @#@@@@+          :/##@#+++//-:/#-'>> p_racc.txt
+	@printf "%s\n" '         //::::::'\'''\'''\'''\'':: '\''      /@                    :---///--:/#'>> p_racc.txt
+	@printf "%s\n" '         /+/------:@#/-#+-'\'''\'''\''  :@    '\''   :               :/----/+'>> p_racc.txt
+	@printf "%s\n" '         '\''++////--@#+@@@@@##/::@+//::'\''::::::::'\'''\'''\'''\'''\'':        :--#+'>> p_racc.txt
+	@printf "%s\n" '          '\''@+@@@@@//++++#@@@##+#+/-#######+//+#@+:::::::::::::-/#'>> p_racc.txt
+	@printf "%s\n" '          :#+@/:@@@+/+######@##-/##/#@@:@@+##+-#@//---------:::-+'>> p_racc.txt
+	@printf "%s\n" '          '\''#+++:#/++#+/++#+++++:/##+##++#++#++'\''/@---------------/'>> p_racc.txt
+	@printf "%s\n" '           '\''//- ++/+++#++@@@@++-###+++#####+++:++#@##+++//////++#'>> p_racc.txt
+	@printf "%s\n" '                 /@+//+##:@@/@#+#@@@@#+///--:-#@@#+//+#@@+++##/::'>> p_racc.txt
+	@printf "%s\n" '                  /@+/: '\''  # +##@ @@@+####@@##++++#-   +@++#+'\''   '>> p_racc.txt
+	@printf "%s\n" '                  ///       -@+++'\''/-  +#+++++++///@:  /@+++#-    '>> p_racc.txt
+	@printf "%s\n" '                  -/'\'''\''     -#+++#:       /+///+#@#:  :#++++#-    '>> p_racc.txt
+	@printf "%s\n" '                   -@::: '\''/@+'\'' :++       --@@+/-'\''    :+####/     '>> p_racc.txt
+	@printf "%s\n" '                     +@:::/@/   -@/'\''      +@@/                   '>> p_racc.txt
+	@printf "%s\n" '                      /+-:-+#-'\''/@#/:'\'':-'\'''\'''\'''\'''\'':+                   '>> p_racc.txt
+	@printf "%s\n" '                       /+---#@##+/:::::::/#@-                    '>> p_racc.txt
+	@printf "%s\n" '                        :/@/----------@+-:'\''                      '>> p_racc.txt
+	@printf "%s\n" '                          '\''-+@@@#++@@-                           '>> p_racc.txt
+	@printf "%s\n" '                                '\'':'\''                              '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                    ::-@@        '>> p_racc.txt
+	@printf "%s\n" '                                                   '\''-:   @+      '>> p_racc.txt
+	@printf "%s\n" '                                                 -@--:'\''   +      '>> p_racc.txt
+	@printf "%s\n" '            +@-:                     :+#+:    :#@@::@@@:  @      '>> p_racc.txt
+	@printf "%s\n" '           @  :-@/:     /+#+-'\''     -+###+/-/##@+::/@/#-:/ #-     '>> p_racc.txt
+	@printf "%s\n" '             @-::#@#//--/+###@+/-+#@######@//@++--@- /#++  -     '>> p_racc.txt
+	@printf "%s\n" '           : :@##::+@/@@######@+@+++####+++++@+/+@-   #/+:-      '>> p_racc.txt
+	@printf "%s\n" '          ::/@#:+-/+++++++###+++@+++##++++++++++@/:   -@/@-      '>> p_racc.txt
+	@printf "%s\n" '            /// '\''#@+++++++++##////#@#+++++++++++@@#:'\'''\'':/@/       '>> p_racc.txt
+	@printf "%s\n" '           @+#: -#@+++++++++@##/#/#+##++++++++++@@@@@+@@//       '>> p_racc.txt
+	@printf "%s\n" '           :@###@@@++++++###+--+#+-:/+######++++++-::@////       '>> p_racc.txt
+	@printf "%s\n" '           ://@'\'':++++######+-       :+#@///+######++++++:/:'\''     '>> p_racc.txt
+	@printf "%s\n" '           --+++++###+++++++-:'\''   ::-#++++++++++++++++++--::'\''    '>> p_racc.txt
+	@printf "%s\n" '          ::-+++++++++++++#####- /@###@+++###########+++-::-     '>> p_racc.txt
+	@printf "%s\n" '          -:-++###########++#++#-#++##+####+/####++/##++-::::    '>> p_racc.txt
+	@printf "%s\n" '         :://++##-:#@+    @#+++#/##++#@  :      @#####///+--:-   '>> p_racc.txt
+	@printf "%s\n" '         :--++-          : @@@@ # @@@@                 -+---:-'\''  '>> p_racc.txt
+	@printf "%s\n" '        '\''//                     @'\''                  -      ///'\''  '>> p_racc.txt
+	@printf "%s\n" '        --:::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\''  '\''      @      ::  '\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':::++  '>> p_racc.txt
+	@printf "%s\n" '        -------::::@@#-+###+::/@/@/:::####+::#@@:::::-:-::::---/ '>> p_racc.txt
+	@printf "%s\n" '        :////-----@-+@+@@ #+##+@/@+##++#+#@@#+:/@@/--------///// '>> p_racc.txt
+	@printf "%s\n" '         :+++@@@@+--++++#++####+-+###--/ +++#/--@---////////+-'\''  '>> p_racc.txt
+	@printf "%s\n" '          -++@--#@@#+/+###++/#@/:/##+#+#####+#-/@@#++##@@+++:    '>> p_racc.txt
+	@printf "%s\n" '          -/+@--//++@#++/+##+###-###+###++//--#@@@@+  '\''##++-     '>> p_racc.txt
+	@printf "%s\n" '          :/++/:#//+++@##+##+##+++#####//++@@@+++//#  -@#+//'\''    '>> p_racc.txt
+	@printf "%s\n" '             '\'''\'' :+@@/+++##  @- @/@/@#+ ####++++///@- '\''@++++/     '>> p_racc.txt
+	@printf "%s\n" '                   /@///      #@+@# @   /+ +///@@+:  '\''+:::'\''      '>> p_racc.txt
+	@printf "%s\n" '                   /@@        #+#+#        //@+:                 '>> p_racc.txt
+	@printf "%s\n" '                    '\'''\'''\'''\''     @+::-++        @@#                  '>> p_racc.txt
+	@printf "%s\n" '                     /:::'\'''\''-/@/   -@/      '\'''\'''\''#                  '>> p_racc.txt
+	@printf "%s\n" '                       #@:::/++: :@@/'\''-:::::@:                   '>> p_racc.txt
+	@printf "%s\n" '                         @--:-##++#+::::@@#                      '>> p_racc.txt
+	@printf "%s\n" '                          #/----:------@:                        '>> p_racc.txt
+	@printf "%s\n" '                             :@@-/#@@@'\''                          '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '          @-@:                                     :@:/          '>> p_racc.txt
+	@printf "%s\n" '             :-@/  -+  #+/-'\''         '\''-/+#  #/  /@--             '>> p_racc.txt
+	@printf "%s\n" '           @@@::@@#-/+#+++##/:     :/###++#+//#@@::@@@           '>> p_racc.txt
+	@printf "%s\n" '          -:++@/::+@#@#++####@#/-/#@####++#@+@+::/@#/:-          '>> p_racc.txt
+	@printf "%s\n" '        @ //#-:@--++#//+@####+@+@+#+####@+//@++--#:-#/- @        '>> p_racc.txt
+	@printf "%s\n" '        # //+  :@+++@+++++###+++@+++###+++++@+++@:  #/-          '>> p_racc.txt
+	@printf "%s\n" '         @/@:  :+@++++++++++##+///###++++++++++@+:  -@/@         '>> p_racc.txt
+	@printf "%s\n" '         /@#---# @++++++++++@##/#/##@++++++++++@ #---#@-         '>> p_racc.txt
+	@printf "%s\n" '          /+@ @++@+++++####+/:-+#+-:/+####+++++@#:@ @//          '>> p_racc.txt
+	@printf "%s\n" '          /+++/@++##+////@#+:       :+#@////+##++@++++/          '>> p_racc.txt
+	@printf "%s\n" '         :-++++++++++++++++#-::   ::-#++++++++++++++++-:         '>> p_racc.txt
+	@printf "%s\n" '         --+++#####+++++++@####- -@###@++++++++####+++-: '\''       '>> p_racc.txt
+	@printf "%s\n" '        ::-+#@#+##########++#++#-#++#++##########+###+-::        '>> p_racc.txt
+	@printf "%s\n" '       :-+//+@###      '\''  @#++##/##++#@  '\''      ####+//+-:       '>> p_racc.txt
+	@printf "%s\n" '       :--##             : @@@@ # @@@@ -             #+--:       '>> p_racc.txt
+	@printf "%s\n" '       //              /        @'\''       -              //       '>> p_racc.txt
+	@printf "%s\n" '      +:::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\''-'\''  :       @       '\''  ::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':::+      '>> p_racc.txt
+	@printf "%s\n" '     ------:::/:::@@#::####-::/@/@/::/####::#@@:::--:::----+     '>> p_racc.txt
+	@printf "%s\n" '      ////------@@--#@#@'\''/#+##+@/@+##+#/ @#@#--@@------////      '>> p_racc.txt
+	@printf "%s\n" '       -++//////-/-++#+#+- ####+-+####  +#+#/+---//////++        '>> p_racc.txt
+	@printf "%s\n" '        +++@/-/#@@+/++####+++##/:/##+++####+#/+@@+/-+@+++        '>> p_racc.txt
+	@printf "%s\n" '         +#@- /+++##/+/+/+##+###-###+##+/+/+/@++++/ -@#+         '>> p_racc.txt
+	@printf "%s\n" '        ++/+@:/+//#@####++@#+##+++##+##++####@#//@/:@+/++        '>> p_racc.txt
+	@printf "%s\n" '           +@+-#@///++++##  @/+@/@ #@  ##++++///@#/#@+           '>> p_racc.txt
+	@printf "%s\n" '              ++#+#@//+ -   + #@+@# @  :- +//@#####              '>> p_racc.txt
+	@printf "%s\n" '                   +@         ###+#         @+                   '>> p_racc.txt
+	@printf "%s\n" '                  -          ++-:-++          :                  '>> p_racc.txt
+	@printf "%s\n" '                    ::'\'''\''/ -'\''/@-   /@/'\'': -'\'''\''::                    '>> p_racc.txt
+	@printf "%s\n" '                      @-::::/#@: :@#/::::-#                      '>> p_racc.txt
+	@printf "%s\n" '                        @-:::+##+##+:::-@                        '>> p_racc.txt
+	@printf "%s\n" '                         +------:-----//                         '>> p_racc.txt
+	@printf "%s\n" '                             #@+-+@+                             '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '           -@:                                     :@:           '>> p_racc.txt
+	@printf "%s\n" '             /-@/  +:  #+/-           -/+#  -+  +@-#             '>> p_racc.txt
+	@printf "%s\n" '           @@@::@@#/+##++++#/:     :/#++++#++/#@@::@@@           '>> p_racc.txt
+	@printf "%s\n" '           '\''/#@/::+@@@#++####@+/-/+@####++#@@@+::/@#-'\''           '>> p_racc.txt
+	@printf "%s\n" '        @  /-+-@--++@//+@####+@+@+@+####@+//@++--#-+-/ /#        '>> p_racc.txt
+	@printf "%s\n" '           /#: :@+++@+++++###+++@+++###+++++@+++#: :@/           '>> p_racc.txt
+	@printf "%s\n" '         @/@/  :+@++++++++++##/////##++++++++++@+:  /@/@         '>> p_racc.txt
+	@printf "%s\n" '          @@---# @++++++++++@##/#/##@++++++++++@ #--/@@          '>> p_racc.txt
+	@printf "%s\n" '          //@ @'\''@@+++++####+/-/+#+/-++####+++++@@-@ @//          '>> p_racc.txt
+	@printf "%s\n" '          /+++/+++##+////@#+-  '\'':'\''  -+#@////###++//+++/          '>> p_racc.txt
+	@printf "%s\n" '         ::++++++++++++++++#/::   ::/+++++++++++++++++::         '>> p_racc.txt
+	@printf "%s\n" '       : :-+++####++++++++@####-'\''/@###@+++++++++###+++-'\'' :       '>> p_racc.txt
+	@printf "%s\n" '         ::++##+##########++#++#/#++##+##########+#+#+::         '>> p_racc.txt
+	@printf "%s\n" '       ::++/+####      '\''  @#+++#/@+++#@  '\''      ####+/++:'\''       '>> p_racc.txt
+	@printf "%s\n" '       :--##:            : @@@@ # @#@@ -            -#+--'\''       '>> p_racc.txt
+	@printf "%s\n" '       //              -        @'\''       '\''              //       '>> p_racc.txt
+	@printf "%s\n" '      +::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\''::  '\''       @ '\''        -:'\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':::+      '>> p_racc.txt
+	@printf "%s\n" '     @-----::-::::@@@-:####/::/@+@/::/####:-@@@::::-:------@     '>> p_racc.txt
+	@printf "%s\n" '      ////------@@/-#@+@::@+##+@/@+##+@- @/@#-/@@------////      '>> p_racc.txt
+	@printf "%s\n" '        ++////+/--/+/#+##::####+-+####::##+#/+/-//+////++        '>> p_racc.txt
+	@printf "%s\n" '         ++@+//#@@+/#+####+++#@+:+@#/++####+#/+@@#//+@++         '>> p_racc.txt
+	@printf "%s\n" '         /#@/'\''/++++@++++++##+###/###+##++++++@++++-'\''/@#+         '>> p_racc.txt
+	@printf "%s\n" '        ++++@-/@//@@#+##++@##@@#+#@####++##+#@@//@--@++++        '>> p_racc.txt
+	@printf "%s\n" '           /@#/#@///++++##  @-:@/@ #@  ##++++///@#/#@-           '>> p_racc.txt
+	@printf "%s\n" '               #+##@//+  :  - #@+@# +  /  +//@##/#               '>> p_racc.txt
+	@printf "%s\n" '                   +@         ###+#         @+                   '>> p_racc.txt
+	@printf "%s\n" '                             ##---#+                             '>> p_racc.txt
+	@printf "%s\n" '                    #:'\'''\'''\'''\''  /@/   /@/  '\'''\'''\'''\'':@                    '>> p_racc.txt
+	@printf "%s\n" '                       @::::/+#- -#+/::::@                       '>> p_racc.txt
+	@printf "%s\n" '                        @--::+#####/::--@                        '>> p_racc.txt
+	@printf "%s\n" '                          @-----------@                          '>> p_racc.txt
+	@printf "%s\n" '                              @@-@@                              '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '           +-:                                     :/+           '>> p_racc.txt
+	@printf "%s\n" '          -  @-@   +    '\''               '\''    +   @-@  +          '>> p_racc.txt
+	@printf "%s\n" '         @ #:::-@@#+####++@#/::'\'''\'''\''::/#@++###++#@@-:::# @         '>> p_racc.txt
+	@printf "%s\n" '         :  -@@/::/@@@#++####@+/-/+@####++#@@@/::/@@-'\'' -         '>> p_racc.txt
+	@printf "%s\n" '         @ /-#/@--+#@//#@#####@#@+@#####@#//@#+--#-#-/ @         '>> p_racc.txt
+	@printf "%s\n" '           /@/:-@+/+@+++++###+++@+++###+++++@+/+#-:/@/           '>> p_racc.txt
+	@printf "%s\n" '         @:@#:'\'':/@++++++++++##/////##+++++++++#@/:'\'':##:@         '>> p_racc.txt
+	@printf "%s\n" '          @@+--+ @++++++++++@##/#/##@++++++++++@ +--+@@          '>> p_racc.txt
+	@printf "%s\n" '          //@ @@ @++++++####+//###//+####++++++# @@-@//          '>> p_racc.txt
+	@printf "%s\n" '          /+/+--+++##++//##+-:::-:::-+##//+###+++-/+/+/          '>> p_racc.txt
+	@printf "%s\n" '          :-++++++++++++++++/-:'\'''\''::-/++++++++++++++++-:          '>> p_racc.txt
+	@printf "%s\n" '        '\'''\''--++##++++++++++@####/:/####@+++++++++###++--'\'':        '>> p_racc.txt
+	@printf "%s\n" '         ::++#############++#++#/#++#++############+++::         '>> p_racc.txt
+	@printf "%s\n" '        :++/++###  ::     @#++##+@+++#@     ::  ###++/++:        '>> p_racc.txt
+	@printf "%s\n" '       '\''--+++            - @@@@ # @/@@ :            +#/--        '>> p_racc.txt
+	@printf "%s\n" '       :/:                      @:                     :/        '>> p_racc.txt
+	@printf "%s\n" '      /::::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':          @ '\''        :'\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':::--      '>> p_racc.txt
+	@printf "%s\n" '      -------:::::@@@/:####+::/@+@/::+####:/@@@:::::-------      '>> p_racc.txt
+	@printf "%s\n" '      -////------@+/#@+@@ ####+@+@+###@ #@+@#/#@------////-      '>> p_racc.txt
+	@printf "%s\n" '        +++//+@#/-++/#++#/+#@##+/+##@#+/#++#//+-/#@+//+++        '>> p_racc.txt
+	@printf "%s\n" '         ++@#//#@@#+#+####++/#@+-+@#/++####+#+#@@+//#@++         '>> p_racc.txt
+	@printf "%s\n" '         +###:-/+++@##++++##+###/+##+##++++##@+++/--#+#+         '>> p_racc.txt
+	@printf "%s\n" '         ++/@+-@//+@++##++#@#@@###@@#@#++##++@+//@-+@/++         '>> p_racc.txt
+	@printf "%s\n" '            +@++@@//++++##  @- @/@ #@'\'' ##++++//@@##@+            '>> p_racc.txt
+	@printf "%s\n" '               # @#@@/+  +    ##+@#    -  +/@@#@ +               '>> p_racc.txt
+	@printf "%s\n" '                   +@         @####        :@+                   '>> p_racc.txt
+	@printf "%s\n" '                   :'\''       '\''@#---#@        '\''-                   '>> p_racc.txt
+	@printf "%s\n" '                    #:::'\''+'\'':/@+:'\'':+@/-'\''+'\'':::+                    '>> p_racc.txt
+	@printf "%s\n" '                      #@::::/+#/:/#+/:::-@#                      '>> p_racc.txt
+	@printf "%s\n" '                        :@--::#@@##::--@                         '>> p_racc.txt
+	@printf "%s\n" '                          @----------/@                          '>> p_racc.txt
+	@printf "%s\n" '                               @@#                               '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '           @                                         #           '>> p_racc.txt
+	@printf "%s\n" '          @- +:                                   :: #@          '>> p_racc.txt
+	@printf "%s\n" '             '\'':-@#++### ++#+--:: ::-/+#++'\''###++#@-:'\''             '>> p_racc.txt
+	@printf "%s\n" '         @  '\''@@:/-/####++###@#/---/#@###++####/-/:@@'\''  +         '>> p_racc.txt
+	@printf "%s\n" '         @ /@-+##--+@/#@######@@#@@######@+/@+--##+-#/ @         '>> p_racc.txt
+	@printf "%s\n" '         @ +/#--#-/+#+++++###+++@+++###+++++++/-#--@/+ @         '>> p_racc.txt
+	@printf "%s\n" '          -/@/::/@@+++++++++#///////#+++++++++@@/::+@//          '>> p_racc.txt
+	@printf "%s\n" '          #@#/-/#@@+++++++++#@#/#/#@#+++++++++@@#/-/#@/          '>> p_racc.txt
+	@printf "%s\n" '           /@@@@+ +++++++###+/+###+/+###++++++#:@@@@@/           '>> p_racc.txt
+	@printf "%s\n" '          :////-@@++#######+/---/-:-/+#######++@+-+///           '>> p_racc.txt
+	@printf "%s\n" '           :+++++++++++++++++--:::--++#++++++++++++++:           '>> p_racc.txt
+	@printf "%s\n" '        ::--++++++++++++++#@###/-/###@#++++++++++++++--:'\''        '>> p_racc.txt
+	@printf "%s\n" '         '\'':-+#@############+#++#/#++#++###########@++-:          '>> p_racc.txt
+	@printf "%s\n" '        :-+/++@##  /+/    @#+++#+##++#@    /+/ '\''##@+//+-:        '>> p_racc.txt
+	@printf "%s\n" '       '\'':--++'\''           '\'' @@/@ # @'\''@#             :+#--:'\''       '>> p_racc.txt
+	@printf "%s\n" '        //    :                 @-  :             :    //        '>> p_racc.txt
+	@printf "%s\n" '       +:::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\''  :    '\'' @ '\''    :  '\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':::+       '>> p_racc.txt
+	@printf "%s\n" '      /-----:::-::@@@#-+####::/@#@/::####/-#@@+::/::------+      '>> p_racc.txt
+	@printf "%s\n" '       ////------@@/#@+@@ /###+@+@+###+ @@+@#/@@------////       '>> p_racc.txt
+	@printf "%s\n" '         +++/#@@+-@//+++#++#@@#+++@@@#++#+++//@-#@@#/+++         '>> p_racc.txt
+	@printf "%s\n" '         /++@+/+@@@##+####++/+@#/##++++####+##@@@+/+@++-         '>> p_racc.txt
+	@printf "%s\n" '         ++#@/-#/+++@#++++##+++++/+#+##++++#@+++/#-+@#++         '>> p_racc.txt
+	@printf "%s\n" '         /+++@/#+//@++@####@#@@###@@#@####@++@//##/@+++/         '>> p_racc.txt
+	@printf "%s\n" '             @##@@@//+++##- @  @/@ -@'\''/##+++//@@@##@             '>> p_racc.txt
+	@printf "%s\n" '                # ##@///   :  #+++#  :   +//@#+ +                '>> p_racc.txt
+	@printf "%s\n" '                    @@    :   @#@+@   :    @@                    '>> p_racc.txt
+	@printf "%s\n" '                   #'\'''\'' '\''    /@+---+@/    '\'' '\'''\''+                   '>> p_racc.txt
+	@printf "%s\n" '                     @:::'\''+'\''/@#-:-#@/'\''/'\'':::@                     '>> p_racc.txt
+	@printf "%s\n" '                       @@::::+#+/+#+::::@@                       '>> p_racc.txt
+	@printf "%s\n" '                         @----+@-@+----@                         '>> p_racc.txt
+	@printf "%s\n" '                           @+-------#@                           '>> p_racc.txt
+	@printf "%s\n" '                                /                                '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                  :              '>> p_racc.txt
+	@printf "%s\n" '            '\''+:                                   :-'\''            '>> p_racc.txt
+	@printf "%s\n" '          @   @-@#/ ##  +##+::-- -- -+##+  @# /#@-@  '\''@          '>> p_racc.txt
+	@printf "%s\n" '          @  @@::+@@####+###@+//-//+@###+####@@+::@@  @          '>> p_racc.txt
+	@printf "%s\n" '          # :-@@#::+@/@@######@@#@@######@@/@+::@@@-: @          '>> p_racc.txt
+	@printf "%s\n" '            +@+/#-/+#/+++@###+++@+++###@+++/++//#/#@+            '>> p_racc.txt
+	@printf "%s\n" '          @:@@/-/@@++++++++##++/#/++##++++++++@@/-/@@:@          '>> p_racc.txt
+	@printf "%s\n" '           @@+//#@@++++++++++@#/#+#@++++++++++@@#//+@@           '>> p_racc.txt
+	@printf "%s\n" '           /@@@@@@@+++++++###+##/#++###+++++++@@@@@@@/           '>> p_racc.txt
+	@printf "%s\n" '            //@::++++#######+--///--+#######++++::@//            '>> p_racc.txt
+	@printf "%s\n" '            ++++++###++++++++-------#+#+++++###+++++/            '>> p_racc.txt
+	@printf "%s\n" '         ::-/+++++++++++++#@###/-/###@++++++++++++++--::         '>> p_racc.txt
+	@printf "%s\n" '          ::++#############+#++#+#+++++############++::          '>> p_racc.txt
+	@printf "%s\n" '         :++/####-:#@@    @#+++++++++#@    @@#'\''/###+/++:         '>> p_racc.txt
+	@printf "%s\n" '       ::--++#             #@ @ @ @ @/             +++--:'\''       '>> p_racc.txt
+	@printf "%s\n" '         /:                 -  :@/  -                 -/         '>> p_racc.txt
+	@printf "%s\n" '       -::::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':  '\''    '\'' @         ::'\'''\'''\'''\'''\'''\'''\'''\'''\'':::-        '>> p_racc.txt
+	@printf "%s\n" '       --------::::@@@/-####::/@#@/::####:/@@@::::--------       '>> p_racc.txt
+	@printf "%s\n" '        ////-----+@+#@+@@  @##+@#@+##@  @@+@#+@/-----////        '>> p_racc.txt
+	@printf "%s\n" '         +++/@@@@/-+@+++#++#@@@++#@@##++#+++@+-/@@@@++++         '>> p_racc.txt
+	@printf "%s\n" '          ++@#++@@@@######+++#+#/#/#+++######@@@@++#@++          '>> p_racc.txt
+	@printf "%s\n" '          /##@/#//++@@#+++###@#/#/#@###+++#@@+++/+/@#+/          '>> p_racc.txt
+	@printf "%s\n" '          /++@#+@///+++####@#@@@/@@@#@####+++///@+#@++/          '>> p_racc.txt
+	@printf "%s\n" '              @@@@@@/+/++#  @  @+@  @  #+/++/@@@@@@              '>> p_racc.txt
+	@printf "%s\n" '                  '\''#@#/       #+++#       /@@#                   '>> p_racc.txt
+	@printf "%s\n" '                   +@@    '\''  /#+#+#:  '\''    @@+                   '>> p_racc.txt
+	@printf "%s\n" '                    +'\'''\'''\'''\''   /@+---#@/ '\'' :'\'''\'''\''#                    '>> p_racc.txt
+	@printf "%s\n" '                      @:::::/@#/-/@@/:::::@                      '>> p_racc.txt
+	@printf "%s\n" '                        @+:::+##+##+:::/@                        '>> p_racc.txt
+	@printf "%s\n" '                          @----::-----@                          '>> p_racc.txt
+	@printf "%s\n" '                             @@/-/@@                             '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '            @@                                     @@            '>> p_racc.txt
+	@printf "%s\n" '           @   -@/  #  :@#:           :#@   #  +@-   #           '>> p_racc.txt
+	@printf "%s\n" '             @:::@@@##@####@#+/////+#@#######@@@:/:@             '>> p_racc.txt
+	@printf "%s\n" '            ::@@+::/@@@@#####@@###@@#####@@@@/::#@@'\'':            '>> p_racc.txt
+	@printf "%s\n" '          @ +@#+@/-++#//+@###+++@+++###@++/@++-##+#@+ @          '>> p_racc.txt
+	@printf "%s\n" '          : +/#//@@++@+++++##+++@+++##+++++@++@#//#/+            '>> p_racc.txt
+	@printf "%s\n" '           @+@+/+@@++++++++++@#/#/#@++++++++++@#+/+@#@           '>> p_racc.txt
+	@printf "%s\n" '           /@@@@@ @++++++++####///####++++++++@ @@@@@'\''           '>> p_racc.txt
+	@printf "%s\n" '            //@'\'':@@+++######+//+++//+######+++@#:'\''@//            '>> p_racc.txt
+	@printf "%s\n" '            -+++++####++++#++///-///+##++++####+++++-            '>> p_racc.txt
+	@printf "%s\n" '          ::-++++++++++++++@###+/+###@++++++++++++++-::          '>> p_racc.txt
+	@printf "%s\n" '           :-++############++#+#+#+#+++###########++-:           '>> p_racc.txt
+	@printf "%s\n" '          :+/#+@##-@@@    @##+++++++##@    @@@:##@+#/+:          '>> p_racc.txt
+	@printf "%s\n" '        ::--++/            -@ @ @ @-@'\''            +++--::        '>> p_racc.txt
+	@printf "%s\n" '         //                 :  -@/                    //         '>> p_racc.txt
+	@printf "%s\n" '        +:::'\'''\'''\'''\'''\'''\'''\'''\'''\'':'\''         @     '\'''\''  ::'\'''\'''\'''\'''\'''\'''\'''\'''\'':::+        '>> p_racc.txt
+	@printf "%s\n" '       @-------:-::@@@#/####::/@@@/::####/#@@@::-:-------@       '>> p_racc.txt
+	@printf "%s\n" '        -////-----@##@++@  @###@#####@  @/+@##@-----////-        '>> p_racc.txt
+	@printf "%s\n" '          +++@@@@@/##/++#++#+@@###@@+#++#+++##/@@@@@+++          '>> p_racc.txt
+	@printf "%s\n" '           ++@++@@@@##+####++++@+@++++####+##@@@@++@++           '>> p_racc.txt
+	@printf "%s\n" '         : /#@#+#/++#@@##+#@@@@/#/@@@@#+##@@+++/@+#@#/ -         '>> p_racc.txt
+	@printf "%s\n" '           +++@#@@//+++####@@@@@/@@@@@###++++//@@#@+++           '>> p_racc.txt
+	@printf "%s\n" '               @@@@@+/+ +#  @ -@+@+ /  ++ +/#@@@@#               '>> p_racc.txt
+	@printf "%s\n" '                   #@@/       #+#+#       /@@#                   '>> p_racc.txt
+	@printf "%s\n" '                   :::     '\'' +#####+ '\''     ::                    '>> p_racc.txt
+	@printf "%s\n" '                     ::'\'''\''   /@#///#@/   '\'''\''::                     '>> p_racc.txt
+	@printf "%s\n" '                       @::::/+@+/+@+/::::@                       '>> p_racc.txt
+	@printf "%s\n" '                         @--::##@##::--@                         '>> p_racc.txt
+	@printf "%s\n" '                          @/---------/@                          '>> p_racc.txt
+	@printf "%s\n" '                               @@#                               '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '            :  :                                 :  +            '>> p_racc.txt
+	@printf "%s\n" '           @  '\''@-@@@@@@#-#@@#+++/+++#@@#-#@@@@@@-@'\''  @           '>> p_racc.txt
+	@printf "%s\n" '           - '\''@@+/:/@@@@#####@@###@@#####@@@@/:/#@@'\'' -           '>> p_racc.txt
+	@printf "%s\n" '           @ /-@@@-/#@//@#####@+@+@#####@//@+/-@@@-/ @           '>> p_racc.txt
+	@printf "%s\n" '             /@++@@++@+++++##+++@+++##+++++@++@@++@/             '>> p_racc.txt
+	@printf "%s\n" '           @-@#++#@@++++++++#@#///#@#++++++++@@#++#@--           '>> p_racc.txt
+	@printf "%s\n" '            #@@@@@#+++++++++##@/+/@##++++++++#/@@@@@+            '>> p_racc.txt
+	@printf "%s\n" '            //@ '\'':@++++######++###++######++++@- '\''@//            '>> p_racc.txt
+	@printf "%s\n" '            -+++++####+///@##+/////+##@//++####+++++:            '>> p_racc.txt
+	@printf "%s\n" '           :-++++++++++++++####+++####++++++++++++++-:           '>> p_racc.txt
+	@printf "%s\n" '           :-++############++#+###+#++############++-:           '>> p_racc.txt
+	@printf "%s\n" '          :-+++@##/@@@-  '\''@##+++#+++##@   +@@@-###+++-:          '>> p_racc.txt
+	@printf "%s\n" '         :--///            '\''@+@ @ @@@            '\''///--:         '>> p_racc.txt
+	@printf "%s\n" '          /-   '\''               -@-               :   //          '>> p_racc.txt
+	@printf "%s\n" '         /:::'\'''\'''\'''\'''\'''\'''\'''\'''\'':  :-     @   '\'' -:  :'\'''\'''\'''\'''\'''\'''\'''\'''\'':::/         '>> p_racc.txt
+	@printf "%s\n" '        ---------::@@@@+####-:/@@@/:/####+@@@+:::--------        '>> p_racc.txt
+	@printf "%s\n" '         /////----@@#@+#@@ @@##@@###@@ #@#+@#@@----/////         '>> p_racc.txt
+	@printf "%s\n" '          /++@@@@@@@#+#+#++#+@@###@@+#++++#+#@@@@@@#++:          '>> p_racc.txt
+	@printf "%s\n" '           ++@##@@@@@@+####++++@#@#+++####+@@@@@##@@++           '>> p_racc.txt
+	@printf "%s\n" '          -/+#@#@//++@@####@@@@#@@@@@@####@@++//@#@#//-          '>> p_racc.txt
+	@printf "%s\n" '            ++@@@@///+++###-@@:@/@ @@ ###+++///@@@@++            '>> p_racc.txt
+	@printf "%s\n" '                @@@@@//+      #@+@#      +//@@@@@                '>> p_racc.txt
+	@printf "%s\n" '                    @@        #####        @@                    '>> p_racc.txt
+	@printf "%s\n" '                    :      '\'' +@###@+ '\''      -                    '>> p_racc.txt
+	@printf "%s\n" '                     @::'\'''\'''\'':/@#+/+#@/'\'''\'''\'''\''::@                     '>> p_racc.txt
+	@printf "%s\n" '                       @@::::+##+##+::::@@                       '>> p_racc.txt
+	@printf "%s\n" '                         @---:+@@@+:---#                         '>> p_racc.txt
+	@printf "%s\n" '                           @#-------#@                           '>> p_racc.txt
+	@printf "%s\n" '                                -                                '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '               :                                 :               '>> p_racc.txt
+	@printf "%s\n" '              -:                                 :--             '>> p_racc.txt
+	@printf "%s\n" '               :-@@@ @@ :#@@# ## +# #@@#  @@ @@@-'\''               '>> p_racc.txt
+	@printf "%s\n" '           @  @@#-:/@@@@####@@@###@@@####@@@@/:-@@@  @           '>> p_racc.txt
+	@printf "%s\n" '           @ /-@@@--+@/@@#####@@@#@#####@@/@#--@@@-/ @           '>> p_racc.txt
+	@printf "%s\n" '           @ +@@#@@++#++++###+++@+++###++++#++@@#@@+ @           '>> p_racc.txt
+	@printf "%s\n" '            #/@###@@++++++++#@/////@#++++++++@@###@/@            '>> p_racc.txt
+	@printf "%s\n" '            /@@@@@'\''@+++++++++#@/#/@++++++++++@ @@@@@/            '>> p_racc.txt
+	@printf "%s\n" '             /@@'\'' ++++++#####++###++#####++++#+  @@/             '>> p_racc.txt
+	@printf "%s\n" '             /+++++###+///@##+++++++##@///+###+++++/             '>> p_racc.txt
+	@printf "%s\n" '           ::-+++++++++++++#####+#####+++++++++++++-::           '>> p_racc.txt
+	@printf "%s\n" '            :-++###########+##+###+#++###########++-:            '>> p_racc.txt
+	@printf "%s\n" '           ://++##/@@@@  :###+++#+++###   @@@@-###+//:           '>> p_racc.txt
+	@printf "%s\n" '         ::--///            @@@ @ @@@            ///--::         '>> p_racc.txt
+	@printf "%s\n" '          -/            -      /@:      /            /-          '>> p_racc.txt
+	@printf "%s\n" '         +:::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\''  '\'': :   @   -  '\''  '\'''\'''\'''\'''\'''\'''\'''\'''\''::::+         '>> p_racc.txt
+	@printf "%s\n" '        #--------:::@@@#@###/:/@@@/:+#####@@@::---------@        '>> p_racc.txt
+	@printf "%s\n" '          ////-----@@@##@@ @@@##@+#@@@ @@##@@@-----////          '>> p_racc.txt
+	@printf "%s\n" '           ++#@@@@@/@+#++++##@@@@@@@##++++#+@/@@@@@+++           '>> p_racc.txt
+	@printf "%s\n" '            #@@#@@@@@@@####+++#@#@#+++####@@@@@@@#@##            '>> p_racc.txt
+	@printf "%s\n" '          ///+@@@//++@@####@@@@@@@@@@@####@@++//@@@+//-          '>> p_racc.txt
+	@printf "%s\n" '             +#@@@@//+++##+ @@ @/@ @@ ###+++//@@@@++             '>> p_racc.txt
+	@printf "%s\n" '                +@@@@#/+ :    #@+@/    - +/@@@@@/                '>> p_racc.txt
+	@printf "%s\n" '                    @@#       #####       @@#                    '>> p_racc.txt
+	@printf "%s\n" '                    @'\''       +@###@+       '\''@                    '>> p_racc.txt
+	@printf "%s\n" '                      @::'\'':'\''/@@#+#@@/'\'':'\''::@                      '>> p_racc.txt
+	@printf "%s\n" '                        @@:::+####++:::@@                        '>> p_racc.txt
+	@printf "%s\n" '                          @----/:/:---@                          '>> p_racc.txt
+	@printf "%s\n" '                            -@+---+@-                            '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '             @/'\''                                  /@             '>> p_racc.txt
+	@printf "%s\n" '               '\''-@@# @/ #@@@+ @@ #@ #@@@# +@ #@@-'\''               '>> p_racc.txt
+	@printf "%s\n" '           -  @@@:-@@@@@####@@@@@@@@@####@@@@@-:@@@              '>> p_racc.txt
+	@printf "%s\n" '           / /:@@@:-+@/@@#####@@@@@#####@@/@+-:@@#-/ '\''           '>> p_racc.txt
+	@printf "%s\n" '           : +#@@@@+++++++###+++@+++###+++++++@@@@++             '>> p_racc.txt
+	@printf "%s\n" '            @/@@@@@@++++++++##/////##++++++++@@@@@@/@            '>> p_racc.txt
+	@printf "%s\n" '            /@@@@@ @+++++++++#@/#/@#+++++++++@ @@@@@-            '>> p_racc.txt
+	@printf "%s\n" '             /@@-@@@++++#################++++@@@:@@/             '>> p_racc.txt
+	@printf "%s\n" '             /+++@+###////@###########@///+###+@+++/             '>> p_racc.txt
+	@printf "%s\n" '           ::-++++++++++++++@#######@++++++++++++++-:            '>> p_racc.txt
+	@printf "%s\n" '            :-++##############+#@@+##############++-:            '>> p_racc.txt
+	@printf "%s\n" '           :-+#+@#/@@@@  :###+++#+++###:  @@@@/#@+#+-:           '>> p_racc.txt
+	@printf "%s\n" '          :--///            @@@ @ @@@            ///--:          '>> p_racc.txt
+	@printf "%s\n" '          -/            /      /@:      -            /-          '>> p_racc.txt
+	@printf "%s\n" '         +::::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\''    -   @   /    '\'''\'''\'''\'''\'''\'''\'''\'''\'''\''::::/         '>> p_racc.txt
+	@printf "%s\n" '         ---------::@@@@####+:/@@@/:#####@@@@::---------         '>> p_racc.txt
+	@printf "%s\n" '          /////----@@@##@@ @@@@#@##@@@ @@##@@@----/////          '>> p_racc.txt
+	@printf "%s\n" '           +++@@@@@/@@##+++##@@@@@@@##+++##@@/@@@@@+++           '>> p_racc.txt
+	@printf "%s\n" '            ++@@@@@@@@@####+++#@@@#+++####@@@@@@@@@++            '>> p_racc.txt
+	@printf "%s\n" '           +++@@@@/++@@####@@@@@@@@@@@####@@++/@@@@+++           '>> p_racc.txt
+	@printf "%s\n" '             :+@@@@//+++### @@ @/@ @@ ##++++//@@@@+:             '>> p_racc.txt
+	@printf "%s\n" '                 @-@@@/+      #@+@-      //@@@'\''@                 '>> p_racc.txt
+	@printf "%s\n" '                     @@       #####       @@                     '>> p_racc.txt
+	@printf "%s\n" '                     '\'''\'' '\''    @@#@#@#    : '\'''\''                     '>> p_racc.txt
+	@printf "%s\n" '                      +:::'\''/-@@@#@@@:/'\'':::/                      '>> p_racc.txt
+	@printf "%s\n" '                        #-:::++@@@++:::-+                        '>> p_racc.txt
+	@printf "%s\n" '                          @----::-----@                          '>> p_racc.txt
+	@printf "%s\n" '                             '\''@@-@@                              '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '             @+                                   /-             '>> p_racc.txt
+	@printf "%s\n" '               '\''-@@/ @  #@@@- @@ @@ /@@@# :@ +@@-'\''               '>> p_racc.txt
+	@printf "%s\n" '              @@@:/@@@@@####@@@@@@@@@####@@@@@/:@@#              '>> p_racc.txt
+	@printf "%s\n" '             /-#@@:-+@/@@#####@@@@@#####@@/@+-:@@+--             '>> p_racc.txt
+	@printf "%s\n" '             /+@@@@+++++++###+++@+++###++++#++@@@@//             '>> p_racc.txt
+	@printf "%s\n" '            @/@@@@@@++++++++##/////##++++++++@@@@@@/@            '>> p_racc.txt
+	@printf "%s\n" '            -@@@@@ @+++++++++#@/#/@#+++++++++@ @@@@@             '>> p_racc.txt
+	@printf "%s\n" '             /@@-@@@+++++########@#######++++@+@:@@/             '>> p_racc.txt
+	@printf "%s\n" '             /+++@+###////@####@@@####@////###+#+++/             '>> p_racc.txt
+	@printf "%s\n" '            :-++++++++++++++@#@@@@@#@++++++++++++++-:            '>> p_racc.txt
+	@printf "%s\n" '            :-++##############+@@@+##############++-:            '>> p_racc.txt
+	@printf "%s\n" '           ::+#+@@/@@@@  :###++##+++###:  @@@@/@@+#+::           '>> p_racc.txt
+	@printf "%s\n" '          :--///            @@@ @ @@@           '\''///--:          '>> p_racc.txt
+	@printf "%s\n" '          :/            /      -@: :    :           '\''/           '>> p_racc.txt
+	@printf "%s\n" '         /::::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\''    -   @   /    '\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':::::         '>> p_racc.txt
+	@printf "%s\n" '         ---------::@@@@#@###:/@@@/:###@#@@@@::---------         '>> p_racc.txt
+	@printf "%s\n" '          /////----@@@##@@ @@@@#@##@@@ @@##@@@----/////          '>> p_racc.txt
+	@printf "%s\n" '           +++@@@@@+@@##+++##@@@@@@###+++##@@#@@@@@+++           '>> p_racc.txt
+	@printf "%s\n" '            ++@@@@@@@@@####+++#@@@#+++####@@@@@@@@@+/            '>> p_racc.txt
+	@printf "%s\n" '           ++/@@@@/++@@####@@@@@@@@@@@###@@@+//@@@@/++           '>> p_racc.txt
+	@printf "%s\n" '              +@@@@///+++## @@ @/@ @@ ##+++///@@@@+              '>> p_racc.txt
+	@printf "%s\n" '                 @ @@@//      +@+@-      //@@@ @                 '>> p_racc.txt
+	@printf "%s\n" '                     @@       ##@##       @@                     '>> p_racc.txt
+	@printf "%s\n" '                     '\'''\'' '\''    @@@@@@@    : '\'''\''                     '>> p_racc.txt
+	@printf "%s\n" '                      :-:::--@@@@@@@-:'\''::/                       '>> p_racc.txt
+	@printf "%s\n" '                        :-:::++@@@++:::/                         '>> p_racc.txt
+	@printf "%s\n" '                          @-----:-----@                          '>> p_racc.txt
+	@printf "%s\n" '                              @@-@@                              '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '             @-:                                 '\''-@             '>> p_racc.txt
+	@printf "%s\n" '               '\''-@@@ @# #@@@@ @@ #@ @@@@+ #@ @@@-'\''               '>> p_racc.txt
+	@printf "%s\n" '           #  @@@:-@@@@@####@@@@@@@@@####@@@@@-:@@@  -           '>> p_racc.txt
+	@printf "%s\n" '           @ /:@@@--+@/@@#####@@@@@#####@@/@+--@@@:/ @           '>> p_racc.txt
+	@printf "%s\n" '           @ +@@@@@+++++++###+++@+++###+++++++@@@@#+ -           '>> p_racc.txt
+	@printf "%s\n" '            @/@@@@@@++++++++#@/////@#++++++++@@@@@@/@            '>> p_racc.txt
+	@printf "%s\n" '            /@@@@@ @+++++++++#@/#/@#+++++++++@ @@@@@/            '>> p_racc.txt
+	@printf "%s\n" '             /@@:-#@++++#################++++@@#'\''@@/             '>> p_racc.txt
+	@printf "%s\n" '             /+++@+###+///@####@@@####@///+###+@+++/             '>> p_racc.txt
+	@printf "%s\n" '           ::-++++++++++++++@#@@@@@#@++++++++++++++-::           '>> p_racc.txt
+	@printf "%s\n" '            :-++###########+##+@@@+##############++-:            '>> p_racc.txt
+	@printf "%s\n" '           :-/#+@@/@@@@  :###+++#+++###'\''  @@@@/@@++/-:           '>> p_racc.txt
+	@printf "%s\n" '         ::--///            @@@ @ @@@            ///--:          '>> p_racc.txt
+	@printf "%s\n" '          -/            /      /@:      /            /-          '>> p_racc.txt
+	@printf "%s\n" '         +::::'\'''\'''\'''\'''\'''\'''\'''\'''\''  '\''  -   @   /    '\'''\'''\'''\'''\'''\'''\'''\'''\'''\''::::+         '>> p_racc.txt
+	@printf "%s\n" '        +---------::@@@@#@##+:/@@@/:###@#@@@@:::--------'\''        '>> p_racc.txt
+	@printf "%s\n" '          /////----@@@##@@ @@@@#@##@@@ @@##@@@----/////          '>> p_racc.txt
+	@printf "%s\n" '           +++@@@@@/@@##+++##@@@@@@@##+++##@@/@@@@@+++           '>> p_racc.txt
+	@printf "%s\n" '            ++@@@@@@@@@####+++#@@@#+++####@@@@@@@@@++            '>> p_racc.txt
+	@printf "%s\n" '           +++@@@#/++@@####@@@@@@@@@@@####@@++/@@@@+++           '>> p_racc.txt
+	@printf "%s\n" '             /+@@@@//+++##+ @@ @/@ @@ ###+++//@@@@+/             '>> p_racc.txt
+	@printf "%s\n" '                 @#@@@/+      #@+@/      +/@@@+@                 '>> p_racc.txt
+	@printf "%s\n" '                     @@       #####       @@                     '>> p_racc.txt
+	@printf "%s\n" '                    -'\'''\''      #@@@@@#    '\'' '\'''\''                     '>> p_racc.txt
+	@printf "%s\n" '                      @:::'\''/-@@@@@@@:/'\'':::@                      '>> p_racc.txt
+	@printf "%s\n" '                        @#:::++@@@++:::+@                        '>> p_racc.txt
+	@printf "%s\n" '                          @----:::----@                          '>> p_racc.txt
+	@printf "%s\n" '                             +@+-+@/                             '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                 :               '>> p_racc.txt
+	@printf "%s\n" '             '\'' :                                 : '\''             '>> p_racc.txt
+	@printf "%s\n" '           @  '\''@-@@@@@@# #@@@@@@-@@@@@@# @@@@@@@-+'\''  #           '>> p_racc.txt
+	@printf "%s\n" '           / :@@+/:/@@@@@####@@@@@@@####@@@@@/:/#@@: +           '>> p_racc.txt
+	@printf "%s\n" '           @ /-@@@--#@//@#####@#@+@#####@//@#--@@@-/ @           '>> p_racc.txt
+	@printf "%s\n" '           '\'' /@@@@@++@+++++##+++@+++##+++++@++@@@@@/ /           '>> p_racc.txt
+	@printf "%s\n" '           '\''-@@@@@@@++++++++#@+///+@#++++++++@@@@@@+/            '>> p_racc.txt
+	@printf "%s\n" '            +@@@@@+@++++++++##@/#/@##++++++++@:@@@@@/            '>> p_racc.txt
+	@printf "%s\n" '            //@:'\''#@++++########@#@########++++#+ /@/:            '>> p_racc.txt
+	@printf "%s\n" '             ++++++###++//@@###@@@####@///+####+++++             '>> p_racc.txt
+	@printf "%s\n" '           :-/+++++++++++++#@#@@@@@#@#+++++++++++++--:           '>> p_racc.txt
+	@printf "%s\n" '           :-++#############+#+@@@+#+############+++:'\''           '>> p_racc.txt
+	@printf "%s\n" '          :-+/+#@@/@@@+  '\''@##+++#+++##@   #@@@-@@#+/+-:          '>> p_racc.txt
+	@printf "%s\n" '         ::-///-            @#@ @ @@@            -///-::         '>> p_racc.txt
+	@printf "%s\n" '          //   '\''               -@-      :        '\''   //          '>> p_racc.txt
+	@printf "%s\n" '         +:::'\'''\'''\'''\'''\'''\'''\'''\'''\'':  :-     @   : ::  :'\'''\'''\'''\'''\'''\'''\'''\''::::+         '>> p_racc.txt
+	@printf "%s\n" '        ---------::/@@@+@###/:/@@@/:/###@+@@@-::---------        '>> p_racc.txt
+	@printf "%s\n" '         /////----#@@@##@@ @@@#@@##@@@ @@##@@@+----/////         '>> p_racc.txt
+	@printf "%s\n" '           ++#@@@@@@@+#++++#+@@@@@@@+#++++#+@@@@@@@#++           '>> p_racc.txt
+	@printf "%s\n" '           ++@@@@@@@@@#####+++#@@@#+++#####@@@@@@@@@++           '>> p_racc.txt
+	@printf "%s\n" '          ++/#@@@//++@@####@@@@@@@@@@@####@@++//@@@+/++          '>> p_racc.txt
+	@printf "%s\n" '            ++@@@@///+++### @@ @/@ @@ ###+++///@@@@+/            '>> p_racc.txt
+	@printf "%s\n" '                @-@@@//+      #@+@+      +//@@@:@                '>> p_racc.txt
+	@printf "%s\n" '                    @@        #####       :@@                    '>> p_racc.txt
+	@printf "%s\n" '                    #        +@@@@@+       '\''@                    '>> p_racc.txt
+	@printf "%s\n" '                     -:::'\'': /@@@@@@@/ -'\'':::'\''                     '>> p_racc.txt
+	@printf "%s\n" '                       #@::::+#@@@#+:::-@+                       '>> p_racc.txt
+	@printf "%s\n" '                          +---+@+@+---@                          '>> p_racc.txt
+	@printf "%s\n" '                           :@-------@                            '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                 @@              '>> p_racc.txt
+	@printf "%s\n" '            '\''                                 @-:  -             '>> p_racc.txt
+	@printf "%s\n" '          @@:                      @@@# @@-@@@-:/@  /            '>> p_racc.txt
+	@printf "%s\n" '         @  '\''-@@@:+@@/:#@@@@@@@@@@@####@@@@@/:/@@-: @            '>> p_racc.txt
+	@printf "%s\n" '           @/@::#@@@@@@####@@@@@@@####@@+/##--@@@++              '>> p_racc.txt
+	@printf "%s\n" '           '\''#@@/:-+@/@@@####+@@@@+####++++@++@@@@@/:-            '>> p_racc.txt
+	@printf "%s\n" '         @ +@@@@-/+++++++###++++++##++++++++@@@@@@@@@            '>> p_racc.txt
+	@printf "%s\n" '          '\''/@@@@@@+++++++++###+####++++++++++@'\''@@@@#'\''            '>> p_racc.txt
+	@printf "%s\n" '          @/@@@@@@+++++++++##@//+#######+++++@/- @//'\''            '>> p_racc.txt
+	@printf "%s\n" '          /@@@@@:@+++++#######@#@######///+###+++++-             '>> p_racc.txt
+	@printf "%s\n" '           //@::#++##+///@####@@@@@@+++++++++++++++--::          '>> p_racc.txt
+	@printf "%s\n" '           -+++++++++++++++@#@@@@@#@@@++++########++::           '>> p_racc.txt
+	@printf "%s\n" '         ::-+++++++++++#####++@@@+###+###- #@@@+@#+/++:          '>> p_racc.txt
+	@printf "%s\n" '          :-++#######+-/####+++@@+++#@           -+++--:         '>> p_racc.txt
+	@printf "%s\n" '         :-+/+#@@@         @@@@#@-@:@ :               //         '>> p_racc.txt
+	@printf "%s\n" '        ::-/++              /   @'\''      -  '\''-  '\'''\'''\'''\'''\''::::/        '>> p_racc.txt
+	@printf "%s\n" '         --    :    :   :       @ : :'\'''\'''\''/##/:@::::--------       '>> p_racc.txt
+	@printf "%s\n" '        +'\'''\'''\'''\'''\'''\'':::-:::+####:::/#@@/:###@@@@@@@@@----/////        '>> p_racc.txt
+	@printf "%s\n" '       /::---------@@@@@@@@@@##+@@+@@@@@@+##@@@-+@@@+++-         '>> p_racc.txt
+	@printf "%s\n" '       ://///------@@##+#-/:@@@@@#@@+###++##@@@@@@@@@++          '>> p_racc.txt
+	@printf "%s\n" '          ++++@@@@@+@@#####++++@@@@#++#####@@@++/@@@@+/-         '>> p_racc.txt
+	@printf "%s\n" '           ++@@@@@@@@@@######+##@@@@@@@####+#@///@@@++/          '>> p_racc.txt
+	@printf "%s\n" '           ++#@@@//++@#@####@@@@@#@ @@ ###+++/#@@@@#             '>> p_racc.txt
+	@printf "%s\n" '           /++#@@@@///++++#  @'\'' @+@# +    +//@@+-                '>> p_racc.txt
+	@printf "%s\n" '                @@@@@@//+      #####        @@:                  '>> p_racc.txt
+	@printf "%s\n" '                     @@     :  @@@@@+     '\'' '\'''\''                   '>> p_racc.txt
+	@printf "%s\n" '                     #'\''     '\'' @@@@@@@+  /'\''::@                    '>> p_racc.txt
+	@printf "%s\n" '                       @::::::/@@@@#++:::+@                      '>> p_racc.txt
+	@printf "%s\n" '                         @/::::+#@@#+:--/'\''                       '>> p_racc.txt
+	@printf "%s\n" '                           /#----------@                         '>> p_racc.txt
+	@printf "%s\n" '                                @@@@                             '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '           +/--:                                   :'\''+           '>> p_racc.txt
+	@printf "%s\n" '          +   -/##-'\''--  +/-                       :-::/          '>> p_racc.txt
+	@printf "%s\n" '          - :+#--#@@@@@@###@@@@@@@@@@@@@#+/#@@+@@#--:  :/        '>> p_racc.txt
+	@printf "%s\n" '         -: :+@@+:-+@@@@@####@@@@@@@@#####@@@@@+/-/@@/ :#        '>> p_racc.txt
+	@printf "%s\n" '         @ :+#@@@/-+#+/+#######@@@@@#####@@#+#+--+@@/-'\'':/        '>> p_racc.txt
+	@printf "%s\n" '         #:-+@@@@@++++++++###+++##+++###++++#++/+@@@@+: -        '>> p_racc.txt
+	@printf "%s\n" '          @#@@@@@@@+++++++++##//////##+++++++++@@@@@@+-//        '>> p_racc.txt
+	@printf "%s\n" '          /#@@@@#-@+++++++++##@+++#@#++++++++++@#@@@@@@@         '>> p_racc.txt
+	@printf "%s\n" '           /+@-+-+#+++++################+++++++@:@@@@@+:         '>> p_racc.txt
+	@printf "%s\n" '          :/++++#+###++//+#####@@@###########+++#::++//          '>> p_racc.txt
+	@printf "%s\n" '         ::-++++++++++++++++@@@@@@@@@#+++++++##++++++/-          '>> p_racc.txt
+	@printf "%s\n" '          :-++########++++#@@#@@@@@#@@#++++++++++++++/-::        '>> p_racc.txt
+	@printf "%s\n" '         ::-++@@#####++###++#++@@@++#++############++/::         '>> p_racc.txt
+	@printf "%s\n" '       ::-///+@@#+:       @@++#@@@#++#@+   /##+/+@@#+/--:        '>> p_racc.txt
+	@printf "%s\n" '       :----'\''              -@:@ @ @#@@           ://///-::       '>> p_racc.txt
+	@printf "%s\n" '       +-'\''    '\'''\''   :'\''          :@'\''       '\''            ---:       '>> p_racc.txt
+	@printf "%s\n" '      +::::::::::::'\'''\'''\'''\'''\'''\'''\''    '\'' @       :  ::'\''  '\''   '\'''\'''\'''\'':+       '>> p_racc.txt
+	@printf "%s\n" '     /------------@@@@##@###::/@@@/::/####/-/#@:::-::-::::+      '>> p_racc.txt
+	@printf "%s\n" '       //////----@@@@##@@ @@@#+@@#+#@@@/@@@@@@@#+--------/-      '>> p_racc.txt
+	@printf "%s\n" '        /++#@@@@@/@@+#+++++#@@@#@@@@@/:-/+##+@@--///////+:       '>> p_racc.txt
+	@printf "%s\n" '         ++@@@@@@@@@@#####+++#@@@@@#++######@@@@@@@@@@++         '>> p_racc.txt
+	@printf "%s\n" '        +++#@@@//++@@@######+++@@+#+#######@@@###@@@@++          '>> p_racc.txt
+	@printf "%s\n" '         /++#@@@///+++####@@@#@@@@@@@@####@#@#+//@@@#+/+/        '>> p_racc.txt
+	@printf "%s\n" '             @@@@@@//+++#: :@ #@#@ @@ -##+++///@@@@@++/          '>> p_racc.txt
+	@printf "%s\n" '                /-@@@/:       @++@:      ///@@@@##-              '>> p_racc.txt
+	@printf "%s\n" '                  @@@'\''       +####+        @@@                   '>> p_racc.txt
+	@printf "%s\n" '                   -'\'''\''      +@@@@@@+        '\''@                   '>> p_racc.txt
+	@printf "%s\n" '                    :-::'\'':'\''/#@@@@@@#: '\'''\'''\''::+                     '>> p_racc.txt
+	@printf "%s\n" '                      @@-:::++#@@#++::::@#                       '>> p_racc.txt
+	@printf "%s\n" '                        @/--:/#@@#/:---@                         '>> p_racc.txt
+	@printf "%s\n" '                          @+---------@                           '>> p_racc.txt
+	@printf "%s\n" '                              :#+                                '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '          @ :                                       : @          '>> p_racc.txt
+	@printf "%s\n" '        @+  :-+   @                           @   #--  #@        '>> p_racc.txt
+	@printf "%s\n" '           :'\'':-@@@@@@@#/#@@@@@@@@@@@@@@##+#@@@@@@@-:'\'':           '>> p_racc.txt
+	@printf "%s\n" '       :- :@@@/://@@@@@#####@@@@@@@@@#####@@@@@/--/@@@: #        '>> p_racc.txt
+	@printf "%s\n" '       @  :-@@@---+@/+@@######@@@@@######@@+/@+---@@@-:  @       '>> p_racc.txt
+	@printf "%s\n" '       @ '\''+@@@@@-/+#+++++####+++@+++####+++++++/-@@@@@+  @       '>> p_racc.txt
+	@printf "%s\n" '        :/@@@@@@@#+++++++++##+//+//+##+++++++++@@@@@@@@--        '>> p_racc.txt
+	@printf "%s\n" '        @@@@@@@@@+++++++++++#@#+#/#@#++++++++++#@@@@@@@@@        '>> p_racc.txt
+	@printf "%s\n" '         /@@@@@ @+++++++++###@#///#@###+++++++++@ @@@@@/         '>> p_racc.txt
+	@printf "%s\n" '         //@@ :@@++++##########@#@##########++++@+: @#//         '>> p_racc.txt
+	@printf "%s\n" '         -++++#+#####////@@###@@@@####@@////#####+#++++-         '>> p_racc.txt
+	@printf "%s\n" '       ::-++++++++++++++++#@@@@@@@@@@@+++++++++++++++++-::       '>> p_racc.txt
+	@printf "%s\n" '        :-++###########++#@@@#@@@@@#@@@#++###########++-:        '>> p_racc.txt
+	@printf "%s\n" '       :::++#@################+@@@++###############@+++:::       '>> p_racc.txt
+	@printf "%s\n" '      :-+//++@@@@      :  @#++@@@@@++@@  :      @@@@++//+-:      '>> p_racc.txt
+	@printf "%s\n" '      :--#+                @@@@ @ @@@@                #+--:      '>> p_racc.txt
+	@printf "%s\n" '      //         :              @              :   '\''     //      '>> p_racc.txt
+	@printf "%s\n" '     +:::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':   - -    @    '\'' -'\''  :'\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':::+     '>> p_racc.txt
+	@printf "%s\n" '    -----:::-::::@@@::#@###:-::@@@/:-:###@+:-@@@::::-::::---+    '>> p_racc.txt
+	@printf "%s\n" '    ////-------@@@@@@@@@#@@@##+@@@+##@@@#@@@@@@@@#-------///-    '>> p_racc.txt
+	@printf "%s\n" '      ++///////--@@+##+/-#/ @@@#@#@@@ +#-++##+@@--///////++      '>> p_racc.txt
+	@printf "%s\n" '       +++@@@@@@@@@@######+###@@@@@###+######@@@@@@@@@@+++       '>> p_racc.txt
+	@printf "%s\n" '        ++@@@@@@+@@@@#######+##@@@##+#######@@@@+@@@@@@++        '>> p_racc.txt
+	@printf "%s\n" '      +++/+@@@@//++@@@###@@@@@@@@@@@@@@@###@@@++//@@@@+/++-      '>> p_racc.txt
+	@printf "%s\n" '         ++@@@@@///++++### @@/@@/@@@@@ ###++++///@@@@@++         '>> p_racc.txt
+	@printf "%s\n" '            #@@@@@@//+ +#   @  @+@  @   ++ +//@@@@@@+            '>> p_racc.txt
+	@printf "%s\n" '                 @@@+/        #+#+#        /#@@@                 '>> p_racc.txt
+	@printf "%s\n" '                  #@@     '\''  +#@@@#+        @@@                  '>> p_racc.txt
+	@printf "%s\n" '                  @'\'''\'''\''   '\''  +@@@@@@@+  :   '\'''\'''\''/                  '>> p_racc.txt
+	@printf "%s\n" '                    @::::'\''+'\''+@@@@@@@/'\''+'\'':::-#                    '>> p_racc.txt
+	@printf "%s\n" '                      @@-:::/+#@@@#+/:::-@@                      '>> p_racc.txt
+	@printf "%s\n" '                        @/---:#@#@#:---+@                        '>> p_racc.txt
+	@printf "%s\n" '                          @/---------/@                          '>> p_racc.txt
+	@printf "%s\n" '                               @@#                               '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '    /#/'\'' --#+:  /-   /--::   '\''     :   ::---   :-  :+#-- :/#-    '>> p_racc.txt
+	@printf "%s\n" '    +: '\'' :--+@@@+@@#+-#@@@@#/@#@-@#@/#@@@@#-+#@@+@@@/--: '\'' :+    '>> p_racc.txt
+	@printf "%s\n" '    @-  @@@:::+@@@@@@@####@@@@@@@@@@@@@####@@@@@@@+:::#@@  -#    '>> p_racc.txt
+	@printf "%s\n" '    /:'\''::@@@+-:-+@+@@@######@@@@@@@@######@@@@+@+-:-#@@#::'\'':-    '>> p_racc.txt
+	@printf "%s\n" '    +/ /#+@@@/-/++#//+#@####+#@@@#@#+####@#+//@++/-+@@@+#/ /+    '>> p_racc.txt
+	@printf "%s\n" '    #'\'' /#@@@@@#+++#+++++####++++@++++###++++++@+++#@@@@@#/ '\''+    '>> p_racc.txt
+	@printf "%s\n" '     @-+@@@@@@@@++++++++++###///+///###++++++++++@@@@@@@@+-@     '>> p_racc.txt
+	@printf "%s\n" '     /@@@@@@@@@@++++++++++++@##+#+#@#++++++++++++@@@@@@@@@@/     '>> p_racc.txt
+	@printf "%s\n" '      /@@@@@@-:@++++++++++##@@#///#@@###+++++++++@'\''-@@@@@@/      '>> p_racc.txt
+	@printf "%s\n" '      +//@/ --##+++++#######################+++++##// /@///      '>> p_racc.txt
+	@printf "%s\n" '      /++++@/#++##++////#######@@@#######////+###++#/@+++//      '>> p_racc.txt
+	@printf "%s\n" '     ::-+++++++++++++++++++@@@@@@@@@@@+++++++++++++++++++--:     '>> p_racc.txt
+	@printf "%s\n" '    ::--+++++++++++++++++#@@@@@@@@@#@@@#+++++++++++++++++--::    '>> p_racc.txt
+	@printf "%s\n" '     -:-+++###############+##+##@@++#+++##############+++-:/     '>> p_racc.txt
+	@printf "%s\n" '    -::-++#@@/@@@@@:   #####++#@#@#++#####   /@@@@@/@@+++-::-    '>> p_racc.txt
+	@printf "%s\n" '   ::-+///+@@@@@-        +@@@@@@@@@@@@@-        /@@@@@+///+-::   '>> p_racc.txt
+	@printf "%s\n" '   ----+-           '\''      @ +@ @ @@ @      :           /#---:   '>> p_racc.txt
+	@printf "%s\n" '   //-          -     /     :   @   /     :    :-          //:   '>> p_racc.txt
+	@printf "%s\n" '  /+:::'\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':  :       :@        '\''  : '\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'''\'':::+:  '>> p_racc.txt
+	@printf "%s\n" '  --::::::-:::::@@-::@####:::::@@@:::::####@::/@@:::::-::::::--  '>> p_racc.txt
+	@printf "%s\n" ' ////--------+@#@@@@@@@@@@@##-+@@@+/##@@@@@@@@@@@/@/-------////- '>> p_racc.txt
+	@printf "%s\n" '    +///////---@@@@##+/@@@@@@@@#@#@@@@@@@@:+##@@@#---///////+    '>> p_racc.txt
+	@printf "%s\n" '     +++@@@@@@@@@@@##++++###+@@@@@@@+###++++##@@@@@@@@@@@+++     '>> p_racc.txt
+	@printf "%s\n" '      ++@@@@@@@@@@@@#####++++#+@@@+#++++#####@@@@@@@@@@@@++      '>> p_racc.txt
+	@printf "%s\n" '     +/+#@@@@//+++@@@######@@@+#@+#@@@######@@@+++//@@@@#+/+     '>> p_racc.txt
+	@printf "%s\n" '     ++++#@@@@///#++######@@@:@@@@@-@@@#####+++#///@@@@+++++     '>> p_racc.txt
+	@printf "%s\n" '         #@@@@@@+//++++##/'\''@@ @@/@# @# /##++++//+@@@@@@#         '>> p_racc.txt
+	@printf "%s\n" '            -+/@@@@//+  -     #++#/     :  +//@@@@/+:            '>> p_racc.txt
+	@printf "%s\n" '                 @@@         -@###@'\''         @@#                 '>> p_racc.txt
+	@printf "%s\n" '                 #:'\''      '\'' -@@@@@@@: '\''      '\'':#                 '>> p_racc.txt
+	@printf "%s\n" '                 '\''#-'\'''\'''\'''\'''\'''\'''\''/@@@@@@@@@:'\'''\'''\'''\'''\'''\'''\''-#                  '>> p_racc.txt
+	@printf "%s\n" '                   '\''#+-::::-+@@@@@@@+-::::/+#                    '>> p_racc.txt
+	@printf "%s\n" '                     :#@-:::-+#@@@#+-:::-@#'\''                     '>> p_racc.txt
+	@printf "%s\n" '                        @+----/////----+@                        '>> p_racc.txt
+	@printf "%s\n" '                         -##++//-//++##-                         '>> p_racc.txt
+	@printf "%s\n" '                              -+#+-                              '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '-/--/@@@/--/+#@#############@@@@@@@@@#############@#+/--/@@@/--/-'>> p_racc.txt
+	@printf "%s\n" '//+++#@@@+///++#+++########+####@###++########+++#++///+@@@#+++//'>> p_racc.txt
+	@printf "%s\n" '//+@@@@@@@+//+#+++++++#####+++++@+++++####++++++++++//+@@@@@@@+//'>> p_racc.txt
+	@printf "%s\n" '+##@@@@@@@@++++++++++++++###++++#++++###+++++++++++++#@@@@@@@@#++'>> p_racc.txt
+	@printf "%s\n" '@#@@@@++@@##++++++++++++++####+++++####++++++++++++++#@@@+#@@@@#@'>> p_racc.txt
+	@printf "%s\n" '@#@@@@##/+##+++++++++++########+++########+++++++++++##+/##@@@@#@'>> p_racc.txt
+	@printf "%s\n" '+#+--+##+++#+++++++###########@################++++++#++####--+#+'>> p_racc.txt
+	@printf "%s\n" '++/@+//++####++++++++#########@@@@@#########++++++++####++//+@//+'>> p_racc.txt
+	@printf "%s\n" '++++++++++++++++++++++###@@@@@@@@@@@@#@####++++++++++++++++++++++'>> p_racc.txt
+	@printf "%s\n" '++++++++++++++++++++++###@@@@@@@@@@@@@@@###++++++++++++++++++++++'>> p_racc.txt
+	@printf "%s\n" '+########++++++++++++###@@@##@@@@@@@##@@@###++++++++++++########+'>> p_racc.txt
+	@printf "%s\n" '+###########################++@@@@@++###########################+'>> p_racc.txt
+	@printf "%s\n" '####@@@@@###+::::/########++++@@@@#+++#########/::::+#####@@@####'>> p_racc.txt
+	@printf "%s\n" '###@@#:  :---::      @@@#+++###@@@###+++#@@@      ::---:  :#@@@##'>> p_racc.txt
+	@printf "%s\n" '/--::'\''             '\''  -@@@@@@@:@@@:@@@@@@@:  '\''             '\''::--/'>> p_racc.txt
+	@printf "%s\n" '                       :@+ @ + @@@ # #'\''#@                        '>> p_racc.txt
+	@printf "%s\n" '                        ::    -:@ :    ::                        '>> p_racc.txt
+	@printf "%s\n" ''\'''\'''\'''\''  '\'''\'':::'\''    '\'':'\''       '\''    #@-:   '\''       '\'':'\''    '\'':::'\''   '\'''\'''\'''\'''>> p_racc.txt
+	@printf "%s\n" ''\'''\'''\'''\'''\'''\'''\'''\'' '\''::'\'''\''   '\'''\'''\'''\''  :'\''      @@@      '\'':  '\'':'\'''\''   '\'':::'\'' '\'''\'''\'''\'''\'''\'''\'''\'''>> p_racc.txt
+	@printf "%s\n" ':::-----:::::-///-:'\'''\'''\'''\'''\'':'\'''\'''\''/'\''+@@@:'\''-'\'''\''::'\'''\'''\'''\''::-///::::::----::::'>> p_racc.txt
+	@printf "%s\n" '::::/+#@@#+/--/+######+-::::/:@@@@@:/::::-+######+/--/+#@@#+-::::'>> p_racc.txt
+	@printf "%s\n" '--//+#@@@@@@@@@@@@@@#####+/:/-@@@@@-/:/+####@@@@@@@@@@@@@@@#+//--'>> p_racc.txt
+	@printf "%s\n" '/+##@@@@@@@@@#@@@+--/+@@@@##++@@@@@++##@@@@#/--+@@@#@@@@@@@@@#++/'>> p_racc.txt
+	@printf "%s\n" '-/+##@@@@@#######@+@@@@@@##@#+#@@@#+@@@#@@@@@@+@#######@@@@@#++/-'>> p_racc.txt
+	@printf "%s\n" '++++#@@@####++++++/////+#@@@@@#@@@#@@@@@#+//////+/+++####@@@#++++'>> p_racc.txt
+	@printf "%s\n" '@@@@@@@@########++++######@@@@@@@@@@@@@######++++########@@@@@@@@'>> p_racc.txt
+	@printf "%s\n" '@@@@@@@@@@#####+####++##+##@@@@@@@@@@###+##++####+####@@@@@@@@@@@'>> p_racc.txt
+	@printf "%s\n" '@@@@@@@@@@@#########+++++++##@@@@@@@##+++++++#########@@@@@@@@@@@'>> p_racc.txt
+	@printf "%s\n" '####@@@@@@@#############++####@@@@@+###++############@@@@@@@@####'>> p_racc.txt
+	@printf "%s\n" '++++##@@@@@@##########@@#@@@###@@@##@@@##@@##########@@@@@@##++++'>> p_racc.txt
+	@printf "%s\n" '/+++##@@@@#########@@@@@@@@@@@@@@@@@@@@@@@@@@@#########@@@@#++++/'>> p_racc.txt
+	@printf "%s\n" '+/++#@#############@#@@@@@@#@@@@#@@@@+@@@@@@#@#############@#++/+'>> p_racc.txt
+	@printf "%s\n" '++++++++++++#######+-##@@@#-@@@@+@@@#-@@@@#+-+#######++++++++++++'>> p_racc.txt
+	@printf "%s\n" '#+++++++++++++####/'\'':-/@@@  +@@@/@@@/  @@@/-::/####+++++++++++++#'>> p_racc.txt
+	@printf "%s\n" '@###+++++++////++/'\''   -#@/  /@@+/#@@-  +@#:   :/++////+++++++###@'>> p_racc.txt
+	@printf "%s\n" '@@@###+++///-----'\''    :#/  :/@@+++@@-'\''  ++'\''    '\''-----///+++###@@@'>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                             :+///+:                             '>> p_racc.txt
+	@printf "%s\n" '                            :+++@+++:                            '>> p_racc.txt
+	@printf "%s\n" '                           ---++@++---                           '>> p_racc.txt
+	@printf "%s\n" '                          '\''#@##+@+##@#'\''                          '>> p_racc.txt
+	@printf "%s\n" '                           /+#'\'''\''#'\'''\''#+/                           '>> p_racc.txt
+	@printf "%s\n" '                            /::+@+::/                            '>> p_racc.txt
+	@printf "%s\n" '                            :/-+#+-/:                            '>> p_racc.txt
+	@printf "%s\n" '                             /-/+/-/                             '>> p_racc.txt
+	@printf "%s\n" '                             ://///:                             '>> p_racc.txt
+	@printf "%s\n" '                               -/-                               '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@printf "%s\n" ''>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '                                                                 '>> p_racc.txt
+	@printf "%s\n" '='>> p_racc.txt
+	@chmod 777 p_racc.txt
+	@printf "$(BLACK)🦝"
+
 
 
 build_cora:
 	@printf "$(NEOR) Building cora... $(RESET)"
 	@printf "$(MINT)🦝\n\n"
 	@> cora
-	@printf '\n'>> cora
-	@printf '\n'>> cora
-	@printf '\n'>> cora
-	@printf '		       ##################\n'>> cora
-	@printf '		        ###############\n'>> cora
-	@printf '		         ############\n'>> cora
-	@printf '		         \n'>> cora
-	@printf '		         \n'>> cora
-	@printf '		         \n'>> cora
+	@printf "%s\n" ''>> cora
+	@printf "%s\n" ''>> cora
+	@printf "%s\n" ''>> cora
+	@printf "%s\n" '		       ##################'>> cora
+	@printf "%s\n" '		        ###############'>> cora
+	@printf "%s\n" '		         ############'>> cora
+	@printf "%s\n" '		         '>> cora
+	@printf "%s\n" '		         '>> cora
+	@printf "%s\n" '		         '>> cora
 	@chmod 777 cora
-	@open cora
 	@printf "$(BLACK)🦝"
 
 
@@ -916,14 +1911,13 @@ build_corb:
 	@printf "$(NEOR) Building corb... $(RESET)"
 	@printf "$(MINT)🦝\n\n"
 	@> corb
-	@printf '			#####		####\n'>> corb
-	@printf '		      ########        #######\n'>> corb
-	@printf '		     ##########      ########\n'>> corb
-	@printf '		          #########\n'>> corb
-	@printf '		           ######\n'>> corb
-	@printf '		            ###\n'>> corb
+	@printf "%s\n" '			#####		####'>> corb
+	@printf "%s\n" '		      ########        #######'>> corb
+	@printf "%s\n" '		     ##########      ########'>> corb
+	@printf "%s\n" '		          #########'>> corb
+	@printf "%s\n" '		           ######'>> corb
+	@printf "%s\n" '		            ###'>> corb
 	@chmod 777 corb
-	@open corb
 	@printf "$(BLACK)🦝"
 
 
@@ -932,13 +1926,12 @@ build_corc:
 	@printf "$(NEOR) Building corc... $(RESET)"
 	@printf "$(MINT)🦝\n\n"
 	@> corc
-	@printf '		     ###########   ##########\n'>> corc
-	@printf '		     ############ ##########\n'>> corc
-	@printf '		      #####################\n'>> corc
-	@printf '		     #      #\n'>> corc
-	@printf '		      ##   #\n'>> corc
-	@printf '		        ### \n'>> corc
+	@printf "%s\n" '		     ###########   ##########'>> corc
+	@printf "%s\n" '		     ############ ##########'>> corc
+	@printf "%s\n" '		      #####################'>> corc
+	@printf "%s\n" '		     #      #'>> corc
+	@printf "%s\n" '		      ##   #'>> corc
+	@printf "%s\n" '		        ### '>> corc
 	@chmod 777 corc
-	@open corc
 	@printf "$(BLACK)🦝"
 

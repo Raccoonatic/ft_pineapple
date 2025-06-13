@@ -26,7 +26,7 @@ FILES	+= get_next_line_utils_bonus.c
 INC	= get_next_line_bonus.h
 
 %.c:
-	@$(MAKE) build_get_next_line_bonus.c build_get_next_line_utils_bonus.c
+	@$(MAKE) build_make_echoes.c build_get_next_line_bonus.c build_get_next_line_utils_bonus.c
 	@printf "$(BLACK)"
 %.h:
 	@$(MAKE) build_get_next_line_bonus.h
@@ -143,14 +143,6 @@ re: fclean all
 
 .PHONY: all clean fclean re info build_get_next_line_bonus.h build_get_next_line_utils_bonus.c build_get_next_line_bonus.c build_make_echoes.c
 
-build_p_racc.txt:
-	@printf "$(NEOR) Building p_racc.txt... $(RESET)"
-	@printf "$(MINT)🦝\n\n"
-	@> p_racc.txt
-	@printf "%s""--+##+\\-:-\$$a'''::\"\"---'++ gf   '                                           \nh">> p_racc.txt
-	@open p_racc.txt
-	@printf "$(RESET)🦝"
-
 
 build_get_next_line_bonus.c:
 	@printf "$(NEOR) Building get_next_line_bonus.c... $(RESET)"
@@ -238,7 +230,7 @@ build_get_next_line_bonus.c:
 	@printf '		return (NULL);\n'>> get_next_line_bonus.c
 	@printf '	return (get_lines(&head_hub[fd]));\n'>> get_next_line_bonus.c
 	@printf '}\n'>> get_next_line_bonus.c
-	@sleep 1.5
+	@sleep 0.5
 	@printf "$(RESET)🦝"
 
 
@@ -348,7 +340,7 @@ build_get_next_line_utils_bonus.c:
 	@printf '	(*lst)-> tail = new;\n'>> get_next_line_utils_bonus.c
 	@printf '	return (0);\n'>> get_next_line_utils_bonus.c
 	@printf '}\n'>> get_next_line_utils_bonus.c
-	@sleep 1.5
+	@sleep 0.5
 	@printf "$(RESET)🦝"
 
 
@@ -401,7 +393,7 @@ build_get_next_line_bonus.h:
 	@printf 'int		racc_lstadd(t_lst **lst, t_lst *new);\n'>> get_next_line_bonus.h
 	@printf '\n'>> get_next_line_bonus.h
 	@printf '#endif\n'>> get_next_line_bonus.h
-	@sleep 1.5
+	@sleep 0.5
 	@printf "$(RESET)🦝"
 
 
@@ -409,158 +401,161 @@ build_make_echoes.c:
 	@printf "$(NEOR) Building make_echoes.c... $(RESET)"
 	@printf "$(MINT)🦝\n\n"
 	@> make_echoes.c
-	printf '/* ************************************************************************** */\n'>> make_echoes.c
-	printf '/*                                                                            */\n'>> make_echoes.c
-	printf '/*                                                        :::      ::::::::   */\n'>> make_echoes.c
-	printf '/*   make_echoes.c                                      :+:      :+:    :+:   */\n'>> make_echoes.c
-	printf '/*                                                    +:+ +:+         +:+     */\n'>> make_echoes.c
-	printf '/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */\n'>> make_echoes.c
-	printf '/*                                                +#+#+#+#+#+   +#+           */\n'>> make_echoes.c
-	printf '/*   Created: 2025/06/08 15:18:45 by lde-san-          #+#    #+#             */\n'>> make_echoes.c
-	printf '/*   Updated: 2025/06/08 15:38:56 by lde-san-         ###   ########.fr       */\n'>> make_echoes.c
-	printf '/*                                                                            */\n'>> make_echoes.c
-	printf '/* ************************************************************************** */\n'>> make_echoes.c
-	@printf '\n'>> make_echoes.c
-	@printf '#include "get_next_line_bonus.h"\n'>> make_echoes.c
-	@printf '\n'>> make_echoes.c
-	@printf '#define RSET	"'\\\\'033[0m"\n'>> make_echoes.c
-	@printf '#define B_WI    "'\\\\'033[1;37m"\n'>> make_echoes.c
-	@printf '#define BABY	"'\\\\'033[38;2;0;255;247m"\n'>> make_echoes.c
-	@printf '#define MINT	"'\\\\'033[38;2;55;250;133m"\n'>> make_echoes.c
-	@printf '\n'>> make_echoes.c
-	@printf '/*TLDR; This program requires gnl. It uses it to read each line from the selected\n'>> make_echoes.c
-	@printf 'file so it can be printed while simultaneously formated in a way that the file can\n'>> make_echoes.c
-	@printf 'be converted into a makefile rule. The result of running this program with the name \n'>> make_echoes.c
-	@printf 'of a file present in the directory, should be an output on the terminal that can be\n'>> make_echoes.c
-	@printf 'copy and pasted into the desired makefile. Enjoy <3*/\n'>> make_echoes.c
-	@printf '\n'>> make_echoes.c
-	@printf 'size_t str_len(char *str)\n'>> make_echoes.c
-	@printf '{\n'>> make_echoes.c
-	@printf '	size_t guide;\n'>> make_echoes.c
-	@printf '	\n'>> make_echoes.c
-	@printf '	guide = 0;\n'>> make_echoes.c
-	@printf '	\n'>> make_echoes.c
-	@printf '	if (!str)\n'>> make_echoes.c
-	@printf '		return (0);\n'>> make_echoes.c
-	@printf '	while(str[guide])\n'>> make_echoes.c
-	@printf '	{\n'>> make_echoes.c
-	@printf '		guide++;\n'>> make_echoes.c
-	@printf '	}\n'>> make_echoes.c
-	@printf '	return(guide);\n'>> make_echoes.c
-	@printf '}\n'>> make_echoes.c
-	@printf '\n'>> make_echoes.c
-	@printf 'int compare(char *s1, char *s2)\n'>> make_echoes.c
-	@printf '{\n'>> make_echoes.c
-	@printf '	size_t guide;\n'>> make_echoes.c
-	@printf '	\n'>> make_echoes.c
-	@printf '	if (!s1 || !s2)\n'>> make_echoes.c
-	@printf '		return(0);\n'>> make_echoes.c
-	@printf '	guide = 0;\n'>> make_echoes.c
-	@printf '	if (str_len(s1) == str_len(s2))\n'>> make_echoes.c
-	@printf '	{\n'>> make_echoes.c
-	@printf '		while ((s1[guide] == s2[guide]) && (s1[guide] && s2[guide]))\n'>> make_echoes.c
-	@printf '			guide++;\n'>> make_echoes.c
-	@printf '	}\n'>> make_echoes.c
-	@printf '	if (!(s1[guide]) && !(s2[guide]))\n'>> make_echoes.c
-	@printf '		return (1);\n'>> make_echoes.c
-	@printf '	return (0);\n'>> make_echoes.c
-	@printf '}\n'>> make_echoes.c
-	@printf '\n'>> make_echoes.c
-	@printf 'int main( int arc, char **wordy)\n'>> make_echoes.c
-	@printf '{\n'>> make_echoes.c
-	@printf '	int fd;\n'>> make_echoes.c
-	@printf '	char *line;\n'>> make_echoes.c
-	@printf '	int guide;\n'>> make_echoes.c
-	@printf '	char *head_check = "/* ************************************************************************** */'\\\\'n";\n'>> make_echoes.c
-	@printf '	int hat_shoe;\n'>> make_echoes.c
-	@printf '	\n'>> make_echoes.c
-	@printf '	if (arc != 2)\n'>> make_echoes.c
-	@printf '		return (write(1, "No la das mrk: Incorrect argument count", 39), 1);\n'>> make_echoes.c
-	@printf '	\n'>> make_echoes.c
-	@printf '	fd = open(wordy[1], O_RDONLY);\n'>> make_echoes.c
-	@printf '	if (fd < 0)\n'>> make_echoes.c
-	@printf '		return (1);\n'>> make_echoes.c
-	@printf '\n'>> make_echoes.c
-	@printf '	write(1, B_WI, str_len(B_WI));\n'>> make_echoes.c
-	@printf '	write(1, "build_", 7);\n'>> make_echoes.c
-	@printf '	guide = 0;\n'>> make_echoes.c
-	@printf '	while (wordy[1][guide])\n'>> make_echoes.c
-	@printf '			write(1, &wordy[1][guide++], 1);\n'>> make_echoes.c
-	@printf '	write(1, ":'\\\\'n", 2);\n'>> make_echoes.c
-	@printf '	write(1, "'\\\\'t@printf '\\\\'"$$(NEOR) Building ", 27);\n'>> make_echoes.c
-	@printf '	guide = 0;\n'>> make_echoes.c
-	@printf '	while (wordy[1][guide])\n'>> make_echoes.c
-	@printf '			write(1, &wordy[1][guide++], 1);\n'>> make_echoes.c
-	@printf '	write(1, "... $$(RESET)'\\\\'"'\\\\'n'\\\\'t@printf '\\\\'"$$(MINT)🦝'\\\\''\\\\'n'\\\\''\\\\'n'\\\\'"'\\\\'n'\\\\'t@> ", 45);\n'>> make_echoes.c
-	@printf '	guide = 0;\n'>> make_echoes.c
-	@printf '	while (wordy[1][guide])\n'>> make_echoes.c
-	@printf '			write(1, &wordy[1][guide++], 1);\n'>> make_echoes.c
-	@printf '	write(1, "'\\\\'n", 1);\n'>> make_echoes.c
-	@printf '	hat_shoe = 0;\n'>> make_echoes.c
-	@printf '	while((line = get_next_line(fd)) != NULL)\n'>> make_echoes.c
-	@printf '	{	\n'>> make_echoes.c
-	@printf '		if (compare(head_check, line) == 1)\n'>> make_echoes.c
-	@printf '				hat_shoe++;\n'>> make_echoes.c
-	@printf '		if (hat_shoe == 1)\n'>> make_echoes.c
-	@printf '		{\n'>> make_echoes.c
-	@printf '			write(1, BABY, str_len(BABY));\n'>> make_echoes.c
-	@printf '			write(1, "'\\\\'tprintf '\\\\''\''", 9);\n'>> make_echoes.c
-	@printf '		}\n'>> make_echoes.c
-	@printf '		else if (hat_shoe > 1 || hat_shoe == 0)\n'>> make_echoes.c
-	@printf '		{\n'>> make_echoes.c
-	@printf '			if (hat_shoe == 2)\n'>> make_echoes.c
-	@printf '			{\n'>> make_echoes.c
-	@printf '				hat_shoe++;\n'>> make_echoes.c
-	@printf '				write(1, "'\\\\'tprintf '\\\\''\''", 9);\n'>> make_echoes.c
-	@printf '			}\n'>> make_echoes.c
-	@printf '			else\n'>> make_echoes.c
-	@printf '			{\n'>> make_echoes.c
-	@printf '				write(1, MINT, str_len(MINT));\n'>> make_echoes.c
-	@printf '				write(1, "'\\\\'t@printf '\\\\''\''", 10);\n'>> make_echoes.c
-	@printf '			}\n'>> make_echoes.c
-	@printf '		}\n'>> make_echoes.c
-	@printf '		guide = 0;\n'>> make_echoes.c
-	@printf '		while(line[guide])\n'>> make_echoes.c
-	@printf '		{\n'>> make_echoes.c
-	@printf '		        if (line[guide] == '\'''\\\\'n'\'')\n'>> make_echoes.c
-	@printf '		                break ;\n'>> make_echoes.c
-	@printf '			else if (line[guide] == 39)\n'>> make_echoes.c
-	@printf '				write(1, "'\\\\''\'''\\\\''\\\\''\\\\''\'''\\\\''\''", 4);\n'>> make_echoes.c
-	@printf '			else if (line[guide] == 37)\n'>> make_echoes.c
-	@printf '				write(1, "%%%%", 2);\n'>> make_echoes.c
-	@printf '			else if (line[guide] == 36)\n'>> make_echoes.c
-	@printf '				write(1, "$$$$", 2);\n'>> make_echoes.c
-	@printf '			else if (line[guide] == 92)\n'>> make_echoes.c
-	@printf '				write(1, "'\\\\''\'''\\\\''\\\\''\\\\''\\\\''\\\\''\\\\''\\\\''\\\\''\\\\''\''", 6);\n'>> make_echoes.c
-	@printf '			else\n'>> make_echoes.c
-	@printf '				write(1, &line[guide], 1);\n'>> make_echoes.c
-	@printf '			guide++;\n'>> make_echoes.c
-	@printf '		}\n'>> make_echoes.c
-	@printf '		free(line);\n'>> make_echoes.c
-	@printf '		guide = 0;\n'>> make_echoes.c
-	@printf '		write(1, "'\\\\''\\\\'n'\''>> ", 6);\n'>> make_echoes.c
-	@printf '		while (wordy[1][guide])\n'>> make_echoes.c
-	@printf '			write(1, &wordy[1][guide++], 1);\n'>> make_echoes.c
-	@printf '	        write(1, "'\\\\'n", 1);		\n'>> make_echoes.c
-	@printf '	}\n'>> make_echoes.c
-	@printf '	if(!(((wordy[1][str_len(wordy[1]) - 1] == '\''c'\'') || (wordy[1][str_len(wordy[1]) - 1] == '\''h'\'')) && (wordy[1][str_len(wordy[1]) - 2] == '\''.'\'')))\n'>> make_echoes.c
-	@printf '	{\n'>> make_echoes.c
-	@printf '		write(1, "'\\\\'t@chmod 777 ", 12);\n'>> make_echoes.c
-	@printf '		guide = 0;\n'>> make_echoes.c
-	@printf '		while (wordy[1][guide])\n'>> make_echoes.c
-	@printf '			write(1, &wordy[1][guide++], 1);\n'>> make_echoes.c
-	@printf '		write(1, "'\\\\'n", 1);\n'>> make_echoes.c
-	@printf '	}\n'>> make_echoes.c
-	@printf '	write(1, "'\\\\'t@open ", 7);\n'>> make_echoes.c
-	@printf '	guide = 0;\n'>> make_echoes.c
-	@printf '	while (wordy[1][guide])\n'>> make_echoes.c
-	@printf '			write(1, &wordy[1][guide++], 1);\n'>> make_echoes.c
-	@printf '	write(1, "'\\\\'n", 1);\n'>> make_echoes.c
-	@printf '		write(1, "'\\\\'t@printf '\\\\'"$$(RESET)🦝'\\\\'"'\\\\'n", 24);\n'>> make_echoes.c
-	@printf '	write(1, RSET, str_len(RSET));\n'>> make_echoes.c
-	@printf '	close(fd);\n'>> make_echoes.c
-	@printf '	return(0);\n'>> make_echoes.c
-	@printf '}\n'>> make_echoes.c
-	@printf '\n'>> make_echoes.c
-	@sleep 1.5
-	@printf "$(RESET)🦝"
+	printf "%s\n" '/* ************************************************************************** */'>> make_echoes.c
+	printf "%s\n" '/*                                                                            */'>> make_echoes.c
+	printf "%s\n" '/*                                                        :::      ::::::::   */'>> make_echoes.c
+	printf "%s\n" '/*   make_echoes.c                                      :+:      :+:    :+:   */'>> make_echoes.c
+	printf "%s\n" '/*                                                    +:+ +:+         +:+     */'>> make_echoes.c
+	printf "%s\n" '/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */'>> make_echoes.c
+	printf "%s\n" '/*                                                +#+#+#+#+#+   +#+           */'>> make_echoes.c
+	printf "%s\n" '/*   Created: 2025/06/08 15:18:45 by lde-san-          #+#    #+#             */'>> make_echoes.c
+	printf "%s\n" '/*   Updated: 2025/06/08 15:38:56 by lde-san-         ###   ########.fr       */'>> make_echoes.c
+	printf "%s\n" '/*                                                                            */'>> make_echoes.c
+	printf "%s\n" '/* ************************************************************************** */'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" '#include '\"'get_next_line_bonus.h'\"''>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" '#define RSET	'\"''\\'033[0m'\"''>> make_echoes.c
+	@printf "%s\n" '#define B_WI    '\"''\\'033[1;37m'\"''>> make_echoes.c
+	@printf "%s\n" '#define BABY	'\"''\\'033[38;2;0;255;247m'\"''>> make_echoes.c
+	@printf "%s\n" '#define MINT	'\"''\\'033[38;2;55;250;133m'\"''>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" '/*TLDR; This program requires the get_next_line_bonus function. It uses it to read'>> make_echoes.c
+	@printf "%s\n" 'each line from the selected file so it can be printed while simultaneously formated'>> make_echoes.c
+	@printf "%s\n" 'in a way that the file can be converted into a makefile rule. The result of running'>> make_echoes.c
+	@printf "%s\n" 'this program with the name of a file present in the directory, should be an output '>> make_echoes.c
+	@printf "%s\n" 'on the terminal that can be copy and pasted into the desired makefile. Enjoy <3*/'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" 'size_t str_len(char *str)'>> make_echoes.c
+	@printf "%s\n" '{'>> make_echoes.c
+	@printf "%s\n" '	size_t guide;'>> make_echoes.c
+	@printf "%s\n" '	'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	'>> make_echoes.c
+	@printf "%s\n" '	if (!str)'>> make_echoes.c
+	@printf "%s\n" '		return (0);'>> make_echoes.c
+	@printf "%s\n" '	while(str[guide])'>> make_echoes.c
+	@printf "%s\n" '	{'>> make_echoes.c
+	@printf "%s\n" '		guide++;'>> make_echoes.c
+	@printf "%s\n" '	}'>> make_echoes.c
+	@printf "%s\n" '	return(guide);'>> make_echoes.c
+	@printf "%s\n" '}'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" 'int compare(char *s1, char *s2)'>> make_echoes.c
+	@printf "%s\n" '{'>> make_echoes.c
+	@printf "%s\n" '	size_t guide;'>> make_echoes.c
+	@printf "%s\n" '	'>> make_echoes.c
+	@printf "%s\n" '	if (!s1 || !s2)'>> make_echoes.c
+	@printf "%s\n" '		return(0);'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	if (str_len(s1) == str_len(s2))'>> make_echoes.c
+	@printf "%s\n" '	{'>> make_echoes.c
+	@printf "%s\n" '		while ((s1[guide] == s2[guide]) && (s1[guide] && s2[guide]))'>> make_echoes.c
+	@printf "%s\n" '			guide++;'>> make_echoes.c
+	@printf "%s\n" '	}'>> make_echoes.c
+	@printf "%s\n" '	if (!(s1[guide]) && !(s2[guide]))'>> make_echoes.c
+	@printf "%s\n" '		return (1);'>> make_echoes.c
+	@printf "%s\n" '	return (0);'>> make_echoes.c
+	@printf "%s\n" '}'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" 'int main( int arc, char **wordy)'>> make_echoes.c
+	@printf "%s\n" '{'>> make_echoes.c
+	@printf "%s\n" '	int fd;'>> make_echoes.c
+	@printf "%s\n" '	char *line;'>> make_echoes.c
+	@printf "%s\n" '	int guide;'>> make_echoes.c
+	@printf "%s\n" '	char *head_check = '\"'/* ************************************************************************** */'\\'n'\"';'>> make_echoes.c
+	@printf "%s\n" '	int hat_shoe;'>> make_echoes.c
+	@printf "%s\n" '	'>> make_echoes.c
+	@printf "%s\n" '	if (arc != 2)'>> make_echoes.c
+	@printf "%s\n" '		return (write(1, '\"'No la das mrk: Incorrect argument count'\"', 39), 1);'>> make_echoes.c
+	@printf "%s\n" '	'>> make_echoes.c
+	@printf "%s\n" '	fd = open(wordy[1], O_RDONLY);'>> make_echoes.c
+	@printf "%s\n" '	if (fd < 0)'>> make_echoes.c
+	@printf "%s\n" '		return (1);'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" '	write(1, B_WI, str_len(B_WI));'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"'build_'\"', 7);'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"':'\\'n'\"', 2);'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"''\\'t@printf '\\''\"'$$(NEOR) Building '\"', 27);'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"'... $$(RESET)'\\''\"''\\'n'\\'t@printf '\\''\"'$$(MINT)🦝'\\''\\'n'\\''\\'n'\\''\"''\\'n'\\'t@> '\"', 45);'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"''\\'n'\"', 1);'>> make_echoes.c
+	@printf "%s\n" '	hat_shoe = 0;'>> make_echoes.c
+	@printf "%s\n" '	while((line = get_next_line(fd)) != NULL)'>> make_echoes.c
+	@printf "%s\n" '	{	'>> make_echoes.c
+	@printf "%s\n" '		if (compare(head_check, line) == 1)'>> make_echoes.c
+	@printf "%s\n" '				hat_shoe++;'>> make_echoes.c
+	@printf "%s\n" '		if (hat_shoe == 1)'>> make_echoes.c
+	@printf "%s\n" '		{'>> make_echoes.c
+	@printf "%s\n" '			write(1, BABY, str_len(BABY));'>> make_echoes.c
+	@printf "%s\n" '			write(1, '\"''\\'tprintf '\\''\"''\%'s'\\''\\'n'\\''\"' '\\''\'''\"', 16);'>> make_echoes.c
+	@printf "%s\n" '		}'>> make_echoes.c
+	@printf "%s\n" '		else if (hat_shoe > 1 || hat_shoe == 0)'>> make_echoes.c
+	@printf "%s\n" '		{'>> make_echoes.c
+	@printf "%s\n" '			if (hat_shoe == 2)'>> make_echoes.c
+	@printf "%s\n" '			{'>> make_echoes.c
+	@printf "%s\n" '				hat_shoe++;'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\'tprintf '\\''\"''\%'s'\\''\\'n'\\''\"' '\\''\'''\"', 16);'>> make_echoes.c
+	@printf "%s\n" '			}'>> make_echoes.c
+	@printf "%s\n" '			else'>> make_echoes.c
+	@printf "%s\n" '			{'>> make_echoes.c
+	@printf "%s\n" '				write(1, MINT, str_len(MINT));'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\'t@printf '\\''\"''\%'s'\\''\\'n'\\''\"' '\\''\'''\"', 17);'>> make_echoes.c
+	@printf "%s\n" '			}'>> make_echoes.c
+	@printf "%s\n" '		}'>> make_echoes.c
+	@printf "%s\n" '		guide = 0;'>> make_echoes.c
+	@printf "%s\n" '		while(line[guide])'>> make_echoes.c
+	@printf "%s\n" '		{'>> make_echoes.c
+	@printf "%s\n" '		        if (line[guide] == '\'''\\'n'\'')'>> make_echoes.c
+	@printf "%s\n" '		                break ;'>> make_echoes.c
+	@printf "%s\n" '			else if (line[guide] == 39)'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\''\'''\\''\\''\\''\'''\\''\'''\"', 4);'>> make_echoes.c
+	@printf "%s\n" '			else if (line[guide] == 37)'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\''\'''\\''\\''\%''\\''\'''\"', 4);'>> make_echoes.c
+	@printf "%s\n" '			else if (line[guide] == 34)'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\''\'''\\''\\''\\''\"''\\''\'''\"', 4);'>> make_echoes.c
+	@printf "%s\n" '			else if (line[guide] == 36)'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"'$$$$'\"', 2);'>> make_echoes.c
+	@printf "%s\n" '			else if (line[guide] == 92)'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\''\'''\\''\\''\\''\\''\\''\'''\"', 4);'>> make_echoes.c
+	@printf "%s\n" '			else'>> make_echoes.c
+	@printf "%s\n" '				write(1, &line[guide], 1);'>> make_echoes.c
+	@printf "%s\n" '			guide++;'>> make_echoes.c
+	@printf "%s\n" '		}'>> make_echoes.c
+	@printf "%s\n" '		free(line);'>> make_echoes.c
+	@printf "%s\n" '		guide = 0;'>> make_echoes.c
+	@printf "%s\n" '		write(1, '\"''\''>> '\"', 4);'>> make_echoes.c
+	@printf "%s\n" '		while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '	        write(1, '\"''\\'n'\"', 1);		'>> make_echoes.c
+	@printf "%s\n" '	}'>> make_echoes.c
+	@printf "%s\n" '	if(!(((wordy[1][str_len(wordy[1]) - 1] == '\''c'\'') || (wordy[1][str_len(wordy[1]) - 1] == '\''h'\'')) && (wordy[1][str_len(wordy[1]) - 2] == '\''.'\'')))'>> make_echoes.c
+	@printf "%s\n" '	{'>> make_echoes.c
+	@printf "%s\n" '		write(1, '\"''\\'t@chmod 777 '\"', 12);'>> make_echoes.c
+	@printf "%s\n" '		guide = 0;'>> make_echoes.c
+	@printf "%s\n" '		while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '		write(1, '\"''\\'n'\"', 1);'>> make_echoes.c
+	@printf "%s\n" '	}'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"''\\'t@open '\"', 7);'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"''\\'n'\"', 1);'>> make_echoes.c
+	@printf "%s\n" '		write(1, '\"''\\'t@printf '\\''\"'$$(RESET)🦝'\\''\"''\\'n'\"', 24);'>> make_echoes.c
+	@printf "%s\n" '	write(1, RSET, str_len(RSET));'>> make_echoes.c
+	@printf "%s\n" '	close(fd);'>> make_echoes.c
+	@printf "%s\n" '	return(0);'>> make_echoes.c
+	@printf "%s\n" '}'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@sleep 0.5
+	@printf "$(BLACK)🦝"
+
