@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-BUFF_SIZE = 42
+BUFF ?= 42
 
 MINT	= \033[38;2;55;250;133;48;2;0;0;0m
 NEOR	= \033[3m\033[38;2;255;153;51m
@@ -27,6 +27,8 @@ FILES += parrot.txt
 FILES += p_racc.txt
 FILES += test_01.txt
 FILES += test_02.txt
+FILES += tiny.txt
+FILES += locked.txt
 
 all: $(FILES)
 
@@ -39,6 +41,8 @@ cor%:
 	@$(MAKE) build_p_racc.txt
 	@$(MAKE) build_test_01.txt
 	@$(MAKE) build_test_02.txt
+	@$(MAKE) build_tiny.txt
+	@$(MAKE) build_locked.txt
 	@printf "$(B_WI)🦝 Options 🦝:\n$(NEOR)-->\t$(BABY)'make $(MINT)test_mandatory'\n$(NEOR)-->\t$(BABY)'make $(MINT)test_bonus'\n"
 	@printf "$(RESET)"
 
@@ -47,8 +51,8 @@ test_mandatory: $(FILES) get_next_line.h
 	@rm -rf test_gnl_B.c
 	@rm -rf test_gnl_M.c
 	@$(MAKE) build_test_gnl_M.c
-	@printf "\n$(MINT)🦝 cc -D BUFFER_SIZE=$(BUFF_SIZE) -Wall -Werror -Wextra test_gnl.c get_next_line.c get_next_line_utils.c -o tester 🦝 \n\n$(RESET)"
-	@cc -g -o0 -D BUFFER_SIZE=$(BUFF_SIZE) -Wall -Werror -Wextra test_gnl_M.c get_next_line.c get_next_line_utils.c -o tester
+	@printf "\n$(MINT)🦝 cc -D BUFF=$(BUFF) -Wall -Werror -Wextra test_gnl_M.c get_next_line.c get_next_line_utils.c -o tester 🦝 \n\n$(RESET)"
+	@cc -g -o0 -D BUFFER_SIZE=$(BUFF) -Wall -Werror -Wextra test_gnl_M.c get_next_line.c get_next_line_utils.c -o tester
 	@printf "$(B_WI)for more info, run$(BABY) './tester' \n\n$(BLACK)"
 
 test_bonus: $(FILES) get_next_line_bonus.h
@@ -56,13 +60,14 @@ test_bonus: $(FILES) get_next_line_bonus.h
 	@rm -rf test_gnl_M.c
 	@rm -rf test_gnl_B.c
 	@$(MAKE) build_test_gnl_B.c
-	@printf "\n$(MINT)🦝 cc -D BUFFER_SIZE=$(BUFF_SIZE) -Wall -Werror -Wextra test_gnl.c get_next_line_bonus.c get_next_line_utils_bonus.c -o tester 🦝 \n\n$(RESET)"
-	@cc -g -o0 -D BUFFER_SIZE=$(BUFF_SIZE) -Wall -Werror -Wextra test_gnl_B.c get_next_line_bonus.c get_next_line_utils_bonus.c -o tester
+	@printf "\n$(MINT)🦝 cc -D BUFF=$(BUFF) -Wall -Werror -Wextra test_gnl_B.c get_next_line_bonus.c get_next_line_utils_bonus.c -o tester 🦝 \n\n$(RESET)"
+	@cc -g -o0 -D BUFFER_SIZE=$(BUFF) -Wall -Werror -Wextra test_gnl_B.c get_next_line_bonus.c get_next_line_utils_bonus.c -o tester
 	@printf "$(B_WI)for more info, run$(BABY) './tester' \n\n$(BLACK)"
 
 clean: 
 	@rm -rf test_gnl_B.c
 	@rm -rf test_gnl_M.c
+	@rm -rf	echoer
 	@rm -rf $(FILES)
 
 fclean: clean
@@ -96,9 +101,10 @@ build_test_gnl_B.c:
 	@printf "%s\n" ''>> test_gnl_B.c
 	@printf "%s\n" '#define RSET	'\"''\\'033[0m'\"''>> test_gnl_B.c
 	@printf "%s\n" '#define B_WI    '\"''\\'033[1;37m'\"''>> test_gnl_B.c
-	@printf "%s\n" '#define MINT	'\"''\\'033[38;2;55;250;133;48;2;0;0;0m'\"''>> test_gnl_B.c
 	@printf "%s\n" '#define LIME	'\"''\\'033[38;2;0;255;0m'\"''>> test_gnl_B.c
+	@printf "%s\n" '#define BLOD	'\"''\\'033[1;38;2;255;0;0m'\"''>> test_gnl_B.c
 	@printf "%s\n" '#define NEOR	'\"''\\'033[3m'\\'033[38;2;255;153;51m'\"''>> test_gnl_B.c
+	@printf "%s\n" '#define MINT	'\"''\\'033[38;2;55;250;133;48;2;0;0;0m'\"''>> test_gnl_B.c
 	@printf "%s\n" ''>> test_gnl_B.c
 	@printf "%s\n" 'int main(int arc, char *wordy[])'>> test_gnl_B.c
 	@printf "%s\n" '{'>> test_gnl_B.c
@@ -138,7 +144,7 @@ build_test_gnl_B.c:
 	@printf "%s\n" '////////////////// BONUS ///////////////////			'>> test_gnl_B.c
 	@printf "%s\n" '			fdeez = malloc(total_fds * sizeof(int));'>> test_gnl_B.c
 	@printf "%s\n" '			if(!fdeez)'>> test_gnl_B.c
-	@printf "%s\n" '				return (printf(MINT '\"'Algo no esta piolando papa'\\'n'\"' RSET), 1);'>> test_gnl_B.c
+	@printf "%s\n" '				return (printf(MINT '\"'Algo no esta piolando papa. Allocation error'\\'n'\\'n'\"' RSET), 1);'>> test_gnl_B.c
 	@printf "%s\n" '			guide = 0;'>> test_gnl_B.c
 	@printf "%s\n" '			while (guide < total_fds)'>> test_gnl_B.c
 	@printf "%s\n" '			{'>> test_gnl_B.c
@@ -147,7 +153,13 @@ build_test_gnl_B.c:
 	@printf "%s\n" '				else'>> test_gnl_B.c
 	@printf "%s\n" '					fd = open(wordy[guide + 2], O_RDONLY);'>> test_gnl_B.c
 	@printf "%s\n" '				if(fd < 0)'>> test_gnl_B.c
-	@printf "%s\n" '					return (printf(MINT '\"'Algo no esta piolando papa'\\'n'\"' RSET), 1);'>> test_gnl_B.c
+	@printf "%s\n" '				{'>> test_gnl_B.c
+	@printf "%s\n" '					if (!get_next_line(fd))'>> test_gnl_B.c
+	@printf "%s\n" '						printf(LIME '\"''\\'nget_next_line returned NULL 👍'\\'n'\\'n'\"' RSET);'>> test_gnl_B.c
+	@printf "%s\n" '					else'>> test_gnl_B.c
+	@printf "%s\n" '						printf(BLOD '\"''\\'nget_next_line didn'\''t return NULL 👎'\\'n'\\'n'\"' RSET);'>> test_gnl_B.c
+	@printf "%s\n" '					return (printf(MINT '\"''\\'t Algo no esta piolando papa'\\'n'\\'n'\"' RSET), 1);'>> test_gnl_B.c
+	@printf "%s\n" '				}'>> test_gnl_B.c
 	@printf "%s\n" '				fdeez[guide] = fd;'>> test_gnl_B.c
 	@printf "%s\n" '				guide++;'>> test_gnl_B.c
 	@printf "%s\n" '			}'>> test_gnl_B.c
@@ -194,8 +206,12 @@ build_test_gnl_B.c:
 	@printf "%s\n" '	'>> test_gnl_B.c
 	@printf "%s\n" '	if (fd < 0)'>> test_gnl_B.c
 	@printf "%s\n" '	{'>> test_gnl_B.c
-	@printf "%s\n" '		printf(MINT '\"'Algo no esta piolando papa'\\'n'\"' RSET);'>> test_gnl_B.c
-	@printf "%s\n" '		printf(NEOR '\"'note: file names can'\''t start with '\''B'\'' or '\''0'\'''\"' RSET);'>> test_gnl_B.c
+	@printf "%s\n" '		if (!get_next_line(fd))'>> test_gnl_B.c
+	@printf "%s\n" '			printf(LIME '\"''\\'nget_next_line returned NULL 👍'\\'n'\\'n'\"' RSET);'>> test_gnl_B.c
+	@printf "%s\n" '		else'>> test_gnl_B.c
+	@printf "%s\n" '			printf(BLOD '\"''\\'nget_next_line didn'\''t return NULL 👎'\\'n'\\'n'\"' RSET);'>> test_gnl_B.c
+	@printf "%s\n" '		printf(MINT '\"''\\'t Algo no esta piolando papa'\\'n'\"' RSET);'>> test_gnl_B.c
+	@printf "%s\n" '		printf(NEOR '\"''\\'t note: file names can'\''t start with '\''B'\'' or '\''0'\'''\\'n'\\'n'\"' RSET);'>> test_gnl_B.c
 	@printf "%s\n" '		return (1);'>> test_gnl_B.c
 	@printf "%s\n" '	}'>> test_gnl_B.c
 	@printf "%s\n" '	while ((line = get_next_line(fd)) != NULL)'>> test_gnl_B.c
@@ -315,9 +331,10 @@ build_test_gnl_M.c:
 	@printf "%s\n" ''>> test_gnl_M.c
 	@printf "%s\n" '#define RSET	'\"''\\'033[0m'\"''>> test_gnl_M.c
 	@printf "%s\n" '#define B_WI    '\"''\\'033[1;37m'\"''>> test_gnl_M.c
-	@printf "%s\n" '#define MINT	'\"''\\'033[38;2;55;250;133;48;2;0;0;0m'\"''>> test_gnl_M.c
 	@printf "%s\n" '#define LIME	'\"''\\'033[38;2;0;255;0m'\"''>> test_gnl_M.c
+	@printf "%s\n" '#define BLOD	'\"''\\'033[1;38;2;255;0;0m'\"''>> test_gnl_M.c
 	@printf "%s\n" '#define NEOR	'\"''\\'033[3m'\\'033[38;2;255;153;51m'\"''>> test_gnl_M.c
+	@printf "%s\n" '#define MINT	'\"''\\'033[38;2;55;250;133;48;2;0;0;0m'\"''>> test_gnl_M.c
 	@printf "%s\n" ''>> test_gnl_M.c
 	@printf "%s\n" 'int main(int arc, char *wordy[])'>> test_gnl_M.c
 	@printf "%s\n" '{'>> test_gnl_M.c
@@ -345,8 +362,12 @@ build_test_gnl_M.c:
 	@printf "%s\n" '	'>> test_gnl_M.c
 	@printf "%s\n" '	if (fd < 0)'>> test_gnl_M.c
 	@printf "%s\n" '	{'>> test_gnl_M.c
-	@printf "%s\n" '		printf(MINT '\"'Algo no esta piolando papa'\\'n'\"' RSET);'>> test_gnl_M.c
-	@printf "%s\n" '		printf(NEOR '\"'note: file names can'\''t start with '\''B'\'' or '\''0'\'''\"' RSET);'>> test_gnl_M.c
+	@printf "%s\n" '		if (!get_next_line(fd))'>> test_gnl_M.c
+	@printf "%s\n" '			printf(LIME '\"''\\'nget_next_line returned NULL 👍'\\'n'\\'n'\"' RSET);'>> test_gnl_M.c
+	@printf "%s\n" '		else'>> test_gnl_M.c
+	@printf "%s\n" '			printf(BLOD '\"''\\'nget_next_line didn'\''t return NULL 👎'\\'n'\\'n'\"' RSET);'>> test_gnl_M.c
+	@printf "%s\n" '		printf(MINT '\"''\\'tAlgo no esta piolando papa'\\'n'\"' RSET);'>> test_gnl_M.c
+	@printf "%s\n" '		printf(NEOR '\"''\\'tnote: file names can'\''t start with '\''B'\'' or '\''0'\'''\\'n'\\'n'\"' RSET);'>> test_gnl_M.c
 	@printf "%s\n" '		return (1);'>> test_gnl_M.c
 	@printf "%s\n" '	}'>> test_gnl_M.c
 	@printf "%s\n" '	while ((line = get_next_line(fd)) != NULL)'>> test_gnl_M.c
@@ -2101,3 +2122,186 @@ build_corc:
 	@sleep 0.25
 	@printf "$(BLACK)"
 
+
+build_tiny.txt:
+	@printf "$(NEOR) Building tiny.txt... $(RESET)"
+	@printf "$(MINT)🦝\n\n"
+	@> tiny.txt
+	@printf "%s" 'I'\''m so tiny.'>> tiny.txt
+	@chmod 777 tiny.txt
+	@sleep 0.5
+	@printf "$(BLACK)"
+
+build_locked.txt:
+	@printf "$(NEOR) Building locked.txt... $(RESET)"
+	@printf "$(MINT)🦝\n\n"
+	@> locked.txt
+	@printf "%s" 'nope'>> locked.txt
+	@chmod 000 locked.txt
+	@sleep 0.5
+	@printf "$(BLACK)"
+
+
+echoer:
+	@printf "$(NEOR) Building make_echoes.c... $(RESET)"
+	@printf "$(MINT)🦝\n\n"
+	@> make_echoes.c
+	printf "%s\n" '/* ************************************************************************** */'>> make_echoes.c
+	printf "%s\n" '/*                                                                            */'>> make_echoes.c
+	printf "%s\n" '/*                                                        :::      ::::::::   */'>> make_echoes.c
+	printf "%s\n" '/*   make_echoes.c                                      :+:      :+:    :+:   */'>> make_echoes.c
+	printf "%s\n" '/*                                                    +:+ +:+         +:+     */'>> make_echoes.c
+	printf "%s\n" '/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */'>> make_echoes.c
+	printf "%s\n" '/*                                                +#+#+#+#+#+   +#+           */'>> make_echoes.c
+	printf "%s\n" '/*   Created: 2025/06/08 15:18:45 by lde-san-          #+#    #+#             */'>> make_echoes.c
+	printf "%s\n" '/*   Updated: 2025/06/08 15:38:56 by lde-san-         ###   ########.fr       */'>> make_echoes.c
+	printf "%s\n" '/*                                                                            */'>> make_echoes.c
+	printf "%s\n" '/* ************************************************************************** */'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" '#include '\"'get_next_line_bonus.h'\"''>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" '#define RSET	'\"''\\'033[0m'\"''>> make_echoes.c
+	@printf "%s\n" '#define B_WI    '\"''\\'033[1;37m'\"''>> make_echoes.c
+	@printf "%s\n" '#define BABY	'\"''\\'033[38;2;0;255;247m'\"''>> make_echoes.c
+	@printf "%s\n" '#define MINT	'\"''\\'033[38;2;55;250;133m'\"''>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" '/*TLDR; This program requires the get_next_line_bonus function. It uses it to read'>> make_echoes.c
+	@printf "%s\n" 'each line from the selected file so it can be printed while simultaneously formated'>> make_echoes.c
+	@printf "%s\n" 'in a way that the file can be converted into a makefile rule. The result of running'>> make_echoes.c
+	@printf "%s\n" 'this program with the name of a file present in the directory, should be an output '>> make_echoes.c
+	@printf "%s\n" 'on the terminal that can be copy and pasted into the desired makefile. Enjoy <3*/'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" 'size_t str_len(char *str)'>> make_echoes.c
+	@printf "%s\n" '{'>> make_echoes.c
+	@printf "%s\n" '	size_t guide;'>> make_echoes.c
+	@printf "%s\n" '	'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	'>> make_echoes.c
+	@printf "%s\n" '	if (!str)'>> make_echoes.c
+	@printf "%s\n" '		return (0);'>> make_echoes.c
+	@printf "%s\n" '	while(str[guide])'>> make_echoes.c
+	@printf "%s\n" '	{'>> make_echoes.c
+	@printf "%s\n" '		guide++;'>> make_echoes.c
+	@printf "%s\n" '	}'>> make_echoes.c
+	@printf "%s\n" '	return(guide);'>> make_echoes.c
+	@printf "%s\n" '}'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" 'int compare(char *s1, char *s2)'>> make_echoes.c
+	@printf "%s\n" '{'>> make_echoes.c
+	@printf "%s\n" '	size_t guide;'>> make_echoes.c
+	@printf "%s\n" '	'>> make_echoes.c
+	@printf "%s\n" '	if (!s1 || !s2)'>> make_echoes.c
+	@printf "%s\n" '		return(0);'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	if (str_len(s1) == str_len(s2))'>> make_echoes.c
+	@printf "%s\n" '	{'>> make_echoes.c
+	@printf "%s\n" '		while ((s1[guide] == s2[guide]) && (s1[guide] && s2[guide]))'>> make_echoes.c
+	@printf "%s\n" '			guide++;'>> make_echoes.c
+	@printf "%s\n" '	}'>> make_echoes.c
+	@printf "%s\n" '	if (!(s1[guide]) && !(s2[guide]))'>> make_echoes.c
+	@printf "%s\n" '		return (1);'>> make_echoes.c
+	@printf "%s\n" '	return (0);'>> make_echoes.c
+	@printf "%s\n" '}'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" 'int main( int arc, char **wordy)'>> make_echoes.c
+	@printf "%s\n" '{'>> make_echoes.c
+	@printf "%s\n" '	int fd;'>> make_echoes.c
+	@printf "%s\n" '	char *line;'>> make_echoes.c
+	@printf "%s\n" '	int guide;'>> make_echoes.c
+	@printf "%s\n" '	char *head_check = '\"'/* ************************************************************************** */'\\'n'\"';'>> make_echoes.c
+	@printf "%s\n" '	int hat_shoe;'>> make_echoes.c
+	@printf "%s\n" '	'>> make_echoes.c
+	@printf "%s\n" '	if (arc != 2)'>> make_echoes.c
+	@printf "%s\n" '		return (write(1, '\"'No la das mrk: Incorrect argument count'\"', 39), 1);'>> make_echoes.c
+	@printf "%s\n" '	'>> make_echoes.c
+	@printf "%s\n" '	fd = open(wordy[1], O_RDONLY);'>> make_echoes.c
+	@printf "%s\n" '	if (fd < 0)'>> make_echoes.c
+	@printf "%s\n" '		return (1);'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@printf "%s\n" '	write(1, B_WI, str_len(B_WI));'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"'build_'\"', 7);'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"':'\\'n'\"', 2);'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"''\\'t@printf '\\''\"'$$(NEOR) Building '\"', 27);'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"'... $$(RESET)'\\''\"''\\'n'\\'t@printf '\\''\"'$$(MINT)🦝'\\''\\'n'\\''\\'n'\\''\"''\\'n'\\'t@> '\"', 45);'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"''\\'n'\"', 1);'>> make_echoes.c
+	@printf "%s\n" '	hat_shoe = 0;'>> make_echoes.c
+	@printf "%s\n" '	while((line = get_next_line(fd)) != NULL)'>> make_echoes.c
+	@printf "%s\n" '	{	'>> make_echoes.c
+	@printf "%s\n" '		if (compare(head_check, line) == 1)'>> make_echoes.c
+	@printf "%s\n" '				hat_shoe++;'>> make_echoes.c
+	@printf "%s\n" '		if (hat_shoe == 1)'>> make_echoes.c
+	@printf "%s\n" '		{'>> make_echoes.c
+	@printf "%s\n" '			write(1, BABY, str_len(BABY));'>> make_echoes.c
+	@printf "%s\n" '			write(1, '\"''\\'tprintf '\\''\"''\%'s'\\''\\'n'\\''\"' '\\''\'''\"', 16);'>> make_echoes.c
+	@printf "%s\n" '		}'>> make_echoes.c
+	@printf "%s\n" '		else if (hat_shoe > 1 || hat_shoe == 0)'>> make_echoes.c
+	@printf "%s\n" '		{'>> make_echoes.c
+	@printf "%s\n" '			if (hat_shoe == 2)'>> make_echoes.c
+	@printf "%s\n" '			{'>> make_echoes.c
+	@printf "%s\n" '				hat_shoe++;'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\'tprintf '\\''\"''\%'s'\\''\\'n'\\''\"' '\\''\'''\"', 16);'>> make_echoes.c
+	@printf "%s\n" '			}'>> make_echoes.c
+	@printf "%s\n" '			else'>> make_echoes.c
+	@printf "%s\n" '			{'>> make_echoes.c
+	@printf "%s\n" '				write(1, MINT, str_len(MINT));'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\'t@printf '\\''\"''\%'s'\\''\\'n'\\''\"' '\\''\'''\"', 17);'>> make_echoes.c
+	@printf "%s\n" '			}'>> make_echoes.c
+	@printf "%s\n" '		}'>> make_echoes.c
+	@printf "%s\n" '		guide = 0;'>> make_echoes.c
+	@printf "%s\n" '		while(line[guide])'>> make_echoes.c
+	@printf "%s\n" '		{'>> make_echoes.c
+	@printf "%s\n" '		        if (line[guide] == '\'''\\'n'\'')'>> make_echoes.c
+	@printf "%s\n" '		                break ;'>> make_echoes.c
+	@printf "%s\n" '			else if (line[guide] == 39)'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\''\'''\\''\\''\\''\'''\\''\'''\"', 4);'>> make_echoes.c
+	@printf "%s\n" '			else if (line[guide] == 37)'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\''\'''\\''\\''\%''\\''\'''\"', 4);'>> make_echoes.c
+	@printf "%s\n" '			else if (line[guide] == 34)'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\''\'''\\''\\''\\''\"''\\''\'''\"', 4);'>> make_echoes.c
+	@printf "%s\n" '			else if (line[guide] == 36)'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"'$$$$'\"', 2);'>> make_echoes.c
+	@printf "%s\n" '			else if (line[guide] == 92)'>> make_echoes.c
+	@printf "%s\n" '				write(1, '\"''\\''\'''\\''\\''\\''\\''\\''\'''\"', 4);'>> make_echoes.c
+	@printf "%s\n" '			else'>> make_echoes.c
+	@printf "%s\n" '				write(1, &line[guide], 1);'>> make_echoes.c
+	@printf "%s\n" '			guide++;'>> make_echoes.c
+	@printf "%s\n" '		}'>> make_echoes.c
+	@printf "%s\n" '		free(line);'>> make_echoes.c
+	@printf "%s\n" '		guide = 0;'>> make_echoes.c
+	@printf "%s\n" '		write(1, '\"''\''>> '\"', 4);'>> make_echoes.c
+	@printf "%s\n" '		while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '	        write(1, '\"''\\'n'\"', 1);		'>> make_echoes.c
+	@printf "%s\n" '	}'>> make_echoes.c
+	@printf "%s\n" '	if(!(((wordy[1][str_len(wordy[1]) - 1] == '\''c'\'') || (wordy[1][str_len(wordy[1]) - 1] == '\''h'\'')) && (wordy[1][str_len(wordy[1]) - 2] == '\''.'\'')))'>> make_echoes.c
+	@printf "%s\n" '	{'>> make_echoes.c
+	@printf "%s\n" '		write(1, '\"''\\'t@chmod 777 '\"', 12);'>> make_echoes.c
+	@printf "%s\n" '		guide = 0;'>> make_echoes.c
+	@printf "%s\n" '		while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '		write(1, '\"''\\'n'\"', 1);'>> make_echoes.c
+	@printf "%s\n" '	}'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"''\\'t@open '\"', 7);'>> make_echoes.c
+	@printf "%s\n" '	guide = 0;'>> make_echoes.c
+	@printf "%s\n" '	while (wordy[1][guide])'>> make_echoes.c
+	@printf "%s\n" '			write(1, &wordy[1][guide++], 1);'>> make_echoes.c
+	@printf "%s\n" '	write(1, '\"''\\'n'\"', 1);'>> make_echoes.c
+	@printf "%s\n" '		write(1, '\"''\\'t@printf '\\''\"'$$(RESET)🦝'\\''\"''\\'n'\"', 24);'>> make_echoes.c
+	@printf "%s\n" '	write(1, RSET, str_len(RSET));'>> make_echoes.c
+	@printf "%s\n" '	close(fd);'>> make_echoes.c
+	@printf "%s\n" '	return(0);'>> make_echoes.c
+	@printf "%s\n" '}'>> make_echoes.c
+	@printf "%s\n" ''>> make_echoes.c
+	@cc -g -O0 make_echoes.c get_next_line_bonus.c get_next_line_utils_bonus.c -o echoer
+	@rm make_echoes.c
+	@sleep 0.5
+	@printf "$(BLACK)🦝"
