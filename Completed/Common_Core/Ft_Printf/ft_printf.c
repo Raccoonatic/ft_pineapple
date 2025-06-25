@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   racc_putstr.c                                      :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 22:03:08 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/05/28 22:03:14 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/05/28 22:00:55 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/05/28 22:01:59 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	racc_putstr(char *s, int *counter)
+int	ft_printf(const char *format, ...)
 {
-	int	guide;
+	va_list	arg;
+	int		counter;
 
-	guide = 0;
-	if (!s)
+	va_start(arg, format);
+	counter = 0;
+	while (*format)
 	{
-		racc_putstr("(null)", counter);
-		return ;
+		if (*format == '%')
+			racc_format_check(arg, *(++format), &counter);
+		else
+			racc_putchar(*format, &counter);
+		format++;
+		if (counter == -1)
+			break ;
 	}
-	while (s[guide])
-	{
-		racc_putchar(s[guide], counter);
-		guide++;
-	}
+	va_end(arg);
+	return (counter);
 }

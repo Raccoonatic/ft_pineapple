@@ -12,13 +12,11 @@
 
 NAME = libftprintf.a
 
-COMPILE = cc -Wall -Werror -Wextra -Iinc
+COMPILE = cc -Wall -Werror -Wextra -I.
 
 FILE = ft_printf.c
-FILE += racc_putstr.c
-FILE += racc_putchar.c
-FILE += racc_putadrs.c
-FILE += racc_putnbs.c
+FILE += racc_printchars.c
+FILE += racc_printnbs.c
 FILE += racc_format_check.c
 
 OBJ = $(FILE:%.c=%.o)
