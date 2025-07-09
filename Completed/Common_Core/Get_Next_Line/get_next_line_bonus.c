@@ -67,7 +67,7 @@ char	*get_next_line(int fd)
 	int				read_out;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= MAX_FD)
-		return (NULL);
+		return (racc_delnode(&head_hub[fd], 1), NULL);
 	while (racc_findend(&head_hub[fd]) == -1)
 	{
 		read_out = extract_buffer(&head_hub[fd], fd);
