@@ -60,6 +60,7 @@ all:
 	@printf "$(MINT_B) 🦝 Miss VIM? 🦝$(RESET)\n"
 	@printf "$(MINT)PARA DE SOFRER RAPAZ! I got you 🤙$(RESET)\n"
 	@sleep 1
+	@sudo apt install vim
 	rm -f ~/.vimrc
 	echo 'set noexpandtab' > ~/.vimrc
 	echo 'set tabstop=4' >> ~/.vimrc
