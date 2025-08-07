@@ -1,0 +1,11 @@
+[Unit]
+Description=The script that she told you not to worry about (monitoring at startup)
+After=network.target
+
+[Service]
+Type=simple
+ExecStartPre=/bin/bash -c 'while ! who | grep -qE "tty|pts"; do sleep 0.1; done'
+ExecStart=/home/lde-san-/monitoring.sh
+
+[Install]
+WantedBy=multi-user.target

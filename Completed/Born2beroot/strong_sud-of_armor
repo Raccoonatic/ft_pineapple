@@ -1,0 +1,8 @@
+Defaults	passwd_tries=3
+Defaults	badpass_message="You’ve done messed up my boy. Sucks to be you"
+Defaults	log_input
+Defaults	log_output
+Defaults	logfile="/var/log/sudo/sudo_iorecord"
+Defaults	iolog_dir="/var/log/sudo"
+Defaults	requiretty
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
