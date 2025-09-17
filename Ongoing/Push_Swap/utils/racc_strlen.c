@@ -6,15 +6,15 @@
 /*   By: lde-san- <lde-san-@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 21:05:47 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/08/05 20:09:14 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/17 18:58:58 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pushswap.h"
 
-int	racc_strlen(char *str)
+size_t	racc_strlen(char *str)
 {
-	int	counter;
+	size_t	counter;
 
 	counter = 0;
 	while (str[counter])

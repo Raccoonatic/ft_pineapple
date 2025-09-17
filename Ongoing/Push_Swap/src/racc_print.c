@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   racc_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/05 19:54:21 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/08/05 20:24:58 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/05/28 22:00:55 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/09/17 15:36:59 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int main (void)
+int	racc_print(int fd, const char *format, ...)
 {
-	racc_print(MINT"qlq contigo? %e %e %e?", "yep", "nope", "racc");
-	return (0);
+	va_list	arg;
+	int		counter;
+
+	va_start(arg, format);
+	counter = 0;
+	while (*format)
+	{
+		if (*format == '%')
+			racc_format_check(fd, arg, *(++format), &counter);
+		else
+			racc_putchar(fd, *format, &counter);
+		format++;
+		if (counter == -1)
+			break ;
+	}
+	va_end(arg);
+	return (counter);
 }

@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   racc_print.c                                       :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 22:00:55 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/08/05 19:04:49 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/09/17 20:21:15 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/09/17 23:19:40 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	racc_print(const char *format, ...)
+void fail(void)
 {
-	va_list	arg;
-	int		counter;
+	racc_print(2,BLOD"Error\n");
+	exit(1);
+}
 
-	va_start(arg, format);
-	counter = 0;
-	while (*format)
+int	main( int arc, char *wordy[])
+{
+	t_list	*head;
+
+	if(arc < 2)
+		return(0);
+	if (!(head = input_manager(arc, wordy)))
 	{
-		if (*format == '%')
-			racc_format_check(arg, *(++format), &counter);
-		else
-			racc_putchar(*format, &counter);
-		format++;
-		if (counter == -1)
-			break ;
+		racc_delnode(&head);
+		fail;
 	}
-	va_end(arg);
-	return (counter);
 }
