@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:33:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/17 18:59:20 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:49:25 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,17 @@ void	racc_putstr(int fd, char *s, int mode, int *counter);
 void	racc_putnbs(int fd, unsigned int n, int *counter, char *base);
 void	racc_putadrs(int fd, uintptr_t n, int *counter, char *base);
 size_t	racc_strlen(char *str);
+
+typedef struct s_node
+{
+	int				nbr;
+	int				stack_index;
+	int				move_price;
+	int				tropical;
+	int				bargain;
+	struct	s_node	*target;
+	struct  s_node	*next;
+	struct  s_node	*prev;
+}	t_node;
 
 #endif

@@ -6,26 +6,28 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:14:28 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/18 00:13:04 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:56:38 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pushswap.h"
 
-int	input_manager(int arc, const char *wordy[])
+t_node *input_manager(int arc, const char *wordy[])
 {
 	int		guide;
-	size_t	input_length;
+	size_t	count;
 	char	*input;
 	
 	guide = 1;
-	input_length = 0;
+	count = 0;
 	while (guide < arc)
 	{
 		char_check(wordy[guide])
-		input_length += (racc_strlen(wordy[guide]) + 1)
-		guide++;
+		count += (racc_strlen(wordy[guide++]) + 1)
 	}
+	input = char_spalloc(count);
+	populate(input, arc, wordy);
+	return(list_gen(input));
 }
 
 static void char_check(char *w)
@@ -49,5 +51,26 @@ static void char_check(char *w)
 			fail();
 	}
 	if (i == 0 || nums == 0)
+		fail();
+}
+
+static void populate(char *space, int arc, char *wordy[])
+{
+	size_t	guidealpha;
+	size_t	guidebeta;
+	int		guidegamma;
+	
+	guidealpha = 0;
+	guidegamma = 1;
+		
+	while(guidegamma < arc)
+	{
+		guidebeta = 0;
+		while(wordy[guidegamma][guidebeta])
+			space[guidealpha++] = wordy[guidegamma][guidebeta++];
+		guidealpha++;
+		guidegamma++;
+	}
+	if (space[guidealpha])
 		fail();
 }

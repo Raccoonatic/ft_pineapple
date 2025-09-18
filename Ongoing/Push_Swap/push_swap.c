@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:21:15 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/17 23:19:40 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/18 19:50:34 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void fail(void)
 
 int	main( int arc, char *wordy[])
 {
-	t_list	*head;
+	t_node	*head;
 
 	if(arc < 2)
 		return(0);
