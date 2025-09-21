@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:14:28 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/18 19:56:38 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:07:25 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_node *input_manager(int arc, const char *wordy[])
 		count += (racc_strlen(wordy[guide++]) + 1)
 	}
 	input = char_spalloc(count);
+	if (!input)
+		fail();
 	populate(input, arc, wordy);
 	return(list_gen(input));
 }

@@ -6,17 +6,11 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:21:15 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/18 19:50:34 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/20 21:49:07 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-
-void fail(void)
-{
-	racc_print(2,BLOD"Error\n");
-	exit(1);
-}
 
 int	main( int arc, char *wordy[])
 {
@@ -25,8 +19,5 @@ int	main( int arc, char *wordy[])
 	if(arc < 2)
 		return(0);
 	if (!(head = input_manager(arc, wordy)))
-	{
-		racc_delnode(&head);
-		fail;
-	}
+		ps_delnode(&head, 1);
 }
