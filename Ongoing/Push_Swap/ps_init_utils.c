@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_utils.c                                         :+:      :+:    :+:   */
+/*   ps_init_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 18:30:04 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/20 21:59:15 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:20:58 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ char	*ps_spalloc(size_t size)
 
 	guide = 0;
 	if (size == 0)
-		return(NULL);
+		return (NULL);
 	allocated = malloc((size * sizeof(char)) + 1);
 	if (!allocated)
-		return(NULL);
+		return (NULL);
 	while (guide < size)
 	{
 		allocated[guide] = ' ';
@@ -45,10 +45,9 @@ size_t	ps_strlen(char *str)
 }
 /*Calculates the length of a "Valid" C string. Excluding the \0 at the end*/
 
-void fail(void)
+void	fail(void)
 {
-	racc_print(2,BLOD"Error\n");
+	racc_print(2, BLOD"Error\n");
 	exit(1);
 }
-
 /*Prints Error\n to the stderror, and then exits with the EXIT_FAILURE signal*/

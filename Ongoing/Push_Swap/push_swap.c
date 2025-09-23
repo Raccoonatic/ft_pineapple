@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:21:15 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/20 21:49:07 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/21 12:17:02 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 int	main( int arc, char *wordy[])
 {
-	t_node	*head;
+	t_node	*stacka;
+	t_node	*stackb;
 
-	if(arc < 2)
-		return(0);
-	if (!(head = input_manager(arc, wordy)))
-		ps_delnode(&head, 1);
+	stacka = NULL;
+	stackb = NULL;
+	if (arc < 2)
+		return (0);
+	stacka = input_manager(arc, wordy);
+	if (!stacka)
+		ps_delnode(&stacka, 1);
 }

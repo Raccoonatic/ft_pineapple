@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:33:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/20 22:10:54 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/21 12:18:51 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ typedef struct s_node
 	int				move_price;
 	int				cheapest;
 	t_tropicool		tropic;
-	struct	s_node	*target;
-	struct  s_node	*next;
-	struct  s_node	*prev;
-	struct	s_node	*tail;
+	struct s_node	*target;
+	struct s_node	*next;
+	struct s_node	*prev;
+	struct s_node	*tail;
 }	t_node;
 
 #endif

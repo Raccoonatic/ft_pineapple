@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 19:59:10 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/21 01:18:26 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/21 12:02:52 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_node	*list_gen(char *input)
 {
-	t_node	*stacka;
 	size_t	index;
+	t_node	*stacka;
 
 	index = 0;
 	stacka = NULL;
@@ -30,6 +30,8 @@ t_node	*list_gen(char *input)
 	free(input)
 	return (stacka);
 }
+/* Takes a string containing all input values and calls functions sequentially
+to, in short, transform them into stack a */
 
 static long	ps_atol(const char *str, size_t *guide)
 {
@@ -53,6 +55,9 @@ static long	ps_atol(const char *str, size_t *guide)
 	}
 	return (result * sign);
 }
+/*Skips any valid whitespaces and turns the incoming string into its "long"
+equivalent. We don't guard against long overflow because the subject allows
+Undefined Behaviour*/
 
 t_node	*ps_new_node(long n)
 {
@@ -74,6 +79,11 @@ t_node	*ps_new_node(long n)
 	result -> tail = NULL;
 	return (result);
 }
+/*Validates if the number resulting from the ps_atol function is within the
+acceptable int range. Allocates memory for a new node and initializes the 
+struct's variables. The incoming value is type casted to an int, all pointers
+are set to NULL and "tropic" is set to the macro ECUAD, which simply expands
+to 0 on precomp*/
 
 void	ps_delnode(t_node **head, int go_to_fail)
 {
@@ -91,6 +101,9 @@ void	ps_delnode(t_node **head, int go_to_fail)
 		fail();
 	return ;
 }
+/*Takes a pointer to the head of the linked list and frees all nodes in
+descending order, finally setting the incoming pointer to NULL. The go_to_fail
+flag is then verified to check if the program should then exit on error*/
 
 int	ps_add_node(t_node **head, t_node *new)
 {
@@ -117,3 +130,7 @@ int	ps_add_node(t_node **head, t_node *new)
 	(*head)-> tail = new;
 	return (1);
 }
+/*Appends the new node to the end of the list. The Tail pointer keeps the
+address of the last pointer to avoid traversing the list with each new
+node, however, a parsing algorithm is still in place as a failsafe. In the 
+process of appending, the tail, prev and next nodes are assigned accordingly*/
