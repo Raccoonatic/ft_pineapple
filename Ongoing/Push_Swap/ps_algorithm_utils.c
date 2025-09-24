@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 13:23:47 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/21 15:32:16 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/24 20:41:51 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,4 @@ num member of the first one. This way it checks if the smallest is at the
 top, and if there is, it continues the loop, advances to the next node and 
 repeates the process. If at any point the smallest is at the bottom the
 loop breaks and it returns 0. Otherwise, it eventually hits the end of the
-list, confirming that the list is sorted.*/
+list, confirming that the list is sorted. 0 = NOT_SORTED*/
