@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_algorithm_utils.c                               :+:      :+:    :+:   */
+/*   ps_algorithm_utils_alpha.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 13:23:47 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/24 20:41:51 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:53:30 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,28 @@ returns the final count*/
 
 void	ps_set_index(t_node *head)
 {
+	size_t	length;
+
 	if (!head)
 		return ;
-	head -> stack_index = 1;
+	length = ps_count_nodes(head);
+	head -> stack_index = 0;
+	head -> tropic = CACER;
 	head = head -> next;
 	while (head)
 	{
 		head -> stack_index = (head -> prev -> stack_index) + 1;
+		head -> tropic = CACER;
+		if (length / 2 < head -> stack_index)
+			head -> tropic = CAPRI;
 		head = head -> next;
 	}
 }
-/*Sets the stack_index of the node pointed by "head" to 1 so the subsequent
+/*Sets the stack_index of the node pointed by "head" to 0 so the subsequent
 nodes may be n+1. This is done by traversing the pointer forward and then
-using the prev pointer to access the previous index member and adding 1*/
+using the prev pointer to access the previous index member and adding 1.
+During this process, the node gets assigned a tropic to identify if they are
+either in the top half (CACER) or the bottom half (CAPRI)*/
 
 t_node	*ps_maxinum(t_node *head)
 {
@@ -64,11 +73,38 @@ t_node	*ps_maxinum(t_node *head)
 	return (result);
 }
 /*Stores the value of the num member in the node pointed by head, to then
-compare i to each subsequent node from the list, as head traverses to it.
+compare it to each subsequent node from the list, as head traverses to it.
 Every time a num member is bigger than "biggie", its value is assigned to
 biggie and the pointer to this node is stored in result. This way, when
 end of the list is reached, result will be pointing to the node with the
 biggest num member*/
+
+t_node	*ps_mininum(t_node *head)
+{
+	int		baby;
+	t_node	*result;
+
+	if (!head)
+		return (NULL);
+	baby = head -> num;
+	result = head;
+	while (head)
+	{
+		if (baby > head -> num)
+		{
+			baby = head -> num;
+			result = head;
+		}
+		head = head -> next;
+	}
+	return (result);
+}
+/*Stores the value of the num member in the node pointed by head, to then
+compare it to each subsequent node from the list, as head traverses to it.
+Every time a num member is smaller than "baby", its value is assigned to
+baby, nobody puts baby in a corner, and the pointer to this node is stored
+in result. This way, when end of the list is reached, result will be pointing
+to the node with the smallest num member*/
 
 int	ps_sort_check(t_node *head)
 {
