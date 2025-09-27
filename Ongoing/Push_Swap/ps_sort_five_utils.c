@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 17:51:30 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/26 22:59:06 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/27 11:47:22 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_node	*ps_find_big_baby(t_node *head, int baby)
 	}
 	return (res);
 }
+/*Compares the smallest number in the list with the other four nodes to
+find the second smallest*/
 
 void	ps_sf_push(t_node **stacka, t_node **stackb, t_node *target)
 {
@@ -35,17 +37,21 @@ void	ps_sf_push(t_node **stacka, t_node **stackb, t_node *target)
 	ps_push(stacka, stackb, 'b');
 	return ;
 }
+/*Verifies wether the "target" node is on the bottom or top half of the 
+list, to find the most effective way to rotate it to the top. CACER means
+they are on the top so it does ra, and CAPRI means bottom so rra. In both
+cases after the target is at the top, it pushes it to stackb*/
 
 void	ps_sf_sort_rems(t_node **stacka, t_node **stackb)
 {
 	t_node  *biggie;
 
-	if (!ps_sort_check(*stack_b))
+	if (!ps_sort_check(*stackb))
 	{
 		ps_sort_three(stacka, 'a');
 		return ;
 	}
-	if (ps_sort_check(*stack_a) && !ps_sort_check(*stack_b))
+	if (ps_sort_check(*stacka) && !ps_sort_check(*stackb))
 		return ;
 	biggie = ps_maxinum(*stacka);
 	ps_refresh_meta(*stacka);
@@ -53,7 +59,7 @@ void	ps_sf_sort_rems(t_node **stacka, t_node **stackb)
 		ps_rotate(stacka, stackb, '\0')
 	else if (biggie -> stack_index == 1)
 		ps_revotate(stacka, stackb, '\0')
-	if ((*stacka)-> num > (*stack)-> next -> num)
+	if ((*stacka)-> num > (*stacka)-> next -> num)
 	{
 		if (!ps_sort_check(*stack_b))
 			ps_swap(stacka, NULL, 'a');
@@ -62,3 +68,9 @@ void	ps_sf_sort_rems(t_node **stacka, t_node **stackb)
 	}
 	return ;
 }
+/*Takes care of sorting the reminding nodes. Since there is potential
+for the nodes on stack to not be in oposite sorted order, it constantly
+checks if the stack isn't sorted, to perform the simultaneous swap or 
+rotate (ss, rr, rrr). This way the nodes are pushed back in order after
+the function call. It is essentially a more complex sort_three algorithm
+that efficiently moves nodes in stackb if necessary. */

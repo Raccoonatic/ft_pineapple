@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 20:37:04 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/26 22:59:13 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/27 11:47:53 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,21 @@ void    ps_sort_five(t_node **stack_a, t_node **stack_b)
 	baby = ps_mininum(*stack_a);
 	ps_sf_push(stack_a, stack_b, baby);
 	ps_sf_sort_rems(stack_a, stack_b);
+	if (ps_sort_check(*stack_b))
+		ps_swap(stackb, NULL, 'b');
 	ps_push(stack_b, stack_a, 'a');
 	ps_push(stack_b, stack_a, 'a');
 	return;
 }
+/*Sorts a list of 5 nodes by finding the 2 smallest nodes, pushing
+them to be, performing a sort_three-like movement and pushing them 
+back. There is a specific util file for this function, that contains
+the functions to find the 2nd smallest, to rotate or revotate
+depending on the node to be pushed, and to perform the sort_three-like
+movements. It analizes the cost of pushing either the smallest or
+second smallest first to guarantee the minimum number of movements.
+Since this means that stackb won't always end up in the correct order,
+ps_sf_sort_rems makes sure to use the the simultaneous swap or rotate 
+(ss, rr, rrr) when necessary. And if it doesn't, a final check is in
+place to ensure stackb is correctly set, before the nodes are pushed
+back. */
