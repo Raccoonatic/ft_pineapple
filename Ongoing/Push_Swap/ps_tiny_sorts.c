@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 20:37:04 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/27 11:47:53 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/29 10:53:37 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ps_sort_three(t_node **stack, char ab)
 	if (ps_sort_check(*stack))
 		return ;
 	biggie = ps_maxinum(*stack);
-	ps_refresh_meta(*stack);
+	ps_refresh_meta(*stack, NULL);
 	if (biggie -> stack_index == 0)
 		ps_rotate(stack, NULL, ab);
 	else if (biggie -> stack_index == 1)
@@ -47,7 +47,7 @@ void	ps_sort_four(t_node **stack_a, t_node **stack_b)
 	if (ps_sort_check(*stack_a))                                                   
 		return ;    
 	baby = ps_mininum(*stack_a);                                                 
-	ps_refresh_meta(*stack_a);                                                        
+	ps_refresh_meta(*stack_a, NULL);
 	if (baby -> stack_index == 3)
 		ps_revotate(stack_a, NULL, 'a');
 	while((*stack_a)-> num != baby -> num)
@@ -73,7 +73,7 @@ void    ps_sort_five(t_node **stack_a, t_node **stack_b)
 	    return ;
 	baby = ps_mininum(*stack_a);
 	big_baby = ps_find_big_baby(*stack_a, baby -> num);
-	ps_refresh_meta(*stack_a);
+	ps_refresh_meta(*stack_a, NULL);
 	if (big_baby -> move_price < baby -> move_price)
 		ps_sf_push(stack_a, stack_b, big_baby);
 	else
