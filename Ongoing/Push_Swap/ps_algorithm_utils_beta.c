@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 16:53:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/30 14:14:48 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:03:19 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ps_refresh_meta(t_node *heada, t_node *headb)
 	ps_set_index(headb);
 	ps_set_target(heada, headb);
 	ps_set_price(heada, headb);
-
+	ps_set_cheapest(heada);
 }
 
 static void	ps_set_price(t_node *heada, t_node *headb)
@@ -80,8 +80,50 @@ static void	ps_set_target(t_node *heada, t_node *headb)
 }
 static void	ps_set_cheapest(t_node *heada)
 {
-	while (heada) 
+	t_node	best_price;
+	t_node	trav;
+
+	best_price = heada;
+	trav = heada;
+	if (trav -> next)
 	{
-		if (heada -> cheapest)
-			heada -> cheapest = 0;
+		while (trav) 
+		{
+			if (trav -> cheapest)
+				trav -> cheapest = NULL;
+			if (trav -> move_price < best_price -> move_price)
+				best_price = trav;
+			trav = trav -> next;
+		}
 	}
+	while (heada)
+	{
+		heada -> cheapest = best_price;
+		heada = heada -> next;
+	}
+	return ;
+}
+
+void	ps_cheap_rotate(t_node **st1, t_node **st2)
+{
+	if (st2)
+	{
+		while(((*st1)->num != (*st1)-> cheapest -> num)
+			&& ((*st2)->num != (*st1)-> cheapest -> target -> num))
+		{
+			if((*st1)-> cheapest -> tropic == CACER)
+				ps_rotate(st1, st2, '\0');
+			else
+				ps_revotate(st1, st2, '\0');
+		}
+		return;
+	}
+	while((*st1)->num != (*st1)-> cheapest -> num)
+	{
+		if((*st1)-> cheapest -> tropic == CACER)
+			ps_rotate(st1, st2, '\0');
+		else
+			ps_revotate(st1, st2, '\0');
+	}
+	return ;
+}

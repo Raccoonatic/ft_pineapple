@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 19:59:10 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/21 12:02:52 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/02 12:08:12 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ t_node	*ps_new_node(long n)
 	result -> num = (int)n;
 	result -> stack_index = 0;
 	result -> move_price = 0;
-	result -> cheapest = 0;
 	result -> tropic = ECUAD;
+	result -> cheapest = NULL;
 	result -> target = NULL;
 	result -> next = NULL;
 	result -> prev = NULL;
