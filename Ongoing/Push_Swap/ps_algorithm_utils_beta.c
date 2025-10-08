@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 16:53:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/08 19:54:37 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 20:03:03 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ static void	ps_set_target(t_node *heada, t_node *headb)
 
 static void	ps_set_cheapest(t_node *heada)
 {
-	t_node	best_price;
-	t_node	trav;
+	t_node	*best_price;
+	t_node	*trav;
 
 	best_price = heada;
 	trav = heada;
