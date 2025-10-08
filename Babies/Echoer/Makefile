@@ -556,8 +556,6 @@ build_make_echoes.c:
 	@printf "%s\n" '	return(0);'>> make_echoes.c
 	@printf "%s\n" '}'>> make_echoes.c
 	@printf "%s\n" ''>> make_echoes.c
-	@cc -g -O0 make_echoes.c get_next_line_bonus.c get_next_line_bonus_utils.c -o echoer
-	@rm make_echoes.c
 	@sleep 0.5
 	@printf "$(BLACK)🦝"
 
