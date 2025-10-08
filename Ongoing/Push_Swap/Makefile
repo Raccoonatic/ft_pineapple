@@ -6,12 +6,19 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/08 19:32:37 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/08 20:31:38 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 LIB = libpushswap.a
+
+MINT	= \033[38;2;55;250;133;48;2;0;0;0m
+NEOR	= \033[3m\033[38;2;255;153;51m
+B_WI    = \033[1;37m
+RESET	= \033[0m
+BABY	= \033[38;2;0;255;247m
+BLACK	= \033[38;2;0;0;0m
 
 COMPILE = cc -Wall -Werror -Wextra -I.
 
@@ -42,26 +49,39 @@ $(LIB): $(OBJ)
 	ar -rcs $(LIB) $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+	@printf "$(NEOR)"
 	$(COMPILE) -c $< -o $@
+	@printf "$(RESET)"
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(SRC_DIR)%.c: $(SRC_DIR)
+	@printf "$(MINT)"
 	mv $(@:$(SRC_DIR)%=%) $(SRC_DIR)
+	@printf "$(RESET)"
 
 $(SRC_DIR):
 	mkdir -p $(SRC_DIR)
 	cp pushswap.h $(SRC_DIR)
 
 clean:
+	@printf "$(NEOR)"
+	if [ -d $(SRC_DIR) ]; then \
+		for f in $(SRC); do \
+			[ -f "$$f" ] && mv "$$f" .; \
+		done; \
+	fi
+	@printf "$(BABY)"
 	rm -rf $(OBJ_DIR)
-	if [ -d $(SRC_DIR) ]; then mv $(SRC) .; fi
 	rm -rf $(SRC_DIR)
 	rm -rf $(LIB)
+	@printf "$(RESET)"
 
 fclean: clean
+	@printf "$(B_WI)"
 	rm -f $(NAME)
+	@printf "$(RESET)"
 
 re: fclean all
 
