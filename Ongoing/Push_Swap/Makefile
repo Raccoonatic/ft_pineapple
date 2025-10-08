@@ -37,7 +37,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJ_DIR)
 	$(COMPILE) -c $< -o $@
 
 $(SRC_DIR)%.c: $(SRC_DIR)
-	mv $< $(SRC_DIR)
+	mv $(FILE) $(SRC_DIR)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
