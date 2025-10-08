@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/08 21:49:36 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/08 21:54:26 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ restore:
 	git restore racc_print.c
 	git restore racc_print_utils.c
 	git restore pushswap.h
-	git restore push_swap.C
+	git restore push_swap.c
 
 re: fclean all
 
