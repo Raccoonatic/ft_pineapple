@@ -25,7 +25,7 @@ void	one_f_to_sort_them_all(t_node **stacka, t_node **stackb)
 	stage = 1;
 	tiny = NULL;
 	ps_rot_push(stacka, stackb, stage, len);
-	ps_sort_three(stack_a, 'a');
+	ps_sort_three(stacka, 'a');
 	stage++;
 	while (*stackb)
 	{
@@ -47,7 +47,7 @@ static void	ps_push_all_but_three(t_node **stacka, t_node **stackb, size_t len)
 {
 	while (len > 3)
 	{
-		ps_push(*stacka, *stackb, 'b');
+		ps_push(stacka, stackb, 'b');
 		len--;
 	}
 }
