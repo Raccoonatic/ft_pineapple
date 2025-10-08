@@ -25,7 +25,7 @@ void	ps_swap(t_node **st1, t_node **st2, char ab)
 	*st1 = (*st1)-> prev;
 	if (!st2)
 	{
-		racc_print(B_WI"s%c"RSET, ab);
+		racc_print(1, B_WI"s%c"RSET, ab);
 		return ;
 	}
 	(*st2)-> prev = (*st2)-> next;
@@ -35,7 +35,7 @@ void	ps_swap(t_node **st1, t_node **st2, char ab)
 	if ((*st2)-> next)
 		(*st2)-> next -> prev = *st2;
 	*st2 = (*st2)-> prev;
-	racc_print(B_WI"ss"RSET);
+	racc_print(1, B_WI"ss"RSET);
 	return ;
 }
 /*Can execute sa or sb depending on which stack is passed on st1. The ab
@@ -58,7 +58,7 @@ void	ps_push(t_node **st1, t_node **st2, char ab)
 		temp -> prev = NULL;
 	*st2 = *st1;
 	*st1 = temp;
-	racc_print(B_WI"p%c"RSET, ab);
+	racc_print(1, B_WI"p%c"RSET, ab);
 	return ;
 }
 /*Can execute pa or pb depending on which stack is passed on st1. It pushes
@@ -84,7 +84,7 @@ void	ps_rotate(t_node **st1, t_node **st2, char ab)
 		(*st2)-> prev = NULL;
 		tail -> next -> prev = tail;
 		tail -> next -> next = NULL;
-		racc_print(B_WI"rr"RSET);
+		racc_print(1, B_WI"rr"RSET);
 	}
 	if (st1 && *st1 && (*st1)-> next)
 	{
@@ -95,7 +95,7 @@ void	ps_rotate(t_node **st1, t_node **st2, char ab)
 		tail -> next -> prev = tail;
 		tail -> next -> next = NULL;
 		if (!st2)
-			racc_print(B_WI"r%c"RSET, ab);
+			racc_print(1, B_WI"r%c"RSET, ab);
 	}
 	return ;
 }
@@ -118,7 +118,7 @@ void	ps_revotate(t_node **st1, t_node **st2, char ab)
 		(*st2)-> prev = tail;
 		tail -> next = *st2;
 		*st2 = tail;
-		racc_print(B_WI"rrr"RSET);
+		racc_print(1, B_WI"rrr"RSET);
 	}
 	if (st1 && *st1 && (*st1)-> next)
 	{
@@ -129,7 +129,7 @@ void	ps_revotate(t_node **st1, t_node **st2, char ab)
 		tail -> next = *st1;
 		*st1 = tail;
 		if (!st2)
-			racc_print(B_WI"rr%c"RSET, ab);
+			racc_print(1, B_WI"rr%c"RSET, ab);
 	}
 	return ;
 }
