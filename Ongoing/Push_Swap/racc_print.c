@@ -12,7 +12,7 @@
 
 #include "pushswap.h"
 
-static unsigned int	vibecheck(int fd, int n, int *counter);
+static unsigned int	vibechek(int fd, int n, int *counter);
 static void			ptr(int fd, va_list arg, int *counter);
 static void			racc_format_check(int fd, va_list arg, char c, int *cnt);
 
@@ -50,7 +50,7 @@ static void	racc_format_check(int fd, va_list arg, char c, int *cnt)
 	else if (c == 'p')
 		ptr(fd, arg, cnt);
 	else if (c == 'i' || c == 'd')
-		racc_putnbs(fd, vibecheck(fd, va_arg(arg, int), cnt), cnt, "0123456789");
+		racc_putnbs(fd, vibechek(fd, va_arg(arg, int), cnt), cnt, "0123456789");
 	else if (c == 'u')
 		racc_putnbs(fd, va_arg(arg, unsigned int), cnt, "0123456789");
 	else if (c == 'x')
@@ -60,7 +60,7 @@ static void	racc_format_check(int fd, va_list arg, char c, int *cnt)
 	return ;
 }
 
-static unsigned int	vibecheck(int fd, int n, int *counter)
+static unsigned int	vibechek(int fd, int n, int *counter)
 {
 	if (n < 0)
 	{
