@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "../pushswap.h"
 
 static unsigned int	vibecheck(int fd, int n, int *counter);
 static void			ptr(int fd, va_list arg, int *counter);

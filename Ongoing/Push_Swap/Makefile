@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/09/20 19:01:44 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/08 16:26:45 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,17 @@ LIB = libpushswap.a
 
 COMPILE = cc -Wall -Werror -Wextra -I.
 
-FILE = racc_print.c
-FILE += racc_printchars.c
-FILE += racc_printnbs.c
-FILE += racc_format_check.c
-FILE += racc_moves.c
+FILE = ps_algorithm_utils_alpha.c
+FILE += ps_algorithm_utils_beta.c
+FILE += ps_init_utils.c
+FILE += ps_input_manager.c
+FILE += ps_list_gen.c
+FILE += ps_moves.c
+FILE += ps_sort_five_utils.c
+FILE += ps_sort_them_all.c
+FILE += ps_tiny_sorts.c
+FILE += racc_print.c
+FILE += racc_print_utils.c
 
 SRC_DIR = src/
 OBJ_DIR = obj/

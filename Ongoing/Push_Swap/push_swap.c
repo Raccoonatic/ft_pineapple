@@ -12,6 +12,8 @@
 
 #include "pushswap.h"
 
+static int	ps_tiny_check(t_node **stacka, t_node **stackb);
+
 int	main( int arc, char *wordy[])
 {
 	t_node	*stacka;

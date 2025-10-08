@@ -12,6 +12,11 @@
 
 #include "../pushswap.h"
 
+static void	ps_set_price(t_node *heada, t_node *headb);
+static void	ps_set_target(t_node *heada, t_node *headb);
+static void	ps_set_cheapest(t_node *heada);
+void		ps_cheap_rotate(t_node **st1, t_node **st2, char ab);
+
 void	ps_refresh_meta(t_node *heada, t_node *headb)
 {
 	ps_set_index(heada);

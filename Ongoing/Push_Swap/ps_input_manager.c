@@ -12,7 +12,11 @@
 
 #include "../pushswap.h"
 
-t_node	*input_manager(int arc, const char *wordy[])
+static void	char_check(char *w);
+static void	ps_populate(char *space, int arc, char *wordy[]);
+static int	ps_dup_check(t_node *stacka);
+
+t_node	*ps_input_manager(int arc, const char *wordy[])
 {
 	int		guide;
 	size_t	count;
@@ -30,7 +34,7 @@ t_node	*input_manager(int arc, const char *wordy[])
 	if (!input)
 		fail();
 	ps_populate(input, arc, wordy);
-	result = list_gen(input);
+	result = ps_list_gen(input);
 	if (!ps_dup_check(result))
 		ps_delnode(&result, 1);
 	result -> tail = NULL;

@@ -6,13 +6,18 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 19:59:10 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/02 12:08:12 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:13:27 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pushswap.h"
 
-t_node	*list_gen(char *input)
+void			ps_delnode(t_node **head, int go_to_fail);
+static int		ps_add_node(t_node **head, t_node *new);
+static long		ps_atol(const char *str, size_t *guide);
+static t_node	*ps_new_node(long n);
+
+t_node	*ps_list_gen(char *input)
 {
 	size_t	index;
 	t_node	*stacka;
