@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:34:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/24 21:12:12 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 22:20:00 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ps_swap(t_node **st1, t_node **st2, char ab)
 	*st1 = (*st1)-> prev;
 	if (!st2)
 	{
-		racc_print(1, B_WI"s%c"RSET, ab);
+		racc_print(1, B_WI"s%c\n"RSET, ab);
 		return ;
 	}
 	(*st2)-> prev = (*st2)-> next;
@@ -35,7 +35,7 @@ void	ps_swap(t_node **st1, t_node **st2, char ab)
 	if ((*st2)-> next)
 		(*st2)-> next -> prev = *st2;
 	*st2 = (*st2)-> prev;
-	racc_print(1, B_WI"ss"RSET);
+	racc_print(1, B_WI"ss\n"RSET);
 	return ;
 }
 /*Can execute sa or sb depending on which stack is passed on st1. The ab
@@ -58,7 +58,7 @@ void	ps_push(t_node **st1, t_node **st2, char ab)
 		temp -> prev = NULL;
 	*st2 = *st1;
 	*st1 = temp;
-	racc_print(1, B_WI"p%c"RSET, ab);
+	racc_print(1, B_WI"p%c\n"RSET, ab);
 	return ;
 }
 /*Can execute pa or pb depending on which stack is passed on st1. It pushes
@@ -84,7 +84,7 @@ void	ps_rotate(t_node **st1, t_node **st2, char ab)
 		(*st2)-> prev = NULL;
 		tail -> next -> prev = tail;
 		tail -> next -> next = NULL;
-		racc_print(1, B_WI"rr"RSET);
+		racc_print(1, B_WI"rr\n"RSET);
 	}
 	if (st1 && *st1 && (*st1)-> next)
 	{
@@ -95,7 +95,7 @@ void	ps_rotate(t_node **st1, t_node **st2, char ab)
 		tail -> next -> prev = tail;
 		tail -> next -> next = NULL;
 		if (!st2)
-			racc_print(1, B_WI"r%c"RSET, ab);
+			racc_print(1, B_WI"r%c\n"RSET, ab);
 	}
 	return ;
 }
@@ -118,7 +118,7 @@ void	ps_revotate(t_node **st1, t_node **st2, char ab)
 		(*st2)-> prev = tail;
 		tail -> next = *st2;
 		*st2 = tail;
-		racc_print(1, B_WI"rrr"RSET);
+		racc_print(1, B_WI"rrr\n"RSET);
 	}
 	if (st1 && *st1 && (*st1)-> next)
 	{
@@ -129,7 +129,7 @@ void	ps_revotate(t_node **st1, t_node **st2, char ab)
 		tail -> next = *st1;
 		*st1 = tail;
 		if (!st2)
-			racc_print(1, B_WI"rr%c"RSET, ab);
+			racc_print(1, B_WI"rr%c\n"RSET, ab);
 	}
 	return ;
 }
