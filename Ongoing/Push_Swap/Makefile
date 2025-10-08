@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/08 21:19:41 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/08 21:49:36 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,21 @@ fclean: clean
 	rm -f $(NAME)
 	@printf "$(RESET)"
 
+restore:
+	git restore ps_input_manager.c
+	git restore ps_algorithm_utils_alpha.c
+	git restore ps_init_utils.c
+	git restore ps_algorithm_utils_beta.c
+	git restore ps_list_gen.c
+	git restore ps_moves.c
+	git restore ps_sort_five_utils.c
+	git restore ps_sort_them_all.c
+	git restore ps_tiny_sorts.c
+	git restore racc_print.c
+	git restore racc_print_utils.c
+	git restore pushswap.h
+	git restore push_swap.C
+
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re restore
