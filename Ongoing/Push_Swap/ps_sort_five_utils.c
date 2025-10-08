@@ -61,7 +61,7 @@ void	ps_sf_sort_rems(t_node **stacka, t_node **stackb)
 		ps_revotate(stacka, stackb, '\0');
 	if ((*stacka)-> num > (*stacka)-> next -> num)
 	{
-		if (!ps_sort_check(*stack_b))
+		if (!ps_sort_check(*stackb))
 			ps_swap(stacka, NULL, 'a');
 		else
 			ps_swap(stacka, stackb, '\0');
