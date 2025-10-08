@@ -32,7 +32,7 @@ t_node	*ps_list_gen(char *input)
 			ps_delnode(&stacka, 1);
 		}
 	}
-	free(input)
+	free(input);
 	return (stacka);
 }
 /* Takes a string containing all input values and calls functions sequentially
