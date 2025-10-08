@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pushswap.h"
+#include "pushswap.h"
 
 void			ps_delnode(t_node **head, int go_to_fail);
 static int		ps_add_node(t_node **head, t_node *new);

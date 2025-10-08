@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:33:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/08 15:54:45 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:47:23 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_node
 }	t_node;
 
 // ps_input_manager.c
-t_node	*ps_input_manager(int arc, const char *wordy[]);
+t_node	*ps_input_manager(int arc, char *wordy[]);
 // ps_init_utils.c
 char	*ps_spalloc(size_t size);
 size_t	ps_strlen(char *str);

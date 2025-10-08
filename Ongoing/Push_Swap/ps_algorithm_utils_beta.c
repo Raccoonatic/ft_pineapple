@@ -6,11 +6,11 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 16:53:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/08 14:50:03 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 19:54:37 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pushswap.h"
+#include "pushswap.h"
 
 static void	ps_set_price(t_node *heada, t_node *headb);
 static void	ps_set_target(t_node *heada, t_node *headb);

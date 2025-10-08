@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pushswap.h"
+#include "pushswap.h"
 
 static void	ps_push_all_but_three(t_node **stacka, t_node **stackb, size_t len);
 static void	ps_rot_push(t_node **stacka, t_node **stackb, int stage, size_t l);

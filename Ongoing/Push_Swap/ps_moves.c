@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pushswap.h"
+#include "pushswap.h"
 
 void	ps_swap(t_node **st1, t_node **st2, char ab)
 {

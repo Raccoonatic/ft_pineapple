@@ -6,11 +6,11 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 13:23:47 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/26 16:53:30 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 19:54:19 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pushswap.h"
+#include "pushswap.h"
 
 size_t	ps_count_nodes(t_node *head)
 {

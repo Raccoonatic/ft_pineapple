@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:21:15 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/08 14:58:05 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:45:37 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main( int arc, char *wordy[])
 	stackb = NULL;
 	if (arc < 2)
 		return (0);
-	stacka = input_manager(arc, wordy);
+	stacka = ps_input_manager(arc, wordy);
 	if (!ps_sort_check(stacka) && !ps_tiny_check(&stacka, &stackb))
 		one_f_to_sort_them_all(&stacka, &stackb);
 	if (!ps_sort_check(stacka) || stackb)

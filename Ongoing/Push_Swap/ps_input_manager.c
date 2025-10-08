@@ -6,17 +6,17 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:14:28 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/27 13:13:50 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:46:46 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pushswap.h"
+#include "pushswap.h"
 
 static void	char_check(char *w);
 static void	ps_populate(char *space, int arc, char *wordy[]);
 static int	ps_dup_check(t_node *stacka);
 
-t_node	*ps_input_manager(int arc, const char *wordy[])
+t_node	*ps_input_manager(int arc, char *wordy[])
 {
 	int		guide;
 	size_t	count;

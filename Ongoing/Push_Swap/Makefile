@@ -6,11 +6,11 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/08 16:26:45 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/08 19:32:37 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap 
+NAME = push_swap
 LIB = libpushswap.a
 
 COMPILE = cc -Wall -Werror -Wextra -I.
@@ -33,38 +33,36 @@ OBJ_DIR = obj/
 SRC = $(addprefix $(SRC_DIR),$(FILE))
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 
+all: $(NAME)
+
+$(NAME): $(LIB) pushswap.h
+	$(COMPILE) $(NAME).c $(LIB) -o $(NAME)
+
+$(LIB): $(OBJ) 
+	ar -rcs $(LIB) $(OBJ)
+
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(COMPILE) -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(SRC_DIR):                                                                      
+$(SRC_DIR)%.c: $(SRC_DIR)
+	mv $(@:$(SRC_DIR)%=%) $(SRC_DIR)
+
+$(SRC_DIR):
 	mkdir -p $(SRC_DIR)
-	mv $(FILE) $(SRC_DIR)
-
-$(LIB): $(OBJ)
-	ar -rcs $(LIB) $(OBJ)
-
-$(NAME): $(LIB) pushswap.h
-	$(COMPILE) $(NAME).c $(LIB) -o $(NAME)
-
-test: $(LIB) pushswap.h
-	$(COMPILE) test.c $(LIB) -o test
-
-all: $(NAME)
+	cp pushswap.h $(SRC_DIR)
 
 clean:
 	rm -rf $(OBJ_DIR)
 	if [ -d $(SRC_DIR) ]; then mv $(SRC) .; fi
 	rm -rf $(SRC_DIR)
-	rm -f test
-	clear
+	rm -rf $(LIB)
 
 fclean: clean
 	rm -f $(NAME)
-	clear
 
 re: fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
