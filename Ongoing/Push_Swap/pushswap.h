@@ -25,6 +25,26 @@
 # define NEOR	"\033[3m\033[38;2;255;153;51m"
 # define MINT	"\033[38;2;55;250;133;48;2;0;0;0m"
 
+typedef enum e_tropicool
+{
+	ECUAD,
+	CAPRI,
+	CACER
+}	t_tropicool;
+
+typedef struct s_node
+{
+	int				num;
+	int				stack_index;
+	int				move_price;
+	t_tropicool		tropic;
+	struct s_node	*cheapest;
+	struct s_node	*target;
+	struct s_node	*next;
+	struct s_node	*prev;
+	struct s_node	*tail;
+}	t_node;
+
 // ps_input_manager.c
 t_node	*ps_input_manager(int arc, const char *wordy[]);
 // ps_init_utils.c
@@ -66,25 +86,5 @@ void	racc_putchar(int fd, char c, int *counter);
 void	racc_putstr(int fd, char *s, int mode, int *counter);
 void	racc_putadrs(int fd, uintptr_t n, int *counter, char *base);
 void	racc_putnbs(int fd, unsigned int n, int *counter, char *base);
-
-typedef enum e_tropicool
-{
-	ECUAD,
-	CAPRI,
-	CACER
-}	t_tropicool;
-
-typedef struct s_node
-{
-	int				num;
-	int				stack_index;
-	int				move_price;
-	t_tropicool		tropic;
-	struct s_node	*cheapest;
-	struct s_node	*target;
-	struct s_node	*next;
-	struct s_node	*prev;
-	struct s_node	*tail;
-}	t_node;
 
 #endif
