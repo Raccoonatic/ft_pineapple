@@ -33,17 +33,15 @@ OBJ_DIR = obj/
 SRC = $(addprefix $(SRC_DIR),$(FILE))
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(COMPILE) -c $< -o $@
-
-$(SRC_DIR)%.c: $(SRC_DIR)
-	mv $(FILE) $(SRC_DIR)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(SRC_DIR):                                                                      
 	mkdir -p $(SRC_DIR)
+	mv $(FILE) $(SRC_DIR)
 
 $(LIB): $(OBJ)
 	ar -rcs $(LIB) $(OBJ)
