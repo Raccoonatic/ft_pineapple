@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 13:57:40 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/02 14:02:50 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 14:59:43 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,62 +14,56 @@
 
 void	one_f_to_sort_them_all(t_node **stacka, t_node **stackb)
 {
-	size_t  len;
+	size_t	len;
 	int		stage;
 	t_node	*tiny;
 
 	len = ps_count_nodes(*stacka);
 	stage = 1;
-	tiny = NULL
-	while 
+	tiny = NULL;
 	ps_rot_push(stacka, stackb, stage, len);
 	ps_sort_three(stack_a, 'a');
 	stage++;
 	while (*stackb)
+	{
+		ps_refresh_meta(*stacka, *stackb);
 		ps_rot_push(stacka, stackb, stage, len);
-	stage++;
+	}
 	tiny = ps_mininum(*stacka);
 	while ((*stacka)-> num != tiny -> num)
 	{
 		if (tiny -> tropic == CACER)
-			ps_rot_push(stacka, stackb, stage, len);
+			ps_rotate(stacka, NULL, 'a');
 		else
-			ps_rot_push(stacka, stackb, 4, len);
-	}	
+			ps_revotate(stacka, NULL, 'a');
+	}
 	return ;
 }
 
-static void	ps_push_all_but_three(t_node **stacka, t_node **stackb, size_t l)
+static void	ps_push_all_but_three(t_node **stacka, t_node **stackb, size_t len)
 {
-	while(len > 3)
+	while (len > 3)
 	{
-		ps_push(*stacka, *stackb, b);
+		ps_push(*stacka, *stackb, 'b');
 		len--;
 	}
 }
-static void	ps_rot_push(t_node **stacka, t_node **stackb, int stage, size_t l)
+
+static void	ps_rot_push(t_node **stacka, t_node **stackb, int stage, size_t len)
 {
 	if (stage == 1)
 		ps_push_all_but_three(stacka, stackb, len);
 	if (stage == 2)
 	{
-		if ((*stacka) -> cheapest -> tropic
-			== (*stacka) -> cheapest -> target -> tropic)
-			ps_cheap_rotate(stacka, stackb);
-		else
-		{
-			ps_cheap_rotate(stacka, NULL);
-			ps_cheap_rotate(stackb, NULL);
-		}
-		if (((*stacka)-> num != (*stacka)-> cheapest -> num)
-			|| ((*stacka) -> cheapest -> target -> num != (*stackb)))
-			ps_rot_push(stacka, stackb, stage, l);
+		if ((*stacka)-> cheapest -> tropic
+			== (*stacka)-> cheapest -> target -> tropic)
+			ps_cheap_rotate(stacka, stackb, '\0');
+		if ((*stacka)-> num != (*stacka)-> cheapest -> num)
+			ps_cheap_rotate(stacka, NULL, 'a');
+		if ((*stacka)-> cheapest -> target -> num != (*stackb)-> num)
+			ps_cheap_rotate(stackb, NULL, 'b');
 		ps_push(stackb, stacka, 'b');
 		return ;
 	}
-	if (stage == 3)
-		ps_rotate(stacka, NULL, 'a');
-	if (stage == 4)
-		ps_revotate(stacka, NULL, 'a');
 	return ;
 }

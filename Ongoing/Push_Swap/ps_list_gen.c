@@ -59,7 +59,7 @@ static long	ps_atol(const char *str, size_t *guide)
 equivalent. We don't guard against long overflow because the subject allows
 Undefined Behaviour*/
 
-t_node	*ps_new_node(long n)
+static t_node	*ps_new_node(long n)
 {
 	t_node	*result;
 
@@ -105,7 +105,7 @@ void	ps_delnode(t_node **head, int go_to_fail)
 descending order, finally setting the incoming pointer to NULL. The go_to_fail
 flag is then verified to check if the program should then exit on error*/
 
-int	ps_add_node(t_node **head, t_node *new)
+static int	ps_add_node(t_node **head, t_node *new)
 {
 	t_node	*last;
 

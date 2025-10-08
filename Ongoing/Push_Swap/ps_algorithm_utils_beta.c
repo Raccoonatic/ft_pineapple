@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 16:53:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/02 14:03:19 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 14:50:03 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static void	ps_set_target(t_node *heada, t_node *headb)
 	long	best_match;
 
 	if (!headb)
-		return;
+		return ;
 	while (heada)
 	{
 		target_node = NULL;
-		best_match = ((long)INT_MIN)- 1;
+		best_match = ((long)INT_MIN) - 1;
 		trav = headb;
 		while (trav)
 		{
@@ -71,13 +71,13 @@ static void	ps_set_target(t_node *heada, t_node *headb)
 			}
 			trav = trav -> next;
 		}
-		if (best_match == ((long)INT_MIN)- 1)
+		if (best_match == ((long)INT_MIN) - 1)
 			target_node = ps_maxinum(headb);
 		heada -> target = target_node;
 		heada = heada -> next;
 	}
-	return ;
 }
+
 static void	ps_set_cheapest(t_node *heada)
 {
 	t_node	best_price;
@@ -87,7 +87,7 @@ static void	ps_set_cheapest(t_node *heada)
 	trav = heada;
 	if (trav -> next)
 	{
-		while (trav) 
+		while (trav)
 		{
 			if (trav -> cheapest)
 				trav -> cheapest = NULL;
@@ -104,26 +104,26 @@ static void	ps_set_cheapest(t_node *heada)
 	return ;
 }
 
-void	ps_cheap_rotate(t_node **st1, t_node **st2)
+void	ps_cheap_rotate(t_node **st1, t_node **st2, char ab)
 {
 	if (st2)
 	{
-		while(((*st1)->num != (*st1)-> cheapest -> num)
+		while (((*st1)->num != (*st1)-> cheapest -> num)
 			&& ((*st2)->num != (*st1)-> cheapest -> target -> num))
 		{
-			if((*st1)-> cheapest -> tropic == CACER)
+			if ((*st1)-> cheapest -> tropic == CACER)
 				ps_rotate(st1, st2, '\0');
 			else
 				ps_revotate(st1, st2, '\0');
 		}
-		return;
+		return ;
 	}
-	while((*st1)->num != (*st1)-> cheapest -> num)
+	while ((*st1)->num != (*st1)-> cheapest -> num)
 	{
-		if((*st1)-> cheapest -> tropic == CACER)
-			ps_rotate(st1, st2, '\0');
+		if ((*st1)-> cheapest -> tropic == CACER)
+			ps_rotate(st1, NULL, ab);
 		else
-			ps_revotate(st1, st2, '\0');
+			ps_revotate(st1, NULL, ab);
 	}
 	return ;
 }

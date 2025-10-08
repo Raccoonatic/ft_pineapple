@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 20:21:15 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/27 13:13:42 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 14:58:05 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ static int	ps_tiny_check(t_node **stacka, t_node **stackb)
 		ps_sort_four(stacka, stackb);
 	else if (length == 5)
 		ps_sort_five(stacka, stackb);
-	return (1);	
+	return (1);
 }

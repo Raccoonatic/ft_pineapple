@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:33:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/02 11:58:03 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:33:40 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,36 @@
 # define NEOR	"\033[3m\033[38;2;255;153;51m"
 # define MINT	"\033[38;2;55;250;133;48;2;0;0;0m"
 
+t_node	*input_manager(int arc, const char *wordy[])
+char	*ps_spalloc(size_t size);
+size_t	ps_strlen(char *str);
+void	fail(void);
+t_node	*list_gen(char *input);
+void	ps_delnode(t_node **head, int go_to_fail);
+size_t	ps_count_nodes(t_node *head);
+void	ps_set_index(t_node *head);
+t_node	*ps_maxinum(t_node *head);
+t_node	*ps_mininum(t_node *head);
+int		ps_sort_check(t_node *head);
+void	ps_swap(t_node **st1, t_node **st2, char ab);
+void	ps_push(t_node **st1, t_node **st2, char ab);
+void	ps_rotate(t_node **st1, t_node **st2, char ab);
+void	ps_revotate(t_node **st1, t_node **st2, char ab);
+void	ps_sort_two(t_node **stack, char ab);
+void	ps_sort_three(t_node **stack, char ab);
+void	ps_sort_four(t_node **stack_a, t_node **stack_b);
+void	ps_sort_five(t_node **stack_a, t_node **stack_b);
+t_node	*ps_find_big_baby(t_node *head, int baby);
+void	ps_sf_push(t_node **stacka, t_node **stackb, t_node *target);
+void	ps_sf_sort_rems(t_node **stacka, t_node **stackb);
+void	one_f_to_sort_them_all(t_node **stacka, t_node **stackb);
+void	ps_refresh_meta(t_node *heada, t_node *headb);
+void	ps_cheap_rotate(t_node **st1, t_node **st2, char ab);
 int		racc_print(int fd, const char *format, ...);
-void	racc_format_check(int fd, va_list arg, char c, int *counter);
 void	racc_putchar(int fd, char c, int *counter);
 void	racc_putstr(int fd, char *s, int mode, int *counter);
-void	racc_putnbs(int fd, unsigned int n, int *counter, char *base);
 void	racc_putadrs(int fd, uintptr_t n, int *counter, char *base);
-size_t	racc_strlen(char *str);
+void	racc_putnbs(int fd, unsigned int n, int *counter, char *base);
 
 typedef enum e_tropicool
 {
@@ -46,7 +69,7 @@ typedef struct s_node
 	int				stack_index;
 	int				move_price;
 	t_tropicool		tropic;
-	struct s_node	*cheapest
+	struct s_node	*cheapest;
 	struct s_node	*target;
 	struct s_node	*next;
 	struct s_node	*prev;
