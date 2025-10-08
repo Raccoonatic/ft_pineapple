@@ -28,7 +28,7 @@ t_node	*ps_input_manager(int arc, char *wordy[])
 	while (guide < arc)
 	{
 		char_check(wordy[guide]);
-		count += (racc_strlen(wordy[guide++]) + 1);
+		count += (ps_strlen(wordy[guide++]) + 1);
 	}
 	input = ps_spalloc(count);
 	if (!input)
