@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/08 20:31:38 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/08 21:19:41 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ $(LIB): $(OBJ)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@printf "$(NEOR)"
 	$(COMPILE) -c $< -o $@
-	@printf "$(RESET)"
+	@printf "$(RESET)\n"
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
@@ -65,13 +65,12 @@ $(SRC_DIR):
 	mkdir -p $(SRC_DIR)
 	cp pushswap.h $(SRC_DIR)
 
-clean:
+./$(FILE):
 	@printf "$(NEOR)"
-	if [ -d $(SRC_DIR) ]; then \
-		for f in $(SRC); do \
-			[ -f "$$f" ] && mv "$$f" .; \
-		done; \
-	fi
+	if [ -f $(@:./%=$(SRC_DIR)%) ]; then mv -f $(@:./%=$(SRC_DIR)%) .; fi
+	@printf "$(RESET)\n"
+
+clean: ./$(FILE)
 	@printf "$(BABY)"
 	rm -rf $(OBJ_DIR)
 	rm -rf $(SRC_DIR)
