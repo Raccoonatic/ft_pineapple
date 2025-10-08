@@ -82,7 +82,7 @@ void	ps_sort_five(t_node **stack_a, t_node **stack_b)
 	ps_sf_push(stack_a, stack_b, baby);
 	ps_sf_sort_rems(stack_a, stack_b);
 	if (ps_sort_check(*stack_b))
-		ps_swap(stackb, NULL, 'b');
+		ps_swap(stack_b, NULL, 'b');
 	ps_push(stack_b, stack_a, 'a');
 	ps_push(stack_b, stack_a, 'a');
 	return ;
