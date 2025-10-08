@@ -41,7 +41,7 @@ void	ps_set_index(t_node *head)
 	{
 		head -> stack_index = (head -> prev -> stack_index) + 1;
 		head -> tropic = CACER;
-		if (length / 2 < head -> stack_index)
+		if (length / 2 < (size_t)(head -> stack_index))
 			head -> tropic = CAPRI;
 		head = head -> next;
 	}
