@@ -50,7 +50,7 @@ static void	racc_format_check(int fd, va_list arg, char c, int *cnt)
 	else if (c == 'p')
 		ptr(fd, arg, cnt);
 	else if (c == 'i' || c == 'd')
-		racc_putnbs(fd, vibecheck(va_arg(arg, int), cnt), cnt, "0123456789");
+		racc_putnbs(fd, vibecheck(fd, va_arg(arg, int), cnt), cnt, "0123456789");
 	else if (c == 'u')
 		racc_putnbs(fd, va_arg(arg, unsigned int), cnt, "0123456789");
 	else if (c == 'x')
