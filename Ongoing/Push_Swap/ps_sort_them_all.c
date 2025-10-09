@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 13:57:40 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/09 15:50:22 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/09 22:16:23 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	one_f_to_sort_them_all(t_node **stacka, t_node **stackb)
 		ps_rot_push(stacka, stackb, stage, len);
 	}
 	tiny = ps_mininum(*stacka);
+	ps_refresh_meta(*stacka, NULL);
 	while ((*stacka)-> num != tiny -> num)
 	{
 		if (tiny -> tropic == CACER)
@@ -55,13 +56,13 @@ static void	ps_rot_push(t_node **stacka, t_node **stackb, int stage, size_t l)
 		ps_push_all_but_three(stacka, stackb, l);
 	if (stage == 2)
 	{
-		if ((*stacka)-> cheapest -> tropic
-			== (*stacka)-> cheapest -> target -> tropic)
+		if ((*stackb)-> cheapest -> tropic
+			== (*stackb)-> cheapest -> target -> tropic)
 			ps_cheap_rotate(stacka, stackb, '\0');
-		if ((*stacka)-> num != (*stacka)-> cheapest -> num)
-			ps_cheap_rotate(stacka, NULL, 'a');
-		if ((*stacka)-> cheapest -> target -> num != (*stackb)-> num)
-			ps_cheap_rotate(stackb, NULL, 'b');
+		if ((*stackb)-> num != (*stackb)-> cheapest -> num)
+			ps_cheap_rotate(stacka, stackb, 'b');
+		if ((*stackb)-> cheapest -> target -> num != (*stacka)-> num)
+			ps_cheap_rotate(stacka, stackb, 'a');
 		ps_push(stackb, stacka, 'a');
 		return ;
 	}

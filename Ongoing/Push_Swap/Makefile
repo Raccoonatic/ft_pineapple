@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/09 13:21:44 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/09 16:53:44 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RESET	= \033[0m
 BABY	= \033[38;2;0;255;247m
 BLACK	= \033[38;2;0;0;0m
 
-COMPILE = cc -Wall -Werror -Wextra -I.
+COMPILE = cc -g -O0 -Wall -Werror -Wextra -I.
 
 FILE = ps_algorithm_utils_alpha.c
 FILE += ps_algorithm_utils_beta.c
@@ -120,7 +120,7 @@ boring: fclean build_boring_moves build_boring_errors
 	@sed -i '20s/.*/B''A''B''Y	= \\033[38;2;0;255;247m/' Makefile
 	@sed -i '21s/.*/B''L''A''C''K	= \\033[38;2;0;0;0m/' Makefile
 	@sed -i '22s/.*//' Makefile
-	@sed -i '23s/.*/''C''O''M''P''I''L''E'' = cc -Wall -Werror -Wextra -I./' Makefile
+	@sed -i '23s/.*/''C''O''M''P''I''L''E'' = cc -g -O0 -Wall -Werror -Wextra -I./' Makefile
 	@sed -i '24s/.*//' Makefile
 	@sed -i '25s/.*/FILE = ps_algorithm_utils_alpha.c/' Makefile
 	@sed -i '26s/.*/FILE += ps_algorithm_utils_beta.c/' Makefile
@@ -208,7 +208,7 @@ fun: fclean build_fun_moves build_fun_errors
 	@sed -i '20s/.*/B''A''B''Y	= \\033[38;2;0;255;247m/' Makefile
 	@sed -i '21s/.*/B''L''A''C''K	= \\033[38;2;0;0;0m/' Makefile
 	@sed -i '22s/.*//' Makefile
-	@sed -i '23s/.*/COMPILE = cc -Wall -Werror -Wextra -I./' Makefile
+	@sed -i '23s/.*/COMPILE = cc -g -O0 -Wall -Werror -Wextra -I./' Makefile
 	@sed -i '24s/.*//' Makefile
 	@sed -i '25s/.*/FILE = ps_algorithm_utils_alpha.c/' Makefile
 	@sed -i '26s/.*/FILE += ps_algorithm_utils_beta.c/' Makefile

@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 19:59:10 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/08 16:13:27 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/09 18:15:37 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_node	*ps_list_gen(char *input)
 	{
 		if (!ps_add_node(&stacka, ps_new_node(ps_atol(input, &index))))
 		{
+			if (input[index] == '\0')
+				break ;
 			free(input);
 			ps_delnode(&stacka, 1);
 		}
@@ -53,11 +55,13 @@ static long	ps_atol(const char *str, size_t *guide)
 			sign *= -1;
 		(*guide)++;
 	}
-	while (str[*guide] >= '0' && str[*guide] <= '9')
+	while (str[*guide] >= '0' && str[*guide] <= '9' && str[*guide] != '\0')
 	{
 		result = result * 10 + (str[*guide] - '0');
 		(*guide)++;
 	}
+	if (str[*guide] == '\0')
+		return (((long)(INT_MAX)) + 1);
 	return (result * sign);
 }
 /*Skips any valid whitespaces and turns the incoming string into its "long"

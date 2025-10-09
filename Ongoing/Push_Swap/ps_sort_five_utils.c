@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 17:51:30 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/08 13:35:02 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/09 20:40:29 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ps_sf_sort_rems(t_node **stacka, t_node **stackb)
 	if (ps_sort_check(*stacka) && !ps_sort_check(*stackb))
 		return ;
 	biggie = ps_maxinum(*stacka);
-	ps_refresh_meta(*stacka, NULL);
+	ps_refresh_tiny_meta(*stacka);
 	if (biggie -> stack_index == 0)
 		ps_rotate(stacka, stackb, '\0');
 	else if (biggie -> stack_index == 1)

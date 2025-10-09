@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 16:53:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/08 20:03:03 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/09 22:55:09 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,31 @@ void	ps_refresh_meta(t_node *heada, t_node *headb)
 	ps_set_index(headb);
 	ps_set_target(heada, headb);
 	ps_set_price(heada, headb);
-	ps_set_cheapest(heada);
+	ps_set_cheapest(headb);
 }
 
 static void	ps_set_price(t_node *heada, t_node *headb)
 {
 	size_t	lena;
 	size_t	lenb;
-	size_t	b_price;
+	size_t	a_price;
 	t_node	*trav;
 
-	if (!heada)
+	if (!headb)
 		return ;
 	lena = ps_count_nodes(heada);
-	lenb = 0;
-	if (headb)
-		lenb = ps_count_nodes(headb);
-	b_price = 0;
-	trav = heada;
+	lenb = ps_count_nodes(headb);
+	a_price = 0;
+	trav = headb;
 	while (trav)
 	{
-		if (headb && trav -> target && trav -> target -> tropic == CACER)
-			b_price = trav -> target -> stack_index;
-		else if (headb && trav -> target && trav -> target -> tropic == CAPRI)
-			b_price = lenb - trav -> target -> stack_index;
-		trav -> move_price = (trav -> stack_index) + b_price;
+		if (heada && trav -> target && trav -> target -> tropic == CACER)
+			a_price = trav -> target -> stack_index;
+		else if (heada && trav -> target && trav -> target -> tropic == CAPRI)
+			a_price = lena - trav -> target -> stack_index;
+		trav -> move_price = (trav -> stack_index) + a_price;
 		if (trav -> tropic == CAPRI)
-			trav -> move_price = (lena - trav -> stack_index) + b_price;
+			trav -> move_price = (lenb - trav -> stack_index) + a_price;
 		trav = trav -> next;
 	}
 }
@@ -62,34 +60,36 @@ static void	ps_set_target(t_node *heada, t_node *headb)
 
 	if (!headb)
 		return ;
-	while (heada)
+	while (headb)
 	{
 		target_node = NULL;
-		best_match = ((long)INT_MIN) - 1;
-		trav = headb;
+		best_match = ((long)INT_MAX) + 1;
+		trav = heada;
 		while (trav)
 		{
-			if ((heada -> num > trav -> num) && (trav -> num > best_match))
+			if ((trav -> num > headb -> num) && (trav -> num < best_match))
 			{
 				best_match = trav -> num;
 				target_node = trav;
 			}
 			trav = trav -> next;
 		}
-		if (best_match == ((long)INT_MIN) - 1)
-			target_node = ps_maxinum(headb);
-		heada -> target = target_node;
-		heada = heada -> next;
+		if (best_match == ((long)INT_MAX) + 1)
+			target_node = ps_mininum(heada);
+		headb -> target = target_node;
+		headb = headb -> next;
 	}
 }
 
-static void	ps_set_cheapest(t_node *heada)
+static void	ps_set_cheapest(t_node *headb)
 {
 	t_node	*best_price;
 	t_node	*trav;
 
-	best_price = heada;
-	trav = heada;
+	if (!headb)
+		return;
+	best_price = headb;
+	trav = headb;
 	if (trav -> next)
 	{
 		while (trav)
@@ -101,34 +101,39 @@ static void	ps_set_cheapest(t_node *heada)
 			trav = trav -> next;
 		}
 	}
-	while (heada)
+	while (headb)
 	{
-		heada -> cheapest = best_price;
-		heada = heada -> next;
+		headb -> cheapest = best_price;
+		headb = headb -> next;
 	}
 	return ;
 }
 
 void	ps_cheap_rotate(t_node **st1, t_node **st2, char ab)
 {
-	if (st2)
+	if (ab == '\0')
 	{
-		while (((*st1)->num != (*st1)-> cheapest -> num)
-			&& ((*st2)->num != (*st1)-> cheapest -> target -> num))
+		while (((*st2)->num != (*st2)-> cheapest -> num)
+			&& ((*st1)->num != (*st2)-> cheapest -> target -> num))
 		{
-			if ((*st1)-> cheapest -> tropic == CACER)
-				ps_rotate(st1, st2, '\0');
+			if ((*st2)-> cheapest -> tropic == CACER)
+				ps_rotate(st1, st2, ab);
 			else
-				ps_revotate(st1, st2, '\0');
+				ps_revotate(st1, st2, ab);
 		}
 		return ;
 	}
-	while ((*st1)->num != (*st1)-> cheapest -> num)
+	while (((*st2)->num != (*st2)-> cheapest -> num)
+			|| ((*st1)->num != (*st2)-> cheapest -> target -> num))
 	{
-		if ((*st1)-> cheapest -> tropic == CACER)
+		if (ab == 'b' && (*st2)-> cheapest -> tropic == CACER)
+			ps_rotate(st2, NULL, ab);
+		else if (ab == 'b' && (*st2)-> cheapest -> tropic == CAPRI)
+			ps_revotate(st2, NULL, ab);
+		else if (ab == 'a' && (*st2)-> cheapest -> target -> tropic == CACER)
 			ps_rotate(st1, NULL, ab);
-		else
+		else if (ab == 'a' && (*st2)-> cheapest -> target -> tropic == CAPRI)
 			ps_revotate(st1, NULL, ab);
 	}
-	return ;
+	return;
 }

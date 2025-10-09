@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:14:28 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/08 18:46:46 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/09 17:22:49 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_node	*ps_input_manager(int arc, char *wordy[])
 	while (guide < arc)
 	{
 		char_check(wordy[guide]);
-		count += (ps_strlen(wordy[guide++]) + 1);
+		count += (ps_strlen(wordy[guide]) + 1);
+		guide++;
 	}
 	input = ps_spalloc(count);
 	if (!input)
