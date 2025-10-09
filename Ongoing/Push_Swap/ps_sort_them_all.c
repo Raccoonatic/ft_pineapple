@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 13:57:40 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/08 16:14:50 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:50:22 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,8 @@ void	one_f_to_sort_them_all(t_node **stacka, t_node **stackb)
 
 static void	ps_push_all_but_three(t_node **stacka, t_node **stackb, size_t len)
 {
-	while (len > 3)
-	{
+	while (len-- > 3)
 		ps_push(stacka, stackb, 'b');
-		len--;
-	}
 }
 
 static void	ps_rot_push(t_node **stacka, t_node **stackb, int stage, size_t l)
@@ -65,7 +62,7 @@ static void	ps_rot_push(t_node **stacka, t_node **stackb, int stage, size_t l)
 			ps_cheap_rotate(stacka, NULL, 'a');
 		if ((*stacka)-> cheapest -> target -> num != (*stackb)-> num)
 			ps_cheap_rotate(stackb, NULL, 'b');
-		ps_push(stackb, stacka, 'b');
+		ps_push(stackb, stacka, 'a');
 		return ;
 	}
 	return ;
