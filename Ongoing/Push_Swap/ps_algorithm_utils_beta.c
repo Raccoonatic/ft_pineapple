@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 16:53:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/09 22:55:09 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/12 01:11:08 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,29 +111,26 @@ static void	ps_set_cheapest(t_node *headb)
 
 void	ps_cheap_rotate(t_node **st1, t_node **st2, char ab)
 {
-	if (ab == '\0')
-	{
-		while (((*st2)->num != (*st2)-> cheapest -> num)
+	while (ab == '\0' && ((*st2)->num != (*st2)-> cheapest -> num)
 			&& ((*st1)->num != (*st2)-> cheapest -> target -> num))
-		{
-			if ((*st2)-> cheapest -> tropic == CACER)
-				ps_rotate(st1, st2, ab);
-			else
-				ps_revotate(st1, st2, ab);
-		}
-		return ;
-	}
-	while (((*st2)->num != (*st2)-> cheapest -> num)
-			|| ((*st1)->num != (*st2)-> cheapest -> target -> num))
 	{
-		if (ab == 'b' && (*st2)-> cheapest -> tropic == CACER)
+		if ((*st2)-> cheapest -> tropic == CACER)
+			ps_rotate(st1, st2, ab);
+		else
+			ps_revotate(st1, st2, ab);
+	}
+	while (ab == 'b' && ((*st2)->num != (*st2)-> cheapest -> num))
+	{
+		if ((*st2)-> cheapest -> tropic == CACER)
 			ps_rotate(st2, NULL, ab);
-		else if (ab == 'b' && (*st2)-> cheapest -> tropic == CAPRI)
-			ps_revotate(st2, NULL, ab);
-		else if (ab == 'a' && (*st2)-> cheapest -> target -> tropic == CACER)
+		else
+		        ps_revotate(st2, NULL, ab);
+	}
+	while (ab == 'a' && ((*st1)->num != (*st2)-> cheapest -> target -> num))
+	{
+	        if ((*st2)-> cheapest -> target -> tropic == CACER)
 			ps_rotate(st1, NULL, ab);
-		else if (ab == 'a' && (*st2)-> cheapest -> target -> tropic == CAPRI)
+		else
 			ps_revotate(st1, NULL, ab);
 	}
-	return;
 }
