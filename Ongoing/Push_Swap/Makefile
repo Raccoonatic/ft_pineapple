@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/09 16:53:44 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/14 19:49:53 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,7 @@ restore:
 	git restore push_swap.c
 
 boring: fclean build_boring_moves build_boring_errors
-	@printf "$(NEOR) Rebuilding Makefile... $(RESET)"
+	@printf "$(NEOR)🦝 Rebuilding Makefile... $(RESET)"
 	@printf "$(MINT)🦝\n"
 	@sed -i '13s/.*/NAME = push_swap/' Makefile
 	@sed -i '14s/.*/LIB = libpushswap.a/' Makefile
@@ -187,10 +187,10 @@ boring: fclean build_boring_moves build_boring_errors
 	@sed -i '87s/.*//' Makefile
 	@sed -i '88s/.*//' Makefile
 	@printf "$(RESET)"
-	@$(MAKE) all
+	@$(MAKE)
 
 fun: fclean build_fun_moves build_fun_errors
-	@printf "$(NEOR) Rebuilding Makefile... $(RESET)"
+	@printf "$(NEOR)🦝 Rebuilding Makefile... $(RESET)"
 	@printf "$(MINT)🦝\n"
 	@sed -i '13s/.*/NAME = push_swap/' Makefile
 	@sed -i '14s/.*/LIB = libpushswap.a/' Makefile
@@ -275,7 +275,7 @@ fun: fclean build_fun_moves build_fun_errors
 	@sed -i '87s/.*/re: fclean all/' Makefile
 	@sed -i '88s/.*//' Makefile
 	@printf "$(RESET)"
-	@$(MAKE) all
+	@$(MAKE)
 
 build_fun_errors:
 	@printf "$(NEOR) 🦝 Rebuilding ps_init_utils.c... $(RESET)"
@@ -431,7 +431,7 @@ build_fun_moves:
 	@printf "%s\n" '	*st1 = (*st1)-> prev;'>> ps_moves.c
 	@printf "%s\n" '	if (!st2)'>> ps_moves.c
 	@printf "%s\n" '	{'>> ps_moves.c
-	@printf "%s\n" '		racc_print(1, B_WI'\"'s'\%'c'\\'n'\"'RSET, ab);'>> ps_moves.c
+	@printf "%s\n" '		racc_print(1, NEOR'\"'s'\%'c'\\'n'\"'RSET, ab);'>> ps_moves.c
 	@printf "%s\n" '		return ;'>> ps_moves.c
 	@printf "%s\n" '	}'>> ps_moves.c
 	@printf "%s\n" '	(*st2)-> prev = (*st2)-> next;'>> ps_moves.c
@@ -441,7 +441,7 @@ build_fun_moves:
 	@printf "%s\n" '	if ((*st2)-> next)'>> ps_moves.c
 	@printf "%s\n" '		(*st2)-> next -> prev = *st2;'>> ps_moves.c
 	@printf "%s\n" '	*st2 = (*st2)-> prev;'>> ps_moves.c
-	@printf "%s\n" '	racc_print(1, B_WI'\"'ss'\\'n'\"'RSET);'>> ps_moves.c
+	@printf "%s\n" '	racc_print(1, NEOR'\"'ss'\\'n'\"'RSET);'>> ps_moves.c
 	@printf "%s\n" '	return ;'>> ps_moves.c
 	@printf "%s\n" '}'>> ps_moves.c
 	@printf "%s\n" '/*Can execute sa or sb depending on which stack is passed on st1. The ab'>> ps_moves.c
@@ -464,7 +464,7 @@ build_fun_moves:
 	@printf "%s\n" '		temp -> prev = NULL;'>> ps_moves.c
 	@printf "%s\n" '	*st2 = *st1;'>> ps_moves.c
 	@printf "%s\n" '	*st1 = temp;'>> ps_moves.c
-	@printf "%s\n" '	racc_print(1, B_WI'\"'p'\%'c'\\'n'\"'RSET, ab);'>> ps_moves.c
+	@printf "%s\n" '	racc_print(1, LIME'\"'p'\%'c'\\'n'\"'RSET, ab);'>> ps_moves.c
 	@printf "%s\n" '	return ;'>> ps_moves.c
 	@printf "%s\n" '}'>> ps_moves.c
 	@printf "%s\n" '/*Can execute pa or pb depending on which stack is passed on st1. It pushes'>> ps_moves.c
@@ -490,7 +490,7 @@ build_fun_moves:
 	@printf "%s\n" '		(*st2)-> prev = NULL;'>> ps_moves.c
 	@printf "%s\n" '		tail -> next -> prev = tail;'>> ps_moves.c
 	@printf "%s\n" '		tail -> next -> next = NULL;'>> ps_moves.c
-	@printf "%s\n" '		racc_print(1, B_WI'\"'rr'\\'n'\"'RSET);'>> ps_moves.c
+	@printf "%s\n" '		racc_print(1, MINT'\"'rr'\\'n'\"'RSET);'>> ps_moves.c
 	@printf "%s\n" '	}'>> ps_moves.c
 	@printf "%s\n" '	if (st1 && *st1 && (*st1)-> next)'>> ps_moves.c
 	@printf "%s\n" '	{'>> ps_moves.c
@@ -524,7 +524,7 @@ build_fun_moves:
 	@printf "%s\n" '		(*st2)-> prev = tail;'>> ps_moves.c
 	@printf "%s\n" '		tail -> next = *st2;'>> ps_moves.c
 	@printf "%s\n" '		*st2 = tail;'>> ps_moves.c
-	@printf "%s\n" '		racc_print(1, B_WI'\"'rrr'\\'n'\"'RSET);'>> ps_moves.c
+	@printf "%s\n" '		racc_print(1, MINT'\"'rrr'\\'n'\"'RSET);'>> ps_moves.c
 	@printf "%s\n" '	}'>> ps_moves.c
 	@printf "%s\n" '	if (st1 && *st1 && (*st1)-> next)'>> ps_moves.c
 	@printf "%s\n" '	{'>> ps_moves.c
@@ -699,4 +699,4 @@ build_boring_moves:
 	@printf "$(RESET)"
 	@sleep 0.5
 
-.PHONY: all clean fclean re restore@$(MAKE)
+.PHONY: all clean fclean re restore build_boring_moves build_fun_moves build_boring_errors build_fun_errors fun boring

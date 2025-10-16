@@ -41,7 +41,7 @@ t_node	*ps_input_manager(int arc, char *wordy[])
 	result -> tail = NULL;
 	return (result);
 }
-/*Calculates the lenght of all incoming arguments combined, and calls other
+/*Calculates the length of all incoming arguments combined, and calls other
 functions sequentially to confirm that the input is valid and then allocate
 memory where all arguments will be combined, in order to later be passed to
 the list_gen algorithm where the stack a will be created and initialized.*/
@@ -95,7 +95,7 @@ static void	ps_populate(char *space, int arc, char *wordy[])
 	if (space[guidealpha])
 		fail();
 }
-/*Uses different counters to step by step, parse the entire argv bidimensional
+/*Uses different counters to step by step, parse the entire argv bi-dimensional
 array and clone its characters into the allocated memory. Since the memory has
 been initialized with "space" characters, it skips one "slot" at the end of
 every argument. Therefore, assuming that all previous calculations and functions

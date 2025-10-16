@@ -38,7 +38,11 @@ t_node	*ps_list_gen(char *input)
 	return (stacka);
 }
 /* Takes a string containing all input values and calls functions sequentially
-to, in short, transform them into stack a */
+to, in short, transform them into stack a. If there is an error at any point
+during the creation or appending of the node, it clears the heap and fails. 
+However, if when it fails, it has reached the NULL terminator, that simply 
+means that the end of the input was reached, so it instead breaks the loop to
+continue normally.*/
 
 static long	ps_atol(const char *str, size_t *guide)
 {
@@ -66,7 +70,9 @@ static long	ps_atol(const char *str, size_t *guide)
 }
 /*Skips any valid whitespaces and turns the incoming string into its "long"
 equivalent. We don't guard against long overflow because the subject allows
-Undefined Behaviour*/
+Undefined Behaviour. The function houses a specific check at the end, so it
+doesn't return 0 when the function is called with the NULL terminator. It
+instead returns an invalid number so no further nodes are created.*/
 
 static t_node	*ps_new_node(long n)
 {
@@ -90,7 +96,7 @@ static t_node	*ps_new_node(long n)
 }
 /*Validates if the number resulting from the ps_atol function is within the
 acceptable int range. Allocates memory for a new node and initializes the 
-struct's variables. The incoming value is type casted to an int, all pointers
+struct's variables. The incoming value is type-casted to an int, all pointers
 are set to NULL and "tropic" is set to the macro ECUAD, which simply expands
 to 0 on precomp*/
 
@@ -141,5 +147,5 @@ static int	ps_add_node(t_node **head, t_node *new)
 }
 /*Appends the new node to the end of the list. The Tail pointer keeps the
 address of the last pointer to avoid traversing the list with each new
-node, however, a parsing algorithm is still in place as a failsafe. In the 
+node, however, a parsing algorithm is still in place as a fail safe. In the 
 process of appending, the tail, prev and next nodes are assigned accordingly*/

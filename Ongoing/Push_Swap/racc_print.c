@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 22:00:55 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/09/20 16:53:31 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/14 11:06:15 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static void	ptr(int fd, va_list arg, int *counter)
 	racc_putstr(fd, "0x", 0, counter);
 	racc_putadrs(fd, address, counter, "0123456789abcdef");
 }
-
 /*This modfied version of the printf function, has fewer functionalities in
 regards  to  formatting  options, but adds the option to print to different 
 file descriptors, and the %e format specifier. Who's sole purpose is to hard

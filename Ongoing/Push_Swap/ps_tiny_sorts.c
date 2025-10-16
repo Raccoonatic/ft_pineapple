@@ -6,9 +6,9 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 20:37:04 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/09 20:41:53 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/14 10:34:36 by lde-san-         ###   ########.fr       */
 /*                                                                            */
-/* ****************************i********************************************** */
+/* ************************************************************************** */
 
 #include "pushswap.h"
 
@@ -29,8 +29,9 @@ void	ps_refresh_tiny_meta(t_node *stack)
 			trav -> move_price = (len - trav -> stack_index);
 		trav = trav -> next;
 	}
-
 }
+/*Refreshes the necessary metadata of each struct in the entered stack. This
+simpler version was tailored specifically for the tiny_sort functions*/
 
 void	ps_sort_two(t_node **stack, char ab)
 {
@@ -112,7 +113,7 @@ them to be, performing a sort_three-like movement and pushing them
 back. There is a specific util file for this function, that contains
 the functions to find the 2nd smallest, to rotate or revotate
 depending on the node to be pushed, and to perform the sort_three-like
-movements. It analizes the cost of pushing either the smallest or
+movements. It analyzes the cost of pushing either the smallest or
 second smallest first to guarantee the minimum number of movements.
 Since this means that stackb won't always end up in the correct order,
 ps_sf_sort_rems makes sure to use the the simultaneous swap or rotate 

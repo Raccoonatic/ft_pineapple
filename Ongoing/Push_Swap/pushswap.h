@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:33:49 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/09 20:41:43 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/14 10:22:36 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <limits.h>
 
-# define RSET	"\033[0m"
+# define RSET	"\033[0m" 
 # define B_WI	"\033[1;37m"
 # define LIME	"\033[38;2;0;255;0m"
 # define BLOD	"\033[1;38;2;255;0;0m"
@@ -71,7 +71,7 @@ void	ps_sort_two(t_node **stack, char ab);
 void	ps_sort_three(t_node **stack, char ab);
 void	ps_sort_four(t_node **stack_a, t_node **stack_b);
 void	ps_sort_five(t_node **stack_a, t_node **stack_b);
-void    ps_refresh_tiny_meta(t_node *stack);
+void	ps_refresh_tiny_meta(t_node *stack);
 // ps_sort_five_utils.c
 t_node	*ps_find_big_baby(t_node *head, int baby);
 void	ps_sf_push(t_node **stacka, t_node **stackb, t_node *target);

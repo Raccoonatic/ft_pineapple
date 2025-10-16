@@ -37,7 +37,7 @@ void	ps_sf_push(t_node **stacka, t_node **stackb, t_node *target)
 	ps_push(stacka, stackb, 'b');
 	return ;
 }
-/*Verifies wether the "target" node is on the bottom or top half of the 
+/*Verifies whether the "target" node is on the bottom or top half of the 
 list, to find the most effective way to rotate it to the top. CACER means
 they are on the top so it does ra, and CAPRI means bottom so rra. In both
 cases after the target is at the top, it pushes it to stackb*/
@@ -73,4 +73,4 @@ for the nodes on stack to not be in opposite sorted order, it constantly
 checks if the stack isn't sorted, to perform the simultaneous swap or 
 rotate (ss, rr, rrr). This way the nodes are pushed back in order after
 the function call. It is essentially a more complex sort_three algorithm
-that efficiently moves nodes in stackb if necessary. */
+that efficiently moves nodes in stackb if necessary.*/
