@@ -34,9 +34,13 @@ FILE += ps_tiny_sorts.c
 FILE += racc_print.c
 FILE += racc_print_utils.c
 
+SRC_DIR = src/
 OBJ_DIR = obj/
 
-OBJ = $(FILE:%.c=$(OBJ_DIR)%.o)
+SRC = $(addprefix $(SRC_DIR),$(FILE))
+OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+
+.PRECIOUS: $(SRC)
 
 all: $(NAME)
 
@@ -46,7 +50,7 @@ $(NAME): $(LIB) pushswap.h
 $(LIB): $(OBJ) 
 	ar -rcs $(LIB) $(OBJ)
 
-$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@printf "$(NEOR)"
 	$(COMPILE) -c $< -o $@
 	@printf "$(RESET)\n"
@@ -54,9 +58,24 @@ $(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-clean:
+$(SRC_DIR)%.c: $(SRC_DIR)
+	@printf "$(MINT)"
+	mv $(@:$(SRC_DIR)%=%) $(SRC_DIR)
+	@printf "$(RESET)"
+
+$(SRC_DIR):
+	mkdir -p $(SRC_DIR)
+	cp pushswap.h $(SRC_DIR)
+
+./$(FILE):
+	@printf "$(NEOR)"
+	mv -f $(SRC_DIR)$(@:./%=%) .
+	@printf "$(RESET)\n"
+
+clean: ./$(FILE)
 	@printf "$(BABY)"
 	rm -rf $(OBJ_DIR)
+	rm -rf $(SRC_DIR)
 	rm -rf $(LIB)
 	@printf "$(RESET)"
 
@@ -66,25 +85,6 @@ fclean: clean
 	@printf "$(RESET)"
 
 re: fclean all
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 restore:
 	git restore ps_input_manager.c

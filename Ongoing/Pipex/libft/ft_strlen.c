@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
+/*   By: lde-san- <lde-san-@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 23:10:50 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/16 14:47:47 by lde-san-         ###   ########.fr       */
+/*   Created: 2024/09/17 21:05:47 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/16 21:43:27 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <sys/wait.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
+size_t	ft_strlen(const char *str)
+{
+	size_t	counter;
 
-#endif
+	counter = 0;
+	while (str[counter])
+		counter++;
+	return (counter);
+}
+/*Calculates the lenght of a "Valid" C string. Excluding the \0 at the end*/

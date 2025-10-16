@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 23:10:50 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/16 14:47:47 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/21 19:17:03 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/21 19:41:43 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <sys/wait.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
+int	ft_lstsize(t_list *lst)
+{
+	int		guide;
 
-#endif
+	guide = 0;
+	while (lst)
+	{
+		lst = lst -> next;
+		guide++;
+	}
+	return (guide);
+}
+/*Calculates how many nodes are linked 
+to the starting node that lst is pointing to*/

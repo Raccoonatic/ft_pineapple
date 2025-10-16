@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 23:10:50 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/16 14:47:47 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/10 18:38:39 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/10 18:50:34 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
-
-# include "./libft/libft.h"
-# include <sys/wait.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
-
-#endif
+int	ft_isprint(int c)
+{
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
+}
+/*Checks if c is a character within the standard ASCII Table that 
+can be printed by traditional means*/

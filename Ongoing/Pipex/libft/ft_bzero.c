@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 23:10:50 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/16 14:47:47 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/10 19:30:34 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/12 22:29:28 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <sys/wait.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	guide;
 
-#endif
+	guide = 0;
+	while (guide < n)
+	{
+		((unsigned char *)s)[guide] = '\0';
+		guide++;
+	}
+}
+/*Fills up the first n bytes of the memory pointed
+by s, with null characters \0. It may write or overwrite the memory*/

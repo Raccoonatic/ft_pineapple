@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 23:10:50 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/16 14:47:47 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/13 12:02:28 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/13 12:34:06 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <sys/wait.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	size_t	guide;
 
-#endif
+	guide = 0;
+	while (guide < n)
+	{
+		if (((unsigned char *)s)[guide] == (unsigned char)c)
+			return ((void *)&(((unsigned char *)s)[guide]));
+		guide++;
+	}
+	return (NULL);
+}
+/*It looks for the character c in the first n bytes of s. It returns a pointer
+to the address of the character or NULL if it doesn't find it*/

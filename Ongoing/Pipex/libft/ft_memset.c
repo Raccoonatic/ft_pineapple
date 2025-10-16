@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 23:10:50 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/16 14:47:47 by lde-san-         ###   ########.fr       */
+/*   Created: 2025/04/10 18:53:29 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/04/10 19:51:14 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <sys/wait.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
+void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t	guide;
 
-#endif
+	guide = 0;
+	while (guide < n)
+	{
+		((unsigned char *)s)[guide] = (unsigned char)c;
+		guide++;
+	}
+	return (s);
+}
+/*Initializes the first n bytes of the memory area
+pointed by s, by filling it with the character c*/

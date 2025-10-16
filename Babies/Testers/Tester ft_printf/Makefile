@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/05/10 20:03:49 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/16 13:46:07 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,19 +47,18 @@ all: $(NAME)
 
 tests: re
 	cc -Iinc -g tests.c -L. -lftprintf -o test
-	clear
 	./test
 
 clean:
 	make -C ./libft clean
 	rm -rf $(OBJ_DIR)
 	rm -f test
-	clear
+	
 
 fclean: clean
 	make -C ./libft fclean
 	rm -f $(NAME)
-	clear
+	
 
 re: fclean all
 

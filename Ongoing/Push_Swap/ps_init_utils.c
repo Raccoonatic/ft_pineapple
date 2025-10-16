@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 18:30:04 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/09 01:57:41 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/09/21 11:20:58 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ size_t	ps_strlen(char *str)
 
 void	fail(void)
 {
-	racc_print(2, "Error\n");
+	racc_print(2, BLOD"Error\n");
 	exit(1);
 }
 /*Prints Error\n to the stderror, and then exits with the EXIT_FAILURE signal*/
