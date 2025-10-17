@@ -6,13 +6,16 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:18:16 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/16 22:23:21 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/17 10:55:57 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char *get_pathname(char *filename, char *envp[])
+static char	*pathfind(char **dirs, char *tempfilename);
+void		px_free_matrix(char **matrix);
+
+char	*get_pathname(char *filename, char *envp[])
 {
 	char	**dirs;
 	int		guide;
@@ -21,25 +24,21 @@ char *get_pathname(char *filename, char *envp[])
 
 	if (ft_strchr(filename, '/'))
 		return (ft_strdup(filename));
-	temp_filename = ft_strjoin("/", filename);
 	guide = 0;
 	while (envp[guide] && ft_strncmp(envp[guide], "PATH=", 5))
 		guide++;
 	if (!envp[guide])
 		return (NULL);
+	temp_filename = ft_strjoin("/", filename);
 	dirs = ft_split(&envp[guide][5], ':');
-	guide = 0;
-	pathname = ft_strjoin(dirs[guide], temp_filename);
-	while (dirs[guide] && access(pathname, F_OK))
-	{
-		free(pathname);
-		pathname = ft_strjoin(dirs[++guide], temp_filename);
-	}
+	pathname = pathfind(dirs, temp_filename);
 	free(temp_filename);
-	guide = 0;
 	px_free_matrix(dirs);
-	if (!access(pathname, F_OK | X_OK))
+	if (!pathname)
+		return (NULL);
+	if (!access(pathname, F_OK))
 		return (pathname);
+	free(pathname);
 	return (NULL);
 }
 
@@ -47,11 +46,37 @@ void	px_free_matrix(char **matrix)
 {
 	int	guide;
 
+	if (!matrix)
+		return ;
 	guide = 0;
-	while(matrix[guide])
+	while (matrix[guide])
 	{
 		free(matrix[guide]);
 		guide++;
 	}
 	free(matrix);
+}
+
+static char	*pathfind(char **dirs, char *temp_filename)
+{
+	int		guide;
+	char	*pathname;
+
+	if (!temp_filename || !dirs)
+		return (NULL);
+	guide = 0;
+	pathname = ft_strjoin(dirs[guide], temp_filename);
+	if (!pathname)
+		return (NULL);
+	while (access(pathname, F_OK) && dirs[guide])
+	{
+		guide++;
+		if (!dirs[guide])
+			break ;
+		free(pathname);
+		pathname = ft_strjoin(dirs[guide], temp_filename);
+		if (!pathname)
+			return (NULL);
+	}
+	return (pathname);
 }
