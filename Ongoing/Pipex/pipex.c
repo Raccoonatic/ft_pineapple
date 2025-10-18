@@ -27,3 +27,12 @@ int	main(int arc, char *wordy[], char *envp[])
 	if(pipe(pipex) == -1)
 		px_fail(2, &in_file, &out_file);
 }
+
+void run_prog (char **wordy, char **envp
+{
+	char **progarg_one;
+	char **progarg_two;
+
+	prog_one = ft_split(wordy[2]), ' ');
+	prog_two = ft_split(wordy[3]), ' ');
+}
