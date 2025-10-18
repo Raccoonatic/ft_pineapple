@@ -6,16 +6,18 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 13:18:16 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/17 10:55:57 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/18 20:13:32 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	*pathfind(char **dirs, char *tempfilename);
+static char	*px_pathfind(char **dirs, char *temp_filename);
 void		px_free_matrix(char **matrix);
+void		px_set_up_channel_progone(int input, int pipex[]);
+void		px_set_up_channel_progtwo(int output, int pipex[]);
 
-char	*get_pathname(char *filename, char *envp[])
+char	*px_get_pathname(char *filename, char *envp[])
 {
 	char	**dirs;
 	int		guide;
@@ -31,7 +33,7 @@ char	*get_pathname(char *filename, char *envp[])
 		return (NULL);
 	temp_filename = ft_strjoin("/", filename);
 	dirs = ft_split(&envp[guide][5], ':');
-	pathname = pathfind(dirs, temp_filename);
+	pathname = px_pathfind(dirs, temp_filename);
 	free(temp_filename);
 	px_free_matrix(dirs);
 	if (!pathname)
@@ -57,7 +59,7 @@ void	px_free_matrix(char **matrix)
 	free(matrix);
 }
 
-static char	*pathfind(char **dirs, char *temp_filename)
+static char	*px_pathfind(char **dirs, char *temp_filename)
 {
 	int		guide;
 	char	*pathname;
@@ -79,4 +81,22 @@ static char	*pathfind(char **dirs, char *temp_filename)
 			return (NULL);
 	}
 	return (pathname);
+}
+
+void	px_set_up_channel_progone(int input, int pipex[])
+{
+	dup2(input, 0);
+	dup2(pipex[1], 1);
+	close(pipex[0]);
+	close(pipex[1]);
+	close(input);
+}
+
+void	px_set_up_channel_progtwo(int output, int pipex[])
+{
+	dup2(output, 1);
+	dup2(pipex[0], 0);
+	close(pipex[0]);
+	close(pipex[1]);
+	close(output);
 }

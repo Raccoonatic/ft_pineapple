@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 22:29:41 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/16 14:43:37 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/18 20:09:34 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 int		racc_print(int fd, const char *format, ...);
-void    racc_putchar(int fd, char c, int *counter);
-void    racc_putstr(int fd, char *s, int mode, int *counter);
-void    racc_putadrs(int fd, uintptr_t n, int *counter, char *base);
-void    racc_putnbs(int fd, unsigned int n, int *counter, char *base);
+void	racc_putchar(int fd, char c, int *counter);
+void	racc_putstr(int fd, char *s, int mode, int *counter);
+void	racc_putadrs(int fd, uintptr_t n, int *counter, char *base);
+void	racc_putnbs(int fd, unsigned int n, int *counter, char *base);
 
 typedef struct s_list
 {
