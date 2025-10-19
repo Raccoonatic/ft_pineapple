@@ -14,7 +14,7 @@
 
 void	px_closing_list(int fd_one, int fd_two);
 
-void	px_fail(int errcode, int release1, int release2)
+void	px_fail(int errcode, int release1, int release2, int exit_code)
 {
 	if (errcode == 0)
 		perror("Incorrect Argument count");
@@ -39,7 +39,7 @@ void	px_fail(int errcode, int release1, int release2)
 	else if (errcode == 10)
 		perror("Error f_execve Prog_two couldn't run");
 	px_closing_list(release1, release2);
-	exit(EXIT_FAILURE);
+	exit(exit_code);
 }
 
 void	px_closing_list(int fd_one, int fd_two)
