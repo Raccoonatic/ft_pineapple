@@ -6,40 +6,48 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:03:11 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/18 20:07:44 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/19 18:30:10 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	px_closing_list(int fd_one, int fd_two);
+static void	px_fail_sixty_nine(int errcode);
+void		px_closing_list(int fd_one, int fd_two);
 
 void	px_fail(int errcode, int release1, int release2, int exit_code)
 {
 	if (errcode == 0)
-		perror("Incorrect Argument count");
+		racc_print(2, MINT"Incorrect Argument count"RSET);
+	if (errcode == 6 || errcode == 9)
+		px_fail_sixty_nine(errcode);
 	else if (errcode == 1)
-		perror("Error f_open");
+		perror(BLOD"Error"PURP" f_open"RSET);
 	else if (errcode == 2)
-		perror("Error f_pipe");
+		perror(BLOD"Error"PURP" f_pipe"RSET);
 	else if (errcode == 3)
-		perror("Error f_fork one");
+		perror(BLOD"Error"PURP" f_fork"B_WI" one"RSET);
 	else if (errcode == 4)
-		perror("Error f_fork two");
+		perror(BLOD"Error"PURP" f_fork"B_WI" two"RSET);
 	else if (errcode == 5)
-		perror("Error v_args f_ft_split Prog_one");
-	else if (errcode == 6)
-		perror("Error v_pathname f_get_pathname child Prog_one");
+		perror(BLOD"Error"NEOR" v_args"PURP" f_ft_split"LIME" Prog_one"RSET);
 	else if (errcode == 7)
-		perror("Error f_execve Prog_one couldn't run");
+		perror(BLOD"Error"PURP" f_execve"LIME" Prog_one"B_WI" can't run"RSET);
 	else if (errcode == 8)
-		perror("Error v_args f_ft_split Prog_two");
-	else if (errcode == 9)
-		perror("Error v_pathname f_get_pathname child Prog_two");
+		perror(BLOD"Error"NEOR" v_args"PURP" f_ft_split"LIME" Prog_two"RSET);
 	else if (errcode == 10)
-		perror("Error f_execve Prog_two couldn't run");
+		perror(BLOD"Error"PURP" f_execve"LIME" Prog_two"B_WI" can't run"RSET);
 	px_closing_list(release1, release2);
 	exit(exit_code);
+}
+
+static void	px_fail_sixty_nine(int errcode)
+{
+	racc_print(2, BLOD"Error"NEOR" v_pathname");
+	if (errcode == 6)
+		perror(" f_get_pathname"B_WI" child "LIME"Prog_one"RSET);
+	else if (errcode == 9)
+		perror(PURP" f_get_pathname"B_WI" child"LIME" Prog_two"RSET);
 }
 
 void	px_closing_list(int fd_one, int fd_two)

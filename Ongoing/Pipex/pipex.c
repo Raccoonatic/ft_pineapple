@@ -6,13 +6,14 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 18:19:51 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/19 03:18:25 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/19 17:41:48 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 static int	px_waiting_room(char **wordy, char **envp, int input, int output);
+static void	px_fork_the_children(pid_t *process, int closing);
 static void	px_run_progone(char *command, char **envp, int input, int pipex[]);
 static void	px_run_progtwo(char *command, char **envp, int output, int pipex[]);
 
@@ -46,29 +47,29 @@ static int	px_waiting_room(char **wordy, char **envp, int input, int output)
 
 	if (pipe(pipex) == -1)
 		px_fail(2, input, output, 1);
-	pid_one = fork();
+	px_fork_the_children(&pid_one, output);
 	if (pid_one < 0)
 		px_fail(3, input, output, 1);
-	else if (pid_one == 0)
-	{
-		close(output);
+	if (pid_one == 0)
 		px_run_progone(wordy[2], envp, input, pipex);
-	}
-	pid_two = fork();
+	if (pid_one > 0)
+		px_fork_the_children(&pid_two, input);
 	if (pid_two < 0)
-	{
-		waitpid(pid_one, NULL, 0);
 		px_fail(4, input, output, 1);
-	}
-	else if (pid_two == 0)
-	{
-		close(input);
+	if (pid_two == 0)
 		px_run_progtwo(wordy[3], envp, output, pipex);
-	}
 	px_closing_list(pipex[0], pipex[1]);
 	waitpid(pid_one, NULL, 0);
 	waitpid(pid_two, &status, 0);
 	return (status >> 8);
+}
+
+static void	px_fork_the_children(pid_t *process, int closing)
+{
+	*process = fork();
+	if (*process > 0 || *process == -1)
+		return ;
+	close(closing);
 }
 
 static void	px_run_progone(char *command, char **envp, int input, int pipex[])
