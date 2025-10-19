@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:03:11 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/19 18:30:10 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/19 22:31:59 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		px_closing_list(int fd_one, int fd_two);
 void	px_fail(int errcode, int release1, int release2, int exit_code)
 {
 	if (errcode == 0)
-		racc_print(2, MINT"Incorrect Argument count"RSET);
+		racc_print(2, MINT"%e Incorrect Argument Count\n"RSET, "nope");
 	if (errcode == 6 || errcode == 9)
 		px_fail_sixty_nine(errcode);
 	else if (errcode == 1)
@@ -37,6 +37,8 @@ void	px_fail(int errcode, int release1, int release2, int exit_code)
 		perror(BLOD"Error"NEOR" v_args"PURP" f_ft_split"LIME" Prog_two"RSET);
 	else if (errcode == 10)
 		perror(BLOD"Error"PURP" f_execve"LIME" Prog_two"B_WI" can't run"RSET);
+	racc_print(1, BABY"%e Usage: ./pipex infile cmd1 cmd2 outfile"RSET, "racc");
+	racc_print(1," %e\n", "racc");
 	px_closing_list(release1, release2);
 	exit(exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 23:10:50 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/19 00:13:22 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/19 22:19:46 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define BLOD	"\033[1;38;2;255;0;0m"
 # define PURP	"\033[1;38;2;174;5;252m"
 # define NEOR	"\033[3m\033[38;2;255;153;51m"
-# define MINT	"\033[38;2;55;250;133;48;2;0;0;0m"
+# define MINT	"\033[1;38;2;55;250;133;48;2;0;0;0m"
 
 char	*px_get_pathname(char *filename, char *envp[]);
 void	px_free_matrix(char **matrix);
