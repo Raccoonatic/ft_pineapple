@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/16 14:49:35 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/20 20:01:06 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/20 21:46:44 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -238,7 +238,7 @@ fail_tests:
 	@open out1 && open out2
 	@read dummy
 	@rm -rf out1 out2 infile
-	@printf "$(MINT)\t\t\t 🦝 Done! 🦝\n$(RSET)"
+	@printf "$(MINT)\t\t\t 🦝 Done! 🦝\n\n$(RSET)"
 
 michmos:
 	git clone https://github.com/michmos/42_pipex_tester.git && cd 42_pipex_tester
