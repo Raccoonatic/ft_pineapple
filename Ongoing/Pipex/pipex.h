@@ -34,8 +34,8 @@
 char	*px_get_pathname(char *filename, char *envp[]);
 void	px_free_matrix(char **matrix);
 void	px_closing_list(int fd_one, int fd_two);
-void	px_set_up_channel_progone(int input, int pipex[]);
-void	px_set_up_channel_progtwo(int output, int pipex[]);
-void	px_fail(int errcode, int release1, int release2, int exit_code);
+void	px_set_up_channel_progone(char *input_file, int pipex[]);
+void	px_set_up_channel_progtwo(char *output_file, int pipex[]);
+void	px_fail(int errcode, int exit_code);
 
 #endif

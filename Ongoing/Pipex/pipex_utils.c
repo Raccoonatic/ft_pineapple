@@ -14,8 +14,8 @@
 
 static char	*px_pathfind(char **dirs, char *temp_filename);
 void		px_free_matrix(char **matrix);
-void		px_set_up_channel_progone(int input, int pipex[]);
-void		px_set_up_channel_progtwo(int output, int pipex[]);
+void		px_set_up_channel_progone(char *input_file, int pipex[]);
+void		px_set_up_channel_progtwo(char *output_file, int pipex[]);
 
 char	*px_get_pathname(char *filename, char *envp[])
 {
@@ -83,20 +83,30 @@ static char	*px_pathfind(char **dirs, char *temp_filename)
 	return (pathname);
 }
 
-void	px_set_up_channel_progone(int input, int pipex[])
+void	px_set_up_channel_progone(char *input_file, int pipex[])
 {
-	dup2(input, 0);
+	int	fd;
+
+	fd = open(input_file, O_RDONLY);
+	if (fd < 0)
+		px_fail(1, 1);
+	dup2(fd, 0);
 	dup2(pipex[1], 1);
 	close(pipex[0]);
 	close(pipex[1]);
-	close(input);
+	close(fd);
 }
 
-void	px_set_up_channel_progtwo(int output, int pipex[])
+void	px_set_up_channel_progtwo(char *output_file, int pipex[])
 {
-	dup2(output, 1);
+	int	fd;
+
+	fd = open(output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+		px_fail(11, 1);
+	dup2(fd, 1);
 	dup2(pipex[0], 0);
 	close(pipex[0]);
 	close(pipex[1]);
-	close(output);
+	close(fd);
 }
