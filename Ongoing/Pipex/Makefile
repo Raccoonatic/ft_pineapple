@@ -240,4 +240,10 @@ fail_tests:
 	@rm -rf out1 out2 infile
 	@printf "$(MINT)\t\t\t 🦝 Done! 🦝\n$(RSET)"
 
-.PHONY: all clean fclean re fail_tests test
+michmos:
+	git clone https://github.com/michmos/42_pipex_tester.git && cd 42_pipex_tester
+	@printf "$(PURP)\n\t\t michmos github:\n"
+	@printf "$(MINT) 🦝 https://github.com/michmos/42_pipex_tester 🦝\n\n"
+	@sleep 1
+
+.PHONY: all clean fclean re fail_tests test michmos
