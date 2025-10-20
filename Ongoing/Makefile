@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/16 14:49:35 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/20 20:01:06 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/20 19:50:54 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,40 +31,69 @@ FILE = pipex.c
 FILE += pipex_utils.c
 FILE += px_fail.c
 
-OBJ = $(FILE:%.c=%.o)
+SRC_DIR = src/
+OBJ_DIR = obj/
+
+SRC = $(addprefix $(SRC_DIR),$(FILE))
+OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+
+.PRECIOUS: $(SRC)
 
 COMPILE = cc -g -O0 -Wall -Werror -Wextra -I.
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) pipex.h
+$(NAME): $(OBJ) $(LIB) $(LIBFT) pipex.h
 	@printf "$(BABY)"
-	$(COMPILE) $(OBJ) $(LIBFT) -o $(NAME)
+	$(COMPILE) $(OBJ) $(LIB) $(LIBFT) -o $(NAME)
 	@printf "$(MINT)"
 	@ls -la
 	@printf "$(RSET)"
 
-%.o: %.c pipex.h
+$(LIB): $(OBJ) 
+	ar -rcs $(LIB) $(OBJ)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c pipex.h | $(OBJ_DIR)
 	@printf "$(PURP)"
 	$(COMPILE) -c $< -o $@
+	@printf "$(RSET)\n"
+
+$(SRC_DIR)%.c: $(SRC_DIR)
+	@printf "$(MINT)"
+	mv $(@:$(SRC_DIR)%=%) $(SRC_DIR)
 	@printf "$(RSET)"
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(SRC_DIR):
+	mkdir -p $(SRC_DIR)
+	cp pipex.h $(SRC_DIR)
 
 $(LIBFT): libft/libft.h
 	@printf "$(NEOR)"
 	@make -C ./libft
 	@printf "$(RSET)"
 
-clean:
+./$(FILE):
+	@printf "$(NEOR)"
+	mv -f $(SRC_DIR)$(@:./%=%) .
+	@sleep 1
+	@printf "$(RSET)\n"
+
+clean: ./$(FILE)
 	@printf "$(LIME)"
-	@make -C ./libft clean
+	make -C ./libft clean
 	@sleep 1
 	@printf "$(BLOD)"
-	rm -rf $(OBJ)
+	rm -rf $(OBJ_DIR)
+	rm -rf $(SRC_DIR)
+	rm -rf $(LIB)
 	@printf "$(RSET)"
 
 fclean: clean
 	@printf "$(B_WI)"
-	@make -C ./libft fclean
+	make -C ./libft fclean
 	@sleep 1
 	@printf "$(PURP)"
 	rm -f $(NAME)
@@ -73,35 +102,6 @@ fclean: clean
 	@printf "$(RSET)"
 
 re: fclean all
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #///////////////////////////////////////////////////////////////
 #/////                                                       //
@@ -233,96 +233,11 @@ fail_tests:
 	./pipex infile "" "" out1 || true
 	@printf "$(LIME)\n\t./bash "
 	<infile  | > out2 || true
-	@printf "$(NEOR)\nOpening outputs...$(RSET)\n"
+	@printf "$(NEOR)\nOpening outputs...$(RSET)\n\n"
 	@sleep 1
 	@open out1 && open out2
 	@read dummy
 	@rm -rf out1 out2 infile
 	@printf "$(MINT)\t\t\t 🦝 Done! 🦝\n$(RSET)"
 
-michmos:
-	git clone https://github.com/michmos/42_pipex_tester.git && cd 42_pipex_tester
-	@printf "$(PURP)\n\t\t michmos github:\n"
-	@printf "$(MINT) 🦝 https://github.com/michmos/42_pipex_tester 🦝\n\n"
-	@sleep 1
-
-fun:
-	@printf "$(NEOR)🦝 Rebuilding Makefile... $(RESET)"
-	@printf "$(MINT)🦝\n"
-	@sed -i '33s/.*//' Makefile
-	@sed -i '34s/.*/''S''R''C''_''D''I''R'' = src\//' Makefile
-	@sed -i '35s/.*/''O''B''J''_''D''I''R'' = obj\//' Makefile
-	@sed -i '36s/.*//' Makefile
-	@sed -i '37s/.*/''S''R''C'' = $$(addprefix $$(''S''R''C''_''D''I''R'')'',$$(''F''I''L''E''))/' Makefile
-	@sed -i '38s/.*/''O''B''J'' = $$(''S''R''C'':$$(''S''R''C''_''D''I''R'')'\%'.c=$$(''O''B''J''_''D''I''R'')'\%'.o)/' Makefile
-	@sed -i '39s/.*//' Makefile
-	@sed -i '40s/.*/.''P''R''E''C''I''O''U''S'':'' $$(''S''R''C'')/' Makefile
-	@sed -i '41s/.*//' Makefile
-	@sed -i '42s/.*/''C''O''M''P''I''L''E'' = cc -g -O0 -Wall -Werror -Wextra -I./' Makefile
-	@sed -i '43s/.*//' Makefile
-	@sed -i '44s/.*/all: $$(''N''A''M''E'')/' Makefile
-	@sed -i '45s/.*//' Makefile
-	@sed -i '46s/.*/$$(''N''A''M''E''): $$(''O''B''J'') $$(''L''I''B'') $$(''L''I''B''F''T'') pipex.h/' Makefile
-	@sed -i '47s/.*/	@printf '\"'$$(''B''A''B''Y'')'\"'/' Makefile
-	@sed -i '48s/.*/	$$(''C''O''M''P''I''L''E'') $$(''O''B''J'') $$(''L''I''B'') $$(''L''I''B''F''T'') -o $$(''N''A''M''E'')/' Makefile
-	@sed -i '49s/.*/	@printf '\"'$$(''M''I''N''T'')'\"'/' Makefile
-	@sed -i '50s/.*/	@ls -la/' Makefile
-	@sed -i '51s/.*/	@printf '\"'$$(''R''S''E''T'')'\"'/' Makefile
-	@sed -i '52s/.*//' Makefile
-	@sed -i '53s/.*/$$(''L''I''B''): $$(''O''B''J'') /' Makefile
-	@sed -i '54s/.*/	ar -rcs $$(''L''I''B'') $$(''O''B''J'')/' Makefile
-	@sed -i '55s/.*//' Makefile
-	@sed -i '56s/.*/$$(''O''B''J''_''D''I''R'')'\%'.o: $$(''S''R''C''_''D''I''R'')'\%'.c pipex.h | $$(''O''B''J''_''D''I''R'')/' Makefile
-	@sed -i '57s/.*/	@printf '\"'$$(''P''U''R''P'')'\"'/' Makefile
-	@sed -i '58s/.*/	$$(''C''O''M''P''I''L''E'') -c $$< -o $$@/' Makefile
-	@sed -i '59s/.*/	@printf '\"'$$(''R''S''E''T'')\\n'\"'/' Makefile
-	@sed -i '60s/.*//' Makefile
-	@sed -i '61s/.*/$$(''S''R''C''_''D''I''R'')'\%'.c: $$(''S''R''C''_''D''I''R'')/' Makefile
-	@sed -i '62s/.*/	@printf '\"'$$(''M''I''N''T'')'\"'/' Makefile
-	@sed -i '63s/.*/	mv $$(@:$$(''S''R''C''_''D''I''R'')'\%'='\%') $$(''S''R''C''_''D''I''R'')/' Makefile
-	@sed -i '64s/.*/	@printf '\"'$$(''R''S''E''T'')'\"'/' Makefile
-	@sed -i '65s/.*//' Makefile
-	@sed -i '66s/.*/$$(''O''B''J''_''D''I''R''):/' Makefile
-	@sed -i '67s/.*/	mkdir -p $$(''O''B''J''_''D''I''R'')/' Makefile
-	@sed -i '68s/.*//' Makefile
-	@sed -i '69s/.*/$$(''S''R''C''_''D''I''R''):/' Makefile
-	@sed -i '70s/.*/	mkdir -p $$(''S''R''C''_''D''I''R'')/' Makefile
-	@sed -i '71s/.*/	cp pipex.h $$(''S''R''C''_''D''I''R'')/' Makefile
-	@sed -i '72s/.*//' Makefile
-	@sed -i '73s/.*/$$(''L''I''B''F''T''): libft\/libft.h/' Makefile
-	@sed -i '74s/.*/	@printf '\"'$$(''N''E''O''R'')'\"'/' Makefile
-	@sed -i '75s/.*/	@make -C .\/libft/' Makefile
-	@sed -i '76s/.*/	@printf '\"'$$(''R''S''E''T'')'\"'/' Makefile
-	@sed -i '77s/.*//' Makefile
-	@sed -i '78s/.*/.\/$$(''F''I''L''E''):/' Makefile
-	@sed -i '79s/.*/	@printf '\"'$$(''N''E''O''R'')'\"'/' Makefile
-	@sed -i '80s/.*/	mv -f $$(''S''R''C''_''D''I''R'')$$(@:.\/'\%'='\%') ./' Makefile
-	@sed -i '81s/.*/	@sleep 1/' Makefile
-	@sed -i '82s/.*/	@printf '\"'$$(''R''S''E''T'')\\n'\"'/' Makefile
-	@sed -i '83s/.*//' Makefile
-	@sed -i '84s/.*/clean: .\/$$(''F''I''L''E'')/' Makefile
-	@sed -i '85s/.*/	@printf '\"'$$(''L''I''M''E'')'\"'/' Makefile
-	@sed -i '86s/.*/	make -C .\/libft clean/' Makefile
-	@sed -i '87s/.*/	@sleep 1/' Makefile
-	@sed -i '88s/.*/	@printf '\"'$$(''B''L''O''D'')'\"'/' Makefile
-	@sed -i '89s/.*/	rm -rf $$(''O''B''J''_''D''I''R'')/' Makefile
-	@sed -i '90s/.*/	rm -rf $$(''S''R''C''_''D''I''R'')/' Makefile
-	@sed -i '91s/.*/	rm -rf $$(''L''I''B'')/' Makefile
-	@sed -i '92s/.*/	@printf '\"'$$(''R''S''E''T'')'\"'/' Makefile
-	@sed -i '93s/.*//' Makefile
-	@sed -i '94s/.*/fclean: clean/' Makefile
-	@sed -i '95s/.*/	@printf '\"'$$(''B''_''W''I'')'\"'/' Makefile
-	@sed -i '96s/.*/	make -C .\/libft fclean/' Makefile
-	@sed -i '97s/.*/	@sleep 1/' Makefile
-	@sed -i '98s/.*/	@printf '\"'$$(''P''U''R''P'')'\"'/' Makefile
-	@sed -i '99s/.*/	rm -f $$(''N''A''M''E'')/' Makefile
-	@sed -i '100s/.*/	@printf '\"'$$(''M''I''N''T'')'\"'/' Makefile
-	@sed -i '101s/.*/	@ls -la/' Makefile
-	@sed -i '102s/.*/	@printf '\"'$$(''R''S''E''T'')'\"'/' Makefile
-	@sed -i '103s/.*//' Makefile
-	@sed -i '104s/.*/re: fclean all/' Makefile
-	@sed -i '105s/.*//' Makefile
-
-boring:
-
-.PHONY: all clean fclean re fail_tests test michmos
+.PHONY: all clean fclean re fail_tests test

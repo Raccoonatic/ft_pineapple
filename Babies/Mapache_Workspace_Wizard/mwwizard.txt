@@ -7,19 +7,20 @@ cat << 'EOF' > Makefile
 #    By: mapache <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/19 19:58:17 by mapache           #+#    #+#              #
-#    Updated: 2025/05/19 19:58:52 by mapache          ###   ########.fr        #
+#    Updated: 2025/10/20 18:20:46 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-MINT    := \033[38;2;55;250;133;48;2;0;0;0m
-MINT_B  := \033[1;38;2;55;250;133;48;2;0;0;0m
-MINT_I  := \033[3;38;2;55;250;133;48;2;0;0;0m
+MINT	= \033[38;2;55;250;133;48;2;0;0;0m
+MINT_B  = \033[1;38;2;55;250;133;48;2;0;0;0m
+MINT_I  = \033[3;38;2;55;250;133;48;2;0;0;0m
 
-RESET   := \033[0m
+RESET   = \033[0m
 
 all:
 	@printf "$(MINT_B)🦝 SETTING UP $(shell whoami) WORKSPACE 🦝$(RESET)\n"
 	@sleep 2
+	@make -C . profile
 	mkdir Mapache
 	mv Makefile Mapache
 	ssh-keygen
@@ -272,5 +273,118 @@ omg:
 	rm -rf .zcompdump
 	rm -rf .zcompdump*
 
-.PHONY: all fruta uninstall omg paco
+profile:
+	@clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile    🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile.   🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile..  🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile... 🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile    🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile.   🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile..  🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile... 🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile    🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile.   🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile..  🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile... 🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile    🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile.   🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile..  🦝$(RESET)"
+	@sleep 0.2 && clear
+	@printf "$(MINT)\n🦝 Building Mapache Terminal Profile... 🦝$(RESET)"
+	@clear
+	@> create_mapache_profile.sh
+	@printf "%s\n" '#!/bin/bash'>> create_mapache_profile.sh
+	@printf "%s\n" ''>> create_mapache_profile.sh
+	@printf "%s\n" 'UUID='\"'b1dcc9dd-5262-4d8d-a863-c897e6d979b9'\"''>> create_mapache_profile.sh
+	@printf "%s\n" 'PROFILE_NAME='\"'Mapache_Main'\"''>> create_mapache_profile.sh
+	@printf "%s\n" ''>> create_mapache_profile.sh
+	@printf "%s\n" 'BASE_KEY='\"'/org/gnome/terminal/legacy/profiles:/:$$UUID/'\"''>> create_mapache_profile.sh
+	@printf "%s\n" ''>> create_mapache_profile.sh
+	@printf "%s\n" '# Add profile to list if missing'>> create_mapache_profile.sh
+	@printf "%s\n" 'PROFILE_LIST=$$(gsettings get org.gnome.Terminal.ProfilesList list)'>> create_mapache_profile.sh
+	@printf "%s\n" 'if [[ $$PROFILE_LIST != *'\"'$$UUID'\"'* ]]; then'>> create_mapache_profile.sh
+	@printf "%s\n" '    NEW_LIST=$$(echo '\"'$$PROFILE_LIST'\"' | sed '\"'s/]$$/, '\''$$UUID'\'']/'\"')'>> create_mapache_profile.sh
+	@printf "%s\n" '    gsettings set org.gnome.Terminal.ProfilesList list '\"'$$NEW_LIST'\"''>> create_mapache_profile.sh
+	@printf "%s\n" 'fi'>> create_mapache_profile.sh
+	@printf "%s\n" ''>> create_mapache_profile.sh
+	@printf "%s\n" '# Set profile name'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY visible-name '\"'$$PROFILE_NAME'\"''>> create_mapache_profile.sh
+	@printf "%s\n" ''>> create_mapache_profile.sh
+	@printf "%s\n" '# Apply settings'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY audible-bell true'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY background-color '\''rgb(0,0,10)'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY background-transparency-percent 4'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY backspace-binding '\''ascii-delete'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY bold-color '\''rgb(255,253,233)'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY bold-color-same-as-fg true'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY bold-is-bright true'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY cell-height-scale 1.05'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY cell-width-scale 1.05'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY cjk-utf8-ambiguous-width '\''narrow'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY cursor-background-color '\''rgb(255,176,0)'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY cursor-blink-mode '\''system'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY cursor-colors-set true'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY cursor-foreground-color '\''rgb(0,0,0)'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY cursor-shape '\''block'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY custom-command '\'''\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY default-size-columns 80'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY default-size-rows 24'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY delete-binding '\''delete-sequence'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY enable-bidi true'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY enable-shaping true'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY enable-sixel false'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY encoding '\''UTF-8'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY exit-action '\''close'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY font '\''Monospace 13'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY foreground-color '\''rgb(254,255,243)'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY highlight-background-color '\''rgb(0,255,188)'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY highlight-colors-set true'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY highlight-foreground-color '\''rgb(0,0,0)'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY login-shell false'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY palette '\"'['\''rgb(23,20,33)'\'', '\''rgb(255,77,0)'\'', '\''rgb(128,0,255)'\'', '\''rgb(162,115,76)'\'', '\''rgb(20,204,144)'\'', '\''rgb(163,71,186)'\'', '\''rgb(42,161,179)'\'', '\''rgb(255,255,255)'\'', '\''rgb(94,92,100)'\'', '\''rgb(255,122,0)'\'', '\''rgb(212,41,255)'\'', '\''rgb(233,173,12)'\'', '\''rgb(0,255,179)'\'', '\''rgb(192,97,203)'\'', '\''rgb(0,255,255)'\'', '\''rgb(255,255,255)'\'']'\"''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY preserve-working-directory '\''safe'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY rewrap-on-resize true'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY scroll-on-keystroke true'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY scroll-on-output false'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY scrollback-lines 10000'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY scrollback-unlimited false'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY scrollbar-policy '\''always'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY text-blink-mode '\''always'\'''>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY use-custom-command false'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY use-system-font false'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY use-theme-colors false'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY use-theme-transparency false'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY use-transparent-background true'>> create_mapache_profile.sh
+	@printf "%s\n" 'gsettings set org.gnome.Terminal.Legacy.Profile:$$BASE_KEY word-char-exceptions '\''@ms nothing'\'''>> create_mapache_profile.sh
+	@printf "%s\n" ''>> create_mapache_profile.sh
+	@chmod +x create_mapache_profile.sh
+	@printf "$(RESET)"
+	@sleep 0.5
+	@./create_mapache_profile.sh
+	@printf "$(MINT_B)\n\t\t   🦝 Boom! 🦝\n"
+	@gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+	@sleep 1
+	@printf "$(MINT_I)\n\tIf you have GNOME, the Mapache_Main\n     profile should now be in your preferences $(RESET)"
+	@rm -rf create_mapache_profile.sh
+	@printf "\n\t     Hit Enter to continue..."
+	@read dummy
+	@clear
+
+
+.PHONY: all fruta uninstall omg paco profile
 EOF
