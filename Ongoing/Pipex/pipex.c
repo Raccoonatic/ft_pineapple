@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 18:19:51 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/21 16:44:27 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:58:58 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,24 @@ static void	px_run_progone(char **wordy, char **envp, int pipex[])
 	char	**args;
 	char	*pathname;
 
-	args = ft_split(wordy[2], ' ');
-	if (!args)
-		px_fail(5, 1);
-	pathname = px_get_pathname(args[0], envp);
-	px_set_up_channel_progone(wordy[1], pipex);
-	if (pathname && ft_strchr(args[0], '/'))
-		execve(args[0], args, envp);
-	else if (pathname && !(ft_strchr(args[0], '/')))
-		execve(pathname, args, envp);
-	if (pathname)
-		free(pathname);
-	px_free_matrix(args);
-	px_fail(7, 127);
+	if (wordy[2][0])
+	{
+		px_set_up_channel_progone(wordy[1], pipex);
+		args = ft_split(wordy[2], ' ');
+		if (!args)
+			px_fail(5, 1);
+		pathname = px_get_pathname(args[0], envp);
+		if (pathname && ft_strchr(args[0], '/'))
+			execve(args[0], args, envp);
+		else if (pathname && !(ft_strchr(args[0], '/')))
+			execve(pathname, args, envp);
+		if (pathname)
+			free(pathname);
+		px_free_matrix(args);
+		px_fail(7, 127);
+	}
+	execve(wordy[2], &wordy[2], envp);
+	px_fail(6, 1);
 }
 
 static void	px_run_progtwo(char **wordy, char **envp, int pipex[])
@@ -68,17 +73,23 @@ static void	px_run_progtwo(char **wordy, char **envp, int pipex[])
 	char	**args;
 	char	*pathname;
 
-	args = ft_split(wordy[3], ' ');
-	if (!args)
-		px_fail(8, 1);
-	pathname = px_get_pathname(args[0], envp);
-	px_set_up_channel_progtwo(wordy[4], pipex);
-	if (pathname && ft_strchr(args[0], '/'))
-		execve(args[0], args, envp);
-	else if (pathname && !(ft_strchr(args[0], '/')))
-		execve(pathname, args, envp);
-	if (pathname)
-		free(pathname);
-	px_free_matrix(args);
-	px_fail(10, 127);
+	if (wordy[3][0])
+	{
+		px_set_up_channel_progtwo(wordy[4], pipex);
+		args = ft_split(wordy[3], ' ');
+		if (!args)
+			px_fail(8, 1);
+		pathname = px_get_pathname(args[0], envp);
+		if (pathname && ft_strchr(args[0], '/'))
+			execve(args[0], args, envp);
+		else if (pathname && !(ft_strchr(args[0], '/')))
+			execve(pathname, args, envp);
+		if (pathname)
+			free(pathname);
+		px_free_matrix(args);
+		px_fail(10, 127);
+	}
+	execve(wordy[3], &wordy[3], envp);
+	open(wordy[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	px_fail(9, 1);
 }

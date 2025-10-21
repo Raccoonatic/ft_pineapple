@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:03:11 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/10/19 22:31:59 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/10/21 22:04:08 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,24 @@ static void	px_fail_system(int errcode)
 
 static void	px_fail_sixty_nine(int errcode)
 {
+	int	delay;
+
+	delay = 0;
 	if (errcode == 6)
 	{
 		racc_print(2, BLOD"Error"NEOR" v_pathname");
-		perror(" f_get_pathname"B_WI" child "LIME"Prog_one"RSET);
+		perror(PURP" f_get_pathname"B_WI" child "LIME"Prog_one"RSET);
+		racc_print(2, BABY"%e Usage: ./pipex infile ", "racc");
+		racc_print(2, "cmd1 cmd2 outfile"RSET" %e\n", "racc");
 	}
 	else if (errcode == 9)
 	{
+		while (delay < 100000)
+			delay++;
 		racc_print(2, BLOD"Error"NEOR" v_pathname");
 		perror(PURP" f_get_pathname"B_WI" child"LIME" Prog_two"RSET);
+		racc_print(2, BABY"%e Usage: ./pipex infile ", "racc");
+		racc_print(2, "cmd1 cmd2 outfile"RSET" %e\n", "racc");
 	}
-	racc_print(2, BABY"%e Usage: ./pipex infile cmd1 cmd2 outfile"RSET, "racc");
-	racc_print(2, " %e\n", "racc");
 	return ;
 }

@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/16 14:49:35 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/20 21:46:44 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/21 21:36:46 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,7 +109,7 @@ re: fclean all
 #///                                                       //
 #///////////////////////////////////////////////////////////
 
-test:
+test: $(NAME)
 	@printf "$(MINT)\n\t\t  🦝 Running Test! 🦝 \n\n"
 	@touch infile
 	@printf "$(PURP)\t"
@@ -122,15 +122,13 @@ test:
 	@printf "$(NEOR)\nOpening outputs...$(RSET)"
 	@sleep 1
 	@open out1 && open out2
-	@sleep 4
+	@read dummy
 	@rm -rf out1 out2 infile
 
-fail_tests:
+fail_tests: $(NAME)
 	@printf "$(MINT)\n\t\t  🦝 [TEST] No infile 🦝 \n\n"
 	@rm -f infile_missing
 	@printf "$(PURP)\t"
-	@touch out1
-	@touch out2
 	./pipex infile_missing "$(cmd1)" "$(cmd2)" out1 || true
 	@printf "$(LIME)\n\t./bash "
 	<infile_missing  $(cmd1) | $(cmd2)> out2 || true
@@ -144,8 +142,6 @@ fail_tests:
 	@touch infile_noread
 	@chmod 000 infile_noread
 	@printf "$(PURP)\t"
-	@touch out1
-	@touch out2
 	./pipex infile_noread "$(cmd1)" "$(cmd2)" out1 || true
 	@printf "$(LIME)\n\t./bash "
 	<infile_noread  $(cmd1) | $(cmd2)> out2 || true
@@ -172,8 +168,6 @@ fail_tests:
 	@printf "$(MINT)\n\t\t  🦝 [TEST] Invalid commands 🦝 \n\n"
 	@touch infile
 	@printf "$(PURP)\t"
-	@touch out1
-	@touch out2
 	./pipex infile "alvunpowerranger" "nopenope" out1 || true
 	@printf "$(LIME)\n\t./bash "
 	<infile  alvunpowerranger | nopenope> out2 || true
@@ -186,8 +180,6 @@ fail_tests:
 	@printf "$(MINT)\n\t\t  🦝 [TEST] Invalid cmd1 🦝 \n\n"
 	@touch infile
 	@printf "$(PURP)\t"
-	@touch out1
-	@touch out2
 	./pipex infile "alvunpowerranger" "wc" out1 || true
 	@printf "$(LIME)\n\t./bash "
 	<infile  alvunpowerranger | wc> out2 || true
@@ -200,8 +192,6 @@ fail_tests:
 	@printf "$(MINT)\n\t\t  🦝 [TEST] Invalid cmd2 🦝 \n\n"
 	@touch infile
 	@printf "$(PURP)\t"
-	@touch out1
-	@touch out2
 	./pipex infile "ls -l" "nopenope" out1 || true
 	@printf "$(LIME)\n\t./bash "
 	<infile  ls -l | nopenope> out2 || true
@@ -228,13 +218,10 @@ fail_tests:
 	@printf "$(MINT)\n\t\t  🦝 [TEST] Empty Commands 🦝 \n\n"
 	@touch infile
 	@printf "$(PURP)\t"
-	@touch out1
-	@touch out2
 	./pipex infile "" "" out1 || true
 	@printf "$(LIME)\n\t./bash "
 	<infile  | > out2 || true
 	@printf "$(NEOR)\nOpening outputs...$(RSET)\n"
-	@sleep 1
 	@open out1 && open out2
 	@read dummy
 	@rm -rf out1 out2 infile
