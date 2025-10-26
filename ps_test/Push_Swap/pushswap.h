@@ -80,7 +80,7 @@ void	ps_sf_sort_rems(t_node **stacka, t_node **stackb);
 void	one_f_to_sort_them_all(t_node **stacka, t_node **stackb);
 void	ps_cheap_rotate(t_node **stck1, t_node **stck2, char ab);
 // ps_algorithm_utils_beta.c
-void	ps_refresh_meta(t_node *heada, t_node *headb);
+void	ps_refresh_meta(t_node *stck1, t_node *stck2, char ab);
 // ps_cost_analysis.c
 void	ps_set_price(t_node *stck1, t_node *stck2);
 // racc_print.c
