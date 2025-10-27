@@ -133,42 +133,42 @@ boring: fclean build_boring_moves build_boring_errors
 	@sed -i '31s/.*/FILE += ps_sort_five_utils.c/' Makefile
 	@sed -i '32s/.*/FILE += ps_sort_them_all.c/' Makefile
 	@sed -i '33s/.*/FILE += ps_tiny_sorts.c/' Makefile
-	@sed -i '34s/.*/FILE += racc_print.c/' Makefile
-	@sed -i '35s/.*/FILE += racc_print_utils.c/' Makefile
-	@sed -i '36s/.*//' Makefile
-	@sed -i '37s/.*/OBJ_DIR = obj\//' Makefile
-	@sed -i '38s/.*//' Makefile
-	@sed -i '39s/.*/''O''B''J'' = $$(''F''I''L''E'':'\%'.c=$$(''O''B''J''_''D''I''R'')'\%'.o)/' Makefile
-	@sed -i '40s/.*//' Makefile
-	@sed -i '41s/.*/all: $$(''N''A''M''E'')/' Makefile
-	@sed -i '42s/.*//' Makefile
-	@sed -i '43s/.*/$$(''N''A''M''E''): $$(''L''I''B'') pushswap.h/' Makefile
-	@sed -i '44s/.*/	$$(''C''O''M''P''I''L''E'') $$(''N''A''M''E'').c $$(''L''I''B'') -o $$(''N''A''M''E'')/' Makefile
-	@sed -i '45s/.*//' Makefile
-	@sed -i '46s/.*/$$(''L''I''B''): $$(''O''B''J'') /' Makefile
-	@sed -i '47s/.*/	ar -rcs $$(''L''I''B'')'' $$(''O''B''J'')/' Makefile
-	@sed -i '48s/.*//' Makefile
-	@sed -i '49s/.*/$$(''O''B''J''_''D''I''R'')'\%'.o: '\%'.c | $$(''O''B''J''_''D''I''R'')/' Makefile
-	@sed -i '50s/.*/	@printf '\"'$$(''N''E''O''R'')'\"'/' Makefile
-	@sed -i '51s/.*/	$$(''C''O''M''P''I''L''E'') -c $$< -o $$@/' Makefile
-	@sed -i '52s/.*/	@printf '\"'$$(''R''E''S''E''T'')\\n'\"'/' Makefile
-	@sed -i '53s/.*//' Makefile
-	@sed -i '54s/.*/$$(''O''B''J''_''D''I''R''):/' Makefile
-	@sed -i '55s/.*/	mkdir -p $$(''O''B''J''_''D''I''R'')/' Makefile
-	@sed -i '56s/.*//' Makefile
-	@sed -i '57s/.*/clean:/' Makefile
-	@sed -i '58s/.*/	@printf '\"'$$(''B''A''B''Y'')'\"'/' Makefile
-	@sed -i '59s/.*/	rm -rf $$(''O''B''J''_''D''I''R'')/' Makefile
-	@sed -i '60s/.*/	rm -rf $$(''L''I''B'')/' Makefile
-	@sed -i '61s/.*/	@printf '\"'$$(''R''E''S''E''T'')'\"'/' Makefile
-	@sed -i '62s/.*//' Makefile
-	@sed -i '63s/.*/fclean: clean/' Makefile
-	@sed -i '64s/.*/	@printf '\"'$$(''B''_''W''I'')'\"'/' Makefile
-	@sed -i '65s/.*/	rm -f $$(''N''A''M''E'')/' Makefile
-	@sed -i '66s/.*/	@printf '\"'$$(''R''E''S''E''T'')'\"'/' Makefile
-	@sed -i '67s/.*//' Makefile
-	@sed -i '68s/.*/re: fclean all/' Makefile
-	@sed -i '69s/.*//' Makefile
+	@sed -i '34s/.*/FILE += ps_cost_analysis.c/' Makefile
+	@sed -i '35s/.*/FILE += racc_print.c/' Makefile
+	@sed -i '36s/.*/FILE += racc_print_utils.c/' Makefile
+	@sed -i '37s/.*//' Makefile
+	@sed -i '38s/.*/OBJ_DIR = obj\//' Makefile
+	@sed -i '39s/.*//' Makefile
+	@sed -i '40s/.*/''O''B''J'' = $$(''F''I''L''E'':'\%'.c=$$(''O''B''J''_''D''I''R'')'\%'.o)/' Makefile
+	@sed -i '41s/.*//' Makefile
+	@sed -i '42s/.*/all: $$(''N''A''M''E'')/' Makefile
+	@sed -i '43s/.*//' Makefile
+	@sed -i '44s/.*/$$(''N''A''M''E''): $$(''L''I''B'') pushswap.h/' Makefile
+	@sed -i '45s/.*/	$$(''C''O''M''P''I''L''E'') $$(''N''A''M''E'').c $$(''L''I''B'') -o $$(''N''A''M''E'')/' Makefile
+	@sed -i '46s/.*//' Makefile
+	@sed -i '47s/.*/$$(''L''I''B''): $$(''O''B''J'') /' Makefile
+	@sed -i '48s/.*/	ar -rcs $$(''L''I''B'')'' $$(''O''B''J'')/' Makefile
+	@sed -i '49s/.*//' Makefile
+	@sed -i '50s/.*/$$(''O''B''J''_''D''I''R'')'\%'.o: '\%'.c | $$(''O''B''J''_''D''I''R'')/' Makefile
+	@sed -i '51s/.*/	@printf '\"'$$(''N''E''O''R'')'\"'/' Makefile
+	@sed -i '52s/.*/	$$(''C''O''M''P''I''L''E'') -c $$< -o $$@/' Makefile
+	@sed -i '53s/.*/	@printf '\"'$$(''R''E''S''E''T'')\\n'\"'/' Makefile
+	@sed -i '54s/.*//' Makefile
+	@sed -i '55s/.*/$$(''O''B''J''_''D''I''R''):/' Makefile
+	@sed -i '56s/.*/	mkdir -p $$(''O''B''J''_''D''I''R'')/' Makefile
+	@sed -i '57s/.*//' Makefile
+	@sed -i '58s/.*/clean:/' Makefile
+	@sed -i '59s/.*/	@printf '\"'$$(''B''A''B''Y'')'\"'/' Makefile
+	@sed -i '60s/.*/	rm -rf $$(''O''B''J''_''D''I''R'')/' Makefile
+	@sed -i '61s/.*/	rm -rf $$(''L''I''B'')/' Makefile
+	@sed -i '62s/.*/	@printf '\"'$$(''R''E''S''E''T'')'\"'/' Makefile
+	@sed -i '63s/.*//' Makefile
+	@sed -i '64s/.*/fclean: clean/' Makefile
+	@sed -i '65s/.*/	@printf '\"'$$(''B''_''W''I'')'\"'/' Makefile
+	@sed -i '66s/.*/	rm -f $$(''N''A''M''E'')/' Makefile
+	@sed -i '67s/.*/	@printf '\"'$$(''R''E''S''E''T'')'\"'/' Makefile
+	@sed -i '68s/.*//' Makefile
+	@sed -i '69s/.*/re: fclean all/' Makefile
 	@sed -i '70s/.*//' Makefile
 	@sed -i '71s/.*//' Makefile
 	@sed -i '72s/.*//' Makefile
@@ -188,6 +188,7 @@ boring: fclean build_boring_moves build_boring_errors
 	@sed -i '86s/.*//' Makefile
 	@sed -i '87s/.*//' Makefile
 	@sed -i '88s/.*//' Makefile
+	@sed -i '89s/.*//' Makefile
 	@printf "$(RESET)"
 	@$(MAKE)
 
@@ -221,61 +222,62 @@ fun: fclean build_fun_moves build_fun_errors
 	@sed -i '31s/.*/FILE += ps_sort_five_utils.c/' Makefile
 	@sed -i '32s/.*/FILE += ps_sort_them_all.c/' Makefile
 	@sed -i '33s/.*/FILE += ps_tiny_sorts.c/' Makefile
-	@sed -i '34s/.*/FILE += racc_print.c/' Makefile
-	@sed -i '35s/.*/FILE += racc_print_utils.c/' Makefile
-	@sed -i '36s/.*//' Makefile
-	@sed -i '37s/.*/SRC_DIR = src\//' Makefile
-	@sed -i '38s/.*/OBJ_DIR = obj\//' Makefile
-	@sed -i '39s/.*//' Makefile
-	@sed -i '40s/.*/''S''R''C'' = $$(addprefix $$(''S''R''C''_''D''I''R''),$$(''F''I''L''E''))/' Makefile
-	@sed -i '41s/.*/''O''B''J'' = $$(''S''R''C'':$$(''S''R''C''_''D''I''R'')'\%'.c=$$(''O''B''J''_''D''I''R'')'\%'.o)/' Makefile
-	@sed -i '42s/.*//' Makefile
-	@sed -i '43s/.*/.''P''R''E''C''I''O''U''S'': $$(''S''R''C'')/' Makefile
-	@sed -i '44s/.*//' Makefile
-	@sed -i '45s/.*/all: $$(''N''A''M''E'')/' Makefile
-	@sed -i '46s/.*//' Makefile
-	@sed -i '47s/.*/$$(''N''A''M''E''): $$(''L''I''B'') pushswap.h/' Makefile
-	@sed -i '48s/.*/	$$(''C''O''M''P''I''L''E'') $$(''N''A''M''E'').c $$(''L''I''B'') -o $$(''N''A''M''E'')/' Makefile
-	@sed -i '49s/.*//' Makefile
-	@sed -i '50s/.*/$$(''L''I''B''): $$(''O''B''J'') /' Makefile
-	@sed -i '51s/.*/	ar -rcs $$(''L''I''B'') $$(''O''B''J'')/' Makefile
-	@sed -i '52s/.*//' Makefile
-	@sed -i '53s/.*/$$(''O''B''J''_''D''I''R'')'\%'.o: $$(''S''R''C''_''D''I''R'')'\%'.c | $$(''O''B''J''_''D''I''R'')/' Makefile
-	@sed -i '54s/.*/	@printf '\"'$$(''N''E''O''R'')'\"'/' Makefile
-	@sed -i '55s/.*/	$$(''C''O''M''P''I''L''E'') -c $$< -o $$@/' Makefile
-	@sed -i '56s/.*/	@printf '\"'$$(''R''E''S''E''T'')\\n'\"'/' Makefile
-	@sed -i '57s/.*//' Makefile
-	@sed -i '58s/.*/$$(''O''B''J''_''D''I''R''):/' Makefile
-	@sed -i '59s/.*/	mkdir -p $$(''O''B''J''_''D''I''R'')/' Makefile
-	@sed -i '60s/.*//' Makefile
-	@sed -i '61s/.*/$$(''S''R''C''_''D''I''R'')'\%'.c: $$(''S''R''C''_''D''I''R'')/' Makefile
-	@sed -i '62s/.*/	@printf '\"'$$(''M''I''N''T'')'\"'/' Makefile
-	@sed -i '63s/.*/	mv $$(@:$$(''S''R''C''_''D''I''R'')'\%'='\%') $$(''S''R''C''_''D''I''R'')/' Makefile
-	@sed -i '64s/.*/	@printf '\"'$$(''R''E''S''E''T'')'\"'/' Makefile
-	@sed -i '65s/.*//' Makefile
-	@sed -i '66s/.*/$$(''S''R''C''_''D''I''R''):/' Makefile
-	@sed -i '67s/.*/	mkdir -p $$(''S''R''C''_''D''I''R'')/' Makefile
-	@sed -i '68s/.*/	cp pushswap.h $$(''S''R''C''_''D''I''R'')/' Makefile
-	@sed -i '69s/.*//' Makefile
-	@sed -i '70s/.*/.\/$$(''F''I''L''E''):/' Makefile
-	@sed -i '71s/.*/	@printf '\"'$$(''N''E''O''R'')'\"'/' Makefile
-	@sed -i '72s/.*/	mv -f $$(''S''R''C''_''D''I''R'')$$(@:.\/'\%'='\%') ./' Makefile
-	@sed -i '73s/.*/	@printf '\"'$$(''R''E''S''E''T'')\\n'\"'/' Makefile
-	@sed -i '74s/.*//' Makefile
-	@sed -i '75s/.*/clean: .\/$$(''F''I''L''E'')/' Makefile
-	@sed -i '76s/.*/	@printf '\"'$$(''B''A''B''Y'')'\"'/' Makefile
-	@sed -i '77s/.*/	rm -rf $$(''O''B''J''_''D''I''R'')/' Makefile
-	@sed -i '78s/.*/	rm -rf $$(''S''R''C''_''D''I''R'')/' Makefile
-	@sed -i '79s/.*/	rm -rf $$(''L''I''B'')/' Makefile
-	@sed -i '80s/.*/	@printf '\"'$$(''R''E''S''E''T'')'\"'/' Makefile
-	@sed -i '81s/.*//' Makefile
-	@sed -i '82s/.*/fclean: clean/' Makefile
-	@sed -i '83s/.*/	@printf '\"'$$(''B''_''W''I'')'\"'/' Makefile
-	@sed -i '84s/.*/	rm -f $$(''N''A''M''E'')/' Makefile
-	@sed -i '85s/.*/	@printf '\"'$$(''R''E''S''E''T'')'\"'/' Makefile
-	@sed -i '86s/.*//' Makefile
-	@sed -i '87s/.*/re: fclean all/' Makefile
-	@sed -i '88s/.*//' Makefile
+	@sed -i '34s/.*/FILE += ps_cost_analysis.c/' Makefile
+	@sed -i '35s/.*/FILE += racc_print.c/' Makefile
+	@sed -i '36s/.*/FILE += racc_print_utils.c/' Makefile
+	@sed -i '37s/.*//' Makefile
+	@sed -i '38s/.*/SRC_DIR = src\//' Makefile
+	@sed -i '39s/.*/OBJ_DIR = obj\//' Makefile
+	@sed -i '40s/.*//' Makefile
+	@sed -i '41s/.*/''S''R''C'' = $$(addprefix $$(''S''R''C''_''D''I''R''),$$(''F''I''L''E''))/' Makefile
+	@sed -i '42s/.*/''O''B''J'' = $$(''S''R''C'':$$(''S''R''C''_''D''I''R'')'\%'.c=$$(''O''B''J''_''D''I''R'')'\%'.o)/' Makefile
+	@sed -i '43s/.*//' Makefile
+	@sed -i '44s/.*/.''P''R''E''C''I''O''U''S'': $$(''S''R''C'')/' Makefile
+	@sed -i '45s/.*//' Makefile
+	@sed -i '46s/.*/all: $$(''N''A''M''E'')/' Makefile
+	@sed -i '47s/.*//' Makefile
+	@sed -i '48s/.*/$$(''N''A''M''E''): $$(''L''I''B'') pushswap.h/' Makefile
+	@sed -i '49s/.*/	$$(''C''O''M''P''I''L''E'') $$(''N''A''M''E'').c $$(''L''I''B'') -o $$(''N''A''M''E'')/' Makefile
+	@sed -i '50s/.*//' Makefile
+	@sed -i '51s/.*/$$(''L''I''B''): $$(''O''B''J'') /' Makefile
+	@sed -i '52s/.*/	ar -rcs $$(''L''I''B'') $$(''O''B''J'')/' Makefile
+	@sed -i '53s/.*//' Makefile
+	@sed -i '54s/.*/$$(''O''B''J''_''D''I''R'')'\%'.o: $$(''S''R''C''_''D''I''R'')'\%'.c | $$(''O''B''J''_''D''I''R'')/' Makefile
+	@sed -i '55s/.*/	@printf '\"'$$(''N''E''O''R'')'\"'/' Makefile
+	@sed -i '56s/.*/	$$(''C''O''M''P''I''L''E'') -c $$< -o $$@/' Makefile
+	@sed -i '57s/.*/	@printf '\"'$$(''R''E''S''E''T'')\\n'\"'/' Makefile
+	@sed -i '58s/.*//' Makefile
+	@sed -i '59s/.*/$$(''O''B''J''_''D''I''R''):/' Makefile
+	@sed -i '60s/.*/	mkdir -p $$(''O''B''J''_''D''I''R'')/' Makefile
+	@sed -i '61s/.*//' Makefile
+	@sed -i '62s/.*/$$(''S''R''C''_''D''I''R'')'\%'.c: $$(''S''R''C''_''D''I''R'')/' Makefile
+	@sed -i '63s/.*/	@printf '\"'$$(''M''I''N''T'')'\"'/' Makefile
+	@sed -i '64s/.*/	mv $$(@:$$(''S''R''C''_''D''I''R'')'\%'='\%') $$(''S''R''C''_''D''I''R'')/' Makefile
+	@sed -i '65s/.*/	@printf '\"'$$(''R''E''S''E''T'')'\"'/' Makefile
+	@sed -i '66s/.*//' Makefile
+	@sed -i '67s/.*/$$(''S''R''C''_''D''I''R''):/' Makefile
+	@sed -i '68s/.*/	mkdir -p $$(''S''R''C''_''D''I''R'')/' Makefile
+	@sed -i '69s/.*/	cp pushswap.h $$(''S''R''C''_''D''I''R'')/' Makefile
+	@sed -i '70s/.*//' Makefile
+	@sed -i '71s/.*/.\/$$(''F''I''L''E''):/' Makefile
+	@sed -i '72s/.*/	@printf '\"'$$(''N''E''O''R'')'\"'/' Makefile
+	@sed -i '73s/.*/	mv -f $$(''S''R''C''_''D''I''R'')$$(@:.\/'\%'='\%') ./' Makefile
+	@sed -i '74s/.*/	@printf '\"'$$(''R''E''S''E''T'')\\n'\"'/' Makefile
+	@sed -i '75s/.*//' Makefile
+	@sed -i '76s/.*/clean: .\/$$(''F''I''L''E'')/' Makefile
+	@sed -i '77s/.*/	@printf '\"'$$(''B''A''B''Y'')'\"'/' Makefile
+	@sed -i '78s/.*/	rm -rf $$(''O''B''J''_''D''I''R'')/' Makefile
+	@sed -i '79s/.*/	rm -rf $$(''S''R''C''_''D''I''R'')/' Makefile
+	@sed -i '80s/.*/	rm -rf $$(''L''I''B'')/' Makefile
+	@sed -i '81s/.*/	@printf '\"'$$(''R''E''S''E''T'')'\"'/' Makefile
+	@sed -i '82s/.*//' Makefile
+	@sed -i '83s/.*/fclean: clean/' Makefile
+	@sed -i '84s/.*/	@printf '\"'$$(''B''_''W''I'')'\"'/' Makefile
+	@sed -i '85s/.*/	rm -f $$(''N''A''M''E'')/' Makefile
+	@sed -i '86s/.*/	@printf '\"'$$(''R''E''S''E''T'')'\"'/' Makefile
+	@sed -i '87s/.*//' Makefile
+	@sed -i '88s/.*/re: fclean all/' Makefile
+	@sed -i '89s/.*//' Makefile
 	@printf "$(RESET)"
 	@$(MAKE)
 
