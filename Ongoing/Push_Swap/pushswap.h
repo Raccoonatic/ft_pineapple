@@ -78,9 +78,11 @@ void	ps_sf_push(t_node **stacka, t_node **stackb, t_node *target);
 void	ps_sf_sort_rems(t_node **stacka, t_node **stackb);
 // ps_sort_them_all.c
 void	one_f_to_sort_them_all(t_node **stacka, t_node **stackb);
+void	ps_cheap_rotate(t_node **stck1, t_node **stck2, char ab);
 // ps_algorithm_utils_beta.c
-void	ps_refresh_meta(t_node *heada, t_node *headb);
-void	ps_cheap_rotate(t_node **st1, t_node **st2, char ab);
+void	ps_refresh_meta(t_node *stck1, t_node *stck2, char ab);
+// ps_cost_analysis.c
+void	ps_set_price(t_node *stck1, t_node *stck2);
 // racc_print.c
 int		racc_print(int fd, const char *format, ...);
 // racc_print_utils.c
