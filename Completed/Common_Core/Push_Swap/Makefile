@@ -6,13 +6,13 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 20:20:13 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/26 21:09:31 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/10/27 17:54:32 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 LIB = libpushswap.a
-
+ARGS ?= 1 9 2 -1 0 33 8 10
 MINT	= \033[38;2;55;250;133;48;2;0;0;0m
 NEOR	= \033[3m\033[38;2;255;153;51m
 B_WI    = \033[1;37m
@@ -108,7 +108,7 @@ boring: fclean build_boring_moves build_boring_errors
 	@printf "$(MINT)🦝\n"
 	@sed -i '13s/.*/NAME = push_swap/' Makefile
 	@sed -i '14s/.*/LIB = libpushswap.a/' Makefile
-	@sed -i '15s/.*//' Makefile
+	@sed -i '15s/.*/ARGS ?= 1 9 2 -1 0 33 8 10/' Makefile
 	@sed -i '16s/.*//' Makefile
 	@sed -i '17s/.*//' Makefile
 	@sed -i '18s/.*//' Makefile
@@ -197,7 +197,7 @@ fun: fclean build_fun_moves build_fun_errors
 	@printf "$(MINT)🦝\n"
 	@sed -i '13s/.*/NAME = push_swap/' Makefile
 	@sed -i '14s/.*/LIB = libpushswap.a/' Makefile
-	@sed -i '15s/.*//' Makefile
+	@sed -i '15s/.*/ARGS ?= 1 9 2 -1 0 33 8 10/' Makefile
 	@sed -i '16s/.*//' Makefile
 	@sed -i '17s/.*//' Makefile
 	@sed -i '18s/.*//' Makefile
@@ -703,4 +703,28 @@ build_boring_moves:
 	@printf "$(RESET)"
 	@sleep 0.5
 
-.PHONY: all clean fclean re restore build_boring_moves build_fun_moves build_boring_errors build_fun_errors fun boring
+test: checker_linux
+	@make re
+	@make fun
+	@clear
+	@printf "$(MINT)\n\t\t  🦝 Running Test! 🦝 \n\n"
+	@sleep 2
+	@printf "$(BABY)\n  Mapache's output:\n\n$(RESET)"
+	@sleep 1
+	@printf "./$(NAME) $(ARGS)$(RESET)\n"
+	@./$(NAME) $(ARGS) || true
+	@printf "$(NEOR)\n\t\t  🦝 Hit Enter to continue... 🦝 \n\n"
+	@read dummy
+	@make boring
+	@clear
+	@printf "$(MINT)\n\n\t       🦝 Now lets see what the checker says 🦝 \n\n"
+	@chmod +x checker_linux
+	@sleep 0.5
+	@printf "$(BABY) ARGS=$(NEOR)\"$(ARGS)\"$(BABY); ./push_swap $(NEOR)\$$ARGS$(BABY) | ./checker_linux $(NEOR)\$$ARGS$(RESET)"
+	@printf "$(B_WI)\n\n\t\t\t\t "
+	@sleep 1
+	@./$(NAME) $(ARGS) | ./checker_linux $(ARGS) || true
+	@sleep 2
+	@printf "$(RESET)$(MINT)\n       🦝 Hope it went well! Love yourself and drink water <3 🦝 \n\n$(RESET)"
+
+.PHONY: all clean fclean re restore build_boring_moves build_fun_moves build_boring_errors build_fun_errors fun boring test

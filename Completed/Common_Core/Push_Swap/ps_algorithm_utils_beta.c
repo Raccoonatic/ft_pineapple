@@ -37,7 +37,8 @@ void	ps_refresh_meta(t_node *stck1, t_node *stck2, char ab)
 }
 /*Refreshes the metadata inside each struct from the list, ensuring the
 correct calculations are done between iterations of the main algorithm
-logic*/
+logic. The char ab, makes sure the correct targetting logic is called if
+the nodes are moving from a to b, from b to a, or nowhere for that matter*/
 
 static void	ps_set_target_ab(t_node *stck1, t_node *stck2)
 {
@@ -67,13 +68,13 @@ static void	ps_set_target_ab(t_node *stck1, t_node *stck2)
 		stck2 = stck2 -> next;
 	}
 }
-/*Traverses stack b, looking each time for the smallest node in a that's 
-bigger than the current node being looked at in b. The "best_match" gets
+/*Traverses stck2, looking each time for the biggest node in stck1 that's 
+smaller than the current node being looked at in stck2. The "best_match" gets
 updated as a better number is found, so it begins at a number that is 
-impossibly bigger considering the constraints from the input_manager's
-evaluation. A final check is performed at the end, because if a bigger 
-number wasn't found during the loop, then the node in b is probably the
-biggest number. In that case, the smallest number in a is assigned as the
+impossibly smaller considering the constraints from the input_manager's
+evaluation. A final check is performed at the end, because if a smaller 
+number wasn't found during the loop, then the node in stck2 is probably the
+new smallest number. In that case, the biggest number in stck1 is assigned as
 target, so they are close together, considering that the final stack can
 be looked at as a circle.*/
 
@@ -105,13 +106,13 @@ static void	ps_set_target_ba(t_node *stck1, t_node *stck2)
 		stck2 = stck2 -> next;
 	}
 }
-/*Traverses stack b, looking each time for the smallest node in a that's 
-bigger than the current node being looked at in b. The "best_match" gets
+/*Traverses stck2, looking each time for the smallest node in stck1 that's 
+bigger than the current node being looked at in stck2. The "best_match" gets
 updated as a better number is found, so it begins at a number that is 
 impossibly bigger considering the constraints from the input_manager's
 evaluation. A final check is performed at the end, because if a bigger 
-number wasn't found during the loop, then the node in b is probably the
-biggest number. In that case, the smallest number in a is assigned as the
+number wasn't found during the loop, then the node in stck2 is probably the
+new biggest number. In that case, the smallest number in stck1 is assigned as
 target, so they are close together, considering that the final stack can
 be looked at as a circle.*/
 
@@ -142,7 +143,7 @@ static void	ps_set_cheapest(t_node *head)
 	}
 	return ;
 }
-/*It looks for the node in b that has the lowest move_price, by performing 2
+/*It looks for the node that has the lowest move_price, by performing 2
 traverses trough the list. The first one compares all values to store the
 address of the node with the cheapest move combination, while simultaneously
 setting all "cheapest" pointers to NULL, creating a blank canvas. Then the 

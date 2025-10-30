@@ -41,7 +41,7 @@ void	ps_set_price(t_node *stck1, t_node *stck2)
 		stck2 = stck2 -> next;
 	}
 }
-/*Traverses stack b checking for the stack_index and whether the node is
+/*Traverses stck2 checking for the stack_index and whether the node is
 above or bellow the meridian (CACER = top, CAPRI = bottom). Based on this
 it calculates the minimum number of rotations needed to get said node to
 the top of the stack. It also considers this same info from the corresponding
