@@ -24,25 +24,34 @@ BLAK	= \033[38;2;0;0;0m
 B_WI    = \033[1;37m
 RSET	= \033[0m
 
+FILE = test.c
+
 OBJ = $(FILE:%.c=%.o)
 
-COMPILE = cc -g -O0 -Wall -Werror -Wextra -I.
+WERROR ?= -Werror 
+COMPILE = cc -g -O0 -Wall $(WERROR)-Wextra -I.
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) solong.h
 	@printf "$(BABY)"
-	$(COMPILE) $(OBJ) $(LIBFT) -o $(NAME)
+	$(COMPILE) $(OBJ) $(LIBFT) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 	@printf "$(MINT)"
 	@ls -la
 	@printf "$(RSET)"
 
 %.o: %.c solong.h
 	@printf "$(PURP)"
-	$(COMPILE) -c $< -o $@
+	$(COMPILE) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 	@printf "$(RSET)"
 
-$(LIBFT): libft/libft.h
+open:
+	@printf "$(MINT)"
+	for f in *.c; do open "$$f" & done
+	for f in *.h; do open "$$f" & done
+	@printf "$(RSET)"
+
+$(LIBFT):
 	@printf "$(NEOR)"
 	@make -C ./libft
 	@printf "$(RSET)"
@@ -50,25 +59,27 @@ $(LIBFT): libft/libft.h
 clean:
 	@printf "$(LIME)"
 	@make -C ./libft clean
-	@sleep 1
+	@sleep 0.3
 	@printf "$(BLOD)"
 	rm -rf $(OBJ)
+	@sleep 0.3
 	@printf "$(RSET)"
 
 fclean: clean
 	@printf "$(B_WI)"
 	@make -C ./libft fclean
-	@sleep 1
+	@sleep 0.3
 	@printf "$(PURP)"
 	rm -f $(NAME)
 	@printf "$(MINT)"
+	@sleep 0.3
 	@ls -la
 	@printf "$(RSET)"
 
 re: fclean all
 
 
-mlx_dependencies:
+mlx_dependencies: mlx_linux
 	@printf "$(MINT)\n\t\t🦝 Loading up the goodies! 🦝\n\n"
 	@sleep 0.5
 	@printf "$(NEOR)Upgrading current packages... \n\n"
@@ -88,6 +99,32 @@ mlx_dependencies:
 	@printf "$(RSET)\n"
 	@sleep 1
 	@printf "$(MINT)\t\t🦝 All requirements installed! 🦝\n\n"
+	@printf "$(NEOR)Don't forget to access the folder$(RSET) (cd mlx_linux)$(NEOR) and then run the ./configure file inside it\n\n"
 	@printf "$(RSET)"
 
-.PHONY: all clean fclean re
+mlx_linux:
+	@printf "$(MINT)\n\t\t🦝 Looks like you don't have the library yet... 🦝\n"
+	@sleep 1
+	@printf "\t\t\t\t Let's get it!\n\n"
+	@sleep 0.5
+	@printf "$(NEOR)  wGetting it... \n"
+	@printf "$(RSET)\n"
+	@printf "$(PURP)"
+	wget https://cdn.intra.42.fr/document/document/40942/minilibx-linux.tgz
+	@printf "$(BABY)"
+	tar -xzf minilibx-linux.tgz
+	@printf "$(RSET)\n"
+	@ls -la
+	@sleep 0.5
+	@printf "$(LIME)"
+	rm -rf minilibx-linux.tgz
+	mv minilibx-linux mlx_linux
+	@printf "$(RSET)\n\n"
+	@ls -la
+	@sleep 1
+	@printf "$(MINT)\n\t\t  🦝 There u go handsome! 🦝\n\n"
+	@printf "$(RSET)"
+	@printf "$(NEOR)Don't forget to access the folder$(RSET) (cd mlx_linux)$(NEOR) and then run the ./configure file inside it\n\n"
+	@sleep 2
+
+.PHONY: all clean fclean re open mlx_linux mlx_dependencies
