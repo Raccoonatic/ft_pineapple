@@ -24,12 +24,13 @@ BLAK	= \033[38;2;0;0;0m
 B_WI    = \033[1;37m
 RSET	= \033[0m
 
-FILE = test.c
+MAIN_F ?= test.c
+FILE =
 
 OBJ = $(FILE:%.c=%.o)
 
 WERROR ?= -Werror 
-COMPILE = cc -g -O0 -Wall $(WERROR)-Wextra -I.
+COMPILE = cc -g -O0 -Wall $(WERROR)-Wextra -I. $(MAIN_F)
 
 all: $(NAME)
 
@@ -127,4 +128,99 @@ mlx_linux:
 	@printf "$(NEOR)Don't forget to access the folder$(RSET) (cd mlx_linux)$(NEOR) and then run the ./configure file inside it\n\n"
 	@sleep 2
 
-.PHONY: all clean fclean re open mlx_linux mlx_dependencies
+evolution:
+	@printf "$(MINT)\n\t🦝 Hope you are ready for a trip down memory lane! 🦝\n\n"
+	@sleep 2
+	@printf "\t\t\t     Let's go!\n\n"
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_1$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_1.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_1.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"	
+	@printf "\n\nMaking Version_2$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_2.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_2.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_3$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_3.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_3.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_4$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_4.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_4.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_5$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_5.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_5.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_6$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_6.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_6.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_7$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_7.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_7.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_8$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_8.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_8.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_9$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_9.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_9.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+
+.PHONY: all clean fclean re open mlx_linux mlx_dependencies evolution
