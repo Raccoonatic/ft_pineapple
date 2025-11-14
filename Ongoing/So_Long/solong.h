@@ -6,16 +6,18 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 17:21:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/07 18:47:08 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/12 19:31:09 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SOLONG_H
 # define SOLONG_H
 
+# include "./libft/includes/get_next_line_bonus.h"
 # include "./libft/includes/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include <string.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <errno.h>
@@ -44,5 +46,10 @@ typedef enum e_keys
 	K_UP = 65362,
 	K_DOW = 65364
 }	t_keys;
+
+char	**sl_text_to_map(char *map_path);
+void	sl_fail(int err_code, int exit_code, char *err_msg);
+void	sl_free_matrix(char **matrix);
+char	**sl_text_to_map(char *map_path)
 
 #endif

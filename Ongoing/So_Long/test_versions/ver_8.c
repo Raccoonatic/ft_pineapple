@@ -26,6 +26,7 @@ typedef struct	s_data
 	int		endian;
 	int	x;
 	int	y;
+	double t_increment;
 }				t_data;
 
 typedef struct	s_datapack
@@ -34,22 +35,28 @@ typedef struct	s_datapack
 	t_data	bkgrnd;
 }				t_datapack;
 
-int handle_keypress(int keycode, t_data *data)
+int handle_keypress(int keycode, t_datapack *data)
 {
 	if (keycode == 65307)
 	{
-		mlx_destroy_window(data->mlx, data->mlx_win);
+		mlx_destroy_window(data->chara.mlx, data->chara.mlx_win);
 		exit (0);
 	}
 	if (keycode == 100 || keycode == 65363)
-		data->x += 20;
+	{
+		data->chara.x += 20;
+		data->bkgrnd.t_increment += 0.001;
+	}
 	if (keycode == 97 || keycode == 65361)
-		data->x -= 20;
+	{
+		data->chara.x -= 20;
+		data->bkgrnd.t_increment -= 0.001;
+	}
 	if (keycode == 115 || keycode == 65364)
-		data->y += 20;
+		data->chara.y += 20;
 	if (keycode == 119 || keycode == 65362)
-		data->y -= 20;
-	racc_print(1, "%e %d, %d, %d %e\n", "racc", keycode, data->x, data->y, "racc");
+		data->chara.y -= 20;
+	printf("🦝 %d, %d, %d, %f 🦝\n", keycode, data->chara.x, data->chara.y, data->bkgrnd.t_increment);
 	return (0);
 }
 
@@ -96,7 +103,7 @@ int render_bkgrnd(t_data *img)
 		*(unsigned int*)dst = color;
 		dst += (img->bits_per_pixel / 8);
 	}
-	t += 0.005; 
+	t += img->t_increment; 
 	if (t > 2 * M_PI)
 		t -= 2 * M_PI;
 
@@ -163,7 +170,8 @@ int	main(void)
 	layers.bkgrnd.y = 0;
 	layers.chara.x = 910;
 	layers.chara.y = 500;
-	mlx_hook(layers.chara.mlx_win, 2, 1L<<0, handle_keypress, &layers.chara);
+	layers.bkgrnd.t_increment = 0.005;
+	mlx_hook(layers.chara.mlx_win, 2, 1L<<0, handle_keypress, &layers);
 	mlx_hook(layers.chara.mlx_win, 6, 1L<<6, handle_mouse, &layers.chara);
 	mlx_loop_hook(layers.bkgrnd.mlx, render, &layers);
 	mlx_loop(mlx);

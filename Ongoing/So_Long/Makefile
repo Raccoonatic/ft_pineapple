@@ -24,30 +24,33 @@ BLAK	= \033[38;2;0;0;0m
 B_WI    = \033[1;37m
 RSET	= \033[0m
 
-MAIN_F ?= test.c
-FILE =
+MAIN_F ?= so_long.c
+
+FILE = sl_exit_game.c
+FILE += sl_text_to_map.c
 
 OBJ = $(FILE:%.c=%.o)
 
 WERROR ?= -Werror 
-COMPILE = cc -g -O0 -Wall $(WERROR)-Wextra -I. $(MAIN_F)
+COMPILE = cc -g -O0 -Wall $(WERROR)-Wextra -I.
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) solong.h
+$(NAME): $(LIBFT) $(OBJ) solong.h
 	@printf "$(BABY)"
-	$(COMPILE) $(OBJ) $(LIBFT) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(COMPILE) $(MAIN_F) $(OBJ) $(LIBFT) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 	@printf "$(MINT)"
 	@ls -la
 	@printf "$(RSET)"
 
-%.o: %.c solong.h
+%.o: %.c
 	@printf "$(PURP)"
-	$(COMPILE) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(COMPILE) -I/usr/include -Imlx_linux -c $< -o $@
 	@printf "$(RSET)"
 
 open:
 	@printf "$(MINT)"
+	open $(MAIN_F)
 	for f in *.c; do open "$$f" & done
 	for f in *.h; do open "$$f" & done
 	@printf "$(RSET)"
@@ -219,6 +222,26 @@ evolution:
 	@open test_versions/ver_9.c
 	@sleep 0.3
 	@make re WERROR="" MAIN_F=test_versions/ver_9.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_10$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_10.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_10.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_11$(RSET)\n\n"
+	@sleep 2
+	@open test_versions/ver_11.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=test_versions/ver_11.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)

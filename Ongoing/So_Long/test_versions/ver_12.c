@@ -12,13 +12,10 @@
 
 #include "solong.h"
 
-/*Began working with mlx_xpm_file_to_image. Made it so that the background can
-now be a selected .xpm file, and figured out a way pass the movement logic from
-the window to the character (circle) drawing logic, in order to merge them in 
-one image. Also created a function that "clears" the frame, by making a copy of
-the background and using the copy to overwrite the original after each frame. The
-controls have been updated so that the character moves around the screen in a loop
-instead of getting lost indefinitely.*/
+/*Learned about mlx_do_sync, and implemented it for alleged "better" rendering. 
+Looked into the better version "mlx_sync" but it somehow seems to be a myth.
+Since the mouse can move the character, added functionality to mlx_mouse_hide, 
+if the mouse enters the game window area.*/
 
 typedef struct	s_data 
 {
@@ -41,7 +38,14 @@ typedef struct	s_datapack
 	t_data  game;
 }				t_datapack;
 
-int handle_keypress(int keycode, t_data *data)
+int	handle_enter(t_data *data)
+{
+    racc_print(1,"Entered\n");
+    mlx_mouse_hide(data->mlx, data->mlx_win);
+    return (0);
+}
+
+int	handle_keypress(int keycode, t_data *data)
 {	
 	if (keycode == 65307)
 	{
@@ -157,13 +161,15 @@ int render(t_datapack *lyrs)
 	lyrs->game.addr = ft_memcpy(lyrs->game.addr, lyrs->bkgrn.addr, lyrs->bkgrn.img_height * lyrs->bkgrn.bytes_per_row);
 	render_character(&lyrs->game);
 	mlx_put_image_to_window(lyrs->game.mlx, lyrs->game.mlx_win, lyrs->game.img, 0, 0);
+	mlx_do_sync(lyrs->game.mlx);
 	return(0);
 }
+
 
 int	main(void)
 {
 	t_datapack lyrs;
-	char	*relative_path = "assets/background/Herculy.xpm";
+	char	*relative_path = "assets/background/Seventy.xpm";
 
 	lyrs.game.mlx = mlx_init();
 	lyrs.bkgrn.mlx = lyrs.game.mlx;
@@ -184,6 +190,7 @@ int	main(void)
 	mlx_hook(lyrs.game.mlx_win, 17, 1L<<0, handle_close, &lyrs.game);
 	mlx_hook(lyrs.game.mlx_win, 2, 1L<<0, handle_keypress, &lyrs.game);
 	mlx_hook(lyrs.game.mlx_win, 6, 1L<<6, handle_mouse, &lyrs.game);
+	mlx_hook(lyrs.game.mlx_win, 7, 1L<<4, handle_enter, &lyrs.game);
 	
 	mlx_loop_hook(lyrs.game.mlx, render, &lyrs);
 	mlx_loop(lyrs.game.mlx);
