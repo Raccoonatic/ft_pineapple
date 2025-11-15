@@ -27,7 +27,10 @@ RSET	= \033[0m
 MAIN_F ?= so_long.c
 
 FILE = sl_exit_game.c
+FILE += sl_check_map.c
+FILE += sl_flood_fill.c
 FILE += sl_text_to_map.c
+FILE += sl_map_init_utils.c
 
 OBJ = $(FILE:%.c=%.o)
 
