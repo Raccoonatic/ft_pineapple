@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 17:21:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/12 19:31:09 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/15 13:28:25 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,22 @@ typedef enum e_keys
 	K_DOW = 65364
 }	t_keys;
 
+typedef s_player
+{
+	int x;
+	int y;
+} t_player
+
+typedef s_game
+{
+	char		**map;
+	t_player	player;
+	char		*bkgrnd_theme;
+}	t_game;
+
 char	**sl_text_to_map(char *map_path);
 void	sl_fail(int err_code, int exit_code, char *err_msg);
 void	sl_free_matrix(char **matrix);
-char	**sl_text_to_map(char *map_path)
+void	sl_check_map(char **map_file);
 
 #endif

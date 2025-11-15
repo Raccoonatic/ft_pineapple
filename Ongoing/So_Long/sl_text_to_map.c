@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 18:59:02 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/14 20:08:07 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/15 13:26:54 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,19 @@ char	**sl_text_to_map(char *map_path)
 	int		rows;
 	int		fd;
 
+	if (ft_strlen(map_path) < 4)
+		sl_fail(1, 2, "Map name incomplete. "NEOR"Is empty or extensionless");
 	if (ft_strncmp(map_path + (ft_strlen(map_path) - 4), ".ber", 4))
-		sl_fail(1, 2, "Map extension must be .ber");
+		sl_fail(1, 2, "Map extension must be "LIME".ber");
 	rows = sl_count_lines(map_path);
 	if (rows < 3)
 		sl_fail(1, 2, "Map is too tiny."BABY" File has less than 3 rows");
 	fd = open(map_path, O_RDONLY);
 	if (fd < 3)
-		sl_fail(1, 2, "Failed to "BABY"f_open "PURP"map file on "B_WI" conversion");
+		sl_fail(1, 2, "Failed to "BABY"open "PURP"map file on "B_WI"READ");
 	map = ft_calloc((rows + 1), sizeof(char *));
 	if (!map)
-		sl_fail(1, 2, "Memory allocation failed on B_WI conversion");
+		sl_fail(1, 2, "Memory allocation failed on "B_WI" conversion");
 	return(sl_map_populate(map, fd, rows));
 }
 
@@ -67,7 +69,7 @@ static int	sl_count_lines(char *map_path)
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 3)
-		sl_fail(1, 2, "Failed to "BABY"f_open "PURP"map file on "B_WI"count");
+		sl_fail(1, 2, "Failed to "BABY"f_open "PURP"map file on "B_WI"COUNT");
 	count = 0;
 	while((line = get_next_line(fd)))
 	{

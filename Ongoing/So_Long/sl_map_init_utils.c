@@ -6,13 +6,13 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 20:08:46 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/14 20:14:18 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/15 13:25:47 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-char	sl_flast(char *str)
+char	sl_flast_char(char *str)
 {
 	int	guide;
 

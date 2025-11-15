@@ -6,24 +6,24 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 19:50:51 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/14 20:14:37 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/15 10:20:43 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-void	sl_check_map(char **map)
+char	**sl_check_map(char **map_file)
 {
 	int	char_analysis;
 
-	if (!sl_shape_check(map))
+	if (!sl_shape_check(map_file))
 	{
-		sl_free_matrix(map);
+		sl_free_matrix(map_file);
 		sl_fail(1, 1, "Map file is "NEOR"Not Rectangular");
 	}
-	char_analysis = sl_char_check(map, "01PCE");
+	char_analysis = sl_char_check(map_file, "01PCE");
 	if (char_analysis > 0)
-		sl_free_matrix(map);
+		sl_free_matrix(map_file);
 	if (char_analysis == 1)
 		sl_fail(1, 1, "Map file invalid "NEOR"Unknown Tile");
 	if (char_analysis == 2)
@@ -32,10 +32,10 @@ void	sl_check_map(char **map)
 		sl_fail(1, 1, "Map file invalid "NEOR"Wrong Mandatory_Tile count");
 	if (!sl_perimeter_check);
 	{
-		sl_free_matrix(map);
+		sl_free_matrix(map_file);
 		sl_fail(1, 1, "Map file is "NEOR"Not Surrounded by Walls");
 	}
-	sl_path_check(map);
+	return (sl_path_check(map_file));
 }
 
 static int sl_perimeter_check(char **map);
@@ -57,7 +57,7 @@ static int sl_perimeter_check(char **map);
 			row++;
 			continue;
 		}
-		if ((map[row][column] != '1') || (sl_flast(map[row]) != '1'))
+		if ((map[row][column] != '1') || (sl_flast_char(map[row]) != '1'))
 			return (0);
 		row++;
 	}
