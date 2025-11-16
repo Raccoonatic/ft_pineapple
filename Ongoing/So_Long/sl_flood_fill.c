@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 09:25:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/15 22:43:17 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/16 15:42:32 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**sl_path_check(char **map, t_game *game)
 
 	new_map = sl_mapdup(map);
 	sl_find_player_start(map, game);
-	sl_flood_fill(map, game -> player.y, game -> player.x);
+	sl_flood_fill(map, game -> plyr.y, game -> plyr.x);
 	if ((sl_count_tiles(map, NULL, 'C') + sl_count_tiles(map, NULL, 'E')) != 0)
 	{
 		sl_free_matrix(map);
@@ -30,9 +30,7 @@ char	**sl_path_check(char **map, t_game *game)
 		sl_fail(1, 1, "Map file invalid. "NEOR"Unreachable Target Tile");
 	}
 	sl_free_matrix(map);
-	sl_free_matrix(new_map);
-	racc_print(2, LIME"%e Congrats!\n"RSET, "racc");
-	exit(0);
+	return (new_map);
 }
 
 static void	sl_flood_fill(char **map, int y, int x)
@@ -60,8 +58,8 @@ static void	sl_find_player_start(char **map, t_game *game)
 		{
 			if (map[y][x] == 'P')
 			{
-				game -> player.y = y;
-				game -> player.x = x;
+				game -> plyr.y = y;
+				game -> plyr.x = x;
 				return ;
 			}
 			x++;

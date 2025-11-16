@@ -1,5 +1,5 @@
 /* XPM */
-static const char *herochar_run_anim_strip_6[] = {
+static const char *enemy_run[] = {
 /* columns rows colors chars-per-pixel */
 "384 64 5 1 ",
 "  c #000000",

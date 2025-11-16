@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/30 15:46:25 by lde-san-          #+#    #+#              #
-#    Updated: 2025/10/30 16:02:39 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/11/16 21:18:44 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,11 @@ RSET	= \033[0m
 
 MAIN_F ?= so_long.c
 
-FILE = sl_exit_game.c
+FILE = sl_render.c
+FILE += sl_exit_game.c
 FILE += sl_check_map.c
 FILE += sl_flood_fill.c
+FILE += sl_layer_init.c
 FILE += sl_text_to_map.c
 FILE += sl_map_init_utils.c
 

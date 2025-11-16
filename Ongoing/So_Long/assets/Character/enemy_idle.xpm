@@ -1,5 +1,5 @@
 /* XPM */
-static const char *herochar_idle_anim_strip_4[] = {
+static const char *enemy_idle[] = {
 /* columns rows colors chars-per-pixel */
 "256 64 5 1 ",
 "  c #000000",

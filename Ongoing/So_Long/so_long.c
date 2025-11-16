@@ -6,11 +6,15 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 17:52:48 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/15 22:18:31 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/16 23:13:07 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
+
+static int	handle_keypress(int keycode, t_game *data);
+static int	handle_close(t_game *data);
+static void	sl_game_init(t_game *game);
 
 int	main(int arc, char *wordy[])
 {
@@ -18,10 +22,44 @@ int	main(int arc, char *wordy[])
 
 	if (arc < 2 || arc > 3)
 		sl_fail(2, 2, "Incorrect argument count.");
-	game.bkgrnd_theme = "./assets/background/Herculy.xpm";
+	game.theme = "./assets/background/Herculy.xpm";
 	if (arc == 3)
-		game.bkgrnd_theme = wordy[2];
+		game.theme = wordy[2];
 	game.map = sl_check_map(sl_text_to_map(wordy[1]), &game);
-	sl_free_matrix(game.map);
+	sl_game_init(&game);
+	mlx_hook(game.win, 17, 1L<<0, handle_close, &game);
+	mlx_hook(game.win, 2, 1L<<0, handle_keypress, &game);
+	mlx_loop_hook(game.mlx, sl_main_renderer, &game);
+	mlx_loop(game.mlx);
+	return (0);
+}
+
+static void	sl_game_init(t_game *game)
+{
+	int h;
+	int w;
+
+	h = game -> h;
+	w = game -> w;
+	sl_zeroing(game);
+	game -> mlx = mlx_init();
+	if (!game -> mlx)
+		sl_kill_the_game(game, 0, 0, 1);
+	game -> win = mlx_new_window(game -> mlx, w, h, "Greed's Hunt");
+	if (!game -> win)
+		sl_kill_the_game(game, 0, 4, 1);
+	sl_layer_init(game, &game -> buf.bpx, &game -> buf.bpr, &game -> buf.e);
+}
+
+static int	handle_keypress(int keycode, t_game *data)
+{
+	if (keycode == 65307)
+		sl_kill_the_game(data, 1, 0, 0);
+	return (0);
+}
+
+static int	handle_close(t_game *data)
+{
+	sl_kill_the_game(data, 1, 0, 0);
 	return (0);
 }

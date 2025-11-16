@@ -6,14 +6,14 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 19:50:51 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/15 22:47:01 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:31:00 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-static int	sl_shape_check(char **map);
 static int	sl_perimeter_check(char **map);
+static int  sl_shape_check(char **map, t_game *game);
 static int	sl_char_check(char **map, char *allowed);
 static int	sl_mandatory_tile_count(char **map, char *tiles);
 
@@ -21,7 +21,7 @@ char	**sl_check_map(char **map_file, t_game *game)
 {
 	int	char_analysis;
 
-	if (!sl_shape_check(map_file))
+	if (!sl_shape_check(map_file, game))
 	{
 		sl_free_matrix(map_file);
 		sl_fail(1, 1, "Map file is "NEOR"Not Rectangular");
@@ -107,7 +107,7 @@ static int	sl_mandatory_tile_count(char **map, char *tiles)
 	return (0);
 }
 
-static int	sl_shape_check(char **map)
+static int	sl_shape_check(char **map, t_game *game)
 {
 	int	rows;
 	int	first_column;
@@ -117,19 +117,18 @@ static int	sl_shape_check(char **map)
 	first_column = 0;
 	while (map[rows])
 	{
-		other_column = 0;
 		if (first_column == 0)
 		{
-			while (map[rows][first_column])
-				first_column++;
+			first_column = ft_strlen(map[rows]);
 			rows++;
 			continue ;
 		}
-		while (map[rows][other_column])
-			other_column++;
+		other_column = ft_strlen(map[rows]);
 		if (first_column != other_column)
 			return (0);
 		rows++;
 	}
+	game -> h = rows * 64;
+	game -> w = first_column * 64;
 	return (1);
 }
