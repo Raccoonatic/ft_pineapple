@@ -6,13 +6,14 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 17:21:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/16 22:17:54 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:36:39 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SOLONG_H
 # define SOLONG_H
 
+// Includes:
 # include "./libft/includes/get_next_line_bonus.h"
 # include "./libft/includes/libft.h"
 # include <unistd.h>
@@ -24,7 +25,7 @@
 # include <math.h>
 # include <mlx.h>
 
-
+// Text Color:
 # define RSET	"\033[0m" 
 # define B_WI	"\033[1;37m"
 # define LIME	"\033[38;2;0;255;0m"
@@ -34,6 +35,21 @@
 # define MINT	"\033[1;38;2;55;250;133m"
 # define NEOR	"\033[3m\033[38;2;255;153;51m"
 
+// Tile size definition:
+# define TSZ	64
+# define HTSZ	32
+
+// Textures Path:
+#define BKND	"./assets/background/Herculy.xpm"
+#define GRND	"./assets/Ground/floor.xpm"
+#define PLYI	"./assets/Character/fox_idle.xpm"
+#define PLYR    "./assets/Character/fox_run.xpm"
+#define PLYJ    "./assets/Character/Fox_jump.xpm"
+#define COIN	"./assets/Items/coin.xpm
+#define COUT    "./assets/Items/coin_pickup.xpm"
+#define DOOR	"./assets/Items/door.xpm"
+
+// Data type definitions
 typedef enum e_keys
 {
 	K_W = 119,
@@ -59,13 +75,17 @@ typedef struct s_plyr
 typedef struct s_imgdata
 {
 	void	*main;
-	int		h;
-	int		w;
-	void	**frm;
-	char	*addr;
-	int		bpx;
-	int		bpr;
-	int		e;
+	char    *addr;
+	int     bpx;
+	int     bpr;
+	int     e;
+	int     h;
+	int     w;
+	void    **frm;
+	char    **frad;
+	int     fbpx;
+	int		fbpr;
+	int		fe;
 	int		index;
 	int		x;
 	int		y;
@@ -87,13 +107,17 @@ typedef struct s_game
 	int			moves;
 	t_imgdata	buf;
 	t_imgdata	bgr;
-	t_imgdata	p;
-	t_imgdata	i;
-	t_imgdata	g;
+	t_imgdata	pi;
+	t_imgdata   pr;
+	t_imgdata   pj;
+	t_imgdata	ci;
+	t_imgdata   co;
+	t_imgdata   d;
+	t_imgdata	gr;
 	t_plyr		plyr;
-
 }	t_game;
 
+// Function Prototypes:
 char	**sl_text_to_map(char *map_path);
 char	sl_flast_char(char *str);
 int		sl_count_rows(char **map);

@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 19:17:21 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/16 23:14:51 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:36:51 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	sl_kill_the_game(t_game *game, int good, int err_code, int exit_code)
 {
 	if (!game -> mlx)
 		sl_fail(1, exit_code, "Game didn't load. "NEOR"mlx failed");
-	if (game -> win)
+	if (game -> win)i
 		mlx_destroy_window(game -> mlx, game -> win);
 	sl_frink(game);
 	mlx_destroy_display(game->mlx);
@@ -79,5 +79,6 @@ void	sl_kill_the_game(t_game *game, int good, int err_code, int exit_code)
 		if (err_code == 4)
 			sl_fail(1, exit_code, "Game didn't load. "NEOR"mlx failed");
 	}
+	sl_fail(1, exit_code, "Memory allocation error");
 	return ;
 }

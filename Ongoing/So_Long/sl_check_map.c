@@ -128,7 +128,7 @@ static int	sl_shape_check(char **map, t_game *game)
 			return (0);
 		rows++;
 	}
-	game -> h = rows * 64;
-	game -> w = first_column * 64;
+	game -> h = rows * TSZ;
+	game -> w = first_column * TSZ;
 	return (1);
 }

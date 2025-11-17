@@ -55,9 +55,9 @@ $(NAME): $(LIBFT) $(OBJ) solong.h
 
 open:
 	@printf "$(MINT)"
-	open $(MAIN_F)
-	for f in *.c; do open "$$f" & done
-	for f in *.h; do open "$$f" & done
+	open Makefile
+	find . -maxdepth 1 -name "*.c" -exec open {} \;
+	find . -maxdepth 1 -name "*.h" -exec open {} \;
 	@printf "$(RSET)"
 
 $(LIBFT):

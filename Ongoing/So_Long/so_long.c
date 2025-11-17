@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 17:52:48 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/16 23:13:07 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:36:44 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int arc, char *wordy[])
 
 	if (arc < 2 || arc > 3)
 		sl_fail(2, 2, "Incorrect argument count.");
-	game.theme = "./assets/background/Herculy.xpm";
+	game.theme = BKND;
 	if (arc == 3)
 		game.theme = wordy[2];
 	game.map = sl_check_map(sl_text_to_map(wordy[1]), &game);
