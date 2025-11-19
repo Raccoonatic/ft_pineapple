@@ -6,13 +6,12 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 19:17:21 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/17 19:36:51 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:51:39 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-void	sl_free_matrix(char **matrix);
 void    sl_kill_the_game(t_game *game, int good, int err_code, int exit_code);
 
 void	sl_fail(int err_code, int exit_code, char *err_msg)
@@ -32,33 +31,11 @@ void	sl_fail(int err_code, int exit_code, char *err_msg)
 	exit(exit_code);
 }
 
-void	sl_free_matrix(char **matrix)
-{
-	int	guide;
-
-	if (!matrix)
-		return ;
-	guide = 0;
-	while (matrix[guide])
-	{
-		free(matrix[guide]);
-		guide++;
-	}
-	free(matrix);
-}
-
-static void sl_frink(t_game *g)
-{
-	// here iterate through every image to avoid leaks;
-
-	mlx_destroy_image(g -> mlx, image);
-}
-
 void	sl_kill_the_game(t_game *game, int good, int err_code, int exit_code)
 {
 	if (!game -> mlx)
 		sl_fail(1, exit_code, "Game didn't load. "NEOR"mlx failed");
-	if (game -> win)i
+	if (game -> win)
 		mlx_destroy_window(game -> mlx, game -> win);
 	sl_frink(game);
 	mlx_destroy_display(game->mlx);

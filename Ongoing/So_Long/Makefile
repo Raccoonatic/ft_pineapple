@@ -27,12 +27,17 @@ RSET	= \033[0m
 MAIN_F ?= so_long.c
 
 FILE = sl_render.c
+FILE += sl_destroy.c
+FILE += sl_zeroing.c
+FILE += sl_terrain.c
 FILE += sl_exit_game.c
 FILE += sl_check_map.c
+FILE += sl_coordinate.c
 FILE += sl_flood_fill.c
 FILE += sl_layer_init.c
 FILE += sl_text_to_map.c
 FILE += sl_map_init_utils.c
+FILE += sl_sprite_handling.c
 
 OBJ = $(FILE:%.c=%.o)
 

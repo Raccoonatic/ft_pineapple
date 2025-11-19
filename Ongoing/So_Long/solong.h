@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 17:21:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/17 19:36:39 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:19:57 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # define NEOR	"\033[3m\033[38;2;255;153;51m"
 
 // Tile size definition:
-# define TSZ	64
-# define HTSZ	32
+# define TSZ	96
+# define HTSZ	48
 
 // Textures Path:
 #define BKND	"./assets/background/Herculy.xpm"
@@ -45,7 +45,7 @@
 #define PLYI	"./assets/Character/fox_idle.xpm"
 #define PLYR    "./assets/Character/fox_run.xpm"
 #define PLYJ    "./assets/Character/Fox_jump.xpm"
-#define COIN	"./assets/Items/coin.xpm
+#define COIN	"./assets/Items/coin.xpm"
 #define COUT    "./assets/Items/coin_pickup.xpm"
 #define DOOR	"./assets/Items/door.xpm"
 
@@ -72,6 +72,16 @@ typedef struct s_plyr
 	int		grounded;
 }	t_plyr;
 
+typedef	struct s_cord
+{
+	int fh;
+	int fw;
+	int th;
+	int tw;
+	int	x;
+	int y;
+}	t_cord;
+
 typedef struct s_imgdata
 {
 	void	*main;
@@ -87,15 +97,12 @@ typedef struct s_imgdata
 	int		fbpr;
 	int		fe;
 	int		index;
-	int		x;
-	int		y;
 }	t_imgdata;
 
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	void		*frame;
 	char		*theme;
 	char		**map;
 	int			h;
@@ -117,19 +124,37 @@ typedef struct s_game
 	t_plyr		plyr;
 }	t_game;
 
-// Function Prototypes:
-char	**sl_text_to_map(char *map_path);
-char	sl_flast_char(char *str);
-int		sl_count_rows(char **map);
-int		sl_count_tiles(char **map, t_game *game, char tile);
-void	sl_fail(int err_code, int exit_code, char *err_msg);
-void	sl_free_matrix(char **matrix);
-char	**sl_check_map(char **map_file, t_game *game);
+//	  	  Function Prototypes:
+// -- -- #           sl_flood_fill.c	      # -- --
 char	**sl_path_check(char **map, t_game *game);
-void	sl_layer_init(t_game *game, int *bpx, int *bpr, int *e);
-void    sl_push_bkgrnd_to_frame(t_imgdata *dst, t_imgdata *src);
-void    sl_kill_the_game(t_game *game, int good, int err_code, int exit_code);
-void    sl_zeroing(t_game *game);
-int		sl_main_renderer(t_game *game);
+// -- -- #         sl_map_init_utils.c        # -- --
+char	sl_flast_char(char *str);
+int	sl_count_rows(char **map);
+int	sl_count_tiles(char **map, t_game *game, char tile);
+// -- -- #	sl_text_to_map.c	# -- --
+char	**sl_text_to_map(char *map_path);
+// -- -- #	sl_layer_init.c	# -- --
+void sl_layer_init(t_game *game, int *bpx, int *bpr, int *e);
+// -- -- #	sl_exit_game.c	# -- --
+void	sl_fail(int err_code, int exit_code, char *err_msg);
+void	sl_kill_the_game(t_game *game, int good, int err_code, int exit_code);
+// -- -- #	sl_check_map.c	# -- --
+char	**sl_check_map(char **map_file, t_game *game);
+// -- -- #	sl_render.c	# -- --
+int	sl_main_renderer(t_game *game);
+void	sl_push_bkgrnd_to_frame(t_imgdata *d, t_imgdata *s);
+void	sl_push_tile_to_frame(char *dst, char *src, t_cord c);
+// -- -- #	sl_terrain.c	# -- --
+void	sl_build_terrain(t_game *g, char **map, t_imgdata *t);
+// -- -- #	sl_zeroing.c	# -- --
+void	sl_zeroing(t_game *game);
+// -- -- #	sl_sprite_handling.c	# -- --
+void	sl_strip_split(t_game *g, t_imgdata *i, int f_num, int f_w);
+void	sl_ani_strip_alloc(t_game *g, int f_num, void ***imgs, char ***addrs);
+// -- -- #	sl_coordinate.c	# -- --
+void	sl_coordinate(t_cord *vessel, int c_unit, t_game *g, int ctrl);
+// -- -- #	sl_destroy.c	# -- --
+void	sl_frink(t_game *g);
+void	sl_free_matrix(char **matrix);
 
 #endif

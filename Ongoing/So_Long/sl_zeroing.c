@@ -1,0 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sl_zeroing.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/19 20:21:05 by lde-san-          #+#    #+#             */
+/*   Updated: 2025/11/19 20:28:18 by lde-san-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "solong.h"
+
+static void	sl_zero_img(t_game *game);
+static void	sl_null_ptrs(t_imgdata *i);
+static void	sl_zero_ints(t_imgdata *i);
+
+void	sl_zeroing(t_game *game)
+{
+	game -> mlx = NULL;
+	game -> win = NULL;
+	game -> map = NULL;
+	game -> coins = 0;
+	game -> victory = 0;
+	game -> exit_y = 0;
+	game -> exit_x = 0;
+	game -> moves = 0;
+	game -> plyr.vy = 0;
+	game -> plyr.vx = 0;
+	game -> plyr.grounded = 0;
+	sl_zero_img(game);
+	return ;
+}
+
+static void	sl_zero_img(t_game *game)
+{
+	sl_null_ptrs(&game -> buf);
+	sl_null_ptrs(&game -> bgr);
+	sl_null_ptrs(&game -> pi);
+	sl_null_ptrs(&game -> pr);
+	sl_null_ptrs(&game -> pj);
+	sl_null_ptrs(&game -> ci);
+	sl_null_ptrs(&game -> co);
+	sl_null_ptrs(&game -> d);
+	sl_null_ptrs(&game -> gr);
+	sl_zero_ints(&game -> buf);
+	sl_zero_ints(&game -> bgr);
+	sl_zero_ints(&game -> pi);
+	sl_zero_ints(&game -> pr);
+	sl_zero_ints(&game -> pj);
+	sl_zero_ints(&game -> ci);
+	sl_zero_ints(&game -> co);
+	sl_zero_ints(&game -> d);
+	sl_zero_ints(&game -> gr);
+	return ;
+}
+
+static void	sl_null_ptrs(t_imgdata *i)
+{
+	i -> main = NULL;
+	i -> addr = NULL;
+	i -> frm = NULL;
+	i -> frad = NULL;
+	return ;
+}
+
+static void	sl_zero_ints(t_imgdata *i)
+{
+	i -> bpx = 0;
+	i -> bpr = 0;
+	i -> e = 0;
+	i -> h = 0;
+	i -> w = 0;
+	i -> fbpx = 0;
+	i -> fbpr = 0;
+	i -> fe = 0;
+	i -> index = 0;
+	return ;
+}
