@@ -6,14 +6,14 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 19:50:51 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/16 18:31:00 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/21 12:56:39 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
 static int	sl_perimeter_check(char **map);
-static int  sl_shape_check(char **map, t_game *game);
+static int	sl_shape_check(char **map, t_game *game);
 static int	sl_char_check(char **map, char *allowed);
 static int	sl_mandatory_tile_count(char **map, char *tiles);
 
@@ -111,7 +111,6 @@ static int	sl_shape_check(char **map, t_game *game)
 {
 	int	rows;
 	int	first_column;
-	int	other_column;	
 
 	rows = 0;
 	first_column = 0;
@@ -120,11 +119,12 @@ static int	sl_shape_check(char **map, t_game *game)
 		if (first_column == 0)
 		{
 			first_column = ft_strlen(map[rows]);
+			if (first_column == 0)
+				return (0);
 			rows++;
 			continue ;
 		}
-		other_column = ft_strlen(map[rows]);
-		if (first_column != other_column)
+		if ((size_t)first_column != ft_strlen(map[rows]))
 			return (0);
 		rows++;
 	}

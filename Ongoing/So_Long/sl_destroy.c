@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:51:10 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/19 23:14:23 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/21 12:58:01 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void		sl_free_matrix(char **matrix);
 static void	sl_imgdata_wipe(t_game *g, t_imgdata *i);
 static void	sl_free_img_matrix(t_game *g, void **matrix);
 
-
-void sl_frink(t_game *g)
+void	sl_frink(t_game *g)
 {
 	if (g -> buf.main || g -> buf.frm || g -> buf.frad)
 		sl_imgdata_wipe(g, &g -> buf);

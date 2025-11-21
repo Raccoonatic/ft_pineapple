@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 20:54:30 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/21 00:02:57 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/21 19:13:21 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	sl_corner_texture(char **map, int y, int x, int border);
 static int	sl_get_texture_index(char **m, int y, int x);
+static int	sl_corner_check(char **map, int y, int x);
 
 void	sl_build_terrain(t_game *g, char **map, t_imgdata *t)
 {
@@ -33,8 +34,8 @@ void	sl_build_terrain(t_game *g, char **map, t_imgdata *t)
 		x = 0;
 		while (map[y][x])
 		{
-			sl_coordinate(&c, 1, g, x);
-			c.y = y;
+			sl_coordinate(&c, 1, g, x * TSZ);
+			c.y = y * TSZ;
 			index = sl_get_texture_index(map, y, x);
 			if (map[y][x] == '1')
 				sl_push_tile_to_frame(t -> addr, t -> frad[index], c);
@@ -49,6 +50,8 @@ static int	sl_get_texture_index(char **m, int y, int x)
 	if (y + x == 0 || (y == 0 && m[y][x + 1] == '\0')
 		|| (x == 0 && !m[y + 1]) || (!m[y + 1] && m[y][x + 1] == '\0'))
 		return (sl_corner_texture(m, y, x, 1));
+	if (sl_corner_texture(m, y, x, 69) != 69)
+		return (sl_corner_texture(m, y, x, 69));
 	if (y != 0 && (!m[y + 1] || m[y + 1][x] == '1') && m[y - 1][x] != '1')
 		return (1);
 	if ((y == 0 || m[y - 1][x] == '1') && m[y + 1] && m[y + 1][x] != '1')
@@ -66,8 +69,6 @@ static int	sl_get_texture_index(char **m, int y, int x)
 		return (8);
 	if (x && (m[y][x + 1] == 0 || m[y][x + 1] == 49) && m[y][x - 1] != 49)
 		return (6);
-	if (sl_corner_texture(m, y, x, 69) != 69)
-		return (sl_corner_texture(m, y, x, 69));
 	return (7);
 }
 
@@ -81,10 +82,7 @@ static int	sl_corner_texture(char **map, int y, int x, int border)
 			return (5);
 		return (7);
 	}
-	if (x && y && map[y + 1] && map[y][x + 1] && (((map[y + 1][x] != '1'
-		&& map[y - 1][x] == '1') || (map[y - 1][x] != '1'
-		&& map[y + 1][x] == '1')) && ((map[y + 1][x] == map[y][x + 1])
-		&& (map[y - 1][x] == map[y][x - 1]))))
+	if (sl_corner_check(map, y, x))
 	{
 		if ((map[y + 1][x] == '1') && (map[y][x + 1] == '1'))
 			return (0);
@@ -98,14 +96,26 @@ static int	sl_corner_texture(char **map, int y, int x, int border)
 	return (border);
 }
 
+static int	sl_corner_check(char **map, int y, int x)
+{
+	if (x && y && map[y + 1] && map[y][x + 1] && ((map[y - 1][x] == '1'
+		&& map[y][x - 1] == '1' && map[y + 1][x] != '1' && map[y][x + 1] != '1')
+		|| (map[y - 1][x] == '1' && map[y][x + 1] == '1' && map[y + 1][x] != '1'
+		&& map[y][x - 1] != '1') || (map[y + 1][x] == '1' && map[y][x - 1] == 49
+		&& map[y - 1][x] != '1' && map[y][x + 1] != '1') || (map[y + 1][x] == 49
+		&& map[y][x + 1] == '1' && map[y - 1][x] != 49 && map[y][x - 1] != 49)))
+		return (1);
+	return (0);
+}
+
 void	sl_blackpink(t_imgdata *img, int h)
 {
 	char	*end;
 	char	*start;
-	
+
 	start = img -> addr;
 	end = (img -> addr) + (img -> bpr * h);
-	while(start < end)
+	while (start < end)
 	{
 		if (*(unsigned int *)start == 0x00000000)
 			*(unsigned int *)start = 0x00FF00FF;

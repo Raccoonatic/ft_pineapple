@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:21:05 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/19 20:28:18 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/21 21:14:34 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ void	sl_zeroing(t_game *game)
 	game -> exit_y = 0;
 	game -> exit_x = 0;
 	game -> moves = 0;
-	game -> plyr.vy = 0;
-	game -> plyr.vx = 0;
 	game -> plyr.grounded = 0;
+	game -> time_stamp = sl_now();
 	sl_zero_img(game);
 	return ;
 }
@@ -38,19 +37,15 @@ static void	sl_zero_img(t_game *game)
 	sl_null_ptrs(&game -> buf);
 	sl_null_ptrs(&game -> bgr);
 	sl_null_ptrs(&game -> pi);
-	sl_null_ptrs(&game -> pr);
 	sl_null_ptrs(&game -> pj);
 	sl_null_ptrs(&game -> ci);
-	sl_null_ptrs(&game -> co);
 	sl_null_ptrs(&game -> d);
 	sl_null_ptrs(&game -> gr);
 	sl_zero_ints(&game -> buf);
 	sl_zero_ints(&game -> bgr);
 	sl_zero_ints(&game -> pi);
-	sl_zero_ints(&game -> pr);
 	sl_zero_ints(&game -> pj);
 	sl_zero_ints(&game -> ci);
-	sl_zero_ints(&game -> co);
 	sl_zero_ints(&game -> d);
 	sl_zero_ints(&game -> gr);
 	return ;
@@ -75,6 +70,7 @@ static void	sl_zero_ints(t_imgdata *i)
 	i -> fbpx = 0;
 	i -> fbpr = 0;
 	i -> fe = 0;
-	i -> index = 0;
+	i -> mx_index = 0;
+	i -> crnt_frm = 0;
 	return ;
 }

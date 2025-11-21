@@ -6,19 +6,21 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:43:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/21 00:05:22 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:19:20 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-static void sl_get_grnd(t_game *g, int *bpx, int *bpr, int *e);
-static void sl_get_bkgrnd(t_game *g, int *bpx, int *bpr, int *e);
+static void	sl_get_grnd(t_game *g, int *bpx, int *bpr, int *e);
+static void	sl_get_bkgrnd(t_game *g, int *bpx, int *bpr, int *e);
+static void	sl_get_items(t_game g, t_imgdata *ci, t_imgdata *co, t_imgdata *d);
+static void	sl_get_plyr(t_game g, t_imgdata *i, t_imgdata *r, t_imgdata *j);
 
-void sl_layer_init(t_game *g, int *bpx, int *bpr, int *e)
+void	sl_layer_init(t_game *g, int *bpx, int *bpr, int *e)
 {
-	int h;
-	int w;
+	int	h;
+	int	w;
 
 	h = g -> h;
 	w = g -> w;
@@ -29,21 +31,57 @@ void sl_layer_init(t_game *g, int *bpx, int *bpr, int *e)
 	g -> buf.h = h;
 	g -> buf.w = w;
 	sl_get_bkgrnd(g, &g -> bgr.bpx, &g -> bgr.bpr, &g -> bgr.e);
+	sl_get_plyr(g, &g -> pi, &p -> pj);
+	sl_get_items(g, &g -> ci, &g -> co, &g -> d);
 	sl_get_grnd(g, &g -> gr.bpx, &g -> gr.bpr, &g -> gr.e);
+	return ;
 }
 
-static void sl_get_grnd(t_game *g, int *bpx, int *bpr, int *e)
+static void	sl_get_items(t_game *g, t_imgdata *ci, t_imgdata *co, t_imgdata *d)
 {
-	void    *mlx;
+	char	*tci;
+	char	*td;
+
+	tci = COIN;
+	td = DOOR;
+	ci -> main = mlx_xpm_file_to_image(g -> mlx, tci, &ci -> w, &ci -> h);
+	d -> main = mlx_xpm_file_to_image(g -> mlx, td, &d -> w, &d -> h);
+	if (!ci -> main || !d -> main)
+		sl_kill_the_game(g, 0, 4, 1);
+	sl_ani_init(g, ci, CSZ);
+	d -> addr = mlx_get_data_addr(d -> main, &d -> bpx, &d -> bpr, &d -> e);
+	sl_get_door_pos(g -> map, &g -> exit_y, &g -> exit_x);
+	return ;
+}
+
+static void	sl_get_plyr(t_game *g, t_imgdata *i, t_imgdata *j)
+{
+	char	*ti;
+	char	*tj;
+
+	ti = PLYI;
+	tj = PLYJ;
+	i -> main = mlx_xpm_file_to_image(g -> mlx, ti, &i -> w, &i -> h);
+	j -> main = mlx_xpm_file_to_image(g -> mlx, tj, &j -> w, &j -> h);
+	if (!i -> main || !j -> main)
+		sl_kill_the_game(g, 0, 4, 1);
+	sl_ani_init(g, i, TSZ);
+	sl_ani_init(g, j, TSZ);
+	return ;
+}
+
+static void	sl_get_grnd(t_game *g, int *bpx, int *bpr, int *e)
+{
+	void	*mlx;
 	char	*t;
 	int		frm_num;
 	t_cord	floor;
-	
+
 	t = GRND;
 	mlx = g -> mlx;
 	g -> gr.main = mlx_xpm_file_to_image(mlx, t, &g -> gr.w, &g -> gr.h);
 	if (!g -> gr.main)
-		sl_kill_the_game(g, 0, 4, 1);	
+		sl_kill_the_game(g, 0, 4, 1);
 	frm_num = (g -> gr.w / TSZ);
 	g -> gr.addr = mlx_get_data_addr(g -> gr.main, bpx, bpr, e);
 	sl_ani_strip_alloc(g, frm_num, &g -> gr.frm, &g -> gr.frad);
@@ -55,7 +93,7 @@ static void sl_get_grnd(t_game *g, int *bpx, int *bpr, int *e)
 	return ;
 }
 
-static void sl_get_bkgrnd(t_game *g, int *bpx, int *bpr, int *e)
+static void	sl_get_bkgrnd(t_game *g, int *bpx, int *bpr, int *e)
 {
 	void	*mlx;
 	char	*theme;

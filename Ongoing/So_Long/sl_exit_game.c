@@ -6,13 +6,13 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 19:17:21 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/19 20:51:39 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/21 12:58:54 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-void    sl_kill_the_game(t_game *game, int good, int err_code, int exit_code);
+void	sl_kill_the_game(t_game *game, int good, int err_code, int exit_code);
 
 void	sl_fail(int err_code, int exit_code, char *err_msg)
 {

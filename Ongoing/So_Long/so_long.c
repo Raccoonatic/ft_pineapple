@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 17:52:48 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/20 18:06:07 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/21 13:08:46 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	main(int arc, char *wordy[])
 	sl_zeroing(&game);
 	game.map = sl_check_map(sl_text_to_map(wordy[1]), &game);
 	sl_game_init(&game);
-	mlx_hook(game.win, 17, 1L<<0, handle_close, &game);
-	mlx_hook(game.win, 2, 1L<<0, handle_keypress, &game);
+	mlx_hook(game.win, 17, 1L << 0, handle_close, &game);
+	mlx_hook(game.win, 2, 1L << 0, handle_keypress, &game);
 	mlx_loop_hook(game.mlx, sl_main_renderer, &game);
 	mlx_loop(game.mlx);
 	return (0);
@@ -37,8 +37,8 @@ int	main(int arc, char *wordy[])
 
 static void	sl_game_init(t_game *game)
 {
-	int h;
-	int w;
+	int	h;
+	int	w;
 
 	h = game -> h;
 	w = game -> w;

@@ -6,14 +6,14 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 18:07:19 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/19 23:22:17 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/21 13:05:39 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
 static void	sl_push_sprite_to_frame(int ofst[], char *dst, char *src, int f_w);
-void	sl_strip_split(t_game *g, t_imgdata *i, int f_num, int f_w);
+void		sl_strip_split(t_game *g, t_imgdata *i, int f_num, int f_w);
 
 void	sl_ani_strip_alloc(t_game *g, int f_num, void ***imgs, char ***addrs)
 {
@@ -30,8 +30,8 @@ void	sl_strip_split(t_game *g, t_imgdata *i, int f_num, int f_w)
 {
 	int	v[2];
 	int	*bpx;
-	int *bpr;
-	int *e;
+	int	*bpr;
+	int	*e;
 
 	bpx = &i -> fbpx;
 	bpr = &i -> fbpr;
@@ -54,10 +54,10 @@ void	sl_strip_split(t_game *g, t_imgdata *i, int f_num, int f_w)
 
 static void	sl_push_sprite_to_frame(int ofst[], char *dst, char *src, int f_w)
 {
-	char *d_ptr;
-	char *s_ptr;
-	int y;
-	int x;
+	char	*d_ptr;
+	char	*s_ptr;
+	int		y;
+	int		x;
 
 	y = 0;
 	while (y < TSZ)
