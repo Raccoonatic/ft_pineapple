@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 09:25:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/16 15:42:32 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/20 19:26:29 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ static char	**sl_mapdup(char **map)
 		}
 		guide++;
 	}
+	new_map[guide] = NULL;
 	return (new_map);
 }

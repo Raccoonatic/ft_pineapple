@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 17:29:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/19 23:13:44 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/20 22:56:45 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	sl_push_tile_to_frame(char *dst, char *src, t_cord c)
 		{
 			s_ptr = src + (((y * c.tw) + x) * 4);
 			d_ptr = dst + ((((c.y * TSZ) + y) * c.fw + ((c.x * TSZ) + x)) * 4);
-			if (*(unsigned int *)s_ptr & 0xFF000000)
+			if (*(unsigned int *)s_ptr != 0x00FF00FF)
 				*(unsigned int *)d_ptr = *(unsigned int *)s_ptr;
 			x++;
 		}

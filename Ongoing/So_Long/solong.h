@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 17:21:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/19 23:19:57 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/21 00:01:20 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void	sl_push_bkgrnd_to_frame(t_imgdata *d, t_imgdata *s);
 void	sl_push_tile_to_frame(char *dst, char *src, t_cord c);
 // -- -- #	sl_terrain.c	# -- --
 void	sl_build_terrain(t_game *g, char **map, t_imgdata *t);
+void    sl_blackpink(t_imgdata *img, int h);
 // -- -- #	sl_zeroing.c	# -- --
 void	sl_zeroing(t_game *game);
 // -- -- #	sl_sprite_handling.c	# -- --

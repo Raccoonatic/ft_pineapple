@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 17:52:48 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/17 19:36:44 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:06:07 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int arc, char *wordy[])
 	game.theme = BKND;
 	if (arc == 3)
 		game.theme = wordy[2];
+	sl_zeroing(&game);
 	game.map = sl_check_map(sl_text_to_map(wordy[1]), &game);
 	sl_game_init(&game);
 	mlx_hook(game.win, 17, 1L<<0, handle_close, &game);
@@ -41,7 +42,6 @@ static void	sl_game_init(t_game *game)
 
 	h = game -> h;
 	w = game -> w;
-	sl_zeroing(game);
 	game -> mlx = mlx_init();
 	if (!game -> mlx)
 		sl_kill_the_game(game, 0, 0, 1);

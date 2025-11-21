@@ -10,7 +10,7 @@ static const char *door[] = {
 "+ c #78473B",
 "@ c #945848",
 "# c #B87E6F",
-"$ c None",
+"$ c #FF00FF",
 /* pixels */
 "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",
 "$$$$$$$$$$$$$$$$$$oooooo$$$$$$$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",

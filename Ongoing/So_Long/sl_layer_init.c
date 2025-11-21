@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:43:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/19 23:20:55 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/21 00:05:22 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void sl_get_grnd(t_game *g, int *bpx, int *bpr, int *e)
 	sl_ani_strip_alloc(g, frm_num, &g -> gr.frm, &g -> gr.frad);
 	sl_strip_split(g, &g -> gr, frm_num, TSZ);
 	sl_build_terrain(g, g -> map, &g -> gr);
+	sl_blackpink(&g -> gr, g -> h);
 	sl_coordinate(&floor, 2, g, 0);
 	sl_push_tile_to_frame(g -> buf.addr, g -> gr.addr, floor);
 	return ;
