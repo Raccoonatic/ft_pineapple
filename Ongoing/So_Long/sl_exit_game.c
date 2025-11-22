@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 19:17:21 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/21 12:58:54 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/22 20:03:08 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	sl_kill_the_game(t_game *game, int good, int err_code, int exit_code)
 	{
 		racc_print(1, BABY"Total Moves:"MINT" %d \n", game -> moves);
 		racc_print(1, LIME"Victory!. ");
-		sl_fail(err_code, exit_code, MINT"Thank you for playing my game <3");
+		sl_fail(err_code, exit_code, MINT"Thank you for playing my game <3\n");
 	}
 	if (good == 0)
 	{

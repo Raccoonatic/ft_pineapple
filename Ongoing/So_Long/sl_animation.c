@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:20:55 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/21 21:14:01 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/22 19:29:47 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 int	sl_animate(t_game *g)
 {
-	int			p_idx;
-	int			c_idx;
-	t_imgdata	*pst
-
 	sl_count_tiles(g -> map, g, 'C');
 	if (g -> coins == 0);
 		g -> victory = 1;
@@ -25,10 +21,9 @@ int	sl_animate(t_game *g)
 	{
 		sl_clear_buffer(g -> buf.main, g -> h);
 		g -> time_stamp = sl_now;
-		sl_grounded_check(g -> map, &g -> plyr,g -> plyr.y, g -> plyr.x);
-		c_idx = ls_get_c_frm_idx(&g -> ci);
-		pst = ls_get_pst(g, g -> plyr.grounded, &p_idx);
-		sl_main_renderer(g, pst);
+		sl_grounded_check(g -> map, &g -> plyr, g -> plyr.y, g -> plyr.x);
+		ls_get_c_frm_idx(&g -> ci);
+		sl_main_render(g, ls_get_pst(g, g -> plyr.grounded, &g -> plyr.state));
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 17:29:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/21 20:53:15 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/22 20:45:12 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    sl_clear_buffer(t_imgdata *img, int h);
 void	sl_push_bkgrnd_to_frame(t_imgdata *d, t_imgdata *s);
 void	sl_push_tile_to_frame(char *dst, char *src, t_cord c);
 
-void	sl_main_renderer(t_game *game, t_imgdata *pst)
+void	sl_main_render(t_game *game, t_imgdata *pst)
 {
 	t_cord	floor;
 	t_cord	door;

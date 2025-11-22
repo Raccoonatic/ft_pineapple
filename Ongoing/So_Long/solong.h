@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 17:21:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/21 20:58:32 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/22 20:45:03 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 
 // Textures Path:
 # define BKND	"./assets/background/Herculy.xpm"
+# define THXS	"./assets/Thanks.xpm"
 # define GRND	"./assets/Ground/floor.xpm"
 # define PLYI	"./assets/Character/fox_idle.xpm"
 # define PLYJ   "./assets/Character/Fox_jump.xpm"
@@ -62,11 +63,20 @@ typedef enum e_keys
 	K_DOW = 65364
 }	t_keys;
 
+typedef enum e_state
+{
+	IDLE,
+	JUMP,
+	FLY,
+	LAND
+} t_state;
+
 typedef struct s_plyr
 {
 	int		y;
 	int		x;
 	int		grounded;
+	t_state	state;
 }	t_plyr;
 
 typedef struct s_cord
@@ -123,43 +133,44 @@ typedef struct s_game
 
 //		Function Prototypes:
 // -- -- #	sl_flood_fill.c			# -- -- //
-char	**sl_path_check(char **map, t_game *game);
+char		**sl_path_check(char **map, t_game *game);
 // -- -- #	sl_map_init_utils.c		# -- -- //
-char	sl_flast_char(char *str);
-int		sl_count_rows(char **map);
-int		sl_count_tiles(char **map, t_game *game, char tile);
+char		sl_flast_char(char *str);
+int			sl_count_rows(char **map);
+int			sl_count_tiles(char **map, t_game *game, char tile);
 // -- -- #	sl_text_to_map.c		# -- -- //
-char	**sl_text_to_map(char *map_path);
+char		**sl_text_to_map(char *map_path);
 // -- -- #	sl_layer_init.c			# -- -- //
-void	sl_layer_init(t_game *game, int *bpx, int *bpr, int *e);
+void		sl_layer_init(t_game *game, int *bpx, int *bpr, int *e);
 // -- -- #	sl_exit_game.c			# -- -- //
-void	sl_fail(int err_code, int exit_code, char *err_msg);
-void	sl_kill_the_game(t_game *game, int good, int err_code, int exit_code);
+void		sl_fail(int err_code, int exit_code, char *err_msg);
+void		sl_kill_the_game(t_game *game, int good, int err_code, int exit_code);
 // -- -- #	sl_check_map.c			# -- -- //
-char	**sl_check_map(char **map_file, t_game *game);
+char		**sl_check_map(char **map_file, t_game *game);
 // -- -- #	sl_render.c				# -- -- //
-void    sl_clear_buffer(t_imgdata *img, int h);
-void    sl_main_renderer(t_game *game, t_imgdata *pst);
-void	sl_push_bkgrnd_to_frame(t_imgdata *d, t_imgdata *s);
-void	sl_push_tile_to_frame(char *dst, char *src, t_cord c);
+void		sl_clear_buffer(t_imgdata *img, int h);
+void		sl_main_render(t_game *game, t_imgdata *pst);
+void		sl_push_bkgrnd_to_frame(t_imgdata *d, t_imgdata *s);
+void		sl_push_tile_to_frame(char *dst, char *src, t_cord c);
 // -- -- #	sl_terrain.c			# -- -- //
-void	sl_build_terrain(t_game *g, char **map, t_imgdata *t);
-void	sl_blackpink(t_imgdata *img, int h);
+void		sl_build_terrain(t_game *g, char **map, t_imgdata *t);
+void		sl_blackpink(t_imgdata *img, int h);
 // -- -- #	sl_zeroing.c			# -- -- //
-void	sl_zeroing(t_game *game);
+void		sl_zeroing(t_game *game);
 // -- -- #	sl_sprite_handling.c	# -- -- //
-void	sl_strip_split(t_game *g, t_imgdata *i, int f_num, int f_w);
-void	sl_ani_strip_alloc(t_game *g, int f_num, void ***imgs, char ***addrs);
+void		sl_strip_split(t_game *g, t_imgdata *i, int f_num, int f_w);
+void		sl_ani_strip_alloc(t_game *g, int f_num, void ***imgs, char ***addrs);
 // -- -- #	sl_coordinate.c			# -- -- //
-void	sl_coordinate(t_cord *vessel, int c_unit, t_game *g, int ctrl);
+void		sl_coordinate(t_cord *vessel, int c_unit, t_game *g, int ctrl);
 // -- -- #	sl_destroy.c			# -- -- //
-void	sl_frink(t_game *g);
-void	sl_free_matrix(char **matrix);
+void		sl_frink(t_game *g);
+void		sl_free_matrix(char **matrix);
 // -- -- #	sl_door.c				# -- -- //
-void    sl_get_door_pos(char **map, int *y, int *x);
+void		sl_get_door_pos(char **map, int *y, int *x);
 // -- -- #  sl_coin.c               # -- -- //
-void    sl_render_coins(t_game *g, t_imgdata *coin, int index);
-int		ls_get_c_frm_idx(t_imgdata *c);
+void		sl_render_coins(t_game *g, t_imgdata *coin, int index);
+int			ls_get_c_frm_idx(t_imgdata *c);
 // -- -- #  sl_player.c             # -- -- //
-
+void		sl_grounded_check(char **map, t_plyr *p, int y, int x);
+t_imgdata	*ls_get_pst(t_game *g, int grnd, t_state *state);
 #endif
