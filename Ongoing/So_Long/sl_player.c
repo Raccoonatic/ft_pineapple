@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 20:58:45 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/23 23:46:21 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:39:45 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,36 @@
 
 void				sl_grounded_check(char **map, t_plyr *p, int y, int x);
 static t_imgdata    *ls_get_pidx(t_game *g, t_state state);
+t_imgdata			*ls_get_pst(t_game *g, int grnd, t_state *state);
+
+void	sl_move_plyr(t_game *g, char **m, char ax, int mv)
+{
+	t_plyr	*p;
+	char	swap;
+	int		og_x;
+	int		og_y;
+
+	p = &g -> plyr;
+	og_x = p -> x;
+	og_y = p -> y;
+	swap = '0';
+	if (p -> on_e == 1)
+		swap = 'E';
+	if(ax == 'y' && m[p -> y + mv][p -> x] != '1')
+		p -> y += mv;
+	else if (ax == 'x' && m[p -> y][p -> x + mv] != '1')
+		p -> x += mv;
+	m[og_y][og_x] = swap;
+	if (m[p -> y][p -> x] == 'E')
+		p -> on_e = 1;
+	else
+		p -> on_e = 0;
+	m[p -> y][p -> x] = 'P';
+	if((ax == 'y' && m[p -> y + mv][p -> x] != '1')
+		|| (ax == 'x' && m[p -> y][p -> x + mv] != '1'))
+		racc_print(1, BABY"Moves:"MINT" %d \n", g -> moves++);
+	return ;	
+}
 
 t_imgdata   *ls_get_pst(t_game *g, int grnd, t_state *state)
 {

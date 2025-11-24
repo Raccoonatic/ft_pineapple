@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 19:30:27 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/24 00:01:03 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:35:31 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,17 @@ static void sl_win_loop(t_game *g, t_imgdata *img, int x, long long rec)
 	middle_top = (g -> h / 2) - (img -> h / 2);
 	y = g -> h + 1;
 
-	while(sl_now() - rec < 10000)
+	while(sl_now() - rec < 5000)
 	{
 		if (y > middle_top)
 		{
+			mlx_put_image_to_window(g -> mlx, g -> win, g -> buf.main, 0, 0);
 			mlx_put_image_to_window(g -> mlx, g -> win, img -> main, x, (int)y);
-			y -= 0.1;
+			mlx_do_sync(g -> mlx);
+			y -= 1.2;
 		}
+		else
+			continue;
 	}
 	return ;
 }
-

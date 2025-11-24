@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 17:21:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/23 23:58:49 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/24 12:44:14 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef enum e_keys
 	K_S = 115,
 	K_D = 100,
 	K_ESC = 65307,
-	K_LEF = 65361,
+	K_LFT = 65361,
 	K_RGT = 65363,
 	K_UP = 65362,
 	K_DOW = 65364
@@ -77,6 +77,7 @@ typedef struct s_plyr
 	int		y;
 	int		x;
 	int		grounded;
+	int		on_e;
 	t_state	state;
 }	t_plyr;
 
@@ -172,15 +173,16 @@ void		sl_get_door_pos(char **map, int *y, int *x);
 // -- -- #  sl_coin.c               # -- -- //
 void		sl_render_coins(t_game *g, t_imgdata *coin, int index);
 void	ls_get_c_frm_idx(t_imgdata *c);
-// -- -- #  sl_player.c             # -- -- //
+// -- -- #  sl_player.c				# -- -- //
+void		sl_move_plyr(t_game *g, char **m, char ax, int mv);
 void		sl_grounded_check(char **map, t_plyr *p, int y, int x);
 t_imgdata	*ls_get_pst(t_game *g, int grnd, t_state *state);
-// -- -- #  sl_time.c             # -- -- //
+// -- -- #  sl_time.c				# -- -- //
 long long	sl_now(void);
-// -- -- #  sl_animation.c             # -- -- //
+// -- -- #  sl_animation.c			# -- -- //
 int			sl_animate(t_game *g);
 void		sl_ani_init(t_game *g, t_imgdata *i, int f_w);
-// -- -- #  sl_win.c             # -- -- //
+// -- -- #  sl_win.c				# -- -- //
 void		sl_win(t_game *g);
 
 #endif

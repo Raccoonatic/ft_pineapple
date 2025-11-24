@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 17:52:48 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/21 13:08:46 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/24 12:46:10 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	sl_game_init(t_game *game)
 	game -> mlx = mlx_init();
 	if (!game -> mlx)
 		sl_kill_the_game(game, 0, 0, 1);
-	game -> win = mlx_new_window(game -> mlx, w, h, "Greed's Hunt");
+	game -> win = mlx_new_window(game -> mlx, w, h, "Glutto The Fox");
 	if (!game -> win)
 		sl_kill_the_game(game, 0, 4, 1);
 	sl_layer_init(game, &game -> buf.bpx, &game -> buf.bpr, &game -> buf.e);
@@ -53,8 +53,16 @@ static void	sl_game_init(t_game *game)
 
 static int	handle_keypress(int keycode, t_game *data)
 {
-	if (keycode == 65307)
+	if (keycode == K_ESC)
 		sl_kill_the_game(data, 1, 0, 0);
+	if (keycode == K_W || keycode == K_UP)
+		sl_move_plyr(data, data -> map, 'y', -1);
+	if (keycode == K_S || keycode == K_DOW)
+		sl_move_plyr(data, data -> map, 'y', 1);
+	if (keycode == K_D || keycode == K_RGT)
+		sl_move_plyr(data, data -> map, 'x', 1);
+	if (keycode == K_A || keycode == K_LFT)
+		sl_move_plyr(data, data -> map, 'x', -1);
 	return (0);
 }
 

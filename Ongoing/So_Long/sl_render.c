@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 17:29:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/23 17:45:16 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:22:23 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,19 @@ void	sl_main_render(t_game *g, t_imgdata *pst)
 	t_cord	plyr;
 
 	sl_push_bkgrnd_to_frame(&g -> buf, &g -> bgr);
+	sl_coordinate(&floor, 2, g, 0);
 	if (g -> victory == 1)
 	{
 		sl_coordinate(&door, 4, g, 0);
 		sl_push_tile_to_frame(g -> buf.addr, g -> d.addr, door);
+		sl_push_tile_to_frame(g -> buf.addr, g -> gr.addr, floor);
 		if (g -> plyr.x == g -> exit_x && g -> plyr.y == g -> exit_y)
-		{
-			mlx_put_image_to_window(g -> mlx, g -> win, g -> buf.main, 0, 0);
 			sl_win(g);
-		}
 	}
 	else
 		sl_render_coins(g, &g -> ci, g -> ci.crnt_frm);
 	sl_coordinate(&plyr, 3, g, 0);
 	sl_push_tile_to_frame(g -> buf.addr, pst -> frad[pst -> crnt_frm], plyr);
-	sl_coordinate(&floor, 2, g, 0);
 	sl_push_tile_to_frame(g -> buf.addr, g -> gr.addr, floor);
 	mlx_put_image_to_window(g -> mlx, g -> win, g -> buf.main, 0, 0);
 	mlx_do_sync(g -> mlx);
@@ -67,6 +65,8 @@ void	sl_push_tile_to_frame(char *dst, char *src, t_cord c)
 	char	*s_ptr;
 
 	y = 0;
+	if (!dst || !src)
+		return ;
 	while (y < c.th)
 	{
 		x = 0;
@@ -80,6 +80,7 @@ void	sl_push_tile_to_frame(char *dst, char *src, t_cord c)
 		}
 		y++;
 	}
+	return ;
 }
 
 void	sl_push_bkgrnd_to_frame(t_imgdata *d, t_imgdata *s)

@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:21:05 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/24 00:02:50 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:07:24 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	sl_zeroing(t_game *game)
 	game -> exit_x = 0;
 	game -> moves = 0;
 	game -> plyr.grounded = 0;
+	game -> plyr.on_e = 0;
 	game -> plyr.state = IDLE;
 	game -> time_stamp = sl_now();
 	sl_zero_img(game);
