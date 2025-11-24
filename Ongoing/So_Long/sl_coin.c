@@ -6,13 +6,13 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 18:33:52 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/22 17:22:49 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/23 19:43:16 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-int	ls_get_c_frm_idx(t_imgdata *c);
+void	ls_get_c_frm_idx(t_imgdata *c);
 
 void	sl_render_coins(t_game *g, t_imgdata *coin, int index)
 {
@@ -44,7 +44,7 @@ void	sl_render_coins(t_game *g, t_imgdata *coin, int index)
 void	ls_get_c_frm_idx(t_imgdata *c)
 {
 	c -> crnt_frm++;
-	if (c -> crnt_frm > c -> mx_index)
+	if (c -> crnt_frm >= c -> mx_index)
 		c -> crnt_frm = 0;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 17:29:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/22 20:45:12 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/23 17:45:16 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,31 @@ void    sl_clear_buffer(t_imgdata *img, int h);
 void	sl_push_bkgrnd_to_frame(t_imgdata *d, t_imgdata *s);
 void	sl_push_tile_to_frame(char *dst, char *src, t_cord c);
 
-void	sl_main_render(t_game *game, t_imgdata *pst)
+void	sl_main_render(t_game *g, t_imgdata *pst)
 {
 	t_cord	floor;
 	t_cord	door;
 	t_cord	plyr;
 
-	sl_push_bkgrnd_to_frame(&game -> buf, &game -> bgr);
-	sl_coordinate(&plyr, 3, game, 0);
-	sl_push_tile_to_frame(game -> buf.addr, pst -> frad[pst -> crnt_frm], plyr);
-	sl_coordinate(&door, 4, game, 0);
-	if (game -> victory == 1)
-		sl_push_tile_to_frame(game -> buf.addr, game -> door.addr, door);
+	sl_push_bkgrnd_to_frame(&g -> buf, &g -> bgr);
+	if (g -> victory == 1)
+	{
+		sl_coordinate(&door, 4, g, 0);
+		sl_push_tile_to_frame(g -> buf.addr, g -> d.addr, door);
+		if (g -> plyr.x == g -> exit_x && g -> plyr.y == g -> exit_y)
+		{
+			mlx_put_image_to_window(g -> mlx, g -> win, g -> buf.main, 0, 0);
+			sl_win(g);
+		}
+	}
 	else
-		sl_render_coins(game, &game -> ci, game -> ci.crnt_frm);
-	sl_coordinate(&floor, 2, game, 0);
-	sl_push_tile_to_frame(game -> buf.addr, game -> gr.addr, floor);
-	mlx_put_image_to_window(game -> mlx, game -> win, game -> buf.main, 0, 0);
-	mlx_do_sync(game -> mlx);
-	if (game -> victory == 1 && game -> plyr.x == game -> exit_x
-		&& game -> plyr.y == game -> exit_y)
-		sl_win(game);
+		sl_render_coins(g, &g -> ci, g -> ci.crnt_frm);
+	sl_coordinate(&plyr, 3, g, 0);
+	sl_push_tile_to_frame(g -> buf.addr, pst -> frad[pst -> crnt_frm], plyr);
+	sl_coordinate(&floor, 2, g, 0);
+	sl_push_tile_to_frame(g -> buf.addr, g -> gr.addr, floor);
+	mlx_put_image_to_window(g -> mlx, g -> win, g -> buf.main, 0, 0);
+	mlx_do_sync(g -> mlx);
 	return ;
 }
 

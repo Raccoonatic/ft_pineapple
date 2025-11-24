@@ -6,21 +6,23 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:20:55 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/22 19:29:47 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/23 23:25:15 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.c"
+#include "solong.h"
+
+void	sl_ani_init(t_game *g, t_imgdata *i, int f_w);
 
 int	sl_animate(t_game *g)
 {
 	sl_count_tiles(g -> map, g, 'C');
-	if (g -> coins == 0);
+	if (g -> coins == 0)
 		g -> victory = 1;
-	if (sl_now - g -> time_stamp > 120)
+	if ((sl_now() - g -> time_stamp) > 120)
 	{
+		g -> time_stamp = sl_now();
 		sl_clear_buffer(g -> buf.main, g -> h);
-		g -> time_stamp = sl_now;
 		sl_grounded_check(g -> map, &g -> plyr, g -> plyr.y, g -> plyr.x);
 		ls_get_c_frm_idx(&g -> ci);
 		sl_main_render(g, ls_get_pst(g, g -> plyr.grounded, &g -> plyr.state));
@@ -28,7 +30,7 @@ int	sl_animate(t_game *g)
 	return (0);
 }
 
-void	sl_ani_init(t_data *g, t_imgdata *i, int f_w)
+void	sl_ani_init(t_game *g, t_imgdata *i, int f_w)
 {
 	int frm_num;
 

@@ -26,10 +26,16 @@ RSET	= \033[0m
 
 MAIN_F ?= so_long.c
 
-FILE = sl_render.c
+FILE = sl_win.c
+FILE += sl_coin.c
+FILE += sl_door.c
+FILE += sl_time.c
+FILE += sl_render.c
+FILE += sl_player.c
 FILE += sl_destroy.c
 FILE += sl_zeroing.c
 FILE += sl_terrain.c
+FILE += sl_animation.c
 FILE += sl_exit_game.c
 FILE += sl_check_map.c
 FILE += sl_coordinate.c

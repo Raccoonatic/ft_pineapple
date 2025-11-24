@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:43:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/21 18:19:20 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/23 20:35:22 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	sl_get_grnd(t_game *g, int *bpx, int *bpr, int *e);
 static void	sl_get_bkgrnd(t_game *g, int *bpx, int *bpr, int *e);
-static void	sl_get_items(t_game g, t_imgdata *ci, t_imgdata *co, t_imgdata *d);
-static void	sl_get_plyr(t_game g, t_imgdata *i, t_imgdata *r, t_imgdata *j);
+static void	sl_get_items(t_game *g, t_imgdata *ci, t_imgdata *d);
+static void	sl_get_plyr(t_game *g, t_imgdata *i, t_imgdata *j);
 
 void	sl_layer_init(t_game *g, int *bpx, int *bpr, int *e)
 {
@@ -31,13 +31,13 @@ void	sl_layer_init(t_game *g, int *bpx, int *bpr, int *e)
 	g -> buf.h = h;
 	g -> buf.w = w;
 	sl_get_bkgrnd(g, &g -> bgr.bpx, &g -> bgr.bpr, &g -> bgr.e);
-	sl_get_plyr(g, &g -> pi, &p -> pj);
-	sl_get_items(g, &g -> ci, &g -> co, &g -> d);
+	sl_get_plyr(g, &g -> pi, &g -> pj);
+	sl_get_items(g, &g -> ci, &g -> d);
 	sl_get_grnd(g, &g -> gr.bpx, &g -> gr.bpr, &g -> gr.e);
 	return ;
 }
 
-static void	sl_get_items(t_game *g, t_imgdata *ci, t_imgdata *co, t_imgdata *d)
+static void	sl_get_items(t_game *g, t_imgdata *ci, t_imgdata *d)
 {
 	char	*tci;
 	char	*td;
@@ -65,8 +65,8 @@ static void	sl_get_plyr(t_game *g, t_imgdata *i, t_imgdata *j)
 	j -> main = mlx_xpm_file_to_image(g -> mlx, tj, &j -> w, &j -> h);
 	if (!i -> main || !j -> main)
 		sl_kill_the_game(g, 0, 4, 1);
-	sl_ani_init(g, i, TSZ);
-	sl_ani_init(g, j, TSZ);
+	sl_ani_init(g, i, PSZ);
+	sl_ani_init(g, j, PSZ);
 	return ;
 }
 

@@ -30,7 +30,7 @@ int	main(int arc, char *wordy[])
 	sl_game_init(&game);
 	mlx_hook(game.win, 17, 1L << 0, handle_close, &game);
 	mlx_hook(game.win, 2, 1L << 0, handle_keypress, &game);
-	mlx_loop_hook(game.mlx, sl_main_renderer, &game);
+	mlx_loop_hook(game.mlx, sl_animate, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

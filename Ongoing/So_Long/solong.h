@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 17:21:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/22 20:45:03 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/23 23:58:49 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 
 // Tile size definition:
 # define TSZ	96
+# define PSZ	168
 # define CSZ	48
 # define DSZ	108
 
@@ -45,7 +46,7 @@
 # define THXS	"./assets/Thanks.xpm"
 # define GRND	"./assets/Ground/floor.xpm"
 # define PLYI	"./assets/Character/fox_idle.xpm"
-# define PLYJ   "./assets/Character/Fox_jump.xpm"
+# define PLYJ   "./assets/Character/fox_jump.xpm"
 # define COIN	"./assets/Items/coin.xpm"
 # define DOOR	"./assets/Items/door.xpm"
 
@@ -127,6 +128,7 @@ typedef struct s_game
 	t_imgdata	ci;
 	t_imgdata	d;
 	t_imgdata	gr;
+	t_imgdata	thnks;
 	t_plyr		plyr;
 	long long	time_stamp;
 }	t_game;
@@ -141,7 +143,7 @@ int			sl_count_tiles(char **map, t_game *game, char tile);
 // -- -- #	sl_text_to_map.c		# -- -- //
 char		**sl_text_to_map(char *map_path);
 // -- -- #	sl_layer_init.c			# -- -- //
-void		sl_layer_init(t_game *game, int *bpx, int *bpr, int *e);
+void		sl_layer_init(t_game *g, int *bpx, int *bpr, int *e);
 // -- -- #	sl_exit_game.c			# -- -- //
 void		sl_fail(int err_code, int exit_code, char *err_msg);
 void		sl_kill_the_game(t_game *game, int good, int err_code, int exit_code);
@@ -169,8 +171,16 @@ void		sl_free_matrix(char **matrix);
 void		sl_get_door_pos(char **map, int *y, int *x);
 // -- -- #  sl_coin.c               # -- -- //
 void		sl_render_coins(t_game *g, t_imgdata *coin, int index);
-int			ls_get_c_frm_idx(t_imgdata *c);
+void	ls_get_c_frm_idx(t_imgdata *c);
 // -- -- #  sl_player.c             # -- -- //
 void		sl_grounded_check(char **map, t_plyr *p, int y, int x);
 t_imgdata	*ls_get_pst(t_game *g, int grnd, t_state *state);
+// -- -- #  sl_time.c             # -- -- //
+long long	sl_now(void);
+// -- -- #  sl_animation.c             # -- -- //
+int			sl_animate(t_game *g);
+void		sl_ani_init(t_game *g, t_imgdata *i, int f_w);
+// -- -- #  sl_win.c             # -- -- //
+void		sl_win(t_game *g);
+
 #endif

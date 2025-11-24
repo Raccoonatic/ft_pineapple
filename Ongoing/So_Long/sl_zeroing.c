@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:21:05 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/22 20:45:10 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/24 00:02:50 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	sl_zero_img(t_game *game)
 	sl_null_ptrs(&game -> ci);
 	sl_null_ptrs(&game -> d);
 	sl_null_ptrs(&game -> gr);
+	sl_null_ptrs(&game -> thnks);
 	sl_zero_ints(&game -> buf);
 	sl_zero_ints(&game -> bgr);
 	sl_zero_ints(&game -> pi);
@@ -49,6 +50,7 @@ static void	sl_zero_img(t_game *game)
 	sl_zero_ints(&game -> ci);
 	sl_zero_ints(&game -> d);
 	sl_zero_ints(&game -> gr);
+	sl_zero_ints(&game -> thnks);
 	return ;
 }
 

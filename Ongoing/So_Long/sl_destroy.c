@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 20:51:10 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/21 12:58:01 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/23 23:58:14 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,16 @@ void	sl_frink(t_game *g)
 		sl_imgdata_wipe(g, &g -> bgr);
 	if (g -> pi.main || g -> pi.frm || g -> pi.frad)
 		sl_imgdata_wipe(g, &g -> pi);
-	if (g -> pr.main || g -> pr.frm || g -> pr.frad)
-		sl_imgdata_wipe(g, &g -> pr);
 	if (g -> pj.main || g -> pj.frm || g -> pj.frad)
 		sl_imgdata_wipe(g, &g -> pj);
 	if (g -> ci.main || g -> ci.frm || g -> ci.frad)
 		sl_imgdata_wipe(g, &g -> ci);
-	if (g -> co.main || g -> co.frm || g -> co.frad)
-		sl_imgdata_wipe(g, &g -> co);
 	if (g -> d.main || g -> d.frm || g -> d.frad)
 		sl_imgdata_wipe(g, &g -> d);
 	if (g -> gr.main || g -> gr.frm || g -> gr.frad)
 		sl_imgdata_wipe(g, &g -> gr);
+	if (g -> thnks.main || g -> thnks.frm || g -> thnks.frad)
+		sl_imgdata_wipe(g, &g -> thnks);
 	return ;
 }
 
