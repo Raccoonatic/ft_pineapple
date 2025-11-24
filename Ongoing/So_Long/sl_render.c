@@ -6,15 +6,16 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 17:29:23 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/24 15:22:23 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/24 19:47:03 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-void    sl_clear_buffer(t_imgdata *img, int h);
-void	sl_push_bkgrnd_to_frame(t_imgdata *d, t_imgdata *s);
-void	sl_push_tile_to_frame(char *dst, char *src, t_cord c);
+void		sl_clear_buffer(t_imgdata *img, int h);
+void		sl_push_bkgrnd_to_frame(t_imgdata *d, t_imgdata *s);
+void		sl_push_tile_to_frame(char *dst, char *src, t_cord c);
+static void sl_render_moves(t_game *g, char *prefix, int moves);
 
 void	sl_main_render(t_game *g, t_imgdata *pst)
 {
@@ -38,6 +39,7 @@ void	sl_main_render(t_game *g, t_imgdata *pst)
 	sl_push_tile_to_frame(g -> buf.addr, pst -> frad[pst -> crnt_frm], plyr);
 	sl_push_tile_to_frame(g -> buf.addr, g -> gr.addr, floor);
 	mlx_put_image_to_window(g -> mlx, g -> win, g -> buf.main, 0, 0);
+	sl_render_moves(g, "Moves: ", g -> moves);
 	mlx_do_sync(g -> mlx);
 	return ;
 }
@@ -80,6 +82,25 @@ void	sl_push_tile_to_frame(char *dst, char *src, t_cord c)
 		}
 		y++;
 	}
+	return ;
+}
+static void	sl_render_moves(t_game *g, char *prefix, int moves)
+{
+	char	*num_char;
+	char	*f_mssg;
+
+	num_char = ft_itoa(moves);
+	if (!num_char)
+		return ;
+	f_mssg = ft_strjoin(prefix, num_char);
+	if (!f_mssg)
+	{
+		free(num_char);
+		return ;
+	}
+	mlx_string_put(g -> mlx, g -> win, 10, 25, 0x37FA85, f_mssg);
+	free(num_char);
+	free(f_mssg);
 	return ;
 }
 

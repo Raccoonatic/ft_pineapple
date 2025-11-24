@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 20:58:45 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/24 14:39:45 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:07:39 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	sl_move_plyr(t_game *g, char **m, char ax, int mv)
 	else
 		p -> on_e = 0;
 	m[p -> y][p -> x] = 'P';
-	if((ax == 'y' && m[p -> y + mv][p -> x] != '1')
-		|| (ax == 'x' && m[p -> y][p -> x + mv] != '1'))
-		racc_print(1, BABY"Moves:"MINT" %d \n", g -> moves++);
+	if((ax == 'y' && m[og_y + mv][og_x] != '1')
+		|| (ax == 'x' && m[og_y][og_x + mv] != '1'))
+		++g -> moves;
 	return ;	
 }
 

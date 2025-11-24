@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 19:50:51 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/21 12:56:39 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:05:11 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**sl_check_map(char **map_file, t_game *game)
 		sl_free_matrix(map_file);
 		sl_fail(1, 1, "Map file is "NEOR"Not Rectangular");
 	}
-	char_analysis = sl_char_check(map_file, "01PCE");
+	char_analysis = sl_char_check(map_file, "0X1PCE");
 	if (char_analysis > 0)
 		sl_free_matrix(map_file);
 	if (char_analysis == 1)
@@ -86,7 +86,7 @@ static int	sl_char_check(char **map, char *allowed)
 		}
 		row++;
 	}
-	return (sl_mandatory_tile_count(map, ++allowed));
+	return (sl_mandatory_tile_count(map, allowed += 2));
 }
 
 static int	sl_mandatory_tile_count(char **map, char *tiles)
