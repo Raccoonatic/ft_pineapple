@@ -31,40 +31,69 @@ FILE = pipex.c
 FILE += pipex_utils.c
 FILE += px_fail.c
 
-OBJ = $(FILE:%.c=%.o)
+SRC_DIR = src/
+OBJ_DIR = obj/
+
+SRC = $(addprefix $(SRC_DIR),$(FILE))
+OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+
+.PRECIOUS: $(SRC)
 
 COMPILE = cc -g -O0 -Wall -Werror -Wextra -I.
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) pipex.h
+$(NAME): $(OBJ) $(LIB) $(LIBFT) pipex.h
 	@printf "$(BABY)"
-	$(COMPILE) $(OBJ) $(LIBFT) -o $(NAME)
+	$(COMPILE) $(OBJ) $(LIB) $(LIBFT) -o $(NAME)
 	@printf "$(MINT)"
 	@ls -la
 	@printf "$(RSET)"
 
-%.o: %.c pipex.h
+$(LIB): $(OBJ) 
+	ar -rcs $(LIB) $(OBJ)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c pipex.h | $(OBJ_DIR)
 	@printf "$(PURP)"
 	$(COMPILE) -c $< -o $@
+	@printf "$(RSET)\n"
+
+$(SRC_DIR)%.c: $(SRC_DIR)
+	@printf "$(MINT)"
+	mv $(@:$(SRC_DIR)%=%) $(SRC_DIR)
 	@printf "$(RSET)"
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(SRC_DIR):
+	mkdir -p $(SRC_DIR)
+	cp pipex.h $(SRC_DIR)
 
 $(LIBFT): libft/libft.h
 	@printf "$(NEOR)"
 	@make -C ./libft
 	@printf "$(RSET)"
 
-clean:
+./$(FILE):
+	@printf "$(NEOR)"
+	mv -f $(SRC_DIR)$(@:./%=%) .
+	@sleep 1
+	@printf "$(RSET)\n"
+
+clean: ./$(FILE)
 	@printf "$(LIME)"
-	@make -C ./libft clean
+	make -C ./libft clean
 	@sleep 1
 	@printf "$(BLOD)"
-	rm -rf $(OBJ)
+	rm -rf $(OBJ_DIR)
+	rm -rf $(SRC_DIR)
+	rm -rf $(LIB)
 	@printf "$(RSET)"
 
 fclean: clean
 	@printf "$(B_WI)"
-	@make -C ./libft fclean
+	make -C ./libft fclean
 	@sleep 1
 	@printf "$(PURP)"
 	rm -f $(NAME)
@@ -73,35 +102,6 @@ fclean: clean
 	@printf "$(RSET)"
 
 re: fclean all
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #///////////////////////////////////////////////////////////////
 #/////                                                       //

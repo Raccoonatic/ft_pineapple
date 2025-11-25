@@ -6,12 +6,12 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/30 15:46:25 by lde-san-          #+#    #+#              #
-#    Updated: 2025/11/24 19:35:50 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/11/25 15:03:09 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
-LIB = racc_long.a
+NAME_BONUS = so_long_bonus
 LIBFT = libft/libft.a
 
 NEOR	= \033[3m\033[38;2;255;153;51m
@@ -24,7 +24,11 @@ BLAK	= \033[38;2;0;0;0m
 B_WI    = \033[1;37m
 RSET	= \033[0m
 
-MAIN_F ?= so_long.c
+MAIN_F ?= src/so_long.c
+MAIN_F_BONUS = src/so_long_bonus.c
+
+SRC_DIR = src/
+OBJ_DIR = obj/
 
 FILE = sl_win.c
 FILE += sl_coin.c
@@ -45,24 +49,61 @@ FILE += sl_text_to_map.c
 FILE += sl_map_init_utils.c
 FILE += sl_sprite_handling.c
 
-OBJ = $(FILE:%.c=%.o)
+BONUS = sl_win_bonus.c
+BONUS += sl_coin_bonus.c
+BONUS += sl_door_bonus.c
+BONUS += sl_time_bonus.c
+BONUS += sl_enemy_bonus.c
+BONUS += sl_render_bonus.c
+BONUS += sl_player_bonus.c
+BONUS += sl_destroy_bonus.c
+BONUS += sl_zeroing_bonus.c
+BONUS += sl_terrain_bonus.c
+BONUS += sl_animation_bonus.c
+BONUS += sl_exit_game_bonus.c
+BONUS += sl_check_map_bonus.c
+BONUS += sl_coordinate_bonus.c
+BONUS += sl_flood_fill_bonus.c
+BONUS += sl_layer_init_bonus.c
+BONUS += sl_text_to_map_bonus.c
+BONUS += sl_map_init_utils_bonus.c
+BONUS += sl_sprite_handling_bonus.c
+
+SRC = $(addprefix $(SRC_DIR),$(FILE))
+SRC_BONUS = $(addprefix $(SRC_DIR),$(BONUS))
+OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+
+.PRECIOUS: $(SRC) $(SRC_BONUS)
 
 WERROR ?= -Werror 
 COMPILE = cc -g -O0 -Wall $(WERROR)-Wextra -I.
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ) solong.h
+$(NAME): $(LIBFT) $(OBJ) ./inc/solong.h
 	@printf "$(BABY)"
 	$(COMPILE) $(MAIN_F) $(OBJ) $(LIBFT) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 	@printf "$(MINT)"
 	@ls -la
 	@printf "$(RSET)"
 
-%.o: %.c
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(LIBFT) $(OBJ_BONUS) ./inc/solong_bonus.h
+	@printf "$(BABY)"
+	$(COMPILE) $(MAIN_F_BONUS) $(OBJ_BONUS) $(LIBFT) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME_BONUS)
+	@printf "$(MINT)"
+	@ls -la
+	@printf "$(RSET)"
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@printf "$(PURP)"
 	$(COMPILE) -I/usr/include -Imlx_linux -c $< -o $@
 	@printf "$(RSET)"
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 open:
 	@printf "$(MINT)"
@@ -81,7 +122,7 @@ clean:
 	@make -C ./libft clean
 	@sleep 0.3
 	@printf "$(BLOD)"
-	rm -rf $(OBJ)
+	rm -rf $(OBJ_DIR)
 	@sleep 0.3
 	@printf "$(RSET)"
 
@@ -91,6 +132,7 @@ fclean: clean
 	@sleep 0.3
 	@printf "$(PURP)"
 	rm -f $(NAME)
+	rm -f $(NAME_BONUS)
 	@printf "$(MINT)"
 	@sleep 0.3
 	@ls -la
@@ -155,9 +197,9 @@ evolution:
 	@printf "$(PURP)"
 	@printf "\n\nMaking Version_1$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_1.c
+	@open src/test_versions/ver_1.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_1.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_1.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
@@ -165,9 +207,9 @@ evolution:
 	@printf "$(PURP)"	
 	@printf "\n\nMaking Version_2$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_2.c
+	@open src/test_versions/ver_2.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_2.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_2.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
@@ -175,9 +217,9 @@ evolution:
 	@printf "$(PURP)"
 	@printf "\n\nMaking Version_3$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_3.c
+	@open src/test_versions/ver_3.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_3.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_3.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
@@ -185,9 +227,9 @@ evolution:
 	@printf "$(PURP)"
 	@printf "\n\nMaking Version_4$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_4.c
+	@open src/test_versions/ver_4.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_4.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_4.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
@@ -195,9 +237,9 @@ evolution:
 	@printf "$(PURP)"
 	@printf "\n\nMaking Version_5$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_5.c
+	@open src/test_versions/ver_5.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_5.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_5.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
@@ -205,9 +247,9 @@ evolution:
 	@printf "$(PURP)"
 	@printf "\n\nMaking Version_6$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_6.c
+	@open src/test_versions/ver_6.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_6.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_6.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
@@ -215,9 +257,9 @@ evolution:
 	@printf "$(PURP)"
 	@printf "\n\nMaking Version_7$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_7.c
+	@open src/test_versions/ver_7.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_7.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_7.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
@@ -225,9 +267,9 @@ evolution:
 	@printf "$(PURP)"
 	@printf "\n\nMaking Version_8$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_8.c
+	@open src/test_versions/ver_8.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_8.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_8.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
@@ -235,9 +277,9 @@ evolution:
 	@printf "$(PURP)"
 	@printf "\n\nMaking Version_9$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_9.c
+	@open src/test_versions/ver_9.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_9.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_9.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
@@ -245,9 +287,9 @@ evolution:
 	@printf "$(PURP)"
 	@printf "\n\nMaking Version_10$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_10.c
+	@open src/test_versions/ver_10.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_10.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_10.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
@@ -255,11 +297,21 @@ evolution:
 	@printf "$(PURP)"
 	@printf "\n\nMaking Version_11$(RSET)\n\n"
 	@sleep 2
-	@open test_versions/ver_11.c
+	@open src/test_versions/ver_11.c
 	@sleep 0.3
-	@make re WERROR="" MAIN_F=test_versions/ver_11.c
+	@make re WERROR="" MAIN_F=src/test_versions/ver_11.c
+	@sleep 1
+	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
+	./$(NAME)
+	@sleep 1
+	@printf "$(PURP)"
+	@printf "\n\nMaking Version_12$(RSET)\n\n"
+	@sleep 2
+	@open src/test_versions/ver_12.c
+	@sleep 0.3
+	@make re WERROR="" MAIN_F=src/test_versions/ver_12.c
 	@sleep 1
 	@printf "$(B_WI)$(NEOR)\n\n 🦝 Press ESC to continue... $(RSET)\n\n"
 	./$(NAME)
 
-.PHONY: all clean fclean re open mlx_linux mlx_dependencies evolution
+.PHONY: all clean fclean re bonus open mlx_linux mlx_dependencies evolution
