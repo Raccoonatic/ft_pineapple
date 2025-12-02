@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/30 15:46:25 by lde-san-          #+#    #+#              #
-#    Updated: 2025/11/25 15:03:09 by lde-san-         ###   ########.fr        #
+#    Updated: 2025/12/02 18:24:13 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ COMPILE = cc -g -O0 -Wall $(WERROR)-Wextra -I.
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ) ./inc/solong.h
+$(NAME): $(LIBFT) ./mlx_linux/libmlx_Linux.a $(OBJ) ./inc/solong.h
 	@printf "$(BABY)"
 	$(COMPILE) $(MAIN_F) $(OBJ) $(LIBFT) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 	@printf "$(MINT)"
@@ -90,7 +90,7 @@ $(NAME): $(LIBFT) $(OBJ) ./inc/solong.h
 
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(LIBFT) $(OBJ_BONUS) ./inc/solong_bonus.h
+$(NAME_BONUS): $(LIBFT) ./mlx_linux/libmlx_Linux.a $(OBJ_BONUS) ./inc/solong_bonus.h
 	@printf "$(BABY)"
 	$(COMPILE) $(MAIN_F_BONUS) $(OBJ_BONUS) $(LIBFT) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME_BONUS)
 	@printf "$(MINT)"
@@ -133,6 +133,7 @@ fclean: clean
 	@printf "$(PURP)"
 	rm -f $(NAME)
 	rm -f $(NAME_BONUS)
+	rm -rf mlx_linux
 	@printf "$(MINT)"
 	@sleep 0.3
 	@ls -la
@@ -140,6 +141,8 @@ fclean: clean
 
 re: fclean all
 
+./mlx_linux/libmlx_Linux.a:
+	@make mlx_dependencies
 
 mlx_dependencies: mlx_linux
 	@printf "$(MINT)\n\t\t🦝 Loading up the goodies! 🦝\n\n"
@@ -160,8 +163,7 @@ mlx_dependencies: mlx_linux
 	sudo apt-get install libbsd-dev || true
 	@printf "$(RSET)\n"
 	@sleep 1
-	@printf "$(MINT)\t\t🦝 All requirements installed! 🦝\n\n"
-	@printf "$(NEOR)Don't forget to access the folder$(RSET) (cd mlx_linux)$(NEOR) and then run the ./configure file inside it\n\n"
+	@printf "$(MINT)\t\t🦝 All requirements should be installed! 🦝\n\n"
 	@printf "$(RSET)"
 
 mlx_linux:
@@ -181,15 +183,15 @@ mlx_linux:
 	@printf "$(LIME)"
 	rm -rf minilibx-linux.tgz
 	mv minilibx-linux mlx_linux
+	make -C ./mlx_linux
 	@printf "$(RSET)\n\n"
 	@ls -la
-	@sleep 1
+	@sleep 0.5
 	@printf "$(MINT)\n\t\t  🦝 There u go handsome! 🦝\n\n"
 	@printf "$(RSET)"
-	@printf "$(NEOR)Don't forget to access the folder$(RSET) (cd mlx_linux)$(NEOR) and then run the ./configure file inside it\n\n"
-	@sleep 2
+	@sleep 0.5
 
-evolution:
+evolution: ./mlx_linux/libmlx_Linux.a
 	@printf "$(MINT)\n\t🦝 Hope you are ready for a trip down memory lane! 🦝\n\n"
 	@sleep 2
 	@printf "\t\t\t     Let's go!\n\n"
