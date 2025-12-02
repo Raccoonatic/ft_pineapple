@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 19:17:21 by lde-san-          #+#    #+#             */
-/*   Updated: 2025/11/25 16:04:11 by lde-san-         ###   ########.fr       */
+/*   Updated: 2025/11/26 02:44:21 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	sl_kill_the_game(t_game *game, int good, int err_cd, int exit_cd)
 	free(game -> mlx);
 	sl_free_matrix(game -> map);
 	if (good == 1 && err_cd == 69)
-		sl_fail(0 , exit_cd, BLOD"Game Over. "NEOR"You is dead boy");
+		sl_fail(0, exit_cd, BLOD"Game Over. "NEOR"You is dead boy");
 	if (good == 1 && err_cd == 42 && game -> victory == 1)
 	{
 		racc_print(1, BABY"Total Moves:"MINT" %d \n", game -> moves);
 		racc_print(1, LIME"Victory!. ");
-		sl_fail(0 , exit_cd, MINT"Thank you for playing my game <3\n");
+		sl_fail(0, exit_cd, MINT"Thank you for playing my game <3\n");
 	}
 	if (good == 0)
 	{
