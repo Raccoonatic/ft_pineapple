@@ -1,34 +1,7 @@
 #!/bin/bash
 source ../../../main/colors.sh
 
-expe# Test 2: n=4 (should have exactly 2 solutions as per sub.txt)
-echo "${BLUE}Testing n=4 (sub.txt example)...${RESET}"
-./n_queens_test 4 > output2.txt 2>/dev/null
-lines=$(wc -l < output2.txt)
-if [ $lines -ne 2 ]; then
-    echo "$(tput setaf 1)$(tput bold)FAIL: n=4 should have exactly 2 solutions as specified in sub.txt, got $lines$(tput sgr 0)"
-    cat output2.txt
-    rm -f n_queens_test n_queens_ref output*.txt
-    exit 1
-fi
-
-# Verify the specific solutions from sub.txt: "1 3 0 2" and "2 0 3 1"
-expected_solutions=("1 3 0 2" "2 0 3 1")
-while IFS= read -r line; do
-    found=false
-    for expected in "${expected_solutions[@]}"; do
-        if [ "$line" = "$expected" ]; then
-            found=true
-            break
-        fi
-    done
-    if [ "$found" = false ]; then
-        echo "$(tput setaf 1)$(tput bold)FAIL: Unexpected solution for n=4: '$line'$(tput sgr 0)"
-        echo "Expected solutions: ${expected_solutions[*]}"
-        rm -f n_queens_test n_queens_ref output*.txt
-        exit 1
-    fi
-done < output2.txt="*.c *.h"
+expected_files="*.c *.h"
 rendu_dir="../../../../rendu/n_queens"
 
 # Check if rendu directory exists
@@ -70,8 +43,7 @@ if [ $lines -ne 0 ]; then
     rm -f n_queens_test n_queens_ref output*.txt
     exit 1
 fi
-    exit 1
-fi
+
 
 # Test 2: n=2 (should have 0 solutions)
 echo "${BLUE}Testing n=2...${RESET}"
