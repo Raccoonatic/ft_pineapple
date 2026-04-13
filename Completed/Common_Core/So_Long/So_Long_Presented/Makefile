@@ -6,7 +6,7 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/30 15:46:25 by lde-san-          #+#    #+#              #
-#    Updated: 2025/12/02 18:24:13 by lde-san-         ###   ########.fr        #
+#    Updated: 2026/03/20 15:48:51 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -150,17 +150,11 @@ mlx_dependencies: mlx_linux
 	@printf "$(NEOR)Upgrading current packages... \n\n"
 	@sleep 1
 	@printf "$(LIME)"
-	@sudo apt-get update || true
-	@sudo apt-get upgrade || true
 	@printf "$(RSET)\n\n"
 	@sleep 0.5
 	@printf "$(NEOR)Installing requirements... \n\n"
 	@sleep 1
 	@printf "$(PURP)"
-	sudo apt-get install xorg || true
-	sudo apt-get install libxext-dev || true
-	sudo apt-get install zlib1g-dev || true
-	sudo apt-get install libbsd-dev || true
 	@printf "$(RSET)\n"
 	@sleep 1
 	@printf "$(MINT)\t\t🦝 All requirements should be installed! 🦝\n\n"
@@ -174,7 +168,7 @@ mlx_linux:
 	@printf "$(NEOR)  wGetting it... \n"
 	@printf "$(RSET)\n"
 	@printf "$(PURP)"
-	wget https://cdn.intra.42.fr/document/document/40942/minilibx-linux.tgz
+	wget https://cdn.intra.42.fr/document/document/45557/minilibx-linux.tgz
 	@printf "$(BABY)"
 	tar -xzf minilibx-linux.tgz
 	@printf "$(RSET)\n"
