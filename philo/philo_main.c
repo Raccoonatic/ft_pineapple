@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 23:26:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2026/04/28 17:35:05 by lde-san-         ###   ########.fr       */
+/*   Updated: 2026/04/28 23:42:08 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int arc, char *wordy[])
 		return (1);
 	if (ph_philoinit(&sim, &philos))
 		return (1);
+	sim->philos = philos;
 	return (ph_run_simulation(sim, &philos));
 }
 
@@ -33,14 +34,14 @@ static int	ph_philoinit(t_table *sim, t_philo ***philos)
 
 	*philos = ph_calloc(sim->n + 1, sizeof(t_philo *))
 	if (!sim->forks)
-		return (ph_clean_up(sim, NULL, 8, 1));
+		return (ph_clean(sim, NULL, 8, 1));
 	guide = 0;
-	while(guide < sim->n + 1)
+	while(guide < sim->n)
 		(*philos)[guide++] = NULL;
 	while(guide > 0)
 	{
 		if(ph_philo_alloc(sim, &(*philos)[--guide], guide));
-			return(ph_clean_up(sim, philos, 9, 1));
+			return(ph_clean(sim, philos, 9, 1));
 	}
 	return (0);
 }
@@ -63,7 +64,8 @@ static int	ph_tableinit(t_table *sim, char *wordy[])
 	else if (ph_atoll(wordy[5], &storage))
 		return (ph_printerr(6, 1));
 	sim->turns = (int)storage;
-	sim->omg_he_ded = false;
+	sim->philos = NULL;
+	sim->omg_she_ded = false;
 	if (pthread_mutex_init(&sim->ded, NULL))
 		return (ph_printerr(7, 1));
 	if (pthread_mutex_init(&sim->print, NULL))

@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 21:41:48 by lde-san-          #+#    #+#             */
-/*   Updated: 2026/04/28 17:35:31 by lde-san-         ###   ########.fr       */
+/*   Updated: 2026/04/28 23:42:24 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,19 @@
 void	ph_usleep(long sleep)
 {
 	long long	start;
+	long long	passed;
 
 	start = ph_getnow();
-	while ((ph_getnow() - start) < sleep)
-		usleep(500);
+	while (1)
+	{
+		passed = ph_getnow() - start;
+		if (passed >= sleep)
+			break
+		if (sleep - passed > 1000)
+			usleep(500);
+		else
+			continue ;
+	}
 	return ;
 }
 /* Improves the presition of the usleep() function by performing tiny 
@@ -76,16 +85,18 @@ static int	ph_getnum(const char *str, long long *strg, int guide, int sign)
 		if (str[guide])
 			return (1);
 		*strg = (*strg) * ((long long)sign);
-		return (0);
+		if (*strg > 0)
+			return (0);
+		return (1);
 	}
 	return (1);
 }
 /* Iterates through the string passed as a parameter, checking if it
 contains non-numerical characters in an unexpected format, and converting
 the string to a numerical value, while checking for limits as well. If the
-value is fully converted successfully it'll return 0, otherwise, it'll
-return 1. In the event the string is a valid number, it will set the 
-variable pointed at to the resulting value. */
+value is fully converted successfully, and the resulting value is bigger
+than 0, it'll return 0, otherwise, it'll return 1. In the event the string
+is a valid number, it will set the variable pointed at to the resulting value.*/
 
 static int	check_limits(char next_digit, int sign, long long *n)
 {

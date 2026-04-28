@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 17:50:03 by lde-san-          #+#    #+#             */
-/*   Updated: 2026/04/28 17:35:11 by lde-san-         ###   ########.fr       */
+/*   Updated: 2026/04/28 23:42:27 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef enum e_odeven
 	EVN
 }	t_odeven;
 
+typedef struct s_philo t_philo;
+
 typedef struct s_table
 {
 	int				n;
@@ -46,22 +48,23 @@ typedef struct s_table
 	long long		tte;
 	long long		tts;
 	long long		start;
-	bool			omg_he_ded;
+	bool			omg_she_ded;
 	pthread_mutex_t	ded;
 	pthread_mutex_t print;
 	pthread_mutex_t *forks;
+	t_philo			**philos;
 }	t_table;
 
-typedef struct s_philo
+struct s_philo
 {
 	int				id;
-	long			eal_count;
+	long			meal_count;
 	long long		last_meal;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	t_odeven		ordr;
 	t_table			*table;
-}	t_philo;
+};
 
 #endif

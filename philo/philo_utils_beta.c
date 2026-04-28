@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 23:31:02 by lde-san-          #+#    #+#             */
-/*   Updated: 2026/04/28 17:35:35 by lde-san-         ###   ########.fr       */
+/*   Updated: 2026/04/28 23:42:21 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ph_printerr(int err_cd, int exit_cd)
 	char *use;
 
 	use = MINT"Usage:"BABY"./philo "LIME"n_philo ttd tte tts"GOLD" [meals]"RSET;
-	write(2, ph_msg_bank(err_cd), ph_strlen(ph_msg_bank(err_cd)));
+	if (exit_cd == 1)
+		write(2, ph_msg_bank(err_cd), ph_strlen(ph_msg_bank(err_cd)));
 	if (err_cd == 1)
 		write(2, use, ph_strlen(use));
 	return (exit_cd);
@@ -53,6 +54,8 @@ static char *ph_msg_bank(int msg_cd)
 		return (BLOD"Sim Failed"RSET": "PURP"malloc "ORNG"Failed"RSET);
 	if (msg_cd == 9)
 		return (BLOD"Sim Failed"RSET": "PURP"philo_alloc "ORNG"Failed"RSET);
+	if (msg_cd == 10)
+		return (BLOD"Sim Failed"RSET": "PURP"pthread_create "ORNG"Failed"RSET);
 	return (BLOD"Sim Failed"RSET": "NEOR"Unexpected Error"RSET);
 }
 
@@ -74,7 +77,7 @@ void	*ph_calloc(size_t nmemb, size_t size)
 the system architecture has enough space for it. Then it initializes the memory
 area by filling it with null characters "\0". */
 
-int	ph_clean_up(t_table *sim, t_philo ***philos, int err_cd, int exit_cd)
+int	ph_clean(t_table *sim, t_philo ***philos, int err_cd, int exit_cd)
 {
 	int guide;
 
@@ -83,7 +86,7 @@ int	ph_clean_up(t_table *sim, t_philo ***philos, int err_cd, int exit_cd)
 	guide = 0;
 	while (sim->forks[guide])
 		pthread_mutex_destroy(&sim->forks[guide++]);
-	free(sim->forks);
+	fpthread_mutex_lock(&sim->ded)ree(sim->forks);
 	if (philos)
 	{
 		guide = 0;
