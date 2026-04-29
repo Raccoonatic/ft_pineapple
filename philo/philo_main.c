@@ -23,24 +23,23 @@ int	main(int arc, char *wordy[])
 		return (1);
 	if (ph_philoinit(&sim, &philos))
 		return (1);
-	sim->philos = philos;
-	return (ph_run_simulation(sim, &philos));
+	sim.philos = philos;
+	return (ph_run_simulation(&sim, &philos));
 }
-
 
 static int	ph_philoinit(t_table *sim, t_philo ***philos)
 {
 	int guide;
 
-	*philos = ph_calloc(sim->n + 1, sizeof(t_philo *))
-	if (!sim->forks)
+	*philos = ph_calloc(sim->n + 1, sizeof(t_philo *));
+	if (!(*philos))
 		return (ph_clean(sim, NULL, 8, 1));
 	guide = 0;
 	while(guide < sim->n)
 		(*philos)[guide++] = NULL;
 	while(guide > 0)
 	{
-		if(ph_philo_alloc(sim, &(*philos)[--guide], guide));
+		if(ph_philo_alloc(sim, &(*philos)[--guide], guide))
 			return(ph_clean(sim, philos, 9, 1));
 	}
 	return (0);
@@ -81,7 +80,7 @@ static int	ph_forkinit(t_table *sim)
 	int	guide;
 
 	guide = 0;
-	sim->forks = ph_calloc(sim->n + 1, sizeof(pthread_mutex_t));
+	sim->forks = ph_calloc(sim->n, sizeof(pthread_mutex_t));
 	if (!sim->forks)
 	{
 		pthread_mutex_destroy(&sim->ded);
@@ -95,10 +94,7 @@ static int	ph_forkinit(t_table *sim)
 			pthread_mutex_destroy(&sim->ded);
 			pthread_mutex_destroy(&sim->print);
 			while(guide > 0)
-			{
-				--guide;
-				pthread_mutex_destroy(&sim->forks[guide]);
-			}
+				pthread_mutex_destroy(&sim->forks[--guide]);
 			free(sim->forks);
 			return (ph_printerr(7, 1));
 		}

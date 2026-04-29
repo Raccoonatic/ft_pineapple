@@ -26,7 +26,7 @@ int	ph_printerr(int err_cd, int exit_cd)
 {
 	char *use;
 
-	use = MINT"Usage:"BABY"./philo "LIME"n_philo ttd tte tts"GOLD" [meals]"RSET;
+	use = MINT"Usage:"BABY" ./philo "LIME"n_philo ttd tte tts"GOLD" [meals]\n"RSET;
 	if (exit_cd == 1)
 		write(2, ph_msg_bank(err_cd), ph_strlen(ph_msg_bank(err_cd)));
 	if (err_cd == 1)
@@ -37,26 +37,26 @@ int	ph_printerr(int err_cd, int exit_cd)
 static char *ph_msg_bank(int msg_cd)
 {
 	if (msg_cd == 1)
-		return (BLOD"Sim Failed"RSET": "NEOR"Incorrect Argument Count"RSET);
+		return (BLOD"Sim Failed"RSET": "NEOR"Incorrect Argument Count\n"RSET);
 	if (msg_cd == 2)
-		return (BLOD"Sim Failed"RSET": "NEOR"Invalid Arg "PINK"n_philo"RSET);
+		return (BLOD"Sim Failed"RSET": "NEOR"Invalid Arg "PINK"n_philo\n"RSET);
 	if (msg_cd == 3)
-		return (BLOD"Sim Failed"RSET": "NEOR"Invalid Arg "PINK"ttd"RSET);
+		return (BLOD"Sim Failed"RSET": "NEOR"Invalid Arg "PINK"ttd\n"RSET);
 	if (msg_cd == 4)
-		return (BLOD"Sim Failed"RSET": "NEOR"Invalid Arg "PINK"tte"RSET);
+		return (BLOD"Sim Failed"RSET": "NEOR"Invalid Arg "PINK"tte\n"RSET);
 	if (msg_cd == 5)
-		return (BLOD"Sim Failed"RSET": "NEOR"Invalid Arg "PINK"tts"RSET);
+		return (BLOD"Sim Failed"RSET": "NEOR"Invalid Arg "PINK"tts\n"RSET);
 	if (msg_cd == 6)
-		return (BLOD"Sim Failed"RSET": "NEOR"Invalid Arg "PINK"[meals]"RSET);
+		return (BLOD"Sim Failed"RSET": "NEOR"Invalid Arg "PINK"[meals]\n"RSET);
 	if (msg_cd == 7)
-		return (BLOD"Sim Failed"RSET": "PURP"mutex_init "ORNG"Failed"RSET);
+		return (BLOD"Sim Failed"RSET": "PURP"mutex_init "ORNG"Failed\n"RSET);
 	if (msg_cd == 8)
-		return (BLOD"Sim Failed"RSET": "PURP"malloc "ORNG"Failed"RSET);
+		return (BLOD"Sim Failed"RSET": "PURP"malloc "ORNG"Failed\n"RSET);
 	if (msg_cd == 9)
-		return (BLOD"Sim Failed"RSET": "PURP"philo_alloc "ORNG"Failed"RSET);
+		return (BLOD"Sim Failed"RSET": "PURP"philo_alloc "ORNG"Failed\n"RSET);
 	if (msg_cd == 10)
-		return (BLOD"Sim Failed"RSET": "PURP"pthread_create "ORNG"Failed"RSET);
-	return (BLOD"Sim Failed"RSET": "NEOR"Unexpected Error"RSET);
+		return (BLOD"Sim Failed"RSET": "PURP"pthread_create "ORNG"Failed\n"RSET);
+	return (BLOD"Sim Failed"RSET": "NEOR"Unexpected Error\n"RSET);
 }
 
 void	*ph_calloc(size_t nmemb, size_t size)
@@ -84,9 +84,9 @@ int	ph_clean(t_table *sim, t_philo ***philos, int err_cd, int exit_cd)
 	pthread_mutex_destroy(&sim->ded);
 	pthread_mutex_destroy(&sim->print);
 	guide = 0;
-	while (sim->forks[guide])
+	while (guide < sim->n)
 		pthread_mutex_destroy(&sim->forks[guide++]);
-	fpthread_mutex_lock(&sim->ded)ree(sim->forks);
+	free(sim->forks);
 	if (philos)
 	{
 		guide = 0;
@@ -101,5 +101,5 @@ int	ph_clean(t_table *sim, t_philo ***philos, int err_cd, int exit_cd)
 		}
 		free(*philos);
 	}
-	return (ph_printerr(err_code, exit_cd));
+	return (ph_printerr(err_cd, exit_cd));
 }

@@ -6,7 +6,7 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:34:51 by lde-san-          #+#    #+#             */
-/*   Updated: 2026/04/28 23:41:53 by lde-san-         ###   ########.fr       */
+/*   Updated: 2026/04/29 23:53:29 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,22 @@ int	ph_run_simulation(t_table *sim, t_philo ***ph)
 	thr_n = sim->n + 1;
 	thr = ph_calloc(thr_n, sizeof(pthread_t));
 	if (!thr)
-		ph_clean(sim, ph, 8, 1);
-	pthread_mutex_lock(&sim->ded)
-	while (thr_n >= 0)
+		return (ph_clean(sim, ph, 8, 1));
+	pthread_mutex_lock(&sim->ded);
+	while (thr_n > 0)
 	{
-		if (thr_n == sim->n + 1)
+		thr_n--;
+		if (thr_n == sim->n)
+		{
 			if (pthread_create(&thr[thr_n], NULL, &ph_monitor, sim))
-				return (ph_clean(sim, ph, 10, ph_sim_end(sim, thr, thr_n, 1)));
+				return (ph_clean(sim, ph, 10, ph_sim_end(sim, &thr, thr_n, 1)));
+		}
 		else if (pthread_create(&thr[thr_n], NULL, &ph_routine, (*ph)[thr_n]))
-			return (ph_clean(sim, ph, 10, ph_sim_end(sim, thr, thr_n, 1)));
-		thread_n--;
+			return (ph_clean(sim, ph, 10, ph_sim_end(sim, &thr, thr_n, 1)));
 	}
 	sim->start = ph_getnow();
 	pthread_mutex_unlock(&sim->ded);
-	return (ph_clean(sim, ph, 42, ph_sim_end(sim, thr, thr_n, 0)));
+	return (ph_clean(sim, ph, 42, ph_sim_end(sim, &thr, -1, 0)));
 }
 
 static void	*ph_monitor(void *arg)
@@ -61,9 +63,12 @@ static void	*ph_monitor(void *arg)
 			if (ph_getnow() - table->philos[guide]->last_meal > table->ttd)
 			{
 				pthread_mutex_unlock(&table->philos[guide]->meal_lock);
+				pthread_mutex_lock(&p->table->print);
 				pthread_mutex_lock(&table->ded);
 				table->omg_she_ded = true;
-				ph_action_report(table->philos[guide], "died");
+				printf("%lld %d %s\n", ph_getnow() - table->start, table->philos[guide]->id, "died");
+				pthread_mutex_unlock(&table->ded);
+				pthread_mutex_unlock(&p->table->print);
 				break;
 			}
 			pthread_mutex_unlock(&table->philos[guide]->meal_lock);
@@ -97,10 +102,10 @@ static void	*ph_routine(void *arg)
 	{
 		pthread_mutex_unlock(&philo->table->ded);
 		if (philo->ordr == EVN)
-			if (ph_pickup_r_l(philo));
+			if (ph_pickup_r_l(philo))
 				break;
 		else
-			if (ph_pickup_l_r(philo));
+			if (ph_pickup_l_r(philo))
 				break;
 		pthread_mutex_lock(&philo->table->ded);
 	}

@@ -22,8 +22,8 @@ void	ph_usleep(long sleep)
 	{
 		passed = ph_getnow() - start;
 		if (passed >= sleep)
-			break
-		if (sleep - passed > 1000)
+			break ;
+		if (sleep - passed > 1)
 			usleep(500);
 		else
 			continue ;
