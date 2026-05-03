@@ -73,3 +73,30 @@ static void	ph_update_meal_data(t_philo *philo)
 	ph_action_report(philo, "is eating");
 	return ;
 }
+
+int	ph_dedcheck(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->table->ded);
+	if (philo->table->omg_she_ded == true)
+	{
+		pthread_mutex_unlock(&philo->table->ded);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->table->ded);
+	if (philo->ordr == EVN)
+		ph_usleep(100);
+	return (0);
+}
+
+void	ph_lastmealinit(t_table *sim, t_philo **ph)
+{
+	int guide;
+
+	guide = 0;
+	while (guide < sim->n)
+	{
+		ph[guide]->last_meal = sim->start;
+		guide++;
+	}
+	return ;
+}
