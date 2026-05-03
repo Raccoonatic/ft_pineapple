@@ -6,11 +6,17 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 21:41:48 by lde-san-          #+#    #+#             */
-/*   Updated: 2026/04/28 23:42:24 by lde-san-         ###   ########.fr       */
+/*   Updated: 2026/05/03 22:35:18 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+long long	ph_getnow(void);
+void	ph_usleep(long sleep);
+int	ph_atoll(const char *str, long long *storage);
+static int	ph_getnum(const char *str, long long *strg, int guide, int sign);
+static int	check_limits(char next_digit, int sign, long long *n);
 
 void	ph_usleep(long sleep)
 {

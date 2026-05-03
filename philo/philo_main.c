@@ -6,11 +6,15 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 23:26:26 by lde-san-          #+#    #+#             */
-/*   Updated: 2026/04/28 23:42:08 by lde-san-         ###   ########.fr       */
+/*   Updated: 2026/05/03 22:20:20 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static int	ph_philoinit(t_table *sim, t_philo ***philos);
+static int	ph_tableinit(t_table *sim, char *wordy[]);
+static int	ph_forkinit(t_table *sim);
 
 int	main(int arc, char *wordy[])
 {
@@ -39,7 +43,8 @@ static int	ph_philoinit(t_table *sim, t_philo ***philos)
 		(*philos)[guide++] = NULL;
 	while(guide > 0)
 	{
-		if(ph_philo_alloc(sim, &(*philos)[--guide], guide))
+		--guide;
+		if(ph_philo_alloc(sim, &(*philos)[guide], guide))
 			return(ph_clean(sim, philos, 9, 1));
 	}
 	return (0);

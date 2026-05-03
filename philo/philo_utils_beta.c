@@ -6,11 +6,17 @@
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 23:31:02 by lde-san-          #+#    #+#             */
-/*   Updated: 2026/04/28 23:42:21 by lde-san-         ###   ########.fr       */
+/*   Updated: 2026/05/03 22:48:51 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static char *ph_msg_bank(int msg_cd);
+size_t		ph_strlen(const char *str);
+int			ph_printerr(int err_cd, int exit_cd);
+void		*ph_calloc(size_t nmemb, size_t size);
+int			ph_clean(t_table *sim, t_philo ***philos, int err_cd, int exit_cd);
 
 size_t	ph_strlen(const char *str)
 {
@@ -24,13 +30,13 @@ size_t	ph_strlen(const char *str)
 
 int	ph_printerr(int err_cd, int exit_cd)
 {
-	char *use;
+	char *u;
 
-	use = MINT"Usage:"BABY" ./philo "LIME"n_philo ttd tte tts"GOLD" [meals]\n"RSET;
+	u = MINT"Usage:"BABY" ./philo "LIME"n_philo ttd tte tts"GD" [meals]\n"RSET;
 	if (exit_cd == 1)
 		write(2, ph_msg_bank(err_cd), ph_strlen(ph_msg_bank(err_cd)));
 	if (err_cd == 1)
-		write(2, use, ph_strlen(use));
+		write(2, u, ph_strlen(u));
 	return (exit_cd);
 }
 

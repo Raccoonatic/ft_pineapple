@@ -6,12 +6,14 @@
 #    By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/03 19:37:56 by lde-san-          #+#    #+#              #
-#    Updated: 2026/05/03 19:38:00 by lde-san-         ###   ########.fr        #
+#    Updated: 2026/05/03 23:22:00 by lde-san-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 PHILO_LIB = libphilo.a
+
+ARGS ?= 1
 
 NEOR	= \033[3m\033[38;2;255;153;51m
 MINT    = \033[1;38;2;55;250;133m
@@ -26,7 +28,7 @@ B_WI    = \033[1;37m
 RSET	= \033[0m
 
 OBJ_DIR = obj/
-OBJ = $(FILE:$(FILE)%.c=$(OBJ_DIR)%.o)
+OBJ = $(FILE:%.c=$(OBJ_DIR)%.o)
 
 MAIN_FILE = philo_main.c
 
@@ -39,7 +41,8 @@ FILE += philo_utils_charlie.c
 .PRECIOUS: $(FILE)
 
 COMPILE = cc -g -O0 -Wall -Werror -Wextra -pthread -I.
-VLGR_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes --helgrind
+LEAK_FLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
+THREAD_FLAGS = --tool=helgrind
 
 all: $(NAME)
 
@@ -48,22 +51,25 @@ $(NAME): $(PHILO_LIB) $(MAIN_FILE) philo.h
 	$(COMPILE) $(MAIN_FILE) $(PHILO_LIB) -o $(NAME)
 	@printf "$(RSET)\n"
 
-$(OBJ_DIR)%.o: $(FILE) philo.h | $(OBJ_DIR)
+$(OBJ_DIR)%.o: %.c philo.h | $(OBJ_DIR)
 	@printf "$(PURP)"
 	$(COMPILE) -c $< -o $@
 	@printf "$(RSET)\n"
 
 $(OBJ_DIR):
-	@printf "$(MINT)"
+	@printf "$(LIME)"
 	mkdir -p $(OBJ_DIR)
 	@printf "$(RSET)\n"
 
 $(PHILO_LIB): $(OBJ)
-	@ar -rcs $@ $^
+	@printf "$(PINK)"
+	ar -rcs $@ $^
+	@printf "$(RSET)\n"
 
 clean:
-	@printf "$(BLOD)"
+	@printf "$(ORNG)"
 	rm -rf $(OBJ_DIR)
+	@printf "$(BLOD)"
 	rm -rf $(PHILO_LIB)
 	@printf "$(RSET)\n"
 
@@ -71,9 +77,9 @@ fclean: clean
 	@printf "$(PURP)"
 	rm -f $(NAME)
 	@rm -rf normloop.sh
-	@printf "$(MINT)"
+	@printf "$(MINT)\n"
 	@ls -la
-	@printf "$(RSET)"
+	@printf "$(RSET)\n"
 
 re: fclean all
 
@@ -81,16 +87,22 @@ re: fclean all
 
 open:
 	@printf "$(MINT)"
-	xdg-open $(MAIN_FILE)
+	open $(MAIN_FILE)
 	for f in $(FILE); do xdg-open $$f; done
 	@printf "$(ORNG)"
 	find . -maxdepth 2 -name "*.h" -exec xdg-open {} \;
 	@printf "$(RSET)"
 
 leaks: $(NAME)
-	@printf "\n$(PINK)valgrind $(ORNG)$(VLGR_FLAGS) $(MINT)./$(NAME)"
-	@printf "$(RSET)\n\n"
-	@valgrind $(VLGR_FLAGS) ./$(NAME)
+	@printf "\n$(PINK)valgrind $(ORNG)$(LEAK_FLAGS) $(MINT)./$(NAME) $(BABY)$(ARGS)"
+	@printf "$(RSET)\n"
+	@valgrind $(LEAK_FLAGS) ./$(NAME) $(ARGS)
+	@sleep 0.3
+
+races: $(NAME)
+	@printf "\n$(PINK)valgrind $(ORNG)$(THREAD_FLAGS) $(MINT)./$(NAME) $(BABY)$(ARGS)"
+	@printf "$(RSET)\n"
+	@valgrind $(THREAD_FLAGS) ./$(NAME) $(ARGS)
 	@sleep 0.3
 
 normloop:

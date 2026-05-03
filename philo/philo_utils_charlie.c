@@ -12,6 +12,10 @@
 
 #include "philo.h"
 
+int	ph_philo_alloc(t_table *sim, t_philo **ph, int guide);
+int	ph_sim_end(t_table *sim, pthread_t **thr, int thr_n, int exit_cd);
+void	ph_action_report(t_philo *p, char *action);
+
 int	ph_philo_alloc(t_table *sim, t_philo **ph, int guide)
 {
 	*ph = ph_calloc(1, sizeof(t_philo));

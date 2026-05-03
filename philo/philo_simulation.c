@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_simulation.c                                    :+:      :+:    :+:   */
+/*   philo_simulation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:34:51 by lde-san-          #+#    #+#             */
-/*   Updated: 2026/05/03 19:31:12 by lde-san-         ###   ########.fr       */
+/*   Updated: 2026/05/03 22:20:31 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	*ph_routine(void *arg);
+static void	*ph_monitor(void *arg);
+static void	ph_philoop(t_table *t, t_philo **ph, int *full);
+int	ph_run_simulation(t_table *sim, t_philo ***ph);
 
 int	ph_run_simulation(t_table *sim, t_philo ***ph)
 {

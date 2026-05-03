@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_routine_utils.c                                 :+:      :+:    :+:   */
+/*   philo_simulation_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-san- <lde-san-@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 20:58:05 by lde-san-          #+#    #+#             */
-/*   Updated: 2026/04/28 23:42:15 by lde-san-         ###   ########.fr       */
+/*   Updated: 2026/05/03 22:34:16 by lde-san-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int         ph_dedcheck(t_philo *philo);
+int			ph_pickup_r_l(t_philo *philo);
+int			ph_pickup_l_r(t_philo *philo);
+static void	ph_update_meal_data(t_philo *philo);
+void		ph_lastmealinit(t_table *sim, t_philo **ph);
 
 int	ph_pickup_r_l(t_philo *philo)
 {
@@ -67,7 +73,7 @@ int	ph_pickup_l_r(t_philo *philo)
 static void	ph_update_meal_data(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->meal_lock);
-	philo->last_meal = getnow();
+	philo->last_meal = ph_getnow();
 	(philo->meal_count)++;
 	pthread_mutex_unlock(&philo->meal_lock);
 	ph_action_report(philo, "is eating");
